@@ -1,3 +1,5 @@
 .SRCINFO
 src
 pkg
+*.log
+*.tar*

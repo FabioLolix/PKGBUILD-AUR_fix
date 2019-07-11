@@ -2,25 +2,22 @@
 
 pkgname=omp
 pkgver=0.1.1
-pkgrel=7
+pkgrel=8
 pkgdesc='Open-Source Music Player'
 url='https://openmusicplayer.com/'
 arch=(x86_64)
 license=(GPL3)
-depends=(gstreamer gst-libav gst-plugins-bad gst-plugins-base 
-         gst-plugins-base-libs gst-plugins-good gst-plugins-ugly gtkmm3
-         libclastfm libconfig sqlite taglib)
-makedepends=(git)
-provides=('omp')
-conflicts=('omp' 'omp-git')
+depends=(gtkmm3 libconfig libclastfm sqlite taglib
+         gst-plugins-base gst-plugins-good)
+optdepends=('gst-libav: additional codecs'
+            'gst-plugins-bad: additional codecs'
+            'gst-plugins-ugly: additional codecs')
 source=("$pkgname-$pkgver.tar.gz::https://github.com/TheWiseNoob/OMP/archive/$pkgver.tar.gz")
-sha256sums=('SKIP')
+sha256sums=('0100830ebbb81c75cd03022193b63e30125bc78a43bcdc931567404eedea8d32')
 
 build() {
   cd "OMP-$pkgver"
-
   make -e FLATPAK=0 CXXFLAGS='-g -DFLATPAK=$(FLATPAK) -std=c++17 -Wall -pipe -Wno-deprecated-declarations -Wno-parentheses -fconcepts -Wno-catch-value -Wno-return-type'
-
 }
 
 package() {

@@ -1,0 +1,29 @@
+# Maintainer: 
+
+pkgname=ensmallen
+pkgver=1.15.1
+pkgrel=1
+pkgdesc="Flexible C++ library for efficient mathematical optimization"
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://ensmallen.org/"
+license=(BSD)
+depends=(armadillo)
+makedepends=(cmake)
+source=("https://ensmallen.org/files/ensmallen-$pkgver.tar.gz")
+sha256sums=('e597a7d488b59add432dba7e8a3911eddbbce30ab665e9e3fc0541466245997a')
+
+prepare() {
+  cd "${pkgname}-${pkgver}"
+  install -d build
+}
+
+build() {
+  cd "${pkgname}-${pkgver}/build"
+  cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/usr
+}
+
+package() {
+  cd "${pkgname}-${pkgver}/build"
+  make DESTDIR=${pkgdir} install
+}

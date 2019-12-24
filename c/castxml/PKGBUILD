@@ -1,0 +1,35 @@
+# Maintainer: 
+
+pkgname=castxml
+pkgdesc="C-family abstract syntax tree XML output tool."
+pkgver=0.2.0
+pkgrel=2
+arch=(i686 x86_64)
+url="https://github.com/CastXML/CastXML"
+license=(Apache)
+depends=(llvm clang)
+makedepends=(git cmake python-sphinx)
+source=("$pkgname-$pkgver.tar.gz::https://github.com/CastXML/CastXML/archive/v$pkgver.tar.gz")
+sha256sums=('626c395d0d3c777b5a1582cdfc4d33d142acfb12204ebe251535209126705ec1')
+
+prepare() {
+  cd "CastXML-$pkgver"
+
+  cmake . \
+    -DSPHINX_EXECUTABLE=/usr/bin/sphinx-build \
+    -DSPHINX_HTML=1 \
+    -DSPHINX_MAN=1 \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCastXML_INSTALL_DOC_DIR=share/doc/castxml \
+    -DCastXML_INSTALL_MAN_DIR=share/man
+}
+
+build() {
+  cd "CastXML-$pkgver"
+  make
+}
+
+package(){
+  cd "CastXML-$pkgver"
+  make DESTDIR="$pkgdir" install
+}

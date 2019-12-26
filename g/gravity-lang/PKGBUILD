@@ -1,24 +1,22 @@
 # Maintainer: erk <valdemarerk@gmail.com>
-pkgname=gravity-lang-git
-pkgdesc="Gravity Programming Language."
-pkgver=0.2.5
-pkgrel=2
-arch=('any')
-url="https://marcobambini.github.io/gravity/"
-license=('MIT')
-makedepends=('git')
-conflicts=(gravity-lang)
-provides=(gravity)
-source=("git://github.com/marcobambini/gravity.git")
-md5sums=(SKIP)
 
-_repo_name=gravity
+pkgname=gravity-lang
+pkgdesc="Gravity Programming Language."
+pkgver=0.7.8
+pkgrel=1
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://marcobambini.github.io/gravity/"
+license=(MIT)
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/marcobambini/gravity/archive/${pkgver}.tar.gz")
+sha256sums=('d6589e1cf55eb3b46e205342cb8c01d524da66b98b6fabe0785c711ec314969d')
 
 build() {
-  cd "$srcdir/$_repo_name"
+  cd "gravity-${pkgver}"
   make gravity
 }
 
 package() {
-  install -D -m 755 "$srcdir/$_repo_name/gravity" "$pkgdir/usr/bin/gravity"
+  cd "gravity-${pkgver}"
+  install -Dm755 "gravity" "$pkgdir/usr/bin/gravity"
+  install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }

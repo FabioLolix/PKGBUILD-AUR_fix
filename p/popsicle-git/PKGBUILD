@@ -16,17 +16,18 @@ source=("git+https://github.com/pop-os/popsicle.git#branch=async")
 sha256sums=('SKIP')
 
 pkgver() {
-  cd popsicle
+  cd "${pkgname%-git}"
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-  cd popsicle
+  cd "${pkgname%-git}"
   make
 }
 
 package() { 
-  cd popsicle
+  cd "${pkgname%-git}"
   make DESTDIR="${pkgdir}/" prefix=/usr install
+  install LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
 }
 

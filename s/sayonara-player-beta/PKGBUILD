@@ -1,7 +1,8 @@
-# Maintainer: Fixed Torres <aur_linuxero@outlook.com>
+# Maintainer: 
+# Contributor: Fixed Torres <aur_linuxero@outlook.com>
 
-pkgname=sayonara-player
-_pkgver=1.5.1-stable5
+pkgname=sayonara-player-beta
+_pkgver=1.5.2-beta3
 pkgver=${_pkgver//-/_}
 pkgrel=1
 pkgdesc="Small, clear and fast audio player for Linux written in C++, supported by the Qt framework. It uses Gstreamer as audio backend."
@@ -9,22 +10,20 @@ arch=(i686 x86_64)
 url="http://sayonara-player.com"
 license=(GPL3)
 depends=(qt5-base taglib gst-plugins-base gst-plugins-good)
-makedepends=(cmake qt5-tools gst-plugins-bad)
+makedepends=(cmake qt5-tools git gst-plugins-bad)
 optdepends=('gst-libav: additional codecs'
             'gst-plugins-bad: additional codecs'
             'gst-plugins-ugly: additional codecs')
-provides=(sayonara-player)
-conflicts=(sayonara-player)
-source=("http://sayonara-player.com/sw/${pkgname}-${_pkgver}.tar.gz")
-sha512sums=('0400a768685a65ac1d7379c10fa8ee7146a181fb208507fe40175feee5352e7ac9c263f6b506711aa93ac0aed3f64c1052790830181cec2d354a05c11c886a13')
+source=("https://gitlab.com/luciocarreras/sayonara-player/-/archive/${_pkgver}/sayonara-player-${_pkgver}.tar.gz")
+sha512sums=('a3ce12582dc95a86e69f18e45610f5559508068a96e94fae7b3fa9878d232d4a391b890c09934fd09d3ded4ee30e093cd58d8b4f7172ba0dd6bbcc54923285c1')
 
 prepare() {
- cd "$srcdir/$pkgname"
+  cd "$srcdir/sayonara-player-${_pkgver}"
   install -d build
 }
 
 build() {
-  cd "$srcdir/${pkgname}/build"
+  cd "$srcdir/sayonara-player-${_pkgver}/build"
   cmake .. \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE="Release" \
@@ -32,12 +31,12 @@ build() {
   make
 }
 
-check() {
-  cd "$srcdir/${pkgname}/build"
-  make test
-}
+#check() {
+#  cd "$srcdir/sayonara-player-${_pkgver}/build"
+#  make test
+#}
  
 package() {
-  cd "$srcdir/${pkgname}/build"
+  cd "$srcdir/sayonara-player-${_pkgver}/build"
   make DESTDIR="$pkgdir/" install
 }

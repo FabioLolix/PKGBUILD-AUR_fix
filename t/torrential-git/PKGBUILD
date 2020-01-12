@@ -1,4 +1,5 @@
-# Maintainer: Helder Bertoldo <helder.bertoldo@gmail.com>
+# Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Helder Bertoldo <helder.bertoldo@gmail.com>
 
 pkgname=torrential-git
 pkgver=1.1.0.r15.gd950ce8
@@ -11,7 +12,7 @@ depends=(libgranite.so libunity libevent libnatpmp libb64 dht miniupnpc libutp)
 makedepends=(git cmake vala-0.42)
 provides=(torrential)
 conflicts=(torrential)
-source=("${pkgname%-git}::git+https://github.com/davidmhewitt/torrential.git"
+source=("git+https://github.com/davidmhewitt/torrential.git"
         "torrential-transmission::git+https://github.com/davidmhewitt/transmission.git#branch=2.9x-torrential")
 md5sums=('SKIP'
          'SKIP')

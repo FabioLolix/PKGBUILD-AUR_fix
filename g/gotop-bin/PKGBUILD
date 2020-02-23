@@ -1,26 +1,26 @@
 # Maintainer: Caleb Bassi <calebjbassi@gmail.com>
 
 pkgname=gotop-bin
-pkgver=1.7.1
-pkgrel=2
+pkgver=3.3.1
+pkgrel=1
 pkgdesc="A terminal based graphical activity monitor inspired by gtop and vtop"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
-url="https://github.com/cjbassi/gotop"
+url="https://github.com/xxxserxxx/gotop"
 license=("AGPL3")
 provides=("gotop")
 conflicts=("gotop")
-source_x86_64=("https://github.com/cjbassi/gotop/releases/download/$pkgver/gotop_${pkgver}_linux_amd64.tgz")
-source_i686=("https://github.com/cjbassi/gotop/releases/download/$pkgver/gotop_${pkgver}_linux_386.tgz")
-source_arm=("https://github.com/cjbassi/gotop/releases/download/$pkgver/gotop_${pkgver}_linux_arm5.tgz")
-source_armv6h=("https://github.com/cjbassi/gotop/releases/download/$pkgver/gotop_${pkgver}_linux_arm6.tgz")
-source_armv7h=("https://github.com/cjbassi/gotop/releases/download/$pkgver/gotop_${pkgver}_linux_arm7.tgz")
-source_aarch64=("https://github.com/cjbassi/gotop/releases/download/$pkgver/gotop_${pkgver}_linux_arm8.tgz")
-sha256sums_x86_64=('ee36818daed804e32e19b8b7024a30d8a0200898cc9670d540d5af175db6ec93')
-sha256sums_i686=('fb01e5cc5d735495ee5f5a50ebc461fba8687e8f88fa8ebf21e5604a53a9242b')
-sha256sums_arm=('a6a33620f1b70f5ee0d50a60f144fe88e8be56e5167a3dfebbd5c1e62a7b876c')
-sha256sums_armv6h=('5589ca25c0ae8946835ae1b001339018eebc35b9480cac552d68e070aae8ac5f')
-sha256sums_armv7h=('22eabc3ff72ed3ff22f62561dba720c3809f5bacc6d4cf5c1294fcc21dcea3f6')
-sha256sums_aarch64=('3ec21b5b088daeac2a7b582fafe138705d02d61d11e99f638ad303dd414d70ac')
+source_x86_64=("https://github.com/xxxserxxx/gotop/releases/download/v$pkgver/gotop_${pkgver}_linux_amd64.zip")
+source_i686=("https://github.com/xxxserxxx/gotop/releases/download/v$pkgver/gotop_${pkgver}_linux_386.zip")
+source_arm=("https://github.com/xxxserxxx/gotop/releases/download/v$pkgver/gotop_${pkgver}_linux_arm_v5.zip")
+source_armv6h=("https://github.com/xxxserxxx/gotop/releases/download/v$pkgver/gotop_${pkgver}_linux_arm_v6.zip")
+source_armv7h=("https://github.com/xxxserxxx/gotop/releases/download/v$pkgver/gotop_${pkgver}_linux_arm_v7.zip")
+source_aarch64=("https://github.com/xxxserxxx/gotop/releases/download/v$pkgver/gotop_${pkgver}_linux_arm64.zip")
+sha256sums_x86_64=('ca27841033006ca89b67afa5115b64f34633a1afb35d01556c7a19cb7e358549')
+sha256sums_i686=('932b3994c50628d4377146f196cf64fafb4e32e117904126c744badb160a1b3f')
+sha256sums_arm=('17fb7217b006d13b410b5562bab6b58f082663cc8b470141515cdd384b6dfbd5')
+sha256sums_armv6h=('450b5e6b904907dfa29bd9a849f78a862db7e8091867f365a485e8cb19ef627f')
+sha256sums_armv7h=('e81fb9165a2371a6c32f811f4dc6475327332db115cefe12c94f7f7da52f2ce4')
+sha256sums_aarch64=('a8cc3a82fd7d722297b78085169f550a96b6bf67b906ada8ce13e528f30f611e')
 
 package() {
   install -Dm755 "$srcdir/gotop" "$pkgdir/usr/bin/gotop"

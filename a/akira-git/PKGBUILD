@@ -3,7 +3,7 @@
 # Contributor: Philip Goto <philip.goto@gmail.com>
 
 pkgname=akira-git
-pkgver=r401.5b91b9c
+pkgver=r430.0b5ca73
 pkgrel=1
 pkgdesc="Native Linux App for UI and UX Design built in Vala and Gtk"
 arch=(x86_64 aarch64)
@@ -13,11 +13,11 @@ depends=(goocanvas libgranite.so gtksourceview3 gtk-theme-elementary elementary-
 makedepends=(git vala meson appstream)
 provides=(akira)
 conflicts=(akira)
-source=("git+https://github.com/akiraux/Akira.git")
+source=("${pkgname%-git}::git+https://github.com/akiraux/Akira.git")
 sha256sums=('SKIP')
 
 pkgver() {
-  cd Akira
+  cd "${srcdir}/${pkgname%-git}"
   ( set -o pipefail
     git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
     printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
@@ -25,12 +25,12 @@ pkgver() {
 }
 
 build() {
-  cd Akira
+  cd "${srcdir}/${pkgname%-git}"
   meson build --prefix=/usr
   ninja -C build
 }
 
 package() {
-  cd Akira
+  cd "${srcdir}/${pkgname%-git}"
   DESTDIR="${pkgdir}" ninja -C build install
 }

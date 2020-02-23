@@ -1,4 +1,6 @@
-# Maintainer: Caleb Bassi <calebjbassi@gmail.com>
+# Maintainer: Sean E. Russell <ser@ser1.net>
+# Contributor: Caleb Bassi <calebjbassi@gmail.com>
+# Contributor: Fabio 'Lolix' Loli <fabio.loli@disroot.org>
 
 pkgname=gotop-bin
 pkgver=3.3.1

@@ -7,15 +7,12 @@ pkgdesc="Debugger for .NET Core runtime"
 url="https://github.com/Samsung/netcoredbg"
 license=(MIT)
 arch=(x86_64)
-depends=(dotnet-host)
+depends=(dotnet-host dotnet-runtime dotnet-sdk)
 makedepends=(git cmake clang)
 source=("git+https://github.com/Samsung/netcoredbg.git"
-        "git+https://github.com/dotnet/coreclr.git"
-        "https://dotnetcli.azureedge.net/dotnet/Sdk/2.1.804/dotnet-sdk-2.1.804-linux-x64.tar.gz")
+        "git+https://github.com/dotnet/coreclr.git")
 sha256sums=('SKIP'
-            'SKIP'
-            '51ce9fe209ed1ba5b077021fd23694808291ff8cf90dc56f04912b8cab9cb510')
-#noextract=('dotnet-sdk-2.1.804-linux-x64.tar.gz')
+            'SKIP')
 
 pkgver() {
   cd "${pkgname%-git}"
@@ -26,8 +23,6 @@ prepare() {
   cd "${pkgname%-git}"
   install -d build
   cp -a "${srcdir}"/coreclr "${srcdir}"/netcoredbg/.coreclr
-#  install -d "${srcdir}"/netcoredbg/.dotnet/sdk/2.1.804
-#  bsdtar -xf ${srcdir}/dotnet-sdk-2.1.804-linux-x64.tar.gz -C "${srcdir}"/netcoredbg/.dotnet/sdk/2.1.804
 }
 
 build() {
@@ -36,15 +31,13 @@ build() {
 
   cmake .. \
     -DCMAKE_INSTALL_PREFIX=/usr/bin \
-    -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_INSTALL_LIBEXECDIR=lib \
-    -DDOTNET_DIR:FILEPATH="${srcdir}"
+    -DDOTNET_DIR=/usr/share/dotnet
   make
+
 }
 
 package() {
   cd "${pkgname%-git}/build"
   make DESTDIR="$pkgdir" install
-  install -Dm644 LICENSE.txt "$pkgdir"/usr/share/licenses/$pkgname/LICENSE.txt
-  install -Dm644 ThirdPartyNotices.txt "$pkgdir"/usr/share/licenses/$pkgname/ThirdPartyNotices.txt
+  install -Dm644 ../LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
 }

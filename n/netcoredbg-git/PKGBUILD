@@ -1,35 +1,50 @@
 # Maintainer: Jun Bo Bi <jambonmcyeah@gmail.com>
 
-pkgname=netcoredbg
-pkgver=latest
+pkgname=netcoredbg-git
+pkgver=r553.4fcfbba
 pkgrel=1
-pkgdesc='Debugger for .NET Core runtime'
-url='https://github.com/Samsung/netcoredbg'
+pkgdesc="Debugger for .NET Core runtime"
+url="https://github.com/Samsung/netcoredbg"
 license=(MIT)
 arch=(x86_64)
-depends=(dotnet-host dotnet-runtime dotnet-sdk)
-makedepends=(git)
-optdepends=()
-source=("${url}/archive/${pkgver}.tar.gz")
-sha256sums=('SKIP')
+depends=(dotnet-host)
+makedepends=(git cmake clang)
+source=("git+https://github.com/Samsung/netcoredbg.git"
+        "git+https://github.com/dotnet/coreclr.git"
+        "https://dotnetcli.azureedge.net/dotnet/Sdk/2.1.804/dotnet-sdk-2.1.804-linux-x64.tar.gz")
+sha256sums=('SKIP'
+            'SKIP'
+            '51ce9fe209ed1ba5b077021fd23694808291ff8cf90dc56f04912b8cab9cb510')
+#noextract=('dotnet-sdk-2.1.804-linux-x64.tar.gz')
+
+pkgver() {
+  cd "${pkgname%-git}"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
 
 prepare() {
-  mkdir -p build
+  cd "${pkgname%-git}"
+  install -d build
+  cp -a "${srcdir}"/coreclr "${srcdir}"/netcoredbg/.coreclr
+#  install -d "${srcdir}"/netcoredbg/.dotnet/sdk/2.1.804
+#  bsdtar -xf ${srcdir}/dotnet-sdk-2.1.804-linux-x64.tar.gz -C "${srcdir}"/netcoredbg/.dotnet/sdk/2.1.804
 }
 
 build() {
-  cd build
-  CC=clang CXX=clang++ \
-  cmake ../netcoredbg-$pkgver \
-    -DDOTNET_DIR=/opt/dotnet \
+  cd "${pkgname%-git}/build"
+  export CC=clang CXX=clang++
+
+  cmake .. \
     -DCMAKE_INSTALL_PREFIX=/usr/bin \
-    -DBUILD_TESTING=OFF \
     -DCMAKE_INSTALL_LIBDIR=lib \
-    -DCMAKE_INSTALL_LIBEXECDIR=lib
+    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DDOTNET_DIR:FILEPATH="${srcdir}"
   make
 }
 
 package() {
-  cd build
+  cd "${pkgname%-git}/build"
   make DESTDIR="$pkgdir" install
+  install -Dm644 LICENSE.txt "$pkgdir"/usr/share/licenses/$pkgname/LICENSE.txt
+  install -Dm644 ThirdPartyNotices.txt "$pkgdir"/usr/share/licenses/$pkgname/ThirdPartyNotices.txt
 }

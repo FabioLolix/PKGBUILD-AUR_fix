@@ -3,7 +3,7 @@
 # Contributor: Caleb Bassi <calebjbassi@gmail.com>
 
 pkgname=gotop
-pkgver=3.3.1
+pkgver=3.5.0
 pkgrel=1
 pkgdesc="A terminal based graphical activity monitor inspired by gtop and vtop"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
@@ -11,10 +11,13 @@ url="https://github.com/xxxserxxx/gotop"
 license=(AGPL3)
 makedepends=(go)
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
-sha256sums=('79b261e5d778ddfdf85ded375dc4877b7d508916b771c2d1b7655849776ea66c')
+sha256sums=('7393da2fc0a991ac5563b8b20aa47b94b8dcd3e27000e32b4d4468d1f4d827ae')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
+
+  export GOPATH="$SRCDEST/go-modules"
+
   go build \
     -gcflags "all=-trimpath=${PWD}" \
     -asmflags "all=-trimpath=${PWD}" \

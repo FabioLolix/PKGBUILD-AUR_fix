@@ -1,7 +1,7 @@
 # Maintainer: Tony Lambiris <tony@criticalstack.com>
 
 pkgname=gotop-git
-pkgver=3.3.1.r5.gcbad9c1
+pkgver=3.5.0.r9.g0255277
 pkgrel=1
 pkgdesc='A terminal based graphical activity monitor inspired by gtop and vtop'
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
@@ -10,37 +10,28 @@ license=(AGPL)
 makedepends=(go git)
 conflicts=(gotop)
 provides=(gotop)
-source=("${pkgname}::git+https://github.com/xxxserxxx/gotop")
+source=("${pkgname%-git}::git+https://github.com/xxxserxxx/gotop")
 sha256sums=('SKIP')
 
 pkgver() {
-	cd "$srcdir/$pkgname"
-
-    git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
-}
-
-prepare() {
-	cd "$srcdir/$pkgname"
-
-	install -m755 -d "$srcdir/go/src/github.com/xxxserxxx"
-	cp -a "$srcdir/$pkgname" "$srcdir/go/src/github.com/xxxserxxx/gotop"
+  cd "$srcdir/${pkgname%-git}"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-	cd "$srcdir/go/src/github.com/xxxserxxx/gotop"
+  cd "$srcdir/${pkgname%-git}"
 
-	export GOPATH="$srcdir/go"
+  export GOPATH="$SRCDEST/go-modules"
 
-    go build \
-        -gcflags "all=-trimpath=${PWD}" \
-        -asmflags "all=-trimpath=${PWD}" \
-        -ldflags "-extldflags ${LDFLAGS}" \
-        -buildmode=pie \
-        ./cmd/gotop
+  go build \
+    -gcflags "all=-trimpath=${PWD}" \
+    -asmflags "all=-trimpath=${PWD}" \
+    -ldflags "-extldflags ${LDFLAGS}" \
+    -buildmode=pie \
+    ./cmd/gotop
 }
 
 package() {
-	cd "$srcdir/go/src/github.com/xxxserxxx/gotop"
-
-	install -Dm755 gotop $pkgdir/usr/bin/gotop
+  cd "$srcdir/${pkgname%-git}"
+  install -Dm755 gotop "${pkgdir}"/usr/bin/gotop
 }

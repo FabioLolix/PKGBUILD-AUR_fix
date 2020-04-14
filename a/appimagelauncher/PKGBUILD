@@ -1,0 +1,38 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: James Kittsmiller (AJSlye) <james@nulogicsystems.com>
+# Contributor: TheAssassin
+
+pkgname=appimagelauncher
+pkgver=2.1.2
+_pkgver=e405182
+pkgrel=1
+pkgdesc="A Helper application for running and integrating AppImages."
+arch=(x86_64)
+url="https://github.com/TheAssassin/AppImageLauncher"
+license=(MIT)
+depends=(qt5-base fuse2 squashfuse libappimage)
+makedepends=(cmake boost qt5-tools)
+source=("${pkgname}-${pkgver}-${_pkgver}.tar.xz::https://github.com/TheAssassin/AppImageLauncher/releases/download/v${pkgver}/appimagelauncher-${_pkgver}.source.tar.xz"
+        'appimage-binfmt-remove.hook')
+sha256sums=('5a6fa81e1ece9082e136bf96fe114a1726f21601b84eada3d44171582a254109'
+            '72a2630cf79b8f90bc21eae1d9f40c07fe77ce22df46c511b500f514455d7c81')
+
+build() {
+  cd "${srcdir}/appimagelauncher-${_pkgver}.source"
+
+  cmake . \
+    -DCMAKE_INSTALL_PREFIX=/usr/ \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DUSE_SYSTEM_LIBAPPIMAGE=ON \
+    -DBUILD_TESTING=OFF
+  make libappimageupdate libappimageupdate-qt
+  cmake .
+  make
+}
+
+package() {
+  cd "${srcdir}/appimagelauncher-${_pkgver}.source"
+  make DESTDIR="$pkgdir" install
+  install -Dm644 LICENSE.txt "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 ../appimage-binfmt-remove.hook "$pkgdir"/usr/share/libalpm/hooks/appimage-binfmt-remove.hook
+}

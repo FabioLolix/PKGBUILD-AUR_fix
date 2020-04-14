@@ -26,15 +26,16 @@ build() {
   cd "$srcdir/sayonara-player-${_pkgver}/build"
   cmake .. \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE="Release" \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DUSE_SYSTEM_TAGLIB=1 \
     -DWITH_TESTS=1
   make
 }
 
-#check() {
-#  cd "$srcdir/sayonara-player-${_pkgver}/build"
-#  make test
-#}
+check() {
+  cd "$srcdir/sayonara-player-${_pkgver}/build"
+  make test
+}
  
 package() {
   cd "$srcdir/sayonara-player-${_pkgver}/build"

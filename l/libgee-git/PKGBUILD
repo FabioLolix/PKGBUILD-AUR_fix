@@ -1,4 +1,4 @@
-# Contributor: Fabio 'Lolix' Loli <lolix@disroot.org>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 # Contributor: Sergej Pupykin <pupykin.s+arch@gmail.com>
 # Contributor: Lubosz Sarnecki <lubosz@gmail.com>
@@ -11,7 +11,7 @@ url="https://git.gnome.org/browse/libgee"
 license=(LGPL2.1)
 arch=(i686 x86_64)
 depends=(glib2)
-makedepends=(gobject-introspection vala autoconf-archive git valadoc)
+makedepends=(gobject-introspection vala autoconf-archive git)
 provides=(libgee)
 conflicts=(libgee)
 source=("git+https://git.gnome.org/browse/libgee")

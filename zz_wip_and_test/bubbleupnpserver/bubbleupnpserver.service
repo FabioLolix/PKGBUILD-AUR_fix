@@ -1,0 +1,18 @@
+[Unit]
+Description=BubbleUPnP Server
+#Wants=network.target
+#After=network.target
+Requires=network-online.target
+After=network-online.target
+
+
+[Service]
+User=bubbleupnp
+Group=bubbleupnp
+WorkingDirectory=/var/lib/bubbleupnp
+EnvironmentFile=-/etc/conf.d/bubbleupnpserver
+ExecStart=/usr/bin/bubbleupnpserver -dataDir /var/lib/bubbleupnp ${RUN_ARGS}
+SuccessExitStatus=1 2 SIGKILL
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,38 @@
+
+
+pkgname=openmvg-regard3d
+pkgver=1.4
+pkgrel=1
+pkgdesc="open Multiple View Geometry library. Basis for 3D computer vision and Structure from Motion"
+arch=(x86_64)
+url='http://imagine.enpc.fr/~moulonp/openMVG/'
+license=(MPL)
+depends=('lz4' 'libpng' 'libjpeg' 'libtiff' 'libxrandr' 'libxxf86vm' 'libxi' 'graphviz' 'libgl' 'ceres-solver' 'gflags' 'flann' 'coin-or-coinutils' 'coin-or-clp' 'coin-or-osi' 'coin-or-lemon')
+makedepends=(cmake doxygen eigen)
+source=("https://sourceforge.net/projects/regard3d/files/Regard3D/${pkgver}/openMVG-${pkgver}_r3d.7z")
+sha256sums=('9bbee1a2d5e25691c46d896be9a6384bc9224b50bf61baf76332f8cfb54719be'
+            '13b1f0195b5e97c17eec737e63f4da69c501bb4ced28c4c14517440009139043'
+            '212589acc8a657b1096d15da9a96518b91181d9f53a1c5a7735846e964629c8c')
+
+prepare() {
+  cd "${srcdir}/openMVG-${pkgver}_r3d/src"
+  install -d build
+}
+
+build() {
+  cd "${srcdir}/openMVG-${pkgver}_r3d/src/build"
+
+  cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=RELEASE \
+    -DOpenMVG_BUILD_SHARED=ON \
+    -DOpenMVG_BUILD_EXAMPLES=OFF \
+    -DOpenMVG_BUILD_OPENGL_EXAMPLES=OFF
+
+  make
+}
+
+package() {
+  cd "${srcdir}/openMVG-${pkgver}_r3d/src/build"
+  make DESTDIR="$pkgdir" install
+}

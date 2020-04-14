@@ -1,0 +1,47 @@
+# Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Yunhui Fu <yhfudev@gmail.com>
+# Contributor: Tri Le <trile7@gmail.com>
+
+pkgname=mjpg-streamer-kingpinzs-patched-git
+pkgver=r360.51f39ee
+pkgrel=1
+pkgdesc="Stream mjpeg frames from a webcam via http"
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://github.com/jacksonliam/mjpg-streamer"
+license=(GPL2)
+depends=(libjpeg-turbo imagemagick)
+provides=(mjpg-streamer)
+conflicts=(mjpg-streamer)
+makedepends=(git cmake)
+source=("mjpg-streamer-kingpinzs::git+https://github.com/kingpinzs/mjpg-streamer.git"
+        "https://github.com/markus-k/mjpg-streamer/commit/0e5d4fe1f389cfe9f1fa78b125fa9dcca32f9307.diff"
+        "https://github.com/markus-k/mjpg-streamer/commit/e647899c71cb2dc021365733ddf80a72efdde229.diff")
+sha256sums=('SKIP'
+            'c93a771b2968b052c0d5bd59acde6544ebfc2377109efff59cba8f60ffc9ee95'
+            'a53f759ffa82ef062b53932da2695e8f32bfc8138be357f49f3968df4743d661')
+
+pkgver() {
+  cd "mjpg-streamer-kingpinzs"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd "mjpg-streamer-kingpinzs/mjpg-streamer-experimental"
+  install -d _build
+  patch -Np2 -i "${srcdir}/0e5d4fe1f389cfe9f1fa78b125fa9dcca32f9307.diff"
+  patch -Np2 -i "${srcdir}/e647899c71cb2dc021365733ddf80a72efdde229.diff"
+}
+
+build() {
+  cd "mjpg-streamer-kingpinzs/mjpg-streamer-experimental/_build"
+  cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DPLUGIN_INPUT_OPENCV=OFF \
+    -DENABLE_HTTP_MANAGEMENT=ON \
+    -DCMAKE_BUILD_TYPE=release
+}
+
+package() {
+  cd "mjpg-streamer-kingpinzs/mjpg-streamer-experimental"
+  make DESTDIR="${pkgdir}" install
+}

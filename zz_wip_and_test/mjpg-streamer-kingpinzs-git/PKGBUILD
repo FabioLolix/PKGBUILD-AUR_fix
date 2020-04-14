@@ -1,0 +1,41 @@
+# Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Yunhui Fu <yhfudev@gmail.com>
+# Contributor: Tri Le <trile7@gmail.com>
+
+pkgname=mjpg-streamer-kingpinzs-git
+pkgver=r360.51f39ee
+pkgrel=1
+pkgdesc="Stream mjpeg frames from a webcam via http"
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://github.com/jacksonliam/mjpg-streamer"
+license=(GPL2)
+depends=(libjpeg-turbo imagemagick)
+provides=(mjpg-streamer)
+conflicts=(mjpg-streamer)
+makedepends=(git cmake)
+source=("mjpg-streamer-kingpinzs::git+https://github.com/kingpinzs/mjpg-streamer.git")
+sha256sums=(SKIP)
+
+pkgver() {
+  cd "mjpg-streamer-kingpinzs"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd "mjpg-streamer-kingpinzs/mjpg-streamer-experimental"
+  install -d _build
+}
+
+build() {
+  cd "mjpg-streamer-kingpinzs/mjpg-streamer-experimental/_build"
+  cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DPLUGIN_INPUT_OPENCV=OFF \
+    -DENABLE_HTTP_MANAGEMENT=ON \
+    -DCMAKE_BUILD_TYPE=release
+}
+
+package() {
+  cd "mjpg-streamer-kingpinzs/mjpg-streamer-experimental"
+  make DESTDIR="${pkgdir}" install
+}

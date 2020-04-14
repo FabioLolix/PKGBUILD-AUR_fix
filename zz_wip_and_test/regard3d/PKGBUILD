@@ -1,0 +1,45 @@
+# Maintainer: 
+
+pkgname=regard3d
+pkgver=1.0.0
+_openMVGver=1.4
+pkgrel=1
+pkgdesc="free and open source structure-from-motion program"
+arch=(x86_64)
+url="http://www.regard3d.org/index.php"
+license=(MIT)
+depends=()
+makedepends=(cmake ceres-solver wxgtk3 flann openscenegraph boost1.69 opencv assimp)
+optdepends=()
+options=()
+source=(https://sourceforge.net/projects/regard3d/files/Regard3D/${pkgver}/Regard3D_src_${pkgver}.7z
+        https://sourceforge.net/projects/regard3d/files/Regard3D/${pkgver}/openMVG-${_openMVGver}_r3d.7z
+)
+sha256sums=('0b802089ada6942118a0453ec7940bc25fc231c151f85d931df5bcb993a23a9d'
+            '9bbee1a2d5e25691c46d896be9a6384bc9224b50bf61baf76332f8cfb54719be')
+
+prepare() {
+  cd "${srcdir}/src"
+  install -d build
+}
+
+build() {
+  cd "${srcdir}/src/build"
+  cmake .. \
+    -Wno-dev \
+    -G "Unix Makefiles" \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_PREFIX_PATH=/usr/include/openMVG \
+    -DCMAKE_EXE_LINKER_FLAGS=-lwx_gtk3u_aui-3.0 \
+    -DwxWidgets_wxrc_EXECUTABLE=/usr/bin/wxrc-3.0 \
+    -DwxWidgets_CONFIG_EXECUTABLE=/usr/bin/wx-config-gtk3 \
+    -DwxWidgets_INCLUDE_DIRS=/usr/include/wx-3.0/
+
+#     -DCMAKE_PREFIX_PATH=${srcdir}/openMVG-${_openMVGver}_r3d/src/ \
+#    -DOpenMVG_BUILD_EXAMPLES=OFF \
+}
+
+package() {
+  cd "${srcdir}/src/build"
+  make DESTDIR=${pkgdir} install
+}

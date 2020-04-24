@@ -1,0 +1,22 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+
+pkgname=cinelerra-hv-bin
+pkgver=7.2
+pkgrel=1
+pkgdesc="Professional video editing and compositing environment"
+arch=(x86_64)
+url="https://cinelerra.org/"
+license=(GPL2)
+depends=(libpng12)
+provides=(cinelerra-hv)
+conflicts=(cinelerra-hv)
+source=("https://sourceforge.net/projects/heroines/files/cinelerra-${pkgver}-x86_64.tar.xz")
+sha256sums=('1f66f363ab9c1040df51c489ca21670d811a86e6b3f8b3a9473b7db91d1e69cb')
+options=(!strip)
+
+package() {
+  install -d "${pkgdir}"/usr/bin
+  install -d "${pkgdir}"/usr/lib/cinelerra-hv
+  cp -a "${srcdir}"/cinelerra-$pkgver/* "${pkgdir}"/usr/lib/cinelerra-hv/
+  ln -s /usr/lib/cinelerra-hv/cinelerra "${pkgdir}"/usr/bin/cinelerra-hv
+}

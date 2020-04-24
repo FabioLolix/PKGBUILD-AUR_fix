@@ -1,0 +1,25 @@
+# Maintainer: 
+
+pkgname=pplib
+pkgver=7.0.1
+pkgrel=1
+pkgdesc="OpenStopMotion Animation Capture"
+arch=(x86_64)
+url="https://www.pfp.de/ppl/"
+license=(BSD)
+#depends=(pcre libtiff)
+makedepends=(nasm pcre sdl2 lame libshout sqlite3 libtiff imagemagick)
+source=("$pkgname-$pkgver.tar.gz::https://github.com/pfedick/pplib/archive/REL_${pkgver//./_}.tar.gz")
+sha256sums=('7cab7ca3c31be4726c4b45025bd49bda34239ade30853edd778d4851e808be37')
+
+build() {
+  cd "pplib-REL_${pkgver//./_}"
+  ./configure LDFLAGS= --with-imlib=/usr/include/ImageMagick-7 --with-pcre=/usr --with-jpeg --with-libtiff=/usr --with-nasm --prefix=/usr --with-sqlite3 -with-mysql=no
+}
+
+package() {
+  cd "pplib-REL_${pkgver//./_}"
+  make DESTDIR="$pkgdir" install
+}
+
+

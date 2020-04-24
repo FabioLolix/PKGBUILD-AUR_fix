@@ -1,0 +1,28 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+
+pkgname=gsvg
+pkgver=0.5.3
+pkgrel=1
+pkgdesc="GObject API for SVG"
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://gitlab.com/pwmc/gsvg"
+license=(LGPL)
+depends=()
+makedepends=(vala-0.42 meson)
+optdepends=()
+provides=()
+conflicts=()
+options=()
+source=("https://gitlab.com/pwmc/${pkgname}/-/archive/${pkgver}/${pkgname}-${pkgver}.tar.gz")
+sha256sums=('8f72fad98a0ec7a14a19d855403ab4969a12c09da04644fee0ee5dc958edd349')
+
+build() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+  meson . build --prefix=/usr
+  ninja -C build
+}
+
+package() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+  DESTDIR="${pkgdir}" ninja -C build install
+}

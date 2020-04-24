@@ -1,0 +1,28 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+
+pkgname=gsvgtk
+pkgver=0.6.3
+pkgrel=1
+pkgdesc="Library for providing Gtk+ widgets to view and modify SVG documents"
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://gitlab.com/pwmc/gsvgtk"
+license=(LGPL)
+depends=()
+makedepends=(vala meson)
+optdepends=()
+provides=()
+conflicts=()
+options=()
+source=("https://gitlab.com/pwmc/${pkgname}/-/archive/${pkgver}/${pkgname}-${pkgver}.tar.gz")
+sha256sums=('85b1eba3357eeec90359e742bcd1d7b4444905db2c522c288b4cf515fde1f889')
+
+build() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+  meson . build --prefix=/usr
+  ninja -C build
+}
+
+package() {
+  cd ${srcdir}/${pkgname}-${pkgver}
+  DESTDIR="${pkgdir}" ninja -C build install
+}

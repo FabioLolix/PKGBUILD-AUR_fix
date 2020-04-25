@@ -2,7 +2,7 @@
 # Based on pkgbuild found on arch forums by user mpan (https://bbs.archlinux.org/viewtopic.php?id=204222)
 
 pkgname=qstopmotion
-pkgver=2.4.1
+pkgver=2.5.0
 pkgrel=1
 pkgdesc="An application for creating stop-motion animation movies."
 url="http://www.qstopmotion.org/"
@@ -11,7 +11,7 @@ arch=(x86_64)
 depends=(v4l-utils qwt qt5-multimedia libgphoto2)
 makedepends=(cmake)
 source=("https://sourceforge.net/projects/qstopmotion/files/Version_${pkgver//./_}/$pkgname-$pkgver-Source.tar.gz")
-sha256sums=('90be482401e7043a68089d216aa149d59d7ac4b4e82ce1f516532d807d97260f')
+sha256sums=('1df93e4a42898f4fd6c5ab35bbc82e38e367e7dd3885b44d025ac0d0cb1828d0')
 
 build() {
   cd "qstopmotion-$pkgver-Source"

@@ -161,14 +161,6 @@ VAR2=t
 
 
 
-VAR2=u
-  VAR=uberwriter-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-
-
-
 VAR2=v
   VAR=vala-0.42
   cd "$BASE/$VAR2/$VAR"

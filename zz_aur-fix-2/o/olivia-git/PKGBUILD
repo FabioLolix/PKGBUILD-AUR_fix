@@ -1,0 +1,33 @@
+# Maintainer: 
+
+pkgname=olivia-git
+pkgver=r818.9ecc29b
+pkgrel=1
+pkgdesc="Elegant music player for Linux"
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://github.com/keshavbhatt/olivia"
+license=(MIT)
+depends=(qt5-base qt5-webkit taglib)
+makedepends=(git qt5-tools)
+optdepends=()
+provides=(olivia)
+conflicts=(olivia)
+source=("git+${url}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${pkgname%-git}"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "${pkgname%-git}"
+  qmake
+  make
+}
+
+package() {
+  cd "${pkgname%-git}"
+  make INSTALL_ROOT="${pkgdir}/" install
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}

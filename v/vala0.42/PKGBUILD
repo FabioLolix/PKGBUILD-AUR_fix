@@ -3,7 +3,7 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 # Contributor: Timm Preetz <timm@preetz.us>
 
-pkgname=vala-0.42
+pkgname=vala0.42
 pkgver=0.42.7
 pkgrel=1
 pkgdesc="Compiler for the GObject type system"

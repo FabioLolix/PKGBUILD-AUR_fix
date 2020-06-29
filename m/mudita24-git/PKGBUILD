@@ -1,4 +1,4 @@
-# Contributor: Fabio 'Lolix' Loli <lolix@disroot.org>
+# Contributor: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 # Contributor: Ricky Sheaves <ricky[at]westdowneast[dot]com>
 
 pkgname=mudita24-git
@@ -13,9 +13,9 @@ makedepends=(git cmake)
 source=("git+https://github.com/NielsMayer/mudita24"
 	      mudita24.desktop
 	      mudita24.png)
-md5sums=( 'SKIP'
-          '71d692e6edea031aa791c92862e5d95d'
-          '3f039ae5900c449d1887e34ce1ebfc62')
+sha256sums=('SKIP'
+            '4fdfcf2d92ee0424fa2af5e06cf21fb07ac5bc9938db224a38a4687cb5c44637'
+            'a659ff56346e3d11bd0c386efd55b183c5e07c9ae8e03e5de15caf6c1be09513')
 
 pkgver() {
   cd "${pkgname%-git}"

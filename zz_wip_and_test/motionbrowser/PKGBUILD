@@ -1,0 +1,26 @@
+# Maintainer: 
+
+pkgname=motionbox
+pkgver=1.6.0
+pkgrel=1
+pkgdesc="Video browser from omega movement"
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="http://omega.gg/MotionBox/"
+license=(GPL3)
+depends=(vlc libtorrent)
+makedepends=(qt5-xmlpatterns)
+optdepends=()
+options=()
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/omega-gg/MotionBox/archive/${pkgver}.tar.gz")
+sha256sums=('49fab9a139dd06e75eb5bd926c90c9b833a097911ac17d44a159239f0c2b0633')
+
+build() {
+  cd "${srcdir}/MotionBox-${pkgver}"
+  qmake -r
+  make 
+}
+
+package() {
+  cd "${srcdir}/MotionBox-${pkgver}"
+  make INSTALL_ROOT="${pkgdir}/" install
+}

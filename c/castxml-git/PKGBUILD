@@ -2,7 +2,7 @@
 
 pkgname=castxml-git
 pkgdesc="C-family abstract syntax tree XML output tool."
-pkgver=0.3.1.r6.g861054e
+pkgver=0.3.4.r19.g8625aed
 pkgrel=1
 arch=(i686 x86_64)
 url="https://github.com/CastXML/CastXML"
@@ -12,7 +12,7 @@ makedepends=(git cmake python-sphinx)
 provides=(castxml)
 conflicts=(castxml)
 source=("${pkgname%-git}::git+https://github.com/CastXML/CastXML")
-md5sums=('SKIP')
+sha256sums=('SKIP')
 
 pkgver() {
   cd "${srcdir}/${pkgname%-git}"
@@ -25,6 +25,7 @@ build() {
   sed -i "s|\${llvm_libs}|LLVM|g" src/CMakeLists.txt
 
   cmake . \
+    -DCLANG_LINK_CLANG_DYLIB=1 \
     -DSPHINX_EXECUTABLE=/usr/bin/sphinx-build \
     -DSPHINX_HTML=1 \
     -DSPHINX_MAN=1 \

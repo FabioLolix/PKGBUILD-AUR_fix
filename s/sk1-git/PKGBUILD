@@ -1,20 +1,20 @@
-# Contributor: Igor Novikov <sk1 dot project dot org at gmail dot com>
 # Maintainer: Joermungand <joermungand at gmail dot com>
+# Contributor: Ihor Novikov <sk1.project.org@gmail.com>
 
 pkgname=sk1-git
-pkgver=r5100.2b78ef14
+pkgver=r5117.4e6a5443
 pkgrel=1
 pkgdesc="An open source vector graphics editor for prepress"
 url="https://sk1project.net/"
-arch=('i686' 'x86_64')
-license=('GPL3')
-depends=('lcms2' 'cairo' 'libmagick' 'pango' 'wxpython' 'python2-cairo' 
-	 'python2-pillow' 'python2-reportlab' 'python2-pycups')
-makedepends=('git' 'python2')
-provides=('sk1')
-conflicts=('sk1')
-source=("${pkgname%-*}"::'git://github.com/sk1project/sk1-wx.git')
-md5sums=('SKIP')
+arch=(i686 x86_64)
+license=(GPL3)
+depends=(lcms2 cairo libmagick pango wxpython python2-cairo 
+         python2-pillow python2-reportlab python2-pycups)
+makedepends=(git)
+provides=(sk1)
+conflicts=(sk1)
+source=("${pkgname%-*}::git+https://github.com/sk1project/sk1-wx.git")
+sha256sums=('SKIP')
 
 pkgver() {
 	cd "$srcdir/${pkgname%-*}"

@@ -5,7 +5,7 @@
 # Contributor: Jon Nordby <jononor@gmail.com>
 
 pkgname=libwebp-git
-pkgver=1.0.0.r17.gf9df0081a
+pkgver=1.1.0.r26.gdef64e920
 pkgrel=1
 pkgdesc="WebP library and conversion tools"
 arch=(x86_64 i686)

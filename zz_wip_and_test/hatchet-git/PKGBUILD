@@ -1,15 +1,16 @@
 # Maintainer: 
 
 pkgname=hatchet-git
-pkgver=r11424.905daf1db
+pkgver=r11465.3d3bebfeb
 pkgrel=1
 pkgdesc="Multi-source music player"
 arch=(x86_64 i686 armv6h armv7h aarch64)
 url="https://github.com/hatchet-player/Hatchet"
 license=(GPL3)
 depends=(qt5-base qt5-svg qt5-tools qt5-webengine qt5-webkit qt5-x11extras
-        vlc attica qtkeychain
-        boost sparsehash lucene++ qca quazip telepathy-qt miniupnpc)
+         vlc attica qtkeychain
+         liblastfm-qt5
+         boost sparsehash lucene++ qca quazip telepathy-qt miniupnpc)
 makedepends=(git meson ninja cmake gcc-objc)
 optdepends=()
 provides=(hatchet)
@@ -60,8 +61,8 @@ prepare() {
 
 build() {
   cd "${pkgname%-git}"
-  meson setup build --prefix=/usr -D with_echonest=false -D with_liblastfm=false
-# -D with_telepathy=false
+  meson setup build --prefix=/usr -D with_echonest=false 
+# -D with_liblastfm=false -D with_telepathy=false
   ninja -C build
 }
 

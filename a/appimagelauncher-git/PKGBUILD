@@ -3,8 +3,8 @@
 # Contributor: TheAssassin
 
 pkgname=appimagelauncher-git
-pkgver=r1040.346f011
-pkgrel=5
+pkgver=r1068.7cb4d70
+pkgrel=1
 pkgdesc="A Helper application for running and integrating AppImages."
 arch=(x86_64)
 url="https://github.com/TheAssassin/AppImageLauncher"

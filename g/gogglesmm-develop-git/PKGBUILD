@@ -7,7 +7,7 @@ pkgdesc="Goggles Music Manager"
 arch=(i686 x86_64 arm armv6h armv7h aarch64)
 url="http://gogglesmm.github.io"
 license=(GPL3)
-depends=(openjpeg libepoxy libwebp taglib glu opus libmad faad2)
+depends=(openjpeg2 libepoxy libwebp taglib glu opus libmad faad2)
 makedepends=(git cmake pkgconfig libpulse alsa-lib)
 optdepends=('libpulse: PulseAudio Output'
             'alsa-lib: Alsa Output')

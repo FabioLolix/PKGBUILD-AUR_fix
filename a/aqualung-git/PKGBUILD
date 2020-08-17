@@ -1,8 +1,8 @@
 # Maintainer: jdn06 <jdn06.jdn06@outlook.fr>
 
 pkgname=aqualung-git
-pkgver=1.0.r12.g61169ba
-pkgrel=2
+pkgver=1.0.r68.g09c86a7
+pkgrel=1
 pkgdesc="High quality music player w/ gapless support"
 arch=(i686 x86_64)
 url="http://aqualung.jeremyevans.net/"
@@ -21,8 +21,6 @@ source=("git+https://github.com/jeremyevans/aqualung.git"
         aqualung.desktop)
 sha256sums=('SKIP'
             '4d2aba2924b7c0bacbd377a6975f1cdbf09dc67a5d61c36bf2d52bddbab1b3b9')
-
-export CC=/usr/bin/gcc-8 CXX=/usr/bin/g++-8
 
 pkgver() {
   cd "${srcdir}/${pkgname%-git}"

@@ -1,13 +1,13 @@
 # Maintainer: Sven Fischer <aur.archlinux@linux4tw.de>
 
 pkgname=guayadeque-git
-pkgver=0.4.6.r0.g85c97c95
+pkgver=0.4.6.r29.g3c54f64b
 pkgrel=1
 pkgdesc="Lightweight music player"
 arch=(i686 x86_64)
 url="http://guayadeque.org/"
 license=(GPL3)
-depends=(wxsqlite3 wxgtk3 webkit2gtk taglib gst-plugins-base gst-plugins-good)
+depends=(wxsqlite3 wxgtk3 webkit2gtk taglib gst-plugins-base gst-plugins-good jsoncpp)
 makedepends=(cmake git)
 optdepends=('gst-libav: additional codecs'
             'gst-plugins-bad: additional codecs'

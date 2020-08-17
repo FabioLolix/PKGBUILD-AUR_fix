@@ -13,12 +13,15 @@ makedepends=(cmake qt5-tools gst-plugins-bad)
 optdepends=('gst-libav: additional codecs'
             'gst-plugins-bad: additional codecs'
             'gst-plugins-ugly: additional codecs')
-source=("http://sayonara-player.com/sw/${pkgname}-${_pkgver}.tar.gz")
-sha512sums=('0400a768685a65ac1d7379c10fa8ee7146a181fb208507fe40175feee5352e7ac9c263f6b506711aa93ac0aed3f64c1052790830181cec2d354a05c11c886a13')
+source=("http://sayonara-player.com/sw/${pkgname}-${_pkgver}.tar.gz"
+        "sayonara-qpainter.patch::https://gitlab.com/luciocarreras/sayonara-player/-/commit/8ece134217a3efaf61383e060353f105ab1a4b21.patch")
+sha512sums=('0400a768685a65ac1d7379c10fa8ee7146a181fb208507fe40175feee5352e7ac9c263f6b506711aa93ac0aed3f64c1052790830181cec2d354a05c11c886a13'
+            'd7a189bfa925a35d2534ce13b6d2407222203b7241abd8b08f3a4ae1f4f0d6bca9c93bd06b70ee7a2783cd32710ed7a782e8fa9dc06b98b3798149fad2bba170')
 
 prepare() {
  cd "$srcdir/$pkgname"
   install -d build
+  patch -Np1 -i ../sayonara-qpainter.patch
 }
 
 build() {

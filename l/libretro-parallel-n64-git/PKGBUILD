@@ -3,7 +3,7 @@
 # Contributor: Thomas Schneider <maxmusterm@gmail.com>
 
 pkgname=libretro-parallel-n64-git
-pkgver=r4975.ab155da1
+pkgver=r5202.cfb9789e
 pkgrel=1
 pkgdesc="Optimized/rewritten Nintendo 64 emulator made specifically for Libretro. Originally based on Mupen64 Plus."
 arch=('i686' 'x86_64')

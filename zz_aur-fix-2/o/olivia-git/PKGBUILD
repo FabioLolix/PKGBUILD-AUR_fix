@@ -1,7 +1,7 @@
 # Maintainer: 
 
 pkgname=olivia-git
-pkgver=r818.9ecc29b
+pkgver=r824.551b4b1
 pkgrel=1
 pkgdesc="Elegant music player for Linux"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)

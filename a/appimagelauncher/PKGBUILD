@@ -3,8 +3,8 @@
 # Contributor: TheAssassin
 
 pkgname=appimagelauncher
-pkgver=2.1.2
-_pkgver=e405182
+pkgver=2.1.4
+_pkgver=7cb4d70
 pkgrel=1
 pkgdesc="A Helper application for running and integrating AppImages."
 arch=(x86_64)
@@ -14,7 +14,7 @@ depends=(qt5-base fuse2 squashfuse libappimage)
 makedepends=(cmake boost qt5-tools)
 source=("${pkgname}-${pkgver}-${_pkgver}.tar.xz::https://github.com/TheAssassin/AppImageLauncher/releases/download/v${pkgver}/appimagelauncher-${_pkgver}.source.tar.xz"
         'appimage-binfmt-remove.hook')
-sha256sums=('5a6fa81e1ece9082e136bf96fe114a1726f21601b84eada3d44171582a254109'
+sha256sums=('af97297ef7939241e65e75647cd1ce78f35eee78d55055872ed6d5e1635d2388'
             '72a2630cf79b8f90bc21eae1d9f40c07fe77ce22df46c511b500f514455d7c81')
 
 build() {

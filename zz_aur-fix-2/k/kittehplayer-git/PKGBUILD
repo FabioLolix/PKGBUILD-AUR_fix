@@ -1,7 +1,7 @@
 # Maintainer: Kitteh <namedkitten@gmail.com>
 
 pkgname=kittehplayer-git
-pkgver=r430.9a0c08f
+pkgver=r509.37cd849
 pkgrel=1
 pkgdesc="A Qt Video Player with many themes for YouTube, Niconico and RoosterTeeth"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)

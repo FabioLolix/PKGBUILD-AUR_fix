@@ -3,7 +3,7 @@
 # Contributor: Eugene Tan <jmingtan at gmail dot com>
 
 pkgname=librocket-git
-pkgver=issue.137.r132.g40f43b9
+pkgver=issue.137.r137.gc4384c71
 pkgrel=1
 epoch=1
 pkgdesc="The HTML/CSS User Interface library"

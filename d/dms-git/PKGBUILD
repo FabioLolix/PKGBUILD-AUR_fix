@@ -1,41 +1,38 @@
 # Maintainer: bitwave <bitwave [At] oomlu [d.o.T] de>
 
-pkgname=dms
-pkgver=198.fcc412c
+pkgname=dms-git
+pkgver=1.1.0.r6.g076137c
 pkgrel=1
-pkgdesc='UPnP DLNA Digital Media Server'
-arch=('x86_64' 'i686')
-url='https://github.com/anacrolix/dms/'
-license=('BSD')
-makedepends=('go' 'git' 'mercurial')
-depends=('glibc')
-
-_download() {
-  mkdir --p "$pkgname-$pkgver"
-  cd "$pkgname-$pkgver"
-
-  GOPATH="$srcdir" go get -d github.com/anacrolix/dms
-}
+pkgdesc="UPnP DLNA Digital Media Server"
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://github.com/anacrolix/dms/"
+license=(BSD)
+depends=(glibc)
+makedepends=(go git)
+source=("git+https://github.com/anacrolix/dms")
+sha256sums=('SKIP')
 
 pkgver() {
-  _download
-  cd "$srcdir/src/github.com/anacrolix/dms"
-  local ver="$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
-  printf "%s" "${ver//-/.}"
+  cd "${srcdir}/${pkgname%-git}"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-  mkdir --p "$pkgname-$pkgver"
-  cd "$pkgname-$pkgver"
+  cd "${srcdir}/${pkgname%-git}"
 
-  GOPATH="$srcdir" go get github.com/anacrolix/dms
+  export GOPATH="$SRCDEST/go-modules"
+
+  go build \
+    -gcflags "all=-trimpath=${PWD}" \
+    -asmflags "all=-trimpath=${PWD}" \
+    -ldflags "-extldflags ${LDFLAGS}" \
+    -buildmode=pie \
+    .
 }
+
 
 package() {
-  cd "$srcdir"
-
-  install -Dm755 "bin/$pkgname" "$pkgdir/usr/bin/$pkgname"
-  install -Dm644 "src/github.com/anacrolix/dms/LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  cd "${srcdir}/${pkgname%-git}"
+  install -Dm755 dms "${pkgdir}/usr/bin/dms"
+  install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/$pkgname/LICENSE"
 }
-
-# vim:set ts=2 sw=2 et:

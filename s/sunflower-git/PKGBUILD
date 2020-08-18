@@ -2,14 +2,14 @@
 
 pkgname=sunflower-git
 pkgver=0.4.62.r49.g841252d0
-pkgrel=1
+pkgrel=2
 pkgdesc="Small and highly customizable twin-panel file manager for Linux with support for plugins"
 arch=(any)
 license=(GPL3)
 url="https://sunflower-fm.org"
-depends=(gtk3 python-gobject python-chardet librsvg)
-makedepends=(git)
-optdepends=('vte3: integrated vte-based terminal'
+depends=(gtk3 vte3 python-gobject python-chardet librsvg)
+makedepends=(git libnotify)
+optdepends=('libnotify'
             'python-mutagen: audio-metadata support'
             'gvfs: mount-management')
 provide=(sunflower)

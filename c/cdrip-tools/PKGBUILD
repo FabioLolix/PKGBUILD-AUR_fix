@@ -8,20 +8,24 @@
 # I will correct this when upstream version bumps master.
 
 pkgname=cdrip-tools
-#pkgver=0.2
-pkgver=master
+pkgver=0.2.r11.gc5a89bd
 pkgrel=1
 pkgdesc="Command-line accuraterip verifier and rip offset fixer"
-url="https://github.com/spadev/cdrip-tools/tree/v${pkgver}"
+url="https://github.com/spadev/cdrip-tools/"
 arch=('i686' 'x86_64')
 license=(GPL3)
 depends=(python libsndfile)
-#source=("https://github.com/spadev/${pkgname}/archive/v${pkgver}.zip")
-source=("https://github.com/spadev/${pkgname}/archive/${pkgver}.zip")
-sha512sums=('43493a2f7b0f8cd0fc9f3de82cc3d1f0bb81b770e468ba7bf3259c89cbd7de3d1ba1295d1f628cf3dc7d65ab8fbc4cca7d73b85309932dd81eb0369d9137c20a')
+makedepends=(git)
+source=("git+https://github.com/spadev/cdrip-tools.git#commit=c5a89bdc6c17af4d156f884cbc74d98b683db70d")
+sha512sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/$pkgname"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-  cd $srcdir/$pkgname-$pkgver
+  cd "$srcdir/$pkgname"
   cc -o ckcdda ckcdda.c
   cc -o splitaudio -l sndfile splitaudio.c
 
@@ -31,7 +35,7 @@ build() {
 }
 
 package() {
-  cd $srcdir/$pkgname-$pkgver
+  cd "$srcdir/$pkgname"
   install -Dm644 README.md $pkgdir/usr/share/doc/$pkgname/README.md
   install -Dm755 arverify.py $pkgdir/usr/bin/arverify
   install -Dm755 fixoffset.py $pkgdir/usr/bin/fixoffset
@@ -41,6 +45,5 @@ package() {
   # nasty library hack - install renamed library (hopefully in site-packages!)
   pylibdir=$(python -c "import sys; print(sys.path[-1]);")
   install -Dm755 utils.py $pkgdir${pylibdir}/cdrip_utils.py
-
 }
 

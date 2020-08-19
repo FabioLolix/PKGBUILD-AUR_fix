@@ -1,8 +1,8 @@
 # Maintainer: Sander Jansen <sander@knology.net>
 
 pkgname=gogglesmm-develop-git
-pkgver=1.2.1.r0.g19902e7
-pkgrel=2
+pkgver=1.2.1.r10.g9497455
+pkgrel=1
 pkgdesc="Goggles Music Manager"
 arch=(i686 x86_64 arm armv6h armv7h aarch64)
 url="http://gogglesmm.github.io"
@@ -13,12 +13,12 @@ optdepends=('libpulse: PulseAudio Output'
             'alsa-lib: Alsa Output')
 provides=(gogglesmm)
 conflicts=(gogglesmm)
-source=("git+https://github.com/gogglesmm/gogglesmm.git")
+source=("git+https://github.com/gogglesmm/gogglesmm.git#branch=develop")
 sha256sums=('SKIP')
 
 pkgver() {
   cd "${pkgname/-develop-git/}"
-  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {

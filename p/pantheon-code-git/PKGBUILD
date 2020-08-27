@@ -34,5 +34,8 @@ build() {
 
 package() {
   DESTDIR="${pkgdir}" meson install -C build
+  ln -s /usr/bin/io.elementary.code "${pkgdir}/usr/bin/e.code"
+  ln -s /usr/bin/io.elementary.code "${pkgdir}/usr/bin/elementary.code"
+  ln -s /usr/bin/io.elementary.code "${pkgdir}/usr/bin/elementary-code"
 }
 

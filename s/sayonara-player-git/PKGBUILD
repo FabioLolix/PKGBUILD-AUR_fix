@@ -1,4 +1,5 @@
-# Maintainer: Fixed Torres <aur_linuxero@outlook.com>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Fixed Torres <aur_linuxero@outlook.com>
 
 pkgname=sayonara-player-git
 pkgver=1.6.0.beta6.r17.g21020349
@@ -24,7 +25,7 @@ pkgver() {
 
 prepare() {
   cd "$srcdir/${pkgname%-git}"
-  install -d build
+  [[ -d build ]] || mkdir build
 }
  
 build() {

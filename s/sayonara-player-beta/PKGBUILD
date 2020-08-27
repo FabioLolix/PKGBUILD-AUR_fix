@@ -23,7 +23,7 @@ sha512sums=('b5a19a9c47736216006de6eff10e313a517f18f0981ff0852cc2afada09bff21c13
 
 prepare() {
   cd "$srcdir/sayonara-player-${_pkgver}"
-  install -d build
+  [[ -d build ]] || mkdir build
   patch -Np1 -i ../sayonara-qpainter.patch
 }
 

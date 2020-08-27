@@ -4,7 +4,7 @@
 
 pkgname=morris
 pkgver=0.2
-pkgrel=4
+pkgrel=5
 pkgdesc="An implementation of the board game Nine Men's Morris"
 arch=('i686' 'x86_64')
 url="http://nine-mens-morris.net/"
@@ -22,8 +22,8 @@ prepare() {
     patch -Np1 < $patch
   done
 
-  install ../debian/autoreconf.sh "${srcdir}/${pkgname}-${pkgver}"/autoreconf
-  ./autoreconf
+  autoreconf -if
+  intltoolize -c -f
 }
 
 build() {

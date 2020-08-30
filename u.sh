@@ -18,6 +18,19 @@ VAR2=a
 
 
 
+VAR2=b
+  VAR=bin2iso
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+  VAR=bitkeeper
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+
+
 VAR2=c
   VAR=castxml
   cd "$BASE/$VAR2/$VAR"

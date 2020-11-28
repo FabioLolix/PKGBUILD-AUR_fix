@@ -2,7 +2,7 @@
 # Contributor: Peter <craven@gmx.net>
 
 pkgname=pktriggercord
-pkgver=0.85.00.r36.g87ecc1d
+pkgver=0.85.00.r51.g5033404
 pkgrel=1
 pkgdesc="Remote control (tethering) for Pentax DSLR cameras"
 arch=(i686 x86_64 armv6h armv7h aarch64)

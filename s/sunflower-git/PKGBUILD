@@ -1,8 +1,8 @@
-# Maintainer:
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=sunflower-git
-pkgver=0.4.62.r49.g841252d0
-pkgrel=2
+pkgver=0.4.62.r135.g3c45a4cb
+pkgrel=1
 pkgdesc="Small and highly customizable twin-panel file manager for Linux with support for plugins"
 arch=(any)
 license=(GPL3)
@@ -32,8 +32,6 @@ package() {
     python setup.py install --root="$pkgdir/" --optimize=1  --skip-build
     install -Dm644 images/sunflower.png "${pkgdir}/usr/share/pixmaps/sunflower.png"
     rm "${pkgdir}/usr/share/sunflower/images/sunflower.png"
-    rm -rd "${pkgdir}/usr/share/sunflower/trasnaltions"
-    cp -r "${srcdir}"/sunflower/translations/ "${pkgdir}/usr/share/locale"
     rm -f "${pkgdir}"/usr/share/locale/*/LC_MESSAGES/*.po
     rm -f "${pkgdir}"/usr/share/locale/*.pot
 }

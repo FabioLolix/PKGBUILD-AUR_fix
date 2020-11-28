@@ -1,7 +1,7 @@
 # Maintainer: 
 
 pkgname=eos-easy-installer-git
-pkgver=0.8.3.beta.r184.gb802947
+pkgver=0.11.0.beta.r0.g856a03b
 pkgrel=1
 pkgdesc="/e/OS “easy” installer"
 arch=(x86_64)

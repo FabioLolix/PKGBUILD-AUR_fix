@@ -1,7 +1,7 @@
 # Maintainer: Emilien Devos (unixfox) <contact@emiliendevos.be>
 
 pkgname=green-recorder-git
-pkgver=3.2.6.r6.gc7418a9
+pkgver=3.2.8.r0.g6d4d44e
 pkgrel=1
 pkgdesc="Simple screen recorder for Linux desktop, supports Wayland & Xorg"
 arch=(any)
@@ -19,7 +19,7 @@ sha256sums=('SKIP')
 
 pkgver() {
   cd "${pkgname%-git}"
-  git describe --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {

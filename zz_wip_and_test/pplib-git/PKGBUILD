@@ -1,7 +1,7 @@
 # Maintainer: 
 
 pkgname=pplib-git
-pkgver=7_0_1.r17.g79da833
+pkgver=7_0_1.r25.g459a184
 pkgrel=1
 pkgdesc="OpenStopMotion Animation Capture"
 arch=(x86_64)
@@ -19,7 +19,15 @@ pkgver() {
 
 build() {
   cd "${pkgname%-git}"
-  ./configure --with-imlib=/usr/include/ImageMagick-7 --with-pcre=/usr --with-jpeg --with-libtiff=/usr --with-nasm --prefix=/usr --with-sqlite3 -with-mysql=no
+  ./configure \
+    --with-imlib=/usr/include/ImageMagick-6/wand/MagickWand.h \
+    --with-libtiff=/usr \
+    --with-pcre=/usr \
+    --with-jpeg \
+    --with-nasm \
+    --with-sqlite3 \
+    --with-mysql=no \
+    --prefix=/usr
 }
 
 package() {

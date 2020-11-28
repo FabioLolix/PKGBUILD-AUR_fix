@@ -3,7 +3,7 @@
 # Contributor: Vítor Ferreira <vitor.dominor@gmail.com>
 
 pkgname=xboxdrv-git
-pkgver=0.8.4.r410.g1aebab2
+pkgver=0.8.4.r453.gf8ef7e0
 pkgrel=1
 pkgdesc="An XBox/XBox 360 gamepad driver - as alternative to the xpad-kernel module - with more configurability, runs in userspace and supports a multitude of controllers"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)

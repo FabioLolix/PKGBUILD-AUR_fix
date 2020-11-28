@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=cinelerra-gg-git
-pkgver=5.1.2020.07.r3.g2951f82f
+pkgver=5.1.2020.10.r1.ge891b045
 pkgrel=1
 pkgdesc="Professional video editing and compositing environment"
 arch=(x86_64)
@@ -17,7 +17,7 @@ depends=(gtk2 libvorbis libavc1394 alsa-lib dav1d openexr
          audiofile ladspa lv2 lilv libsndfile ffmpeg)
 # sratom serd sord suil
 makedepends=(git nasm yasm libtool cmake xorg-mkfontdir xorg-mkfontscale
-             libxml2 perl-xml-libxml perl-xml-parser python2)
+             libxml2 perl-xml-libxml perl-xml-parser)
 source=("git://git.cinelerra-gg.org/goodguy/cinelerra.git")
 sha256sums=('SKIP')
 
@@ -27,9 +27,7 @@ pkgver() {
 }
 
 prepare() {
-#  patch -Np0 -i dep.patch
   cd "${srcdir}/cinelerra/cinelerra-5.1"
-  sed -i 's/\<python\>/python2.7/' ./guicast/Makefile
   ./autogen.sh
 }
 

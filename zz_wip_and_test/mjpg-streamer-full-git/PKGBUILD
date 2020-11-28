@@ -4,7 +4,7 @@
 
 pkgname=mjpg-streamer-full-git
 epoch=1
-pkgver=r346.501f636
+pkgver=r355.85f89a8
 pkgrel=1
 pkgdesc="Stream mjpeg frames from a webcam via http"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)

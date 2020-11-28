@@ -1,7 +1,7 @@
 # Maintainer: bitwave <bitwave [At] oomlu [d.o.T] de>
 
 pkgname=dms-git
-pkgver=1.1.0.r6.g076137c
+pkgver=1.1.0.r8.g138d5ac
 pkgrel=1
 pkgdesc="UPnP DLNA Digital Media Server"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)

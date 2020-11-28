@@ -2,7 +2,7 @@
 # Contributor: sekret, mail=$(echo c2VrcmV0QHBvc3Rlby5zZQo= | base64 -d)
 
 pkgname=openh264-git
-pkgver=2.0.0.r114.g84590b64
+pkgver=2.0.0.r141.g992c1c14
 pkgrel=1
 pkgdesc="OpenH264 is a codec library which supports H.264 encoding and decoding"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)

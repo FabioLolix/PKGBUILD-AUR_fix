@@ -48,11 +48,15 @@ VAR2=c
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
   VAR=cinelerra-gg
+  cd "$DEST/$VAR2/$VAR"
+    git pull
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
   VAR=cinelerra-gg-git
+  cd "$DEST/$VAR2/$VAR"
+    git pull
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
@@ -133,10 +137,12 @@ VAR2=m
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
-#  VAR=mono-git
-#  cd "$BASE/$VAR2/$VAR"
-#    makepkg --printsrcinfo > .SRCINFO
-#    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+  VAR=mono-git
+  cd "$DEST/$VAR2/$VAR"
+    git pull
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO,mono.binfmt.d,mono.install} "$DEST/$VAR2/$VAR"
 
   VAR=mudita24-git
   cd "$BASE/$VAR2/$VAR"
@@ -151,6 +157,11 @@ VAR2=m
 
 
 VAR2=p
+  VAR=pantheon-camera-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=pantheon-code-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -287,3 +298,8 @@ VAR2=v
     rsync {PKGBUILD,.SRCINFO,LICENSE,vuescan.desktop,vuescan.sh} "$DEST/$VAR2/$VAR"
 
 
+VAR2=y
+  VAR=yatoc2cue
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"

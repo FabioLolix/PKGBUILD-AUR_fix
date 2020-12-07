@@ -4,8 +4,8 @@
 # Contributor: Nick Bair <njbair at gmail dot com>
 
 pkgname=bubbleupnpserver
-pkgver=0.9.u37
-pkgrel=4
+pkgver=0.9.u38
+pkgrel=1
 pkgdesc="Stream content to Android devices over the Internet, requires UPNP/DNLA backend e.g. miniDLNA, Gerbera, Mediatomb"
 arch=(any)
 url="http://www.bubblesoftapps.com/bubbleupnpserver/"
@@ -20,7 +20,7 @@ source=(
         bubbleupnpserver
         "https://bubblesoftapps.com/bubbleupnpserver/core/bcprov-jdk16-146.jar"
         "https://bubblesoftapps.com/bubbleupnpserver/core/BubbleUPnPServerLauncher.jar"
-        "https://bubblesoftapps.com/bubbleupnpserver/core/LICENCE.txt"
+        "${pkgname}-LICENCE.txt::https://bubblesoftapps.com/bubbleupnpserver/core/LICENCE.txt"
 )
 sha256sums=('7df801995e65a79eb5140814ca80c4caeee7e1282b69acff9e74201cbaafdaf3'
             'b99d60122343959f2118f6f74968e105d63e8ca2c8ff71efc120415378b1175a'
@@ -41,5 +41,5 @@ package() {
   install -D -m644 "${srcdir}"/bubbleupnpserver.service       "${pkgdir}"/usr/lib/systemd/system/${pkgname}.service
   install -D -m644 "${srcdir}"/bubbleupnpserver.config        "${pkgdir}"/etc/conf.d/bubbleupnpserver.config
   install -D -m644 "${srcdir}"/bubbleupnpserver               "${pkgdir}"/etc/default/bubbleupnpserver
-  install -D -m644 "${srcdir}"/LICENCE.txt                    "${pkgdir}"/usr/share/licenses/${pkgname}/LICENCE.txt
+  install -D -m644 "${srcdir}"/${pkgname}-LICENCE.txt         "${pkgdir}"/usr/share/licenses/${pkgname}/LICENCE.txt
 }

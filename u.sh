@@ -21,6 +21,11 @@ VAR2=a
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+  VAR=aqualung
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
 
 
 VAR2=b
@@ -38,6 +43,7 @@ VAR2=b
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO,bubbleupnpserver,bubbleupnpserver.config,bubbleupnpserver.service,launch.sh,sysuser.conf} "$DEST/$VAR2/$VAR"
+
 
 
 VAR2=c
@@ -185,6 +191,11 @@ VAR2=p
 #  cd "$BASE/$VAR2/$VAR"
 #    makepkg --printsrcinfo > .SRCINFO
 #    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+  VAR=popsicle
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
   VAR=popsicle-git
   cd "$BASE/$VAR2/$VAR"

@@ -3,16 +3,16 @@
 # Contributor: IgnorantGuru http://igurublog.wordpress.com/contact-ignorantguru/
 
 pkgname=spacefm-git
-pkgver=1.0.6.r80.ge257d15
-pkgrel=3
+pkgver=2.0.0.r1.g23e66c4
+pkgrel=1
 pkgdesc="Multi-panel tabbed file manager"
 arch=(i686 x86_64)
-url="https://ignorantguru.github.io/spacefm"
+url="https://github.com/thermitegod/spacefm"
 license=(GPL3)
 conflicts=(spacefm)
 provides=(spacefm)
-makedepends=(intltool git)
-depends=(gtk3 startup-notification ffmpegthumbnailer)
+makedepends=(git meson) #intltool 
+depends=(gtk3 ffmpegthumbnailer libbsd) # startup-notification
 optdepends=('dbus: dbus integration'
             'util-linux: disk eject support'
             'lsof: device processes'
@@ -26,35 +26,21 @@ optdepends=('dbus: dbus integration'
             'gphotofs: mount cameras'
             'ifuse: mount your iPhone/iPod Touch'
             'fuseiso: mount ISO files')
-source=("git+https://github.com/IgnorantGuru/spacefm.git#branch=alpha"
-        "https://github.com/FabioLolix/AUR-artifacts/raw/master/spacefm-Fix-GCC-10-build.patch"
-        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/spacefm-glibc-2.28-compatibility.patch")
-sha256sums=('SKIP'
-            '16622d0d56c40e87e846a81709d9c2c8303f189e53a783bf20ccdb57b8f9465f'
-            '12411055df994211d2968cb52746b6caefce6926aed1ed33b542bd70b571ce7e')
+source=("git+https://github.com/thermitegod/spacefm")
+sha256sums=('SKIP')
 
 pkgver() {
   cd "spacefm"
-  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-}
-
-prepare() {
-  cd "spacefm"
-  patch -Np1 -i ../spacefm-glibc-2.28-compatibility.patch
-  patch -Np1 -i ../spacefm-Fix-GCC-10-build.patch
-  NOCONFIGURE=1 ./autogen.sh
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
   cd "spacefm"
-  ./configure \
-    --prefix=/usr \
-    --with-gtk3
-  make
+  meson build --prefix=/usr -D gtk3=true
+  ninja -C build
 }
 
 package() {
   cd "spacefm"
-  make DESTDIR="$pkgdir" install
-  rm -f "$pkgdir"/usr/bin/spacefm-installer
+  DESTDIR="${pkgdir}" ninja -C build install
 }

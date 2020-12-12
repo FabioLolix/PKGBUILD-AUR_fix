@@ -1,7 +1,7 @@
 # Maintainer: jdn06 <jdn06.jdn06@outlook.fr>
 
 pkgname=aqualung-git
-pkgver=1.0.r68.g09c86a7
+pkgver=1.1.r2.g8775a1d
 pkgrel=1
 pkgdesc="High quality music player w/ gapless support"
 arch=(i686 x86_64)
@@ -10,7 +10,7 @@ license=(GPL)
 depends=(gtk2 libxml2 alsa-lib sndio jack libpulse liboggz libusb-compat
          libifp ffmpeg libvorbis libsndfile lua52 wavpack libcdio-paranoia
          libmad flac liblrdf libmpcdec libsamplerate)
-makedepends=(git gcc8 ladspa libcddb speex lame libmodplug)
+makedepends=(git ladspa libcddb speex lame libmodplug)
 optdepends=('libcddb: CDDB / FreeDB support'
             'speex: Oggz speex support (playback)'
             'lame: MP3 audio support (encode)'
@@ -24,7 +24,7 @@ sha256sums=('SKIP'
 
 pkgver() {
   cd "${srcdir}/${pkgname%-git}"
-  git describe --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {

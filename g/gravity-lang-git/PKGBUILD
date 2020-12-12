@@ -2,7 +2,7 @@
 
 pkgname=gravity-lang-git
 pkgdesc="Gravity Programming Language."
-pkgver=0.7.8.r39.gecbee9f
+pkgver=0.8.1.r11.g73d8837
 pkgrel=1
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://marcobambini.github.io/gravity/"

@@ -4,8 +4,8 @@
 # Contributor: zarra <zarraxx@gmail.com>
 
 pkgname=python-pygccxml
-pkgver=1.9.1
-pkgrel=2
+pkgver=2.0.1
+pkgrel=1
 pkgdesc="Simple framework to navigate C++ declarations, using Python classes."
 arch=(any)
 url="https://github.com/gccxml/pygccxml"
@@ -13,10 +13,11 @@ license=(Boost)
 depends=(castxml python)
 makedepends=(python-setuptools)
 #checkdepends=(python-pycodestyle)
+optdepends=('gccxml-git: alternative to castxml (deprecated)')
 provides=(pygccxml)
 replaces=(pygccxml)
 source=("$pkgname-$pkgver.tar.gz::https://github.com/gccxml/pygccxml/archive/v${pkgver}.tar.gz")
-sha256sums=('2fb4e18f7a3ae039a05230ca58f11e1fc925c8643f926a1be481bb4338414a95')
+sha256sums=('25c6f693da741139c538d751b4bee1408764a4470c4f5ee982ac2611032cebc2')
 
 build() {
   cd "${srcdir}/pygccxml-${pkgver}"

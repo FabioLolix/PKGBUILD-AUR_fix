@@ -1,0 +1,35 @@
+# Maintainer: 
+
+pkgname=opentesarena
+pkgver=0.12.0
+pkgrel=1
+pkgdesc="Modern engine re-implementation for The Elder Scrolls: Arena from 1994 by Bethesda Softworks"
+arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
+url="https://github.com/afritz1/OpenTESArena"
+license=(MIT)
+depends=(sdl2 openal wildmidi)
+makedepends=(cmake)
+provides=()
+conflicts=()
+options=()
+source=("https://github.com/afritz1/OpenTESArena/archive/opentesarena-${pkgver}.tar.gz")
+sha256sums=('c30f73e09c89c889a1887971f588f20b65f9c9cd49ba977a8917db09ed2cb3a5')
+
+prepare() {
+  cd "${srcdir}/OpenTESArena-${pkgname}-${pkgver}"
+  install -d build
+}
+
+build() {
+  cd "${srcdir}/OpenTESArena-${pkgname}-${pkgver}/build"
+  cmake .. \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+  make
+}
+
+package() {
+  cd "${srcdir}/OpenTESArena-${pkgname}-${pkgver}/build"
+  install -Dm755 TESArena "${pkgdir}/usr/bin/tesarena"
+  install -Dm644 ../LICENSE.txt "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE.txt"
+}

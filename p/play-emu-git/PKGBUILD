@@ -2,7 +2,7 @@
 # Contributor:  Michael DeGuzis <mdeguzis@gmail.com>
 
 pkgname=play-emu-git
-pkgver=0.34.r19.g8dc4c554
+pkgver=0.35.r23.ga4322e85
 pkgrel=1
 pkgdesc="Play! is an experimental Playstation 2 emulator."
 arch=(x86_64)

@@ -1,4 +1,5 @@
-# Maintainer: Dct Mei <dctxmei@gmail.com>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Dct Mei <dctxmei@gmail.com>
 
 pkgname=filebrowser-git
 pkgver=2.10.0.r0.gc746c193

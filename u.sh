@@ -79,6 +79,16 @@ VAR2=c
 
 
 VAR2=f
+  VAR=filebrowser
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO,filebrowser@.service} "$DEST/$VAR2/$VAR"
+
+  VAR=filebrowser-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO,filebrowser@.service} "$DEST/$VAR2/$VAR"
+
   VAR=fox-devel
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -87,6 +97,11 @@ VAR2=f
 
 
 VAR2=g
+  VAR=glimpse-editor
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=glimpse-editor-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

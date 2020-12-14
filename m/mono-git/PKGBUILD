@@ -2,32 +2,31 @@
 # Contributor: Daniel Isenmann <daniel@archlinux.org>
 # Contributor: Brice Carpentier <brice@dlfp.org>
 
-pkgname='mono-git'
-_gitname='mono'
-pkgver=6.10.0.95.r761.8248c906564
+pkgname=mono-git
+pkgver=6.12.0.114.r1083.d5f338c088d
 pkgrel=1
-pkgdesc='Free implementation of the .NET platform including runtime and compiler'
-url='http://www.mono-project.com/'
-arch=('i686' 'x86_64')
+pkgdesc="Free implementation of the .NET platform including runtime and compiler"
+url="http://www.mono-project.com/"
+arch=(i686 x86_64)
 license=('custom=MITX11' 'custom=MSPL' 'BSD' 'GPL' 'LGPL2.1' 'MPL')
-depends=('ca-certificates' 'libgdiplus' 'python' 'zlib')
-makedepends=('cmake' 'git' 'mono')
-provides=('mono=${pkgver}' 'monodoc')
-conflicts=('mono' 'monodoc')
-install="${_gitname}.install"
+depends=(ca-certificates libgdiplus)
+makedepends=(cmake git mono)
+provides=(mono monodoc)
+conflicts=(mono monodoc)
+install="mono.install"
 source=(
   'git+https://github.com/mono/mono.git'
   'git+https://github.com/mono/aspnetwebstack.git'
   'git+https://github.com/mono/Newtonsoft.Json.git'
   'git+https://github.com/mono/cecil.git'
   'git+https://github.com/mono/rx.git#branch=rx-oss-v2.2'
-  'ikvm::git+https://github.com/mono/ikvm-fork.git'
+  'git+https://github.com/mono/ikvm-fork.git'
   'git+https://github.com/mono/ikdasm.git'
   'binary-reference-assemblies::git+https://github.com/mono/reference-assemblies.git'
-  'nunit-lite::git+https://github.com/mono/NUnitLite.git'
-  'nuget-buildtasks::git+https://github.com/mono/NuGet.BuildTasks'
+  'git+https://github.com/mono/NUnitLite.git'
+  'git+https://github.com/mono/NuGet.BuildTasks'
   'cecil-legacy::git+https://github.com/mono/cecil.git#branch=mono-legacy-0.9.5'
-  'git+https://github.com/mono/boringssl.git#branch=mono'
+  'mono-boringssl::git+https://github.com/mono/boringssl.git#branch=mono'
   'git+https://github.com/mono/corefx.git'
   'git+https://github.com/mono/bockbuild.git'
   'git+https://github.com/mono/linker.git'
@@ -36,19 +35,38 @@ source=(
   'git+https://github.com/mono/xunit-binaries.git'
   'git+https://github.com/mono/api-doc-tools.git'
   'git+https://github.com/mono/api-snapshot.git'
-  'git+https://github.com/dotnet/llvm-project.git'
+  'mono-llvm-project::git+https://github.com/dotnet/llvm-project.git'
   'git+https://github.com/mono/helix-binaries.git'
   'git+https://github.com/Unity-Technologies/bdwgc.git'
   'mono.binfmt.d'
 )
-sha256sums=(
-  'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP'
-  'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP' 'SKIP'
-  '9a657fc153ef4ce23bf5fc369a26bf4a124e9304bde3744d04c583c54ca47425'
-)
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            '9a657fc153ef4ce23bf5fc369a26bf4a124e9304bde3744d04c583c54ca47425')
 
 pkgver() {
-	cd "${_gitname}"
+  cd "${pkgname%-git}"
 
   local -r tag=$(git describe --tags "$(git rev-list --tags --max-count=1)")
   local -r revision=$(git rev-list --count "${tag}"...HEAD)
@@ -59,43 +77,36 @@ pkgver() {
 }
 
 prepare() {
-  cd "${_gitname}"
+  cd "${srcdir}/${pkgname%-git}"
 
-  local submodules=(
-    'aspnetwebstack'
-    'Newtonsoft.Json'
-    'cecil'
-    'rx'
-    'ikvm'
-    'ikdasm'
-    'binary-reference-assemblies'
-    'nunit-lite'
-    'nuget-buildtasks'
-    'cecil-legacy'
-    'boringssl'
-    'corefx'
-    'bockbuild'
-    'linker'
-    'roslyn-binaries'
-    'corert'
-    'xunit-binaries'
-    'api-doc-tools'
-    'api-snapshot'
-    'llvm-project'
-    'helix-binaries'
-    'bdwgc'
-  )
-
-  for module in "${submodules[@]}"; do
-    local submodule="external/${module}"
-    git submodule init "${submodule}"
-    git config "submodule.${submodule}.url" "${srcdir}/${module}"
-    git submodule update "${submodule}"
-  done
+  git submodule init
+  git config submodule.external/aspnetwebstack.url "${srcdir}/aspnetwebstack"
+  git config submodule.external/Newtonsoft.Json.url "${srcdir}/Newtonsoft.Json"
+  git config submodule.external/cecil.url "${srcdir}/cecil"
+  git config submodule.external/rx.url "${srcdir}/rx"
+  git config submodule.external/ikvm.url "${srcdir}/ikvm-fork"
+  git config submodule.external/ikdasm.url "${srcdir}/ikdasm"
+  git config submodule.external/binary-reference-assemblies.url "${srcdir}/binary-reference-assemblies"
+  git config submodule.external/nunit-lite.url "${srcdir}/NUnitLite"
+  git config submodule.external/nuget-buildtasks.url "${srcdir}/NuGet.BuildTasks"
+  git config submodule.external/cecil-legacy.url "${srcdir}/cecil-legacy"
+  git config submodule.external/boringssl.url "${srcdir}/mono-boringssl"
+  git config submodule.external/corefx.url "${srcdir}/corefx"
+  git config submodule.external/bockbuild.url "${srcdir}/bockbuild"
+  git config submodule.external/linker.url "${srcdir}/linker"
+  git config submodule.external/roslyn-binaries.url "${srcdir}/roslyn-binaries"
+  git config submodule.external/corert.url "${srcdir}/corert"
+  git config submodule.external/xunit-binaries.url "${srcdir}/xunit-binaries"
+  git config submodule.external/api-doc-tools.url "${srcdir}/api-doc-tools"
+  git config submodule.external/api-snapshot.url "${srcdir}/api-snapshot"
+  git config submodule.external/llvm-project.url "${srcdir}/mono-llvm-project"
+  git config submodule.external/helix-binaries.url "${srcdir}/helix-binaries"
+  git config submodule.external/bdwgc.url "${srcdir}/bdwgc"
+  git submodule update
 }
 
 build() {
-  cd "${_gitname}"
+  cd "${pkgname%-git}"
 
   # Default prefix is /usr/local/
   # Default sysconfdir is /usr/local/etc/
@@ -108,9 +119,9 @@ build() {
 
   # If a working installation of mono is not found, attempt to
   # bootstrap the project:
-  if ! hash mono; then
-    make get-monolite-latest
-  fi
+  #if ! hash mono; then
+  #  make get-monolite-latest
+  #fi
   
   make
 
@@ -124,7 +135,7 @@ package() {
     "${srcdir}/mono.binfmt.d" \
     "${pkgdir}/usr/lib/binfmt.d/mono.conf"
 
-  cd "${_gitname}"
+  cd "${pkgname%-git}"
 
   make DESTDIR="${pkgdir}" install
   install	-D -m 644 \

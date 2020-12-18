@@ -2,13 +2,13 @@
 
 pkgname=gravity-lang
 pkgdesc="Gravity Programming Language."
-pkgver=0.7.8
+pkgver=0.8.1
 pkgrel=1
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://marcobambini.github.io/gravity/"
 license=(MIT)
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/marcobambini/gravity/archive/${pkgver}.tar.gz")
-sha256sums=('d6589e1cf55eb3b46e205342cb8c01d524da66b98b6fabe0785c711ec314969d')
+sha256sums=('0db70b08984dc73f989d0f60dbd3e0c6e1027e7c31674f368a8e52843b0f9496')
 
 build() {
   cd "gravity-${pkgver}"

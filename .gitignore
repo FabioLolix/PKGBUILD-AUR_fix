@@ -1,4 +1,5 @@
 .SRCINFO
+.gitignore
 src
 pkg
 *.log

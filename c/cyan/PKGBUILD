@@ -1,0 +1,28 @@
+# Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org>
+
+pkgname=cyan
+pkgver=1.2.2
+pkgrel=1
+pkgdesc="Open source prepress color converter and image editor"
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://cyan.fxarena.net/"
+license=(GPL2)
+depends=(imagemagick)
+makedepends=(cmake)
+source=("$pkgname-${pkgver}.tar.gz::https://github.com/rodlie/cyan/archive/${pkgver}.tar.gz")
+sha256sums=('c4ea8b82d877671ff1bc08beb3eafbba4b961173465f240501d03b1291f59fd5')
+
+prepare(){
+  cd "$srcdir/$pkgname-$pkgver"
+  install -d build
+}
+
+build(){
+  cd "$srcdir/$pkgname-$pkgver/build"
+  cmake ..
+}
+
+package(){
+  cd "$srcdir/$pkgname-$pkgver/build"
+  make DESTDIR="${pkgdir}" install
+}

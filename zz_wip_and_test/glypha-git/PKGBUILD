@@ -1,0 +1,41 @@
+# Maintainer: 
+
+pkgname=glypha-git
+pkgver=2.0.1.r1.gb0ff71f
+pkgrel=1
+pkgdesc="Modern port of Classic Mac OS game"
+arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
+url="https://github.com/kainjow/Glypha"
+license=()
+depends=()
+makedepends=(git cmake)
+optdepends=()
+provides=()
+conflicts=()
+options=()
+source=("${pkgname%-git}::git+https://github.com/kainjow/Glypha.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${pkgname%-git}"
+  git describe --long --tags | sed -r 's/([^-]*-g)/r\1/;s/-/./g;s/v//g'
+}
+
+prepare() {
+  cd "${pkgname%-git}"
+  install -d build
+}
+
+build() {
+  cd "${pkgname%-git}/build"
+  cmake .. \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+  make
+}
+
+package() {
+  cd "${pkgname%-git}/build"
+  make DESTDIR=${pkgdir} install
+}

@@ -1,6 +1,6 @@
-# Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
-pkgname=cyan
+pkgname=cyan-git
 pkgver=r1039.52d22e9
 pkgrel=1
 pkgdesc="Open source prepress color converter and image editor"

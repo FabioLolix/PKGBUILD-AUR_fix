@@ -1,4 +1,4 @@
-# Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=cyan
 pkgver=1.2.2
@@ -13,16 +13,16 @@ source=("$pkgname-${pkgver}.tar.gz::https://github.com/rodlie/cyan/archive/${pkg
 sha256sums=('c4ea8b82d877671ff1bc08beb3eafbba4b961173465f240501d03b1291f59fd5')
 
 prepare(){
-  cd "$srcdir/$pkgname-$pkgver"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   install -d build
 }
 
 build(){
-  cd "$srcdir/$pkgname-$pkgver/build"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   cmake ..
 }
 
 package(){
-  cd "$srcdir/$pkgname-$pkgver/build"
+  cd "${srcdir}/${pkgname}-${pkgver}"
   make DESTDIR="${pkgdir}" install
 }

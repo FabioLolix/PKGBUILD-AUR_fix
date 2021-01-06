@@ -9,8 +9,7 @@ url="https://github.com/hatchet-player/Hatchet"
 license=(GPL3)
 depends=(qt5-base qt5-svg qt5-tools qt5-webengine qt5-webkit qt5-x11extras
          vlc attica qtkeychain
-         liblastfm-qt5
-         boost sparsehash lucene++ qca quazip telepathy-qt miniupnpc)
+         boost sparsehash lucene++ qca quazip miniupnpc) # liblastfm-qt5 telepathy-qt
 makedepends=(git meson ninja cmake gcc-objc)
 optdepends=()
 provides=(hatchet)
@@ -61,7 +60,7 @@ prepare() {
 
 build() {
   cd "${pkgname%-git}"
-  meson setup build --prefix=/usr -D with_echonest=false 
+  meson setup build --prefix=/usr -D with_echonest=false -D with_liblastfm=false -D with_telepathy=false
 # -D with_liblastfm=false -D with_telepathy=false
   ninja -C build
 }

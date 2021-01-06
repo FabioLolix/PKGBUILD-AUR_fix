@@ -1,0 +1,30 @@
+# Maintainer:
+
+pkgname=instagraph-git
+pkgver=r210.f9b0718
+pkgrel=1
+pkgdesc=""
+url=""
+arch=(x86_64)
+license=(GPL3)
+depends=(qt5-base)
+makedepends=(git)
+provides=(instagraph)
+conflicts=(instagraph)
+source=("git+https://github.com/turanmahmudov/Instagraph.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd Instagraph
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd Instagraph
+  qmake Instagraph.pro PREFIX=/usr
+}
+
+package() {
+  cd Instagraph
+  make INSTALL_ROOT="${pkgdir}" install
+}

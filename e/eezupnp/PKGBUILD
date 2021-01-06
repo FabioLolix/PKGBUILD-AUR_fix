@@ -2,21 +2,34 @@
 
 pkgname=eezupnp
 pkgver=3.1.0
-pkgrel=1
+pkgrel=2
 pkgdesc="UPnP Audio control point"
 arch=('x86_64')
 url="http://www.eezupnp.de/"
 license=('custom:eezupnp')
-depends=('jre8-openjdk' 'gtk2')
+depends=(gtk3 'java-runtime-headless>=8')
+makedepends=(chrpath)
 source=("http://www.eezupnp.de/archives/eezupnp-$pkgver.linux.gtk.x86_64.zip" "License.txt" "eezUPnP.desktop")
-sha256sums=('SKIP' 'fc44b250ee98341818d6c76dd8787f02378c61b2d33970555a1fac8511710fb1' 'SKIP')
+sha256sums=('77ae45e71609d6130abad261064876a6e806a3d579f4c5c1af2b2e282ce4eb15'
+            'fc44b250ee98341818d6c76dd8787f02378c61b2d33970555a1fac8511710fb1'
+            '81e65371498f67ccb0bd9a5c05c56db7c2475d34abb385e78a1f7d602bde99db')
 options=(!strip)
 
 package() {
   cd "$srcdir"
-  mkdir -p ${pkgdir}/opt/
-  bsdtar xf eezupnp-$pkgver.linux.gtk.x86_64.zip -C "$pkgdir/opt"
-  install -Dm644 "eezUPnP.desktop" "$pkgdir/opt/eezUPnP"
-  install -Dm644 "License.txt" \
-  "$pkgdir/usr/share/licenses/$pkgname/COPYING"
+  install -d "${pkgdir}/usr/lib/eezupnp"
+  cp -r eezUPnP/* "${pkgdir}/usr/lib/eezupnp"
+  chrpath --delete "${pkgdir}/usr/lib/eezupnp/plugins/com.sun.jna_3.4.1.b671-201710202124/lib/sunos-sparcv9/libjnidispatch.so"
+  chrpath --delete "${pkgdir}/usr/lib/eezupnp/plugins/com.sun.jna_3.4.1.b671-201710202124/lib/sunos-sparc/libjnidispatch.so"
+  chrpath --delete "${pkgdir}/usr/lib/eezupnp/plugins/com.sun.jna_3.4.1.b671-201710202124/com/sun/jna/sunos-sparcv9/libjnidispatch.so"
+  chrpath --delete "${pkgdir}/usr/lib/eezupnp/plugins/com.sun.jna_3.4.1.b671-201710202124/com/sun/jna/sunos-sparc/libjnidispatch.so"
+
+  install -d "${pkgdir}/usr/bin"
+  ln -s "/usr/lib/eezupnp/CP" "${pkgdir}/usr/bin/eezupnp"
+
+  install -d "$pkgdir/usr/share/pixmaps"
+  mv "$pkgdir/usr/lib/eezupnp/icon.xpm" "$pkgdir/usr/share/pixmaps/eezupnp.xpm"
+
+  install -Dm644 "eezUPnP.desktop" "$pkgdir/usr/share/applications/eezUPnP.desktop"
+  install -Dm644 "License.txt" "$pkgdir/usr/share/licenses/$pkgname/COPYING"
 }

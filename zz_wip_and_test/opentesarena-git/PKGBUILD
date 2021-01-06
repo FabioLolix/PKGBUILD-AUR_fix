@@ -1,7 +1,7 @@
 # Maintainer: 
 
 pkgname=opentesarena
-pkgver=0.12.0.r91.g4e716043
+pkgver=0.12.0.r144.g81ca6ab8
 pkgrel=1
 pkgdesc="Modern engine re-implementation for The Elder Scrolls: Arena from 1994 by Bethesda Softworks"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)

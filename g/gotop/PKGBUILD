@@ -8,24 +8,26 @@ pkgrel=1
 pkgdesc="A terminal based graphical activity monitor inspired by gtop and vtop"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://github.com/xxxserxxx/gotop"
-license=(AGPL3)
+license=(MIT)
+depends=(glibc)
 makedepends=(go)
 source=("${pkgname}-${pkgver}.tar.gz::${url}/archive/v${pkgver}.tar.gz")
 sha256sums=('38a34543ed828ed8cedd93049d9634c2e578390543d4068c19f0d0c20aaf7ba0')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-
+  CGO_ENABLED=0
   export GOPATH="$SRCDEST/go-modules"
 
   go build \
     -gcflags "all=-trimpath=${PWD}" \
     -asmflags "all=-trimpath=${PWD}" \
-    -ldflags "-extldflags ${LDFLAGS}" \
+    -ldflags "-X main.Version=v${pkgver} -extldflags ${LDFLAGS}" \
     -buildmode=pie \
     ./cmd/gotop
 }
 
 package() {
   install -Dm755 "${srcdir}"/${pkgname}-${pkgver}/gotop "${pkgdir}"/usr/bin/gotop
+  install -Dm644 "${srcdir}"/${pkgname}-${pkgver}/LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }

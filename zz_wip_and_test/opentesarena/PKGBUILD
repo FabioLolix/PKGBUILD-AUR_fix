@@ -22,7 +22,7 @@ prepare() {
 
 build() {
   cd "${srcdir}/OpenTESArena-${pkgname}-${pkgver}/build"
-  cmake .. \
+  cmake .. -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr
 
   make

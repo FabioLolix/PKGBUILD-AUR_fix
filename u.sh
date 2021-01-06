@@ -47,7 +47,7 @@ VAR2=b
   VAR=bubbleupnpserver
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,bubbleupnpserver,bubbleupnpserver.config,bubbleupnpserver.service,launch.sh,sysuser.conf} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,bubbleupnpserver,bubbleupnpserver.config,bubbleupnpserver.service,launch.sh,bubbleupnpserver-sysuser.conf} "$DEST/$VAR2/$VAR"
 
 
 
@@ -165,6 +165,11 @@ VAR2=i
 
 
 VAR2=l
+  VAR=libcdk
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=libgee-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -363,7 +368,7 @@ VAR2=v
   VAR=vuescan-bin
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,LICENSE,vuescan.desktop,vuescan.sh} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,vuescan-LICENSE.txt} "$DEST/$VAR2/$VAR"
 
 
 VAR2=y

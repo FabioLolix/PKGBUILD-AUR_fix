@@ -1,4 +1,5 @@
 # Maintainer: Emilien Devos (unixfox) <contact@emiliendevos.be>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=green-recorder-git
 pkgver=3.2.8.r0.g6d4d44e

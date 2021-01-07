@@ -1,8 +1,8 @@
 # Maintainer: Sander Jansen <sander@knology.net>
 
 pkgname=gogglesmm-git
-pkgver=1.2.1.r0.g19902e7
-pkgrel=2
+pkgver=1.2.2.r0.g4eb0eb66
+pkgrel=1
 pkgdesc="Goggles Music Manager"
 arch=(i686 x86_64 arm armv6h armv7h aarch64)
 url="http://gogglesmm.github.io"

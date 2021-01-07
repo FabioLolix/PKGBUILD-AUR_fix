@@ -93,6 +93,14 @@ VAR2=c
 
 
 
+VAR2=d
+  VAR=dsf2flac-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+
+
 VAR2=f
   VAR=filebrowser
   cd "$BASE/$VAR2/$VAR"

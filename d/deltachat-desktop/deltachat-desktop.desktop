@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=DeltaChat
 Comment=A privacy oriented chat application built on e-mail
-Exec=/opt/DeltaChat/deltachat %u
+Exec=/usr/bin/deltachat %u
 Terminal=false
 Type=Application
 Icon=deltachat

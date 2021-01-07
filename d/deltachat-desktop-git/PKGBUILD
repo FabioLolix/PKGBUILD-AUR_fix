@@ -1,35 +1,40 @@
 # Maintainer: Jikstra <jikstra@disroot.org>
+
 pkgname=deltachat-desktop-git
-pkgver=v1.3.2.r341.gd366c0cf
+pkgver=1.14.1.r29.gb17f0bf9
 pkgrel=1
 pkgdesc="A privacy oriented chat application built on e-mail"
 arch=("any")
-url="https://github.com/deltachat/deltachat-desktop"
-license=("GPL")
-depends=('electron6')
-makedepends=('npm' 'nodejs' 'git' 'rustup' 'python')
-source=(
-    "deltachat-desktop-git::git://github.com/deltachat/deltachat-desktop.git"
-    "deltachat-desktop.desktop"
-    "deltachat-desktop.sh"
-)
-
-sha256sums=(
-    "SKIP"
-    "39bae164c234b3c89e7ae2bde89753c90065df7f37fece084f7f5acccbb9f1f1"
-    "5e20ea657599390e317523ae17b17aba0d26c59474a7f80282af5f2668002f59"
-)
+url="https://delta.chat/en/"
+license=("GPL3")
+depends=(electron6)
+makedepends=('npm' 'nodejs' 'git' )
+source=("git+https://github.com/deltachat/deltachat-desktop.git"
+        "git+https://github.com/cracker0dks/basicwebrtc.git"
+        "deltachat-desktop.desktop"
+        "deltachat-desktop.sh"
+       )
+sha256sums=('SKIP'
+            'SKIP'
+            'bb12448df6e2385b37fbfb24bfecec55018986d0dd412aa351bea6ef336089da'
+            '6ad355414b02a0c07ffb391ecc8cca71ff72d9848e80f27d5b43c0ec9c2c8b3e')
 
 
 pkgver() {
-    cd "$srcdir/${pkgname}"
+    cd "${srcdir}/${pkgname%-git}"
 
-    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+    git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
+prepare() {
+    cd "${srcdir}/${pkgname%-git}"
+    git submodule init
+    git config 'submodule.basicwebrtc.url' "${srcdir}/basicwebrtc"
+    git submodule update
+}
 
 build() {
-    cd "$srcdir/${pkgname}"
+    cd "${srcdir}/${pkgname%-git}"
 
     npm install --verbose
     npm run build
@@ -38,25 +43,23 @@ build() {
     npm prune --production 
 }
 
-
 package() {
-    cd "$srcdir/${pkgname}"
+    cd "${srcdir}/${pkgname%-git}"
     
-    install -d "${pkgdir}/opt/DeltaChat/electron_app"
-    cp -r node_modules  images tsc-dist build html-dist _locales themes "${pkgdir}/opt/DeltaChat/electron_app"
+    install -d "${pkgdir}/usr/lib/deltachat"
 
-    rm -rf "${pkgdir}/opt/DeltaChat/electron_app/node_modules/deltachat-node/prebuilds/win32-x64"
-    rm -rf "${pkgdir}/opt/DeltaChat/electron_app/node_modules/deltachat-node/prebuilds/darwin-x64"
-    find "${pkgdir}/opt/DeltaChat/electron_app/node_modules/" -name *.js.map -exec rm {} \;
+    cp -r node_modules  images tsc-dist build html-dist _locales themes "${pkgdir}/usr/lib/deltachat"
 
-    cp index.js package.json "${pkgdir}/opt/DeltaChat/electron_app"
+    rm -rf "${pkgdir}/usr/lib/deltachat/node_modules/deltachat-node/prebuilds/win32-x64"
+    rm -rf "${pkgdir}/usr/lib/deltachat/node_modules/deltachat-node/prebuilds/darwin-x64"
+    rm -rf "${pkgdir}/usr/lib/deltachat/build/vcredist"
+    find "${pkgdir}/usr/lib/deltachat/node_modules/" -name *.js.map -exec rm {} \;
 
+    cp index.js package.json "${pkgdir}/usr/lib/deltachat"
     
     install -Dm644 "${srcdir}/deltachat-desktop.desktop" "${pkgdir}/usr/share/applications/deltachat.desktop"
-    install -Dm755 "${srcdir}/deltachat-desktop.sh" "${pkgdir}/opt/DeltaChat/deltachat"
-    install -d "${pkgdir}/usr/bin"
-    ln -s "${pkdir}/opt/DeltaChat/deltachat" "${pkgdir}/usr/bin/deltachat"
+    install -Dm755 "${srcdir}/deltachat-desktop.sh" "${pkgdir}/usr/bin/deltachat"
     
-    install -Dm644 ./images/deltachat.png "${pkgdir}/usr/share/icons/hicolor/scalable/apps/deltachat.png"
+    install -Dm644 ./images/deltachat.png "${pkgdir}/usr/share/pixmaps/deltachat.png"
 }
  

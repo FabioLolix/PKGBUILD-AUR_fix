@@ -1,0 +1,24 @@
+_npmname=unit.js
+_npmver=2.1.1
+pkgname=nodejs-unit.js # All lowercase
+pkgver=2.1.1
+pkgrel=1
+pkgdesc="Simple, intuitive and flexible unit testing framework for javascript / Node.js (browser and server). Integrates awesome assertions libraries like Must.js, Should.js, Assert of Node.js, Sinon.js and other friendly features (promise, IoC, plugins, ...)."
+arch=(any)
+url="https://unitjs.com"
+license=()
+depends=('nodejs' 'npm')
+optdepends=()
+source=(https://registry.npmjs.org/$_npmname/-/$_npmname-$_npmver.tgz)
+noextract=($_npmname-$_npmver.tgz)
+sha256sums=('cc6d29856bbd34807082c8ce7e2151dab99cf891d315e5f68f1781aab1a28682')
+
+package() {
+  cd $srcdir
+  local _npmdir="$pkgdir/usr/lib/node_modules/"
+  mkdir -p $_npmdir
+  cd $_npmdir
+  npm install -g --prefix "$pkgdir/usr" $_npmname@$_npmver
+}
+
+# vim:set ts=2 sw=2 et:

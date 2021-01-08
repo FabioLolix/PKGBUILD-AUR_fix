@@ -31,5 +31,5 @@ build() {
 
 package() {
   cd "${srcdir}/pygccxml-${pkgver}"
-  python setup.py install --prefix=/usr --root="$pkgdir" --optimize=1
+  python setup.py install --skip-build --optimize=1 --prefix=/usr --root="${pkgdir}"
 }

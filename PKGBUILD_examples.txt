@@ -1,0 +1,90 @@
+## Examples for reuse in pkgbuilds
+
+# All architectures
+arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
+
+# Common cd
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  cd "${srcdir}/${pkgname}-${pkgver}/build"
+
+  cd "${srcdir}/${pkgname%-git}"
+  cd "${srcdir}/${pkgname%-git}/build"
+
+
+
+pkgver() 
+
+# Using the most recent annotated tag reachable from the last commit: 
+  git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+
+# Using the most recent un-annotated tag reachable from the last commit: 
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+
+# cutting off 'v' prefix that presents in the git tag
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+
+# cutting off 'foo-' prefix that presents in the git tag
+  git describe --long --tags | sed 's/^foo-//;s/\([^-]*-g\)/r\1/;s/-/./g'
+
+# Git without tags
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+
+# Both methods can also be combined, to support repositories that start without a tag but get tagged later on (uses a bashism): 
+  ( set -o pipefail
+    git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  )
+
+# Bazaar
+	printf "r%s" "$(bzr revno)"
+
+# Mercurial
+	printf "r%s.%s" "$(hg identify -n)" "$(hg identify -i)"
+
+# Subversion
+	printf "r%s" "$(svnversion | tr -d 'A-z')"
+
+
+
+# Git submodules configuration
+
+  git submodule init
+  git config 'submodule.PATH/NAME.url' "${srcdir}/NAME"
+  git submodule update
+
+
+# Extract .deb to pkgdir
+  bsdtar -xf ${srcdir}/data.tar.xz -C ${pkgdir}/
+
+
+# Build with Cmake
+
+
+# Build with Qmake
+
+  qmake-qt5 .pro
+  make
+
+  make install INSTALL_ROOT="${pkgdir}/"
+
+
+
+
+build() {
+  cd "${pkgname%-git}"
+  make
+}
+
+package() {
+  cd "${pkgname%-git}"
+  make DESTDIR="${pkgdir}" install
+
+ install -d ${pkgdir}/usr/share/licenses/${pkgname}
+ install -d ${pkgdir}/usr/share/doc/${pkgname}
+ ln -s /opt/${pkgname}/${pkgname} ${pkgdir}/usr/bin/${pkgname}
+}
+
+# Python version variable
+  _pyver=$(python -c "from sys import version_info; print(\"%d.%d\" % (version_info[0],version_info[1]))")
+
+

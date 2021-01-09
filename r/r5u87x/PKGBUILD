@@ -7,13 +7,13 @@
 
 pkgname=r5u87x
 pkgver=0.2.2
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc='Userspace module for Ricoh R5U870 OEM cameras'
 arch=(i686 x86_64)
 url='https://gitea.artixlinux.org/linuxer/r5u87x'
 license=(GPL2)
-depends=(glib2 libusb-compat)
+depends=(glib2 libusb-compat lib32-libusb-compat)
 optdepends=('guile: script for extracting firmware from Windows driver')
 source=("${pkgname}-${pkgver}.tar.gz::https://gitea.artixlinux.org/linuxer/r5u87x/archive/${pkgver}.tar.gz")
 sha256sums=('d87dc965f6fcb2a1c849ff309d8bc4e4669b9b37d73ba875af35f580c5e32036')
@@ -32,10 +32,20 @@ build() {
 
 package() {
 	cd "${srcdir}/${pkgname}"
-	make DESTDIR="${pkgdir}" \
+
+	mkdir -p "${pkgdir}/usr/bin"
+	mkdir -p "${pkgdir}/usr/lib/r5u87x/ucode"
+	mkdir -p "${pkgdir}/usr/lib32/r5u87x/ucode"
+	
+    install "${srcdir}/${pkgname}/ricoh-webcam-loader" ${pkgdir}/usr/bin
+	
+    make DESTDIR="${pkgdir}" \
 		sbindir="/bin" \
-		firmdir="/lib/firmware" \
+		firmdir="/lib/ucode" \
 		UDEV_INSTALL="/usr/lib/udev/rules.d" \
-		install
-	install recode-fw.scm ${pkgdir}/usr/bin
+        install
+	
+    install recode-fw.scm ${pkgdir}/usr/bin
+	cp -r "${pkgdir}/usr/lib/ucode" "${pkgdir}/usr/lib/r5u87x/"
+	cp -r "${pkgdir}/usr/lib/ucode" "${pkgdir}/usr/lib32/r5u87x/"
 }

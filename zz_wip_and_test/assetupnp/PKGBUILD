@@ -21,10 +21,5 @@ sha256sums_i686=('b449f4a7041f38c067eca5aa038e1b9489312c37fdd72384229eecf54bba3a
 
 package() {
   install -d "${pkgdir}/opt/AssetUPnP"
-
   cp -a Asset-R${pkgver}-Linux-x64-trial/bin/ "${pkgdir}/opt/AssetUPnP"
-
-# install -d ${pkgdir}/usr/share/licenses/${pkgname}
-# install -d ${pkgdir}/usr/share/doc/${pkgname}
-# ln -s /opt/${pkgname}/${pkgname} ${pkgdir}/usr/bin/${pkgname}
 }

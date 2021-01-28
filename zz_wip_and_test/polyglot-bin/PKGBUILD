@@ -1,0 +1,20 @@
+# Maintainer:
+
+pkgname=polyglot-bin
+pkgver=3.3
+pkgrel=1
+pkgdesc="Spoken language construction toolkit"
+arch=(x86_64)
+url="https://draquet.github.io/PolyGlot/index.html"
+license=(MIT)
+depends=(libxtst libnet alsa-lib libxrender freetype2)
+optdepends=(java-runtime)
+source_x86_64=("${pkgname}-${pkgver}.deb::https://github.com/DraqueT/PolyGlot/releases/download/${pkgver}/PolyGlot-Ins-Lin.deb")
+sha256sums_x86_64=('da0be67be7c0c88e2d79f331e431fd9767f7c419dbf5e6991ad4781a51aef3c3')
+
+package() {
+  bsdtar -xf "${srcdir}"/data.tar.xz -C "${pkgdir}/"
+  install -D "${pkgdir}"/opt/polyglot-linear-a/share/doc/copyright "${pkgdir}/usr/share/licenses/${pkgname}/copyright"
+  rm -rf "${pkgdir}"/opt/polyglot-linear-a/share/
+  cp -r "${pkgdir}"/opt/polyglot-linear-a/lib/runtime/legal "${pkgdir}/usr/share/licenses/${pkgname}/"
+}

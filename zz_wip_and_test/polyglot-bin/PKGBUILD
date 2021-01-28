@@ -14,7 +14,27 @@ sha256sums_x86_64=('da0be67be7c0c88e2d79f331e431fd9767f7c419dbf5e6991ad4781a51ae
 
 package() {
   bsdtar -xf "${srcdir}"/data.tar.xz -C "${pkgdir}/"
+
+  install -d "${pkgdir}"/usr/share/{licenses,applications,metainfo,pixmaps}/
+
   install -D "${pkgdir}"/opt/polyglot-linear-a/share/doc/copyright "${pkgdir}/usr/share/licenses/${pkgname}/copyright"
-  rm -rf "${pkgdir}"/opt/polyglot-linear-a/share/
+  rm -rf "${pkgdir}"/opt/polyglot-linear-a/share
   cp -r "${pkgdir}"/opt/polyglot-linear-a/lib/runtime/legal "${pkgdir}/usr/share/licenses/${pkgname}/"
+
+  install -d "${pkgdir}"/usr/lib/polyglot
+  mv "${pkgdir}"/opt/polyglot-linear-a/* "${pkgdir}"/usr/lib/polyglot
+  rm -rf "${pkgdir}"/opt
+
+  install -d  "${pkgdir}/usr/bin/"
+  ln -s /usr/lib/polyglot/bin/PolyGlot "${pkgdir}/usr/bin/PolyGlot"
+  ln -s /usr/lib/polyglot/bin/PolyGlot "${pkgdir}/usr/bin/polyglot"
+
+  install "${pkgdir}"/usr/lib/polyglot/lib/PolyGlot.png \
+             "${pkgdir}"/usr/share/pixmaps/PolyGlot.png
+
+  install "${pkgdir}"/usr/lib/polyglot/lib/polyglot-linear-a-PolyGlot-MimeInfo.xml \
+            "${pkgdir}"/usr/share/metainfo/polyglot-linear-a-PolyGlot-MimeInfo.xml
+
+#  install "${pkgdir}"/usr/lib/polyglot/lib/polyglot-linear-a-PolyGlot.desktop \
+#        "${pkgdir}"/usr/share/applications/polyglot-linear-a-PolyGlot.desktop
 }

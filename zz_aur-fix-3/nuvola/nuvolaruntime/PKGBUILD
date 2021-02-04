@@ -1,4 +1,5 @@
 # Maintainer:
+# Contributor: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 # Contributor: Mark Wagie <mark dot wagie at tutanota dot com>
 # Contributor: Laramy Black <laramy2020@gmail.com>
 
@@ -13,8 +14,8 @@ depends=(diorite python-gobject json-glib webkit2gtk
          libnotify gst-plugins-ugly libdri2 libpulse
          libdrm libsecret libappindicator-gtk3)
 makedepends=(vala)
-optdepends=('nodejs-engine.io-client'
-            'nodejs-unit.js: for JavaScript unit tests')
+#optdepends=('nodejs-engine.io-client'
+#            'nodejs-unit.js: for JavaScript unit tests')
 #libappindicator-gtk3 is mandatory if enabled
 provides=(nuvolaplayer)
 conflicts=(nuvolaplayer)

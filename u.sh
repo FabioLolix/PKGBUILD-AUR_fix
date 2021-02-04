@@ -233,7 +233,7 @@ VAR2=m
   VAR=mstreamexpress-bin
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,mudita24.desktop,mudita24.png} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
   VAR=mudita24-git
   cd "$BASE/$VAR2/$VAR"
@@ -261,10 +261,10 @@ VAR2=o
 
 
 VAR2=p
-  VAR=pantheon-camera-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+#  VAR=pantheon-camera-git
+#  cd "$BASE/$VAR2/$VAR"
+#    makepkg --printsrcinfo > .SRCINFO
+#    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
   VAR=pantheon-code-git
   cd "$BASE/$VAR2/$VAR"

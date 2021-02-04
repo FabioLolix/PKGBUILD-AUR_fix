@@ -1,4 +1,5 @@
-# Maintainer: erk <valdemarerk@gmail.com>
+# Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org>
+# Contributor: erk <valdemarerk@gmail.com>
 
 pkgname=gravity-lang-git
 pkgdesc="Gravity Programming Language."

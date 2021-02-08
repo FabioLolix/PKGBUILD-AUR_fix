@@ -1,7 +1,7 @@
 # Maintainer: Jun Bo Bi <jambonmcyeah@gmail.com>
 
 pkgname=netcoredbg-git
-pkgver=r672.0809b8a
+pkgver=1.2.0.672.r0.g0809b8a
 pkgrel=1
 pkgdesc="Debugger for .NET Core runtime"
 url="https://github.com/Samsung/netcoredbg"
@@ -16,7 +16,7 @@ sha256sums=('SKIP'
 
 pkgver() {
   cd "${pkgname%-git}"
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {

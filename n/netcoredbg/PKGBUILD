@@ -1,7 +1,8 @@
 # Maintainer: Jun Bo Bi <jambonmcyeah@gmail.com>
 
-pkgname=netcoredbg-git
-pkgver=r672.0809b8a
+pkgname=netcoredbg
+_pkgver=1.2.0-672
+pkgver=${_pkgver//-/.}
 pkgrel=1
 pkgdesc="Debugger for .NET Core runtime"
 url="https://github.com/Samsung/netcoredbg"
@@ -9,15 +10,10 @@ license=(MIT)
 arch=(x86_64)
 depends=(dotnet-host dotnet-runtime dotnet-sdk)
 makedepends=(git cmake clang)
-source=("git+https://github.com/Samsung/netcoredbg.git"
+source=("git+https://github.com/Samsung/netcoredbg.git#tag=${_pkgver}"
         "git+https://github.com/dotnet/coreclr.git")
 sha256sums=('SKIP'
             'SKIP')
-
-pkgver() {
-  cd "${pkgname%-git}"
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-}
 
 prepare() {
   cd "${pkgname%-git}"

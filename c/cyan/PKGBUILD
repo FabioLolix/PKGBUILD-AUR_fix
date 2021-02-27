@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=cyan
-pkgver=1.3.r0.g78785ce
+pkgver=1.3+0+g78785ce
 pkgrel=1
 pkgdesc="Open source prepress color converter and image editor"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
@@ -20,7 +20,8 @@ prepare(){
 
 pkgver() {
   cd "${srcdir}/${pkgname}"
-  git describe --long --tags | sed 's/^continuous-//;s/\([^-]*-g\)/r\1/;s/-/./g'
+#  git describe --long --tags | sed 's/^continuous-//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags | sed 's/^continuous-//g;s/-/+/g'
 }
 
 build(){

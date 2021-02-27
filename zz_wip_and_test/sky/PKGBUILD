@@ -7,8 +7,8 @@ pkgdesc="Application kit designed for multimedia software"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://github.com/omega-gg/Sky"
 license=(LGPL3)
-depends=()
-makedepends=(boost)
+depends=(qt5-base vlc libtorrent) #boost-libs
+makedepends=(boost lib32-glibc qt5-xmlpatterns qt5-quickcontrols qt5-quickcontrols2)
 optdepends=()
 options=()
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/omega-gg/Sky/archive/${pkgver}.tar.gz")
@@ -16,9 +16,10 @@ sha256sums=('0de0e7779b3360d4eda2620337a85ccba03b24c312d005910dcae636831aa003')
 
 build() {
   cd "${srcdir}/Sky-${pkgver}"
-  ./configure.sh qt5 linux
-  qmake -r
-  make 
+  ./build.sh qt5 linux
+#  ./configure.sh qt5 linux
+#  qmake -r
+#  make 
 }
 
 package() {

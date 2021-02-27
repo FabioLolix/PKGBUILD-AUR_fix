@@ -11,8 +11,14 @@ provides=(navidrome)
 conflicts=(navidrome)
 makedepends=(go git npm nodejs-lts-fermium)
 depends=(ffmpeg)
-source=('git+https://github.com/deluan/navidrome.git')
-sha256sums=('SKIP')
+source=("git+https://github.com/deluan/navidrome.git"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/navidrome/navidrome.service"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/navidrome/navidrome.sysusers"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/navidrome/navidrome.tmpfiles")
+sha256sums=('SKIP'
+            '2f880b59f1e4c600c5bf401175cc0257819ccdaf8005c13c7d1b64ccf8f22217'
+            '69e9182da679585a9e011fa632d73f3114d209c31f9d98cb5200c4a43ca9b2d8'
+            'ce35018064426c0cde0a369c70c8e946ddca61b430c9b5cdaa2045991b3cf618')
 
 pkgver() {
   cd "${srcdir}/${pkgname%-git}"

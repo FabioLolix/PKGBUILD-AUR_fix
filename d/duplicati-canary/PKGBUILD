@@ -14,12 +14,11 @@ license=(LGPL)
 depends=(gtk-sharp-2 mono)
 makedepends=(nuget mono-msbuild)
 optdepends=('notify-sharp: for tray notifications')
-install=duplicati.install
 source=("https://github.com/duplicati/duplicati/archive/v${_pkgver}.tar.gz"
-        duplicati-user.service
-        duplicati.service
-        duplicati.sysusers
-        duplicati-cli)
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati-user.service"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati.service"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati.sysusers"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati-cli")
 sha256sums=('d080c28124e456fb81cf07ba1c6d8262a1f2d7e139321087d6cb6bd48ab81b2b'
             '2eb973cef79731d407bfbc83f754cef588c62ec83dae2112ac93f9c9f0baa403'
             '499eb63532bcad50b897c0874b723eebc6693816fcb9626532f367b5ff51da70'

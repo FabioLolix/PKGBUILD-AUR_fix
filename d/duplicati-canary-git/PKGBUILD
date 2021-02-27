@@ -4,7 +4,7 @@
 # aarch64 tester: Irissman    <irissman@probus.ca>
 
 pkgname=duplicati-canary-git
-pkgver=2.0.5.112.2.0.5.112_canary_2021.01.20.r7.gc47a356d6
+pkgver=2.0.5.112.2.0.5.112_canary_2021.01.20.r21.g24990a401
 pkgrel=1
 pkgdesc="FOSS backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
@@ -13,14 +13,11 @@ license=(LGPL)
 depends=(gtk-sharp-2 mono)
 makedepends=(git nuget mono-msbuild)
 optdepends=('notify-sharp: for tray notifications')
-install=duplicati.install
 source=("git+https://github.com/duplicati/duplicati.git"
-        # https://updates.duplicati.com/${_branch}/duplicati-${pkgver}_${_branch}_${_date}.zip
-        # duplicati.com seems to be blocked in Russia, see https://aur.archlinux.org/packages/duplicati-latest/#comment-746652
-        duplicati-user.service
-        duplicati.service
-        duplicati.sysusers
-        duplicati-cli)
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati-user.service"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati.service"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati.sysusers"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati-cli")
 sha256sums=('SKIP'
             '2eb973cef79731d407bfbc83f754cef588c62ec83dae2112ac93f9c9f0baa403'
             '499eb63532bcad50b897c0874b723eebc6693816fcb9626532f367b5ff51da70'

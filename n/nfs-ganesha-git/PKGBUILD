@@ -1,47 +1,60 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
-pkgname=nfs-ganesha-git
-pkgver=V2.7.rc3.r0.g32e8a2462
+pkgname=nfs-ganesha
+pkgver=4.dev.52.r0.g09fafbbbd
 pkgrel=1
-pkgdesc="Nfs-ganesha supports both the NFS and 9P protocols."
-arch=('any')
+pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="http://nfs-ganesha.github.io/"
-license=('GPL3')
-depends=()
-conflicts=('nfs-ganesha')
-makedepends=('git' 'cmake' 'gcc' 'bison' 'flex')
-source=("$pkgname"::'git://github.com/nfs-ganesha/nfs-ganesha.git')
-md5sums=('SKIP')
-
+license=(GPL3)
+depends=(jemalloc liburcu)
+makedepends=(cmake git python-sphinx)
+source=("git+https://github.com/nfs-ganesha/nfs-ganesha.git"
+        "git+https://github.com/nfs-ganesha/ntirpc.git")
+sha256sums=('SKIP'
+            'SKIP')
 backup=(etc/ganesha/ganesha.conf etc/sysconfig/ganesha)
 
 pkgver() {
-	cd ${pkgname}
-	git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  cd "${pkgname}"
+  git describe --long --tags | sed 's/^V//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
-	cd ${pkgname}
-	git submodule update --init
+  cd "${pkgname}"
+  git submodule init
+  git config 'submodule.src/libntirpc.url' "${srcdir}/ntirpc"
+  git submodule update
 }
 
 build() {
-	cd "${pkgname}"
-        cmake src/ -DUSE_9P=ON -DCMAKE_BUILD_TYPE=Maintainer -DBUILD_CONFIG=everything -DLIB_INSTALL_DIR=/usr/lib
-        make
+  cd "${pkgname}/src"
+  cmake . \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DUSE_MAN_PAGE=ON \
+    -DUSE_RADOS_RECOV=OFF \
+    -DRADOS_URLS=OFF \
+    -DUSE_FSAL_LUSTRE=OFF \
+    -DUSE_FSAL_LIZARDFS=OFF \
+    -DUSE_FSAL_CEPH=OFF \
+    -DUSE_FSAL_GLUSTER=OFF \
+    -DUSE_FSAL_RGW=OFF \
+    -DUSE_9P=OFF
+
+  make
 }
 
 package() {
-        cd "${pkgname}"
-        make install DESTDIR="$pkgdir"
-        mv "$pkgdir"/var/run "$pkgdir"/run
-        rmdir "$pkgdir"/var
-        install -d "$pkgdir"/usr/lib/systemd/system "$pkgdir"/etc/sysconfig "$pkgdir"/usr/libexec/ganesha
-	install src/scripts/ganeshactl/org.ganesha.nfsd.conf "$pkgdir"/etc/dbus-1/system.d/
-        install src/scripts/systemd/nfs-ganesha.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha.service
-        install src/scripts/systemd/nfs-ganesha-config.service-in.cmake "$pkgdir"/usr/lib/systemd/system/nfs-ganesha-config.service
-        install src/scripts/systemd/nfs-ganesha-lock.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha-lock.service
-        install src/scripts/systemd/sysconfig/nfs-ganesha "$pkgdir"/etc/sysconfig/ganesha
-        install src/scripts/systemd/tmpfiles.d/ganesha.conf "$pkgdir"/etc/tmpfiles.d/ganesha.conf
-        install src/scripts/nfs-ganesha-config.sh "$pkgdir"/usr/libexec/ganesha
+  cd "${pkgname}"
+  make install DESTDIR="$pkgdir"
+  mv "$pkgdir"/var/run "$pkgdir"/run
+  rmdir "$pkgdir"/var
+  install -d "$pkgdir"/usr/lib/systemd/system "$pkgdir"/etc/sysconfig "$pkgdir"/usr/libexec/ganesha
+  install src/scripts/ganeshactl/org.ganesha.nfsd.conf "$pkgdir"/etc/dbus-1/system.d/
+  install src/scripts/systemd/nfs-ganesha.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha.service
+  install src/scripts/systemd/nfs-ganesha-lock.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha-lock.service
+  install src/scripts/systemd/nfs-ganesha-config.service-in.cmake "$pkgdir"/usr/lib/systemd/system/nfs-ganesha-config.service
+  install src/scripts/systemd/sysconfig/nfs-ganesha "$pkgdir"/etc/sysconfig/ganesha
+  install src/scripts/systemd/tmpfiles.d/ganesha.conf "$pkgdir"/etc/tmpfiles.d/ganesha.conf
+  install src/scripts/nfs-ganesha-config.sh "$pkgdir"/usr/libexec/ganesha
 }

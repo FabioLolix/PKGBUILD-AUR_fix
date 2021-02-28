@@ -2,7 +2,7 @@
 # Contributor: Ihor Novikov <sk1.project.org@gmail.com>
 
 pkgname=sk1-snapshot
-pkgver=2.0rc5_20200425
+pkgver=2.0rc5_20210228
 pkgrel=1
 pkgdesc="An open source vector graphics editor for prepress"
 url="https://sk1project.net/"
@@ -13,7 +13,7 @@ depends=(lcms2 cairo imagemagick pango wxpython python2-cairo
 provides=(sk1)
 conflicts=(sk1)
 source=("https://downloads.sk1project.net/sk1/nightbuilds/sk1-${pkgver}.tar.gz")
-sha256sums=('7faa00810ded5ca13bb4ad2e12a8335a11a82940e6a927dada3bf48dc092b2a2')
+sha256sums=('a4f18a3b5f91cfae6c7dd8f89b52ac12684507b19ac138e3ab44dd313fcdb9ed')
 
 build() {
   cd "${srcdir}/sk1-2.0rc5"

@@ -10,7 +10,7 @@ pkgver=2.3.r385.g7d0e8ede
 pkgrel=1
 pkgdesc="Professional video editing and compositing environment - Community version"
 arch=(x86_64)
-url="https://github.com/cinelerra-gg/cinelerra-cv/"
+url="https://github.com/cinelerra-cv-team/cinelerra-cv/"
 license=(GPL)
 depends=(e2fsprogs libavc1394 libiec61883 libxv
          libtiff mjpegtools fftw a52dec glu
@@ -31,9 +31,8 @@ pkgver() {
 
 prepare() {
   cd "${pkgname}"
-  patch -Np1 -i ../71fb05327d17a76d5735416a48d6175a6bac235a.patch
+#  patch -Np1 -i ../71fb05327d17a76d5735416a48d6175a6bac235a.patch
   ./autogen.sh
-#true
 }
 
 build() {

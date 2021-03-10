@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=isodumper-git
-pkgver=1.26.r0.ge39062c
+pkgver=1.33.r8.g46feeb4
 pkgrel=1
 pkgdesc="A tool for writing ISO images on a USB stick, a fork of usb-imagewriter"
 arch=(any)

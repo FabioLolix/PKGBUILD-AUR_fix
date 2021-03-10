@@ -1,7 +1,7 @@
 # Maintainer: Jun Bo Bi <jambonmcyeah@gmail.com>
 
 pkgname=netcoredbg
-_pkgver=1.2.0-672
+_pkgver=1.2.0-738
 pkgver=${_pkgver//-/.}
 pkgrel=1
 pkgdesc="Debugger for .NET Core runtime"
@@ -34,6 +34,6 @@ build() {
 
 package() {
   cd "${pkgname%-git}/build"
-  make DESTDIR="$pkgdir" install
-  install -Dm644 ../LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 ../LICENSE "${pkgdir}"/usr/share/licenses/${pkgname}/LICENSE
 }

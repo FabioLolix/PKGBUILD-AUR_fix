@@ -1,0 +1,24 @@
+
+pkgname=vuescan-bin
+pkgver=9.7.51
+pkgrel=1
+pkgdesc="A powerful proprietary scanning tool developed by Hamrick Software"
+arch=(i686 x86_64 armv6h aarch64)
+url="https://www.hamrick.com/"
+license=('custom')
+depends=(gtk2 libsm libusb-compat)
+options=(!strip) # required to accept registration details
+source=(vuescan-LICENSE.txt)
+source_x86_64=("vuescan-x64-$(date +%F-%H).rpm::https://www.hamrick.com/files/vuex6497.rpm")
+sha256sums=('6dbe377ee83561ef0b12fec64dadb5c81beb1f9ee274284c09184366bad1a6d6')
+sha256sums_x86_64=('SKIP')
+
+pkgver() {
+  printf "%s" "$(wget -qO- https://www.hamrick.com/alternate-versions.html | egrep '<a href.*[0-9]+\.[0-9]+' | head -1 | sed -E 's/^.*([0-9]+[.][0-9]+[.][0-9]+).*$/\1/')"
+}
+
+package() {
+  cp -a "${srcdir}"/usr "${pkgdir}"/
+  cp -a "${srcdir}"/lib "${pkgdir}"/usr
+  install -Dm644 "${srcdir}/vuescan-LICENSE.txt" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE.txt"
+}

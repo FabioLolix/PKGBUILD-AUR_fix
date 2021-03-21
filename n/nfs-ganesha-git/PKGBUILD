@@ -1,7 +1,7 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
 pkgname=nfs-ganesha
-pkgver=4.dev.52.r0.g09fafbbbd
+pkgver=4.dev.55.r0.g21f0535bf
 pkgrel=1
 pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
@@ -25,12 +25,16 @@ prepare() {
   git submodule init
   git config 'submodule.src/libntirpc.url' "${srcdir}/ntirpc"
   git submodule update
+
+  mkdir -p "/src/build"
 }
 
 build() {
-  cd "${pkgname}/src"
-  cmake . \
+  cd "${pkgname}/src/build"
+  cmake ..  -Wno-dev \
     -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
     -DUSE_MAN_PAGE=ON \
     -DUSE_RADOS_RECOV=OFF \
     -DRADOS_URLS=OFF \
@@ -45,16 +49,16 @@ build() {
 }
 
 package() {
-  cd "${pkgname}"
+  cd "${pkgname}/src/build"
   make install DESTDIR="$pkgdir"
-  mv "$pkgdir"/var/run "$pkgdir"/run
-  rmdir "$pkgdir"/var
-  install -d "$pkgdir"/usr/lib/systemd/system "$pkgdir"/etc/sysconfig "$pkgdir"/usr/libexec/ganesha
-  install src/scripts/ganeshactl/org.ganesha.nfsd.conf "$pkgdir"/etc/dbus-1/system.d/
-  install src/scripts/systemd/nfs-ganesha.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha.service
-  install src/scripts/systemd/nfs-ganesha-lock.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha-lock.service
-  install src/scripts/systemd/nfs-ganesha-config.service-in.cmake "$pkgdir"/usr/lib/systemd/system/nfs-ganesha-config.service
-  install src/scripts/systemd/sysconfig/nfs-ganesha "$pkgdir"/etc/sysconfig/ganesha
-  install src/scripts/systemd/tmpfiles.d/ganesha.conf "$pkgdir"/etc/tmpfiles.d/ganesha.conf
-  install src/scripts/nfs-ganesha-config.sh "$pkgdir"/usr/libexec/ganesha
+#  mv "$pkgdir"/var/run "$pkgdir"/run
+#  rmdir "$pkgdir"/var
+#  install -d "$pkgdir"/usr/lib/systemd/system "$pkgdir"/etc/sysconfig "$pkgdir"/usr/libexec/ganesha
+#  install src/scripts/ganeshactl/org.ganesha.nfsd.conf "$pkgdir"/etc/dbus-1/system.d/
+#  install src/scripts/systemd/nfs-ganesha.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha.service
+#  install src/scripts/systemd/nfs-ganesha-lock.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha-lock.service
+#  install src/scripts/systemd/nfs-ganesha-config.service-in.cmake "$pkgdir"/usr/lib/systemd/system/nfs-ganesha-config.service
+#  install src/scripts/systemd/sysconfig/nfs-ganesha "$pkgdir"/etc/sysconfig/ganesha
+#  install src/scripts/systemd/tmpfiles.d/ganesha.conf "$pkgdir"/etc/tmpfiles.d/ganesha.conf
+#  install src/scripts/nfs-ganesha-config.sh "$pkgdir"/usr/libexec/ganesha
 }

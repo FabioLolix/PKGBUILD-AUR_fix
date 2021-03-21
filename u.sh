@@ -26,6 +26,8 @@ VAR2=a
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+echo "Done A"
+
 
 
 VAR2=b
@@ -48,6 +50,8 @@ VAR2=b
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO,bubbleupnpserver,bubbleupnpserver.config,bubbleupnpserver.service,launch.sh,bubbleupnpserver-sysuser.conf} "$DEST/$VAR2/$VAR"
+
+echo "Done B"
 
 
 
@@ -101,6 +105,8 @@ VAR2=c
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+echo "Done C"
+
 
 
 VAR2=d
@@ -108,6 +114,8 @@ VAR2=d
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done D"
 
 
 
@@ -131,6 +139,8 @@ VAR2=f
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done F"
 
 
 
@@ -187,6 +197,8 @@ VAR2=g
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+echo "Done G"
+
 
 
 VAR2=i
@@ -195,6 +207,8 @@ VAR2=i
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+echo "Done I"
+
 
 
 VAR2=k
@@ -202,6 +216,8 @@ VAR2=k
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done K"
 
 
 
@@ -230,6 +246,9 @@ VAR2=l
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done L"
+
 
 
 VAR2=m
@@ -270,6 +289,8 @@ VAR2=m
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+echo "Done M"
+
 
 
 VAR2=o
@@ -282,6 +303,8 @@ VAR2=o
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done O"
 
 
 
@@ -336,6 +359,8 @@ VAR2=p
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+echo "Done P"
+
 
 
 VAR2=q
@@ -364,6 +389,8 @@ VAR2=q
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+echo "Done Q"
+
 
 
 VAR2=r
@@ -376,6 +403,8 @@ VAR2=r
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done R"
 
 
 
@@ -425,6 +454,8 @@ VAR2=s
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+echo "Done S"
+
 
 
 VAR2=t
@@ -438,6 +469,8 @@ VAR2=t
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+echo "Done T"
+
 
 
 VAR2=u
@@ -445,6 +478,8 @@ VAR2=u
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done U"
 
 
 
@@ -479,9 +514,29 @@ VAR2=v
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO,vuescan-LICENSE.txt} "$DEST/$VAR2/$VAR"
 
+echo "Done V"
+
+
+
+VAR2=x
+  VAR=xboxdrv-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+#  VAR=xerox-phaser-6000-6010
+#  cd "$BASE/$VAR2/$VAR"
+#    makepkg --printsrcinfo > .SRCINFO
+#    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done X"
+
+
 
 VAR2=y
   VAR=yatoc2cue
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done Y"

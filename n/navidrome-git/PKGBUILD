@@ -1,7 +1,7 @@
 # Maintainer: Sumner Evans <me [at] sumnerevans [dot] com>
 
 pkgname=navidrome-git
-pkgver=0.40.0.r1.gd8a4db36
+pkgver=0.40.0.r53.gfa479f0a
 pkgrel=1
 pkgdesc="Music Server and Streamer compatible with Subsonic/Airsonic"
 url='https://www.navidrome.org/'

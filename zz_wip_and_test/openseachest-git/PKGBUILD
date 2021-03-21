@@ -1,0 +1,48 @@
+# Maintainer: 
+# Contributor: 
+
+pkgname=openseachest-git
+pkgver=20.11.r36.gf90553a
+pkgrel=1
+pkgdesc="Utilities for performing various operations on SATA, SAS, NVMe, and USB storage devices"
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://github.com/Seagate/openSeaChest"
+license=(MPL2)
+makedepends=(git)
+provides=(openseachest)
+conflicts=(openseachest)
+source=("${pkgname%-git}::git+https://github.com/Seagate/openSeaChest.git"
+        "git+https://github.com/Seagate/opensea-common.git"
+        "git+https://github.com/Seagate/opensea-transport.git"
+        "git+https://github.com/Seagate/opensea-operations.git"
+        "seagate-wingetopt::git+https://github.com/Seagate/wingetopt.git")
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP')
+
+prepare() {
+  cd "${srcdir}/${pkgname%-git}"
+  git submodule init
+  git config 'submodule.opensea-common.url' "${srcdir}/opensea-common"
+  git config 'submodule.opensea-transport.url' "${srcdir}/opensea-transport"
+  git config 'submodule.opensea-operations.url' "${srcdir}/opensea-operations"
+  git config 'submodule.wingetopt.url' "${srcdir}/seagate-wingetopt"
+  git submodule update
+}
+
+pkgver() {
+  cd "${srcdir}/${pkgname%-git}"
+  git describe --long --tags | sed 's/^Release.//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "${srcdir}/${pkgname%-git}/Make/gcc"
+  make release
+}
+
+package() {
+  cd "${srcdir}/${pkgname%-git}"
+  make DESTDIR="${pkgdir}/" install
+}

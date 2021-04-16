@@ -119,6 +119,16 @@ echo "Done D"
 
 
 
+VAR2=e
+  VAR=efax-gtk
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done E"
+
+
+
 VAR2=f
   VAR=filebrowser
   cd "$BASE/$VAR2/$VAR"
@@ -154,11 +164,6 @@ VAR2=g
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-
-#  VAR=goocanvas3
-#  cd "$BASE/$VAR2/$VAR"
-#    makepkg --printsrcinfo > .SRCINFO
-#    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
   VAR=gotop
   cd "$DEST/$VAR2/$VAR"

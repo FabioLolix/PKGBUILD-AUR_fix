@@ -1,14 +1,12 @@
 # Maintainer: Sumner Evans <me [at] sumnerevans [dot] com>
 
 pkgname=navidrome
-pkgver=0.40.0
-pkgrel=2
+pkgver=0.42.0
+pkgrel=1
 pkgdesc="Music Server and Streamer compatible with Subsonic/Airsonic"
 url='https://www.navidrome.org/'
 license=(GPL3)
 arch=(x86_64 armv6h armv7h aarch64)
-provides=(navidrome)
-conflicts=(navidrome)
 makedepends=(go git npm nodejs-lts-fermium)
 depends=(ffmpeg)
 source=("git+https://github.com/deluan/navidrome.git#tag=v${pkgver}"

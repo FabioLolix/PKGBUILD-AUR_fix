@@ -29,8 +29,7 @@ build() {
   cd "$srcdir/${pkgname}/build"
   cmake .. \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DUSE_SYSTEM_TAGLIB=1
+    -DCMAKE_BUILD_TYPE=Release
   make
 
 #    -DWITH_TESTS=1

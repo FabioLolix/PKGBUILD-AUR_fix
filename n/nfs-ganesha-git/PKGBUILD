@@ -1,7 +1,7 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
 pkgname=nfs-ganesha
-pkgver=4.dev.55.r0.g21f0535bf
+pkgver=4.dev.59.r0.gd381482b6
 pkgrel=1
 pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
@@ -26,12 +26,12 @@ prepare() {
   git config 'submodule.src/libntirpc.url' "${srcdir}/ntirpc"
   git submodule update
 
-  mkdir -p "/src/build"
+#  install -d "/src/build"
 }
 
 build() {
-  cd "${pkgname}/src/build"
-  cmake ..  -Wno-dev \
+  cd "${pkgname}/src"
+  cmake .  -Wno-dev \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_LIBDIR=lib \
@@ -49,7 +49,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}/src/build"
+  cd "${pkgname}/src"
   make install DESTDIR="$pkgdir"
 #  mv "$pkgdir"/var/run "$pkgdir"/run
 #  rmdir "$pkgdir"/var

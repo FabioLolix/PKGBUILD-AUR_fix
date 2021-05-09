@@ -1,0 +1,45 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Kyle Keen <keenerd@gmail.com>
+# Contributor: minder
+
+pkgname=python2-pillow
+pkgver=6.2.1
+pkgrel=2
+_appname=Pillow
+_py2basever=2.7
+pkgdesc="Python Imaging Library (PIL) fork"
+arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
+url="https://python-pillow.github.io/"
+license=(BSD)
+depends=(python2 lcms2 libtiff openjpeg2 libimagequant libxcb)
+optdepends=('freetype2: for the ImageFont module'
+            'libraqm: for complex text scripts'
+            'libwebp: for webp images'
+            'tk: for the ImageTK module'
+            'python2-olefile: OLE2 file support'
+            'python2-pyqt5: for the ImageQt module')
+makedepends=(python2-setuptools freetype2 libraqm libwebp tk)
+#checkdepends=(python2-pytest)
+source=("https://files.pythonhosted.org/packages/source/P/$_appname/$_appname-$pkgver.tar.gz")
+sha256sums=('bf4e972a88f8841d8fdc6db1a75e0f8d763e66e3754b03006cbc3854d89f1cb1')
+
+build() {
+  cd "$srcdir/$_appname-$pkgver"
+  python2 setup.py build
+}
+
+#check() {
+#  cd "$srcdir/$_appname-$pkgver"
+#  export PYTHONPATH="$PWD/build/lib.linux-$CARCH-$_py2basever"
+#  python2 selftest.py
+#  pytest2
+#}
+
+package() {
+  cd "$srcdir/$_appname-$pkgver"
+  python2 setup.py install --root="$pkgdir/" --optimize=1
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+
+  install -dm755 "$pkgdir/usr/include/python$_py2basever/"
+  install -m644 -t "$pkgdir/usr/include/python$_py2basever/" src/libImaging/*.h
+}

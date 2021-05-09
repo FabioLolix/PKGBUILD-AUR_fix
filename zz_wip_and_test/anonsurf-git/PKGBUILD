@@ -1,29 +1,25 @@
 
 
 pkgname=anonsurf-git
-pkgver=r55.7dd30f9
+pkgver=r626.286a4ce
 pkgrel=1
-pkgdesc="A script from ParrotSec that provides a strong system-wide anonymization module"
-arch=('any')
+pkgdesc="Script from ParrotSec that provides a strong system-wide anonymization module"
+arch=(any)
 url="https://www.parrotsec.org"
-license=('GPL')
-depends=('tor' 'iptables' 'i2p')
-provides=('anonsurf')
-conflicts=('anonsurf' 'anonsurf-git')
-source=("$pkgname::git+https://github.com/ParrotSec/anonsurf.git")
-md5sums=('SKIP')
+license=(GPL3)
+#depends=(tor iptables i2p)
+makedepends=(nim)
+provides=(anonsurf)
+conflicts=(anonsurf)
+source=("git+https://github.com/ParrotSec/anonsurf.git")
+sha256sums=('SKIP')
 
 pkgver() {
-  cd ${pkgname}
+  cd "${srcdir}/${pkgname%-git}"
   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
-build() {
-  cd ${srcdir}/${pkgname}
-  make 
-}
-
 package() {
-  cd ${srcdir}/${pkgname}
-  make DESTDIR="$pkgdir" install
+  cd "${srcdir}/${pkgname%-git}"
+  make DESTDIR="${pkgdir}" install
 }

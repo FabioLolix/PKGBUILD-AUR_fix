@@ -1,7 +1,8 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
 pkgname=nfs-ganesha
-pkgver=4.dev.55
+_pkgver=4-dev.59
+pkgver=${_pkgver//-/.}
 pkgrel=1
 pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
@@ -9,7 +10,7 @@ url="http://nfs-ganesha.github.io/"
 license=(GPL3)
 depends=(jemalloc liburcu)
 makedepends=(cmake git)
-source=("git+https://github.com/nfs-ganesha/nfs-ganesha.git#tag=V4-dev.55"
+source=("git+https://github.com/nfs-ganesha/nfs-ganesha.git#tag=V${_pkgver}"
         "git+https://github.com/nfs-ganesha/ntirpc.git")
 sha256sums=('SKIP'
             'SKIP')
@@ -24,7 +25,10 @@ prepare() {
 
 build() {
   cd "${pkgname}/src"
-  cmake . 
+  cmake .  -Wno-dev \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DUSE_MAN_PAGE=ON
 
   make
 }

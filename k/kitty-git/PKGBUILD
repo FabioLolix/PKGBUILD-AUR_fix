@@ -4,7 +4,7 @@
 
 pkgbase=kitty-git
 pkgname=(kitty-git kitty-terminfo-git)
-pkgver=0.19.3.r357.g1f4fdb17
+pkgver=0.20.3.r37.g7c48db7d
 pkgrel=1
 pkgdesc="Modern, hackable, featureful, OpenGL based terminal emulator"
 arch=(i686 x86_64)

@@ -1,17 +1,19 @@
 # Maintainer:
 
 pkgname=mailspring-git
-pkgver=1.8.0.r29.g4b6c24fef
+pkgver=1.9.1.r2.g2b89469bb
 pkgrel=1
 pkgdesc="A beautiful, fast and maintained fork of Nylas Mail by one of the original authors."
 arch=(x86_64)
 license=(GPL3)
 url="https://getmailspring.com/"
-makedepends=(git npm)
+makedepends=(git npm gcc5 cmake wget)
 source=("${pkgname%-git}::git+https://github.com/Foundry376/Mailspring.git"
+        "git+https://github.com/Foundry376/Mailspring-Sync.git"
         "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/mailspring_0001-linux-don-t-build-a-deb-or-rpm-please.patch"
 )
 sha256sums=('SKIP'
+            'SKIP'
             'fd2158e0e3d39df0fa498b2afbcfa55c30607018ae144656f9575a6ec9e3dc98')
 
 pkgver() {
@@ -22,11 +24,18 @@ pkgver() {
 
 prepare() {
   cd "${pkgname%-git}"
-  patch -p1 < ../mailspring_0001-linux-don-t-build-a-deb-or-rpm-please.patch
+#  patch -p1 < ../mailspring_0001-linux-don-t-build-a-deb-or-rpm-please.patch
+
+  git submodule init
+  git config 'submodule.mailsync.url' "${srcdir}/Mailspring-Sync"
+  git submodule update
 }
 
 build() {
-  cd "${pkgname%-git}"
+  cd "${pkgname%-git}/mailsync"
+  ./build.sh
+
+  cd ..
   npm config set unsafe-perm=true
   npm install
   npm audit

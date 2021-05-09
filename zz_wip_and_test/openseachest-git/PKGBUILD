@@ -2,7 +2,7 @@
 # Contributor: 
 
 pkgname=openseachest-git
-pkgver=20.11.r36.gf90553a
+pkgver=21.04.r2.ga61ead5
 pkgrel=1
 pkgdesc="Utilities for performing various operations on SATA, SAS, NVMe, and USB storage devices"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)

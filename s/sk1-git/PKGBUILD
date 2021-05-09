@@ -2,7 +2,7 @@
 # Contributor: Ihor Novikov <sk1.project.org@gmail.com>
 
 pkgname=sk1-git
-pkgver=r5117.4e6a5443
+pkgver=r5194.17caa859
 pkgrel=1
 pkgdesc="An open source vector graphics editor for prepress"
 url="https://sk1project.net/"

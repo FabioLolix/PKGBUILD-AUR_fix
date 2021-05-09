@@ -3,7 +3,7 @@
 # Contributor: IgnorantGuru http://igurublog.wordpress.com/contact-ignorantguru/
 
 pkgname=spacefm-git
-pkgver=2.0.0.r14.g7775e99
+pkgver=2.1.0.r36.gaf062ca
 pkgrel=1
 pkgdesc="Multi-panel tabbed file manager"
 arch=(i686 x86_64)
@@ -36,7 +36,7 @@ pkgver() {
 
 build() {
   cd "spacefm"
-  meson build --prefix=/usr -D gtk3=true
+  meson build --prefix=/usr
   ninja -C build
 }
 

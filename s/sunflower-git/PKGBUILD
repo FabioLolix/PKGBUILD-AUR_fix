@@ -1,8 +1,8 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=sunflower-git
-pkgver=0.4.62.r144.g46fdaae1
-pkgrel=2
+pkgver=0.4.62.r146.gbe06112a
+pkgrel=1
 pkgdesc="Small and highly customizable twin-panel file manager for Linux with support for plugins"
 arch=(any)
 license=(GPL3)

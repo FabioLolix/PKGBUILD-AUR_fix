@@ -1,7 +1,7 @@
 # Maintainer:
 
 pkgname=cinelerra-hv
-pkgver=7.2
+pkgver=7.3
 pkgrel=1
 pkgdesc="Professional video editing and compositing environment"
 arch=(x86_64)
@@ -26,7 +26,7 @@ makedepends=(alsa-lib atk bzip2 cairo expat fftw flac
         	 xorg-mkfontdir xorg-mkfontscale
 )
 source=("$pkgname-$pkgver-src.tar.xz::https://sourceforge.net/projects/heroines/files/cinelerra-$pkgver-src.tar.xz")
-sha256sums=('f1190edaa1c8cb863f971a0f14b61fa4cb76056262e67386f071b2d330ff2797')
+sha256sums=('389e7fc906e45411a2f31f0bdaa429a73dc464d3eeb6136272ba1a91f15c7a8e')
 
 build() {
   cd "${srcdir}/cinelerra-$pkgver"

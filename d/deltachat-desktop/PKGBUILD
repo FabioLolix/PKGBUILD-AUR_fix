@@ -1,7 +1,7 @@
 # Maintainer: Jikstra <jikstra@disroot.org>
 
 pkgname=deltachat-desktop
-pkgver=1.14.1
+pkgver=1.15.5
 pkgrel=1
 pkgdesc="Privacy oriented chat application built on e-mail"
 arch=(any)

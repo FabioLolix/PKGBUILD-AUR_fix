@@ -1,7 +1,7 @@
 # Maintainer: Jun Bo Bi <jambonmcyeah@gmail.com>
 
 pkgname=netcoredbg-git
-pkgver=1.2.0.761.r0.ge23f439
+pkgver=1.2.0.786.r0.g094860c
 pkgrel=1
 pkgdesc="Debugger for .NET Core runtime"
 url="https://github.com/Samsung/netcoredbg"

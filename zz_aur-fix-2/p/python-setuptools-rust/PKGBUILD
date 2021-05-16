@@ -1,0 +1,25 @@
+# Maintainer: 
+
+pkgname=python-setuptools-rust
+_module=setuptools-rust
+pkgver=0.12.1
+pkgrel=1
+pkgdesc="Setuptools Rust extension plugin"
+arch=(any)
+url="https://github.com/PyO3/setuptools-rust"
+license=(MIT)
+depends=(python)
+makedepends=(python-setuptools python-wheel python-pip)
+source=("https://files.pythonhosted.org/packages/source/${_module::1}/$_module/$_module-$pkgver.tar.gz")
+sha256sums=('647009e924f0ae439c7f3e0141a184a69ad247ecb9044c511dabde232d3d570e')
+
+build() {
+  cd "${srcdir}/${_module}-${pkgver}"
+  python setup.py build
+}
+
+package() {
+  cd "${srcdir}/${_module}-${pkgver}"
+  python setup.py install --root="${pkgdir}" --optimize=1 --skip-build
+  install -D -m644 LICENSE "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+}

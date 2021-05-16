@@ -1,27 +1,25 @@
 # Maintainer: 0kalekale <kalekale.anon@gmail.com> - https://kalekale.ga
 
-pkgname=python3-anilistpy
-pkgver=0.1.0
-pkgrel=2
+pkgname=python-anilistpy-git
+pkgver=0.1.0.r5.ga638846
+pkgrel=1
 pkgdesc="Easy to use python wrapper for anilist apiv2"
-arch=('i686' 'x86_64')
+arch=(x86_64 i686)
 url="https://github.com/anilistpy/anilistpy"
-license=('AGPL3')
-provides=('python3-anilistpy')
-conflicts=('python3-anilistpy')
-makedepends=('python' 'rust' 'python-pip')
-source=('git+https://github.com/anilistpy/anilistpy.git')
-md5sums=('SKIP')
+license=(AGPL3)
+depends=(python-semantic-version python-setuptools-rust)
+makedepends=(git rust)
+provides=(python-anilistpy)
+conflicts=(python-anilistpy)
+source=("git+https://github.com/anilistpy/anilistpy.git")
+sha256sums=('SKIP')
 
-prepare() {
-  pip3 install setuptools wheel setuptools-rust requests
-}
-
-build() {
+pkgver() {
   cd anilistpy
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 package() {
   cd anilistpy
-  python3 setup.py install --user
+  python setup.py install --root="${pkgdir}" --optimize=1
 }

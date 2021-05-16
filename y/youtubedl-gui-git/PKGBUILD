@@ -23,7 +23,7 @@ pkgver(){
 build() {
   cd "${pkgname%-git}"
   cmake -B build
-  make -C build 
+  make -C build
 }
 
 package() {

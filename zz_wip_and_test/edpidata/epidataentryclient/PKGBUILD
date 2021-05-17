@@ -1,0 +1,20 @@
+# Maintainer:
+# Contributor:
+
+pkgname=epidataentryclient
+_pkgver=4.6.0.2-0
+pkgver=${_pkgver//-/.}
+pkgrel=1
+pkgdesc="Proprietary tool for entering data into a database created with EpiData Manager"
+arch=(x86_64)
+url="https://www.epidata.dk/index.htm"
+license=('custom: Copyright EpiData Association')
+depends=(gtk2)
+source_x86_64=("https://www.epidata.dk/php/downloadc.php?file=setup.${pkgname}.${_pkgver}_amd64.deb")
+sha256sums_x86_64=('75c5182158d56985ff3125bc1ab19247c31a1c9950dae752eb260d3d434aae6a')
+
+package() {
+  bsdtar xf data.tar.xz -C "${pkgdir}"
+  bsdtar -zxf control.tar.gz copyright
+  install -Dm644 copyright "${pkgdir}/usr/share/licenses/${pkgname}/copyright"
+}

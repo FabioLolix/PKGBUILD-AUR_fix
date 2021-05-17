@@ -1,0 +1,20 @@
+# Maintainer:
+# Contributor:
+
+pkgname=epidatamanager
+_pkgver=4.6.0.4-0
+pkgver=${_pkgver//-/.}
+pkgrel=1
+pkgdesc="Proprietary tool for creating personal database with emphasis on data quality"
+arch=(x86_64)
+url="https://www.epidata.dk/index.htm"
+license=('custom: Copyright EpiData Association')
+depends=(gtk2)
+source_x86_64=("https://www.epidata.dk/php/downloadc.php?file=setup.${pkgname}.${_pkgver}_amd64.deb")
+sha256sums_x86_64=('6209eb0351fc3b9775b6d616bf6e4a8be167f1f24aa19bca7ca954d6290847dd')
+
+package() {
+  bsdtar xf data.tar.xz -C "${pkgdir}"
+  bsdtar -zxf control.tar.xz copyright
+  install -Dm644 copyright "${pkgdir}/usr/share/licenses/${pkgname}/copyright"
+}

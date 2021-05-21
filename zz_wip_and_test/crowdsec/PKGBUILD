@@ -10,7 +10,7 @@ url="https://crowdsec.net/"
 license=(MIT)
 depends=(glibc)
 makedepends=(git go jq)
-source=("git+https://github.com/crowdsecurity/crowdsec.git#tag=v1.0.14")
+source=("git+https://github.com/crowdsecurity/crowdsec.git#tag=v${pkgver}")
 sha256sums=('SKIP')
 
 build() {

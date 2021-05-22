@@ -2,8 +2,8 @@
 # Contributor: Bernhard Landauer <oberon@manjaro.org>
 # Contributor: Eric Bélanger <eric@archlinux.org>
 
-pkgname=audacity-git
-pkgver=3.0.2.r126.g90903d237
+pkgname=audacity
+pkgver=3.0.2
 pkgrel=1
 pkgdesc="A program that lets you manipulate digital audio waveforms"
 arch=(i686 x86_64)
@@ -16,15 +16,8 @@ makedepends=(git cmake clang sdl2 libsoup libnotify gstreamer gst-plugins-bad-li
              ffmpeg jack nasm)
 # can't find system lame portmidi
 optdepends=('ffmpeg: additional import/export capabilities')
-provides=(audacity)
-conflicts=(audacity)
-source=("git+https://github.com/audacity/audacity.git")
+source=("git+https://github.com/audacity/audacity.git#tag=Audacity-${pkgver}")
 sha256sums=('SKIP')
-
-pkgver() {
-  cd audacity
-  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g' | cut -d'.' -f2-
-}
 
 build() {
   mkdir audacity/build

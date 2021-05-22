@@ -16,7 +16,9 @@ arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
 
 
 
-pkgver() 
+pkgver() {
+
+}
 
 # Using the most recent annotated tag reachable from the last commit: 
   git describe --long | sed 's/\([^-]*-g\)/r\1/;s/-/./g'

@@ -19,3 +19,9 @@ DEST=~/Dev/AUR/zz_aur-fix-3/nuvola
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR"
 
+  VAR=python-nuvolasdk
+  cd "$BASE/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR"
+
+

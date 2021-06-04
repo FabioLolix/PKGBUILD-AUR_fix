@@ -1,0 +1,41 @@
+
+pkgname=libreoffice-6.4-rpm
+pkgver=6.4.7.2
+pkgrel=1
+pkgdesc="LGPL Office Suite installed from rpms"
+arch=(x86_64)
+url='https://www.libreoffice.org'
+license=(LGPL)
+depends=(gtk3 neon nss gpgme libxslt)
+optdepends=(jre8-openjdk  gst-plugins-good gst-plugins-bad gst-plugins-ugly)
+options=(!strip)
+source_x86_64=("https://downloadarchive.documentfoundation.org/libreoffice/old/${pkgver}/rpm/x86_64/LibreOffice_${pkgver}_Linux_x86-64_rpm.tar.gz"
+               "https://downloadarchive.documentfoundation.org/libreoffice/old/${pkgver}/rpm/x86_64/LibreOffice_${pkgver}_Linux_x86-64_rpm_helppack_en-GB.tar.gz"
+               "https://downloadarchive.documentfoundation.org/libreoffice/old/${pkgver}/rpm/x86_64/LibreOffice_${pkgver}_Linux_x86-64_rpm_helppack_de.tar.gz"
+               "https://downloadarchive.documentfoundation.org/libreoffice/old/${pkgver}/rpm/x86_64/LibreOffice_${pkgver}_Linux_x86-64_rpm_langpack_en-GB.tar.gz"
+               "https://downloadarchive.documentfoundation.org/libreoffice/old/${pkgver}/rpm/x86_64/LibreOffice_${pkgver}_Linux_x86-64_rpm_langpack_de.tar.gz"
+               )
+sha256sums_x86_64=('5d9b78d8d0e35fb378e05756f26bfa6506056340ab9662b930ef85f1bc553d2a'
+                   '44eeb8347065f7f6e8f299c052ac9c39e430ac7a852e7fad5c1685f3d892f5c7'
+                   'a4231a78d0c6ecbc2c0ad9480a203c3c812615c1e2913ccedc074c3f51ad2bd4'
+                   '4d827a9b3cd150556682a7c529f474d7a5754fa50a23010195fc4480adcde7bd'
+                   '9b4c31f924339fca8f7c657edb009cca6d4d321f2233b8b24c16db8c2c915853')
+
+package() {
+
+for a in $(ls -d */); do  ## loop for all directories found
+  cd "${srcdir}/${a}/RPMS";  ## enter the RPMS directory
+  for b in *.rpm; do  ## loop for all rpm files found
+    bsdtar -xf $b;  ## extract the rpm files
+  done;
+  
+  cp -rf */ ${pkgdir}/;  ## copy and merge all found directories to the package directory
+
+  ## change the permissions for files that shouldn't be executable
+  declare -a wrongexec=("opt/libreoffice$(echo $pkgver | awk -F'.' 'OFS="." {print $1,$2}')/CREDITS.fodt" "opt/libreoffice$(echo $pkgver | awk -F'.' 'OFS="." {print $1,$2}')/LICENSE" "opt/libreoffice$(echo $pkgver | awk -F'.' 'OFS="." {print $1,$2}')/NOTICE");  ## set the array to change permissions
+  for a in ${wrongexec[@]}; do
+    chmod 644 ${pkgdir}/$a; ## change permissions to read/write for root, read only for users
+  done;
+done;
+
+}

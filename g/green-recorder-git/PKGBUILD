@@ -2,7 +2,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=green-recorder-git
-pkgver=3.2.9.r19.g41afe43
+pkgver=3.2.10.r1.gb64b97a
 pkgrel=1
 pkgdesc="Simple screen recorder for Linux desktop, supports Wayland & Xorg"
 arch=(any)

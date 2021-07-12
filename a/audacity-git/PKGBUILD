@@ -3,17 +3,19 @@
 # Contributor: Eric Bélanger <eric@archlinux.org>
 
 pkgname=audacity-git
-pkgver=3.0.2.r126.g90903d237
+pkgver=3.0.2.r304.gbf14b2bef
 pkgrel=1
 pkgdesc="A program that lets you manipulate digital audio waveforms"
 arch=(i686 x86_64)
 url="https://www.audacityteam.org/"
 license=(GPL2 CCPL)
 groups=(pro-audio)
-depends=(alsa-lib libx11 gtk3 expat libid3tag libogg libsndfile
-         libvorbis lilv lv2 portsmf suil libmad twolame vamp-plugin-sdk libsoxr soundtouch)
-makedepends=(git cmake clang sdl2 libsoup libnotify gstreamer gst-plugins-bad-libs
-             ffmpeg jack nasm)
+depends=(alsa-lib libx11 gtk3  libogg libsndfile
+         libvorbis lilv lv2 portsmf suil twolame vamp-plugin-sdk libsoxr soundtouch)
+makedepends=(git cmake ninja clang sdl2 libsoup libnotify gstreamer gst-plugins-bad-libs
+             ffmpeg jack nasm conan)
+# provided by conan (build output) zlib expat wxWidgets libmp3lame libid3tag libmad ThreadPool libuuid RapidJSON
+# provided by conan expat libid3tag libmad
 # can't find system lame portmidi
 optdepends=('ffmpeg: additional import/export capabilities')
 provides=(audacity)
@@ -29,15 +31,18 @@ pkgver() {
 build() {
   mkdir audacity/build
   cd audacity/build
-  CC=clang cmake \
+
+  export CC=clang CXX=clang
+  cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DwxBUILD_TOOLKIT:STRING=gtk3 \
+    -Daudacity_lib_preference=system \
+    -Daudacity_obey_system_dependencies=On \
     -Daudacity_use_wxwidgets=local \
-    audacity_use_ffmpeg:STRING=loaded \
+    -Daudacity_use_ffmpeg=loaded \
     ..
-  cmake --build .
-  make .
+  cmake --build . -j1
+  make -j1
 }
 
 package() {

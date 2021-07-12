@@ -3,7 +3,7 @@
 # Contributor: IgnorantGuru http://igurublog.wordpress.com/contact-ignorantguru/
 
 pkgname=spacefm-git
-pkgver=2.1.0.r36.gaf062ca
+pkgver=2.1.0.r37.gead6c8f
 pkgrel=1
 pkgdesc="Multi-panel tabbed file manager"
 arch=(i686 x86_64)
@@ -11,8 +11,8 @@ url="https://github.com/thermitegod/spacefm"
 license=(GPL3)
 conflicts=(spacefm)
 provides=(spacefm)
-makedepends=(git meson) #intltool 
 depends=(gtk3 ffmpegthumbnailer libbsd) # startup-notification
+makedepends=(git meson exo) #intltool 
 optdepends=('dbus: dbus integration'
             'util-linux: disk eject support'
             'lsof: device processes'

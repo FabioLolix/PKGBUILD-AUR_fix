@@ -4,13 +4,13 @@
 export GIT_LFS_SKIP_SMUDGE=1
 
 pkgname=opentoonz-git
-pkgver=r2701.343493385
+pkgver=1.5.0rc2.r88.10c061146
 pkgrel=1
 pkgdesc='Software for producing a 2D animation'
 arch=(x86_64)
 url='https://opentoonz.github.io/e/'
 license=(BSD)
-depends=(cblas ffmpeg freeglut glew hicolor-icon-theme libmypaint qt5-multimedia qt5-script qt5-svg superlu)
+depends=(cblas ffmpeg freeglut glew hicolor-icon-theme libmypaint qt5-multimedia qt5-script qt5-svg qt5-serialport superlu opencv)
 makedepends=(git boost cmake qt5-tools)
 provides=(opentoonz)
 conflicts=(opentoonz)
@@ -20,7 +20,10 @@ sha256sums=('SKIP')
 pkgver() {
   cd "${pkgname%-git}"
 #  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+#  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+
+  TAG=$(git tag --list | tail -n 1 | sed 's/^v//')
+  printf "${TAG}.r%s.%s" "$(git rev-list --count v${TAG}..HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 prepare() {
@@ -32,7 +35,7 @@ prepare() {
 }
 
 build() {
-  pushd  "${pkgname%-git}"/thirdparty/tiff-4.0.3
+  pushd  "${pkgname%-git}/thirdparty/tiff-4.0.3"
   ./configure --with-pic --disable-jbig
   make
   popd

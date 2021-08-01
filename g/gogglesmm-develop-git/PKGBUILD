@@ -3,9 +3,9 @@
 pkgname=gogglesmm-develop-git
 pkgver=1.2.1.r32.g20d8af7a
 pkgrel=1
-pkgdesc="Goggles Music Manager"
+pkgdesc="Music Manager and Player"
 arch=(i686 x86_64 arm armv6h armv7h aarch64)
-url="http://gogglesmm.github.io"
+url="https://gogglesmm.github.io"
 license=(GPL3)
 depends=(openjpeg2 libepoxy libwebp taglib glu opus libmad faad2)
 makedepends=(git cmake pkgconfig libpulse alsa-lib)

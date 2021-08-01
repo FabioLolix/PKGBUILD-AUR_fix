@@ -1,7 +1,7 @@
 # Maintainer: 
 
 pkgname=opentesarena
-pkgver=0.12.0.r259.gab5fe5cb
+pkgver=0.13.0.r281.g926ebc14
 pkgrel=1
 pkgdesc="Modern engine re-implementation for The Elder Scrolls: Arena from 1994 by Bethesda Softworks"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
@@ -11,7 +11,7 @@ depends=(sdl2 openal)
 makedepends=(git cmake wildmidi)
 provides=(opentesarena)
 conflicts=(opentesarena)
-source=("${pkgname%-git}::git+https://github.com/afritz1/OpenTESArena")
+source=("${pkgname%-git}::git+https://github.com/afritz1/OpenTESArena.git#branch=main")
 sha256sums=('SKIP')
 
 pkgver() {

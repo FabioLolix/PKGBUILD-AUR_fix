@@ -24,7 +24,7 @@ sha256sums=('SKIP')
 build() {
   mkdir audacity/build
   cd audacity/build
-  CC=clang cmake \
+  CC=clang CXX=clang++ cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DwxBUILD_TOOLKIT:STRING=gtk3 \

@@ -1,7 +1,7 @@
 # Maintainer: 
 
 pkgname=pplib-git
-pkgver=7_0_1.r25.g459a184
+pkgver=7_0_1.r85.g49d3ac1c
 pkgrel=1
 pkgdesc="OpenStopMotion Animation Capture"
 arch=(x86_64)

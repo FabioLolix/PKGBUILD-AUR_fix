@@ -1,7 +1,7 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
 pkgname=nfs-ganesha
-_pkgver=4-dev.59
+_pkgver=4-dev.69
 pkgver=${_pkgver//-/.}
 pkgrel=1
 pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
@@ -36,8 +36,8 @@ build() {
 package() {
   cd "${pkgname}/src"
   make install DESTDIR="$pkgdir"
-  mv "$pkgdir"/var/run "$pkgdir"/run
-  rmdir "$pkgdir"/var
+#  mv "$pkgdir"/var/run "$pkgdir"/run
+#  rmdir "$pkgdir"/var
 #  install -d "$pkgdir"/usr/lib/systemd/system "$pkgdir"/etc/sysconfig "$pkgdir"/usr/libexec/ganesha
 #  install src/scripts/ganeshactl/org.ganesha.nfsd.conf "$pkgdir"/etc/dbus-1/system.d/
 #  install src/scripts/systemd/nfs-ganesha.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha.service

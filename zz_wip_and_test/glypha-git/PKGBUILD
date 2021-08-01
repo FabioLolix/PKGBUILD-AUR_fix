@@ -28,7 +28,7 @@ prepare() {
 
 build() {
   cd "${pkgname%-git}/build"
-  cmake .. \
+  cmake .. -Wno-dev \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr
 

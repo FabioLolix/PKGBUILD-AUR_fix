@@ -2,8 +2,8 @@
 # Contributor: Eduardo Sánchez Muñoz
 
 pkgname=dsf2flac-git
-pkgver=r29.b0cf5aa
-pkgrel=2
+pkgver=r31.6b109cd
+pkgrel=1
 pkgdesc="Tool for converting DSF to FLAC files."
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
 url="https://github.com/hank/dsf2flac"

@@ -1,19 +1,18 @@
 # Maintainer: Peter Semiletov <peter.semiletov@gmail.com>
 
-pkgname=tea-git
-pkgver=60.4.0.r5.ga799f31
+pkgname=tea-qt-git
+pkgver=60.5.0.r0.g56c7271
 pkgrel=1
 pkgdesc="Powerful text editor for Linux, *BSD, Windows, OS/2, Mac and Haiku OS"
-arch=('x86_64')
+arch=(x86_64)
 url="http://tea.ourproject.org"
-license=('GPL')
-depends=('qt6-base' 'qt6-5compat' 'gcc-libs' 'zlib' 'hunspell' 'desktop-file-utils')
-makedepends=('cmake' 'git')
-provides=('tea')
-conflicts=('tea')
-
+license=(GPL)
+depends=(qt6-base qt6-5compat gcc-libs zlib hunspell desktop-file-utils)
+makedepends=(cmake git)
+provides=(tea-qt)
+conflicts=(tea-qt)
 source=("git+https://github.com/psemiletov/tea-qt.git")
-md5sums=('SKIP')
+sha256sums=('SKIP')
 
 pkgver() {
   cd "${srcdir}/tea-qt"

@@ -8,7 +8,7 @@
 
 pkgname=tea-qt
 pkgver=60.5.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Powerful text editor for Linux, *BSD, Windows, OS/2, Mac and Haiku OS with PDF and DJVU support"
 arch=(x86_64)
 url="https://tea.ourproject.org/"
@@ -32,10 +32,14 @@ build() {
     -DUSE_DJVU=ON
 
   make
+
+  cd "${srcdir}/tea-qt-${pkgver}/desktop"
+  sed -i 's/tea %U/tea-qt %U/g' tea.desktop
 }
 
 package(){
   cd "${srcdir}/tea-qt-${pkgver}/build"
   make DESTDIR="${pkgdir}" install
+  mv "${pkgdir}/usr/bin/tea" "${pkgdir}/usr/bin/tea-qt"
 }
 

@@ -1,23 +1,33 @@
-# $Id$
 # Maintainer: Solomon Choina <shlomochoina@gmail.com>
+
 pkgname=dht
-pkgver=0.24
-pkgrel=3
+pkgver=r288.gb02da59
+pkgrel=1
 pkgdesc="BitTorrent DHT library"
-arch=('i686' 'x86_64')
+arch=(i686 x86_64)
 url="https://github.com/transmission/dht.git"
-license=('MIT')
-makedepends=('cmake' 'git')
-source=("git+$url#branch=post-0.24-transmission")
+license=(MIT)
+makedepends=(git cmake)
+source=("git+https://github.com/transmission/dht.git#commit=b02da5981ccb28af9d73f2b425d157f1a00bf223")
 sha256sums=('SKIP')
 
+pkgver() {
+  cd "${srcdir}/dht"
+  printf "r%s.g%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd "${srcdir}/dht"
+  [[ -d build ]] || mkdir build
+}
+
 build() {
-  cd $srcdir/dht
-  cmake -DCMAKE_INSTALL_PREFIX=/usr .
+  cd "${srcdir}/dht/build"
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr
   make
 }
 package() {
-  cd $srcdir/dht
+  cd "${srcdir}/dht/build"
   make DESTDIR=${pkgdir} install
-  install -D LICENCE $pkgdir/usr/share/licenses/$pkgname/LICENSE 
+  install -D ../LICENCE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

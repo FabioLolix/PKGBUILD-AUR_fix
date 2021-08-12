@@ -1,45 +1,38 @@
 # Maintainer: Your Name <youremail@domain.com>
-pkgname=hydra-go
-pkgver=2.2
+
+pkgname=hydra-go-git
+pkgver=2.2.0.r13.gbfb723d
 pkgrel=1
-epoch=
-pkgdesc="hydra is a command line utility for generating language-specific project structures."
+pkgdesc="Command line utility for generating language-specific project structures."
 arch=(x86_64 i686)
 url="https://github.com/Shravan-1908/hydra.git"
-license=('MIT')
-groups=()
-depends=()
-makedepends=(git curl)
-checkdepends=()
-optdepends=()
-provides=()
-conflicts=()
-replaces=()
-backup=()
-options=()
-install=
-changelog=
-source=("git+$url")
-noextract=()
-md5sums=("SKIP")
-validpgpkeys=()
+license=(MIT)
+makedepends=(git go)
+source=("hydra-go::git+https://github.com/Shravan-1908/hydra.git")
+sha256sums=('SKIP')
 
-prepare() {
-	cd "${_pkgname}"
-    printf "2.2.r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+pkgver() {
+  cd "${srcdir}/hydra-go"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-	cd hydra
-	bash linux_install.sh
+  cd "${srcdir}/hydra-go/src"
 
+  go build \
+    -gcflags "all=-trimpath=${PWD}" \
+    -asmflags "all=-trimpath=${PWD}" \
+    -ldflags "-extldflags ${LDFLAGS}" \
+    -buildmode=pie
 }
 
-# check() {
-# 	cd "$pkgname-$pkgver"
-# 	make -k check
-# }
+check() {
+  cd "${srcdir}/hydra-go/src"
+  go test -v
+}
 
 package() {
-	echo "Installation DOne"
+  cd "${srcdir}/hydra-go/src"
+  install -Dm755 src "${pkgdir}/usr/bin/hydra-go"
+  install -D ../LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

@@ -1,4 +1,3 @@
-#!/hint/bash
 # Maintainer : bartus <arch-local-repo(at).bartus.33mail.com>
 # Contributor : Rafał Kozdrój <kozeid2+aur@gmail.com>
 # Contributor : kikadf <kikadf.01@gmail.com>
@@ -9,20 +8,19 @@
 # shellcheck disable=SC2034,SC2154 # unused/uninitialized variables
 # shellcheck disable=SC2164 # cd safe
 
-pkgname=megasync-nopdfium
-pkgver=4.5.3.0
+pkgname=megasync-Lolix
+pkgver=4.5.3.0_Linux
 pkgrel=1
 pkgdesc="Easy automated syncing between your computers and your MEGA cloud drive(stripped of pdfium dependency)"
-arch=('i686' 'x86_64')
-provides=(megasync=$pkgver)
-conflicts=(megasync)
+arch=(x86_64)
 url="https://github.com/meganz/MEGAsync"
 license=('custom:MEGA LIMITED CODE REVIEW LICENCE')
-depends=('c-ares' 'crypto++' 'libsodium' 'libuv'
-         'libmediainfo' 'libraw' 'qt5-base' 'qt5-svg' 'qt5-x11extras' 'ffmpeg3.4')
-makedepends=('qt5-tools' 'swig' 'doxygen' 'lsb-release' 'git')
-_extname="_Win"
-source=("git+https://github.com/meganz/MEGAsync.git#tag=v${pkgver}${_extname}"
+depends=(c-ares crypto++ libsodium libuv
+         libmediainfo libraw qt5-base qt5-svg qt5-x11extras ffmpeg3.4)
+makedepends=(qt5-tools swig doxygen lsb-release git)
+provides=(megasync)
+conflicts=(megasync)
+source=("git+https://github.com/meganz/MEGAsync.git#tag=v${pkgver}"
         "meganz-sdk::git+https://github.com/meganz/sdk.git")
 sha256sums=('SKIP'
             'SKIP')

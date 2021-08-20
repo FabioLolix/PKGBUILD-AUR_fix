@@ -3,11 +3,11 @@
 # Contributor: TheAssassin
 
 pkgname=appimagelauncher-git
-pkgver=r1068.7cb4d70
+pkgver=2.2.0.r102.a05cc3c
 pkgrel=1
 pkgdesc="A Helper application for running and integrating AppImages."
 arch=(x86_64)
-url="https://github.com/TheAssassin/AppImageLauncher"
+url="https://assassinate-you.net/tags/appimagelauncher/"
 license=(MIT)
 depends=(qt5-base fuse2 squashfuse libappimage)
 makedepends=(git cmake boost qt5-tools)
@@ -38,8 +38,10 @@ sha256sums=('SKIP'
 
 pkgver() {
   cd "$srcdir/${pkgname%-git}"
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+#  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 #  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  TAG=$(git tag --list | tail -n 1 | sed 's/^v//')
+  printf "${TAG}.r%s.%s" "$(git rev-list --count v${TAG}..HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 prepare() {
@@ -80,9 +82,8 @@ prepare() {
 build() {
   cd "$srcdir/${pkgname%-git}"
 
-  cmake . \
+  cmake . -Wno-dev \
         -DCMAKE_INSTALL_PREFIX=/usr/ \
-        -DCMAKE_INSTALL_LIBDIR=lib \
         -DUSE_SYSTEM_LIBAPPIMAGE=ON \
         -DBUILD_TESTING=OFF
   make libappimageupdate libappimageupdate-qt

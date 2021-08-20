@@ -7,34 +7,13 @@ arch=(i686 x86_64 arm armv6h armv7h aarch64)
 url="http://www.transmissionbt.com/"
 pkgdesc="Fast, easy, and free BitTorrent library"
 license=(MIT)
-depends=(openssl libnatpmp curl libevent miniupnpc dht libutp libb64)
-makedepends=(cmake libevent)
-source=("git+https://github.com/transmission/transmission.git#tag=${pkgver}"
-        'git+https://github.com/transmission/dht.git'
-        'git+https://github.com/transmission/libb64.git'
-        'git+https://github.com/transmission/libevent.git'
-        'git+https://github.com/transmission/libnatpmp.git'
-        'git+https://github.com/transmission/libutp.git'
-        'git+https://github.com/transmission/miniupnpc.git')
-sha256sums=('SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP'
-            'SKIP')
+depends=(openssl libnatpmp libevent libb64 miniupnpc curl)
+makedepends=(git cmake libevent dht libutp)
+source=("git+https://github.com/transmission/transmission.git#tag=${pkgver}")
+sha256sums=('SKIP')
 
 prepare() {
   cd "${srcdir}/transmission"
-
-  git submodule init
-  git config submodule.third-party/dht.url "${srcdir}/dht"
-  git config submodule.third-party/libb64.url "${srcdir}/libb64"
-  git config submodule.third-party/libevent.url "${srcdir}/libevent"
-  git config submodule.third-party/libnatpmp.url "${srcdir}/libnatpmp"
-  git config submodule.third-party/libutp.url "${srcdir}/libutp"
-  git config submodule.third-party/miniupnpc.url "${srcdir}/miniupnpc"
-  git submodule update
 
   [[ -d build ]] || mkdir build
 }
@@ -44,21 +23,24 @@ build() {
   
   cmake .. \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=None \
     -DINSTALL_LIB=ON \
     -DENABLE_UTP=ON \
     -DENABLE_QT=OFF \
     -DENABLE_GTK=OFF \
     -DENABLE_CLI=OFF \
     -DENABLE_DAEMON=OFF \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DUSE_SYSTEM_UTP=ON
-
+    -DUSE_SYSTEM_UTP=ON \
+    -DUSE_SYSTEM_DHT=ON \
+    -DWITH_INOTIFY=OFF \
+    -DWITH_KQUEUE=OFF \
+    -DWITH_LIBAPPINDICATOR=OFF
   make
+
 }
 
 package() {
   cd "${srcdir}/transmission/build"
   make -C libtransmission DESTDIR="$pkgdir" install
   install -Dm644 ${srcdir}/transmission/COPYING "$pkgdir/usr/share/licenses/libtransmission/COPYING"
-
 }

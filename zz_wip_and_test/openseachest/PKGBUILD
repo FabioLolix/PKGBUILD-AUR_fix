@@ -2,14 +2,14 @@
 # Contributor: 
 
 pkgname=openseachest
-pkgver=v21.03.01.r0.g3dd1a16
+pkgver=21.06
 pkgrel=1
 pkgdesc="Utilities for performing various operations on SATA, SAS, NVMe, and USB storage devices"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://github.com/Seagate/openSeaChest"
 license=(MPL2)
 makedepends=(git)
-source=("${pkgname%-git}::git+https://github.com/Seagate/openSeaChest.git#tag=v21.03.01"
+source=("${pkgname%-git}::git+https://github.com/Seagate/openSeaChest.git#tag=Release-${pkgver}"
         "git+https://github.com/Seagate/opensea-common.git"
         "git+https://github.com/Seagate/opensea-transport.git"
         "git+https://github.com/Seagate/opensea-operations.git"
@@ -28,11 +28,6 @@ prepare() {
   git config 'submodule.opensea-operations.url' "${srcdir}/opensea-operations"
   git config 'submodule.wingetopt.url' "${srcdir}/seagate-wingetopt"
   git submodule update
-}
-
-pkgver() {
-  cd "${srcdir}/${pkgname%-git}"
-  git describe --long --tags | sed 's/^Release.//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {

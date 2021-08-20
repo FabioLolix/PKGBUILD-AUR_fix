@@ -4,7 +4,7 @@
 export GIT_LFS_SKIP_SMUDGE=1
 
 pkgname=opentoonz-git
-pkgver=1.5.0rc2.r88.10c061146
+pkgver=1.5.0rc2.r126.e5fa7e8ef
 pkgrel=1
 pkgdesc='Software for producing a 2D animation'
 arch=(x86_64)

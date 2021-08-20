@@ -1,7 +1,7 @@
 # Maintainer:
 
 pkgname=dotdevelop-git
-pkgver=r65206.bb090e816d
+pkgver=r65208.f0019a02f5
 pkgrel=1
 epoch=
 pkgdesc="Effort to get monodevelop open sourced again"

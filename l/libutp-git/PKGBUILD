@@ -1,7 +1,7 @@
 # Maintainer: Solomon Choina <shlomochoina@gmail.com>
 
 pkgname=libutp-git
-pkgver=r164.gf22f814
+pkgver=r99.gfda9f4b
 pkgrel=1
 epoch=3
 pkgdesc="uTorrent Transport Protocol library"
@@ -11,7 +11,7 @@ license=(MIT)
 makedepends=(git cmake)
 provides=(libutp)
 conflicts=(libutp)
-source=("git+https://github.com/transmission/libutp.git#branch=post-3.4-transmission")
+source=("git+https://github.com/transmission/libutp.git#branch=post-3.3-transmission")
 sha256sums=('SKIP')
 
 pkgver() {

@@ -1,7 +1,7 @@
 # Maintainer: Solomon Choina <shlomochoina@gmail.com>
 
 pkgname=dht-git
-pkgver=r288.gb02da59
+pkgver=r242.g80024e5
 pkgrel=1
 pkgdesc="BitTorrent DHT library"
 arch=(i686 x86_64)
@@ -10,7 +10,7 @@ license=(MIT)
 makedepends=(git cmake)
 provides=(dht)
 conflicts=(dht)
-source=("git+https://github.com/transmission/dht.git#branch=post-0.26-transmission")
+source=("git+https://github.com/transmission/dht.git#branch=post-0.24-transmission")
 sha256sums=('SKIP')
 
 pkgver() {

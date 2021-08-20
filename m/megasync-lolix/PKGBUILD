@@ -15,8 +15,9 @@ pkgdesc="Easy automated syncing between your computers and your MEGA cloud drive
 arch=(x86_64)
 url="https://github.com/meganz/MEGAsync"
 license=('custom:MEGA LIMITED CODE REVIEW LICENCE')
-depends=(c-ares crypto++ libsodium libuv
-         libmediainfo libraw qt5-base qt5-svg qt5-x11extras ffmpeg3.4)
+depends=(c-ares crypto++ libsodium ffmpeg3.4
+         libmediainfo libraw libzen libuv
+         qt5-base qt5-svg qt5-x11extras)
 makedepends=(qt5-tools swig doxygen lsb-release git)
 provides=(megasync)
 conflicts=(megasync)
@@ -50,21 +51,14 @@ build() {
         --enable-static \
         --disable-silent-rules \
         --disable-curl-checks \
-        --disable-megaapi \
-        --with-ffmpeg \
-        --with-cryptopp \
-        --with-sodium \
-        --with-zlib \
-        --with-sqlite \
-        --with-cares \
-        --with-curl \
-        --without-freeimage \
-        --with-libuv \
         --disable-posix-threads \
         --disable-examples \
-        --with-libzen \
-        --with-libmediainfo \
+        --disable-megaapi \
+        --without-freeimage \
         --prefix="${srcdir}/MEGAsync/src/MEGASync/mega/bindings/qt/3rdparty"
+
+# needed or fail to build (--without config pointless): c-ares crypto++ libsodium ffmpeg3.4
+# dinamically added anyway: openssl libzen libmedianfo libraw libuv sqlite zlib
 
     # build megasync
     cd "../.."

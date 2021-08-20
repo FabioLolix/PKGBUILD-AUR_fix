@@ -1,30 +1,20 @@
 # Maintainer: Jikstra <jikstra@disroot.org>
 
 pkgname=deltachat-desktop
-pkgver=1.20.1
+pkgver=1.20.3
 pkgrel=1
 pkgdesc="Privacy oriented chat application built on e-mail"
-arch=(any)
+arch=(x86_64)
 url="https://delta.chat/en/"
 license=(GPL3)
-depends=(electron6)
+depends=(electron)
 makedepends=(npm nodejs git)
 source=("git+https://github.com/deltachat/deltachat-desktop.git#tag=v${pkgver}"
-        "git+https://github.com/cracker0dks/basicwebrtc.git"
-        "deltachat-desktop.desktop"
-        "deltachat-desktop.sh"
-        )
+        'deltachat-desktop.desktop'
+        'deltachat-desktop.sh')
 sha256sums=('SKIP'
-            'SKIP'
             'bb12448df6e2385b37fbfb24bfecec55018986d0dd412aa351bea6ef336089da'
-            '6ad355414b02a0c07ffb391ecc8cca71ff72d9848e80f27d5b43c0ec9c2c8b3e')
-
-prepare() {
-    cd "${srcdir}/${pkgname}"
-    git submodule init
-    git config 'submodule.basicwebrtc.url' "${srcdir}/basicwebrtc"
-    git submodule update
-}
+            'c980791bd750c627bd1adb5339c8458e4a39e94cfa5ef3d6cd9db17b9bd7783d')
 
 build() {
     cd "${srcdir}/${pkgname}"
@@ -35,7 +25,6 @@ build() {
     # Delete development dependencies, we don't need them anymore
     npm prune --production 
 }
-
 
 package() {
     cd "${srcdir}/${pkgname}"

@@ -1,36 +1,24 @@
 # Maintainer: Jikstra <jikstra@disroot.org>
 
 pkgname=deltachat-desktop-git
-pkgver=1.20.1.r0.g2691bd1d
+pkgver=1.20.3.r84.g7ec2572c
 pkgrel=1
-pkgdesc="A privacy oriented chat application built on e-mail"
-arch=("any")
+pkgdesc="Privacy oriented chat application built on e-mail"
+arch=(x86_64)
 url="https://delta.chat/en/"
-license=("GPL3")
-depends=(electron6)
-makedepends=('npm' 'nodejs' 'git' )
+license=(GPL3)
+depends=(electron)
+makedepends=(npm nodejs git)
 source=("git+https://github.com/deltachat/deltachat-desktop.git"
-        "git+https://github.com/cracker0dks/basicwebrtc.git"
-        "deltachat-desktop.desktop"
-        "deltachat-desktop.sh"
-       )
+        'deltachat-desktop.desktop'
+        'deltachat-desktop.sh')
 sha256sums=('SKIP'
-            'SKIP'
             'bb12448df6e2385b37fbfb24bfecec55018986d0dd412aa351bea6ef336089da'
-            '6ad355414b02a0c07ffb391ecc8cca71ff72d9848e80f27d5b43c0ec9c2c8b3e')
-
+            'c980791bd750c627bd1adb5339c8458e4a39e94cfa5ef3d6cd9db17b9bd7783d')
 
 pkgver() {
     cd "${srcdir}/${pkgname%-git}"
-
     git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
-}
-
-prepare() {
-    cd "${srcdir}/${pkgname%-git}"
-    git submodule init
-    git config 'submodule.basicwebrtc.url' "${srcdir}/basicwebrtc"
-    git submodule update
 }
 
 build() {

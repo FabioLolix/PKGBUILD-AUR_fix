@@ -1,4 +1,4 @@
 #!/bin/bash
 
-cd /usr/lib/deltachat && electron6 . "$@"
+cd /usr/lib/deltachat && electron . "$@"
 

@@ -1,0 +1,41 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Janne Heß <jannehess@gmail.com>
+# Contributor: Bartłomiej Piotrowski <nospam@bpiotrowski.pl>
+# Contributor: IgnorantGuru http://igurublog.wordpress.com/contact-ignorantguru/
+# Contributor: ridikulus_rat <the.ridikulus.rat@gmail.com>
+
+pkgname=spacefm
+pkgver=2.1.0
+pkgrel=1
+pkgdesc='Multi-panel tabbed file manager'
+arch=(i686 x86_64)
+url="https://ignorantguru.github.io/spacefm/"
+license=(GPL3)
+depends=(gtk3 libbsd ffmpegthumbnailer)
+makedepends=(meson)
+optdepends=('dbus: dbus integration'
+            'util-linux: disk eject support'
+            'lsof: device processes'
+            'wget: plugin download'
+            'gksu: perform as root functionality'
+            'udevil: mount as non-root user and mount networks'
+            'udisks2: mount as non-root user'
+            'pmount: mount as non-root user'
+            'curlftpfs: mount FTP shares'
+            'jmtpfs: mount MTP devices'
+            'gphotofs: mount cameras'
+            'ifuse: mount your iPhone/iPod Touch'
+            'fuseiso: mount ISO files')
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/thermitegod/spacefm/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('d6eb174874cf9c06bbc364adeb755a8b741bb16de5205c7442a0c41dbb5fafa9')
+
+build() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  meson build --prefix=/usr -D gtk3=true -D gtk2=false
+  ninja -C build
+}
+
+package() {
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  DESTDIR="${pkgdir}" ninja -C build install
+}

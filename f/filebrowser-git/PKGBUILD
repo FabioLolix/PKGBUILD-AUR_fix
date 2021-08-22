@@ -2,7 +2,7 @@
 # Contributor: Dct Mei <dctxmei@gmail.com>
 
 pkgname=filebrowser-git
-pkgver=2.16.1.r1.g25c87883
+pkgver=2.17.0.r0.gf0bc9167
 pkgrel=1
 pkgdesc="Standalone web file manager"
 arch=(x86_64)
@@ -28,7 +28,7 @@ build() {
 
   npm install
   npm update
-  npm audit fix
+#  npm audit fix
   npm run build
 
   cd "${srcdir}/${pkgname%-git}/http"

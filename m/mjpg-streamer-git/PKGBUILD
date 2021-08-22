@@ -20,7 +20,6 @@ sha256sums=(SKIP)
 export LDFLAGS="-Wl,-O1,--sort-common,--no-as-needed,-z,relro,-z,now"
 export CFLAGS="-fcommon"
 
-
 pkgver() {
   cd "${pkgname/-git/}"
   git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'

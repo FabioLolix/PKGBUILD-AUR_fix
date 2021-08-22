@@ -1,40 +1,33 @@
 # Maintainer: Thomas Lübking <thomas.luebking@gmail.com>
 
 pkgname=qnetctl-git
-pkgver=20180220
+pkgver=r28.e3edb1c
 pkgrel=1
+epoch=1
 pkgdesc="A Qt GUI for netctl"
 arch=('i686' 'x86_64')
 url="https://github.com/luebking/qnetctl/"
-license=('GPL2')
-groups=('base')
-depends=('qt5-base')
-makedepends=('git')
-conflicts=()
-provides=('qnetctl')
+license=(GPL2)
+depends=(qt5-base)
+makedepends=(git)
+conflicts=(qnetctl)
+provides=(qnetctl)
+source=("git+https://github.com/luebking/qnetctl.git")
+sha256sums=('SKIP')
 
-_gitroot="https://github.com/luebking/qnetctl.git"
-_gitname=qnetctl
+pkgver() {
+    cd "${srcdir}/qnetctl"
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
 
 build() {
-    cd "$srcdir"
-    if [[ -e $_gitname ]]
-    then
-        cd "$_gitname"
-        git reset --hard
-        git clean -f
-        git pull
-    else
-        git clone "$_gitroot" "$_gitname"
-        cd "$_gitname"
-    fi
-
+    cd "${srcdir}/qnetctl"
     qmake-qt5 qmake.pro
     make
 }
 
 package() {
-    cd "$srcdir/$_gitname"
-    install -D qnetctl "$pkgdir/usr/bin/qnetctl"
-    install -D qnetctl_tool "$pkgdir/usr/bin/qnetctl_tool"
+    cd "${srcdir}/qnetctl"
+    install -D qnetctl "${pkgdir}/usr/bin/qnetctl"
+    install -D qnetctl_tool "${pkgdir}/usr/bin/qnetctl_tool"
 }

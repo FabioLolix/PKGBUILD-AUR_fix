@@ -1,33 +1,37 @@
 # Maintainer: Matthias Baur <aur@matthiasbaur.me>
-pkgname=noson-app
-pkgver=4.4.9.r0.g18147837
+
+pkgname=noson-app-git
+pkgver=4.4.9.r2.g2fedb7e3
 pkgrel=1
 pkgdesc="The essential to control music from your SONOS devices on Linux platforms"
-arch=('x86_64' 'armv7h')
+arch=(x86_64 armv7h aarch64)
 url="https://janbar.github.io/noson-app"
-license=('GPL3')
-groups=('base-devel')
-depends=('cmake' 'qt5-base' 'qt5-quickcontrols2' 'qt5-graphicaleffects' 'qt5-svg' 'libpulse' 'flac')
-makedepends=('cmake' 'git')
-source=("git+git://github.com/janbar/noson-app.git#tag=4.4.9")
-sha1sums=('SKIP')
+license=(GPL3)
+depends=(qt5-base qt5-quickcontrols2 qt5-graphicaleffects qt5-svg libpulse flac)
+makedepends=(cmake git)
+source=("git+http://github.com/janbar/noson-app.git")
+sha256sums=('SKIP')
 
 pkgver() {
-  cd "$srcdir/${pkgname%-git}"
+  cd noson-app
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
+prepare() {
+  cd noson-app
+  [[ -d build ]] || mkdir build
+}
+
 build() {
-  mkdir -p "$srcdir/build"
-  cd "$srcdir/build"
-  cmake "$srcdir/${pkgname%-git}" \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=/usr/lib
+  cd noson-app/build
+  cmake .. -Wno-dev \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
   make
 }
 
 package() {
-  cd "$srcdir/build"
-  make DESTDIR="$pkgdir/" install
+  cd noson-app/build
+  make DESTDIR="${pkgdir}/" install
 }

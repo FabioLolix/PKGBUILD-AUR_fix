@@ -1,17 +1,23 @@
 # Maintainer: Paweł Lidwin <linguin@tutanota.com>
 
-pkgname=jelly-desktop
-pkgver=1.0.1
+pkgname=jelly-desktop-git
+pkgver=1.0.0.r19.g240bb94
 pkgrel=1
 pkgdesc="Simple community made desktop client for Jellyfin"
-arch=("x86_64")
+arch=(x86_64)
 url="https://github.com/imLinguin/jelly-desktop"
-license=("GPL3")
-_filename=jelly-desktop-${pkgver}.pacman
-source=("${pkgname}::git+${url}.git")
-md5sums=("SKIP")
-provides=("jelly-desktop")
-makedepends=("nodejs" "npm")
+license=(GPL3)
+makedepends=(nodejs npm)
+provides=(jelly-desktop)
+provides=(jelly-desktop)
+source=("git+https://github.com/imLinguin/jelly-desktop.git")
+sha256sums=("SKIP")
+
+pkgver() {
+	cd "jelly-desktop"
+    git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
 build() {
 	cd "jelly-desktop"
 	npm install
@@ -20,8 +26,7 @@ build() {
 }
 
 package(){
-	tar -xJv -C "${pkgdir}" -f "${srcdir}/jelly-desktop/dist/${_filename}" usr opt
+	tar -xJv -C "${pkgdir}" -f "${srcdir}/jelly-desktop/dist/jelly-desktop-${pkgver}.pacman" usr opt
 	mkdir "$pkgdir/usr/bin"
 	ln -s "/opt/Jelly Desktop/jelly-desktop" "$pkgdir/usr/bin/jelly-desktop"
-	
 }

@@ -1,31 +1,35 @@
 # Maintainer: Valerii Huz <ghotrix at gmail dot com>
+
 pkgname=lc0-blas-git
 _pkgname=lc0-blas
-pkgver=v0.28.0.r0.g3982cc0e
+pkgver=0.28.0.r0.g3982cc0e
 pkgrel=1
 pkgdesc="BLAS version of Leela Chess Zero."
-arch=('any')
+arch=(x86_64)
 url="https://lczero.org/"
-license=('GPLv3')
-depends=('openblas' 'protobuf')
-makedepends=('git' 'meson>=0.46' 'ninja' 'openblas-cblas-git')
-source=("${_pkgname}::git+https://github.com/LeelaChessZero/lc0.git#branch=master")
-md5sums=('SKIP')
+license=(GPL3)
+depends=(blas protobuf)
+makedepends=(git meson ninja )
+source=("${_pkgname}::git+https://github.com/LeelaChessZero/lc0.git#branch="release/0.28""
+        "git+https://github.com/LeelaChessZero/lczero-common.git")
+md5sums=('SKIP'
+         'SKIP')
 
 pkgver() {
     cd "${srcdir}/${_pkgname}"
-    git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+    git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
     cd "${srcdir}/${_pkgname}"
-    git checkout $(git tag|grep -v rc|sort -rh|head -n 1)
-    git submodule update --init --recursive
+    git submodule init
+    git config submodule.libs/lczero-common.url "${srcdir}/lczero-common"
+    git submodule update
 }
 
 build() {
     cd "${srcdir}/${_pkgname}"
-    CC=gcc CXX=g++ ./build.sh release -Dopencl=false -Ddefault_library=static || return 1
+    CC=gcc CXX=g++ ./build.sh release -Dopencl=false -Ddefault_library=static
 }
 
 package() {

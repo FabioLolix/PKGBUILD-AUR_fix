@@ -1,7 +1,7 @@
 # Maintainter: Talebian <talebian@sovietunion.xyz>
 
 pkgname=bottles-git
-pkgver=r1273.2c75f40
+pkgver=r2004.23f18ef
 pkgrel=1
 epoch=1
 pkgdesc="Easily manage wineprefix using environments"

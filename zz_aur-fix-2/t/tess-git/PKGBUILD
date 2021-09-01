@@ -5,6 +5,7 @@
 pkgname=tess-git
 pkgver=0.4.2.r1.g12ee207
 pkgrel=1
+epoch=1
 pkgdesc="Hackable, simple, rapid and beautiful terminal for the new era"
 arch=(x86_64)
 url="https://github.com/SquitchYT/Tess"

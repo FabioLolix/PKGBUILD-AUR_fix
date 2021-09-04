@@ -9,12 +9,16 @@ url="https://github.com/whoshuu/cpr"
 license=('MIT')
 depends=('curl')
 makedepends=('cmake')
-source=("https://github.com/whoshuu/cpr/archive/refs/tags/$pkgver.tar.gz")
-md5sums=('7032dc8b49840488e3aded733bc7a454')
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/whoshuu/cpr/archive/refs/tags/$pkgver.tar.gz")
+sha256sums=('c45f9c55797380c6ba44060f0c73713fbd7989eeb1147aedb8723aa14f3afaa3')
 
 prepare() {
 	cd "$srcdir/cpr-$pkgver"
-	cmake -DCMAKE_BUILD_TYPE=Release -DCPR_BUILD_TESTS=OFF -DCPR_FORCE_USE_SYSTEM_CURL=ON .
+	cmake . \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCPR_BUILD_TESTS=OFF \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCPR_FORCE_USE_SYSTEM_CURL=ON .
 }
 
 build() {
@@ -24,10 +28,7 @@ build() {
 
 package() {
 	cd "$srcdir/cpr-$pkgver"
+    make DESTDIR="$pkgdir/" install
+    install -D LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 
-	mkdir -p "$pkgdir/usr/lib"
-	cp -r lib/libcpr* "$pkgdir/usr/lib"
-
-	mkdir -p "$pkgdir/usr/include"
-	cp -r include/cpr "$pkgdir/usr/include"
 }

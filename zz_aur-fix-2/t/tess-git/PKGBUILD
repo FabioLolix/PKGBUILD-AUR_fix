@@ -9,7 +9,7 @@ pkgdesc="Hackable, simple, rapid and beautiful terminal for the new era"
 arch=(x86_64)
 url="https://github.com/SquitchYT/Tess"
 license=(MPL2)
-depends=(gtk3 nss)
+depends=(gtk3 nss cpr)
 makedepends=(git npm cmake chrpath)
 source=("git+https://github.com/SquitchYT/Tess.git")
 sha256sums=('SKIP')
@@ -22,12 +22,12 @@ pkgver() {
 package() {
 	cd "Tess"
 
-	install -D Tess.desktop "${pkgdir}/usr/share/applications/Tess.desktop"
-	install -D tesshere.desktop "${pkgdir}/usr/share/kservices5/ServiceMenus/tesshere.desktop"
-	install -D appintess.desktop "${pkgdir}/usr/share/kservices5/ServiceMenus/appintess.desktop"
+    install -D Tess.desktop "${pkgdir}/usr/share/applications/Tess.desktop"
+    install -D tesshere.desktop "${pkgdir}/usr/share/kservices5/ServiceMenus/tesshere.desktop"
+    install -D appintess.desktop "${pkgdir}/usr/share/kservices5/ServiceMenus/appintess.desktop"
     install -D src/img/Tess.png "${pkgdir}/usr/share/pixmaps/tess.png"
 
-	if type "$kbuildsycoca5" > /dev/null; then
+    if type "$kbuildsycoca5" > /dev/null; then
 		kbuildsycoca5
 	fi
 

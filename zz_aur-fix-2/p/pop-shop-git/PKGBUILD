@@ -1,21 +1,26 @@
 # Maintainer: Tomoghno Sen <tomoghno at outlook dot com>
 
 pkgname=pop-shop-git
-pkgver=master
+pkgver=r3966.eff4ef85
 pkgrel=1
 pkgdesc="A fast and simple software center"
-arch=('x86_64')
+arch=(x86_64)
 url="https://github.com/pop-os/shop"
-license=('GPL3')
-depends=('granite' 'libhandy' 'packagekit' 'appstream')
-makedepends=('meson' 'vala')
-provides=('io.elementary.appcenter')
-conflicts=('appcenter')
-source=("shop-$pkgver.tar.gz::https://github.com/pop-os/shop/archive/refs/heads/$pkgver.zip")
-sha256sums=('fad48b1263e823964ad6cc77d5810137cfdd03268e88b26dfc13ed67323e418c')
+license=(GPL3)
+depends=(granite libhandy libpackagekit-glib appstream flatpak)
+makedepends=(git meson vala)
+provides=(io.elementary.appcenter)
+provides=(io.elementary.appcenter)
+source=("git+https://github.com/pop-os/shop.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd shop
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
 
 build() {
-	arch-meson shop-$pkgver build
+	arch-meson shop build
 	meson compile -C build
 }
 

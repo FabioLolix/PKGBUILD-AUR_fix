@@ -86,7 +86,7 @@ package() {
   make DESTDIR="${pkgdir}" install
 
   install -D LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
-  install -D LICENSE -t "${pkgdir}/usr/share/doc/${pkgname}"
+  install -D README.MD -t "${pkgdir}/usr/share/doc/${pkgname}"
   ln -s /opt/${pkgname}/${pkgname} ${pkgdir}/usr/bin/${pkgname}
 }
 

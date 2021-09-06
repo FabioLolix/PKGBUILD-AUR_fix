@@ -1,0 +1,26 @@
+# Maintainer: 
+
+## NOT WORKING PKGBUILD!!
+
+pkgname=protonup-qt
+pkgver=1.4.2
+pkgrel=1
+pkgdesc="Qt-based graphical user interface for ProtonUp"
+arch=(any)
+url="https://github.com/DavidoTek/ProtonUp-Qt"
+license=(GPL3)
+depends=(python protonup pyside6)
+makedepends=(python-setuptools)
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/DavidoTek/ProtonUp-Qt/archive/refs/tags/v${pkgver}.tar.gz")
+sha256sums=('89c01e2e85e3070a70295fa591dc8c1f8ed14c85e5afa10e0e52231dd2a79f89')
+
+build() {
+  cd "${srcdir}/ProtonUp-Qt-${pkgver}"
+  pyside6-uic ui/protonup_mainwindow.ui > pupgui/protonup_mainwindow.py
+  # no pyside6-uic in pyside6 Arch package
+}
+
+package() {
+  cd "${srcdir}/ProtonUp-Qt-${pkgver}"
+  install pupgui/pupgui.py "${pkgdir}/usr/bin/pupgui"
+}

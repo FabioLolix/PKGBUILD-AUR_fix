@@ -1,0 +1,35 @@
+# Maintainer: Your Name <youremail@domain.com>
+# Contributor: 
+
+pkgname=nx-software-center
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="graphical front end to manage AppImage applications built using MauiKit"
+arch=(x86_64)
+url="https://github.com/Nitrux/nx-software-center"
+license=(LGPL2.1)
+depends=(mauikit mauikit-filebrowsing libappimage)
+makedepends=(git cmake extra-cmake-modules)
+checkdepends=()
+optdepends=()
+source=("git+https://github.com/Nitrux/nx-software-center.git#tag=v${pkgver}")
+sha256sums=('SKIP')
+
+prepare() {
+  cd nx-software-center
+  [[ -d build ]] || mkdir build
+}
+
+build() {
+  cd nx-software-center/build
+  cmake .. -Wno-dev \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+  make
+}
+
+package() {
+  cd nx-software-center/build
+  make DESTDIR="${pkgdir}/" install
+}

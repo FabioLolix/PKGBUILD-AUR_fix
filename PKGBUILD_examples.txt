@@ -65,6 +65,12 @@ pkgver() {
 
 # Build with Cmake
 
+  [[ -d build ]] || mkdir build
+
+  cmake .. -Wno-dev \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  make
 
 # Build with Qmake
 

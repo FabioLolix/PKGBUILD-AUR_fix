@@ -13,7 +13,7 @@ license=(GPL3)
 depends=(python freetype2 fontconfig wayland libx11 libxi libgl libcanberra dbus lcms2)
 makedepends=(git python-setuptools libxinerama libxcursor libxrandr libxkbcommon mesa
              libxkbcommon-x11 wayland-protocols python-sphinx python-sphinx-copybutton
-             python-sphinx-inline-tabs python-sphinxext-opengraph python-sphinx-furo)
+             python-sphinx-inline-tabs python-sphinxext-opengraph python-sphinx-furo librsync)
 source=("git+https://github.com/kovidgoyal/kitty.git")
 sha256sums=('SKIP')
 

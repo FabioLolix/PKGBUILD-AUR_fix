@@ -45,4 +45,5 @@ package() {
     make INSTALL_ROOT="${pkgdir}/" install
     install -D tutorial.pdf -t "${pkgdir}/usr/share/sioyek"
     install -d "${pkgdir}/usr/share/sioyek/shaders"
+    cp -r pdf_viewer/shaders/* "${pkgdir}/usr/share/sioyek/shaders"
 }

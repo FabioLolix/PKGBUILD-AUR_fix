@@ -72,6 +72,8 @@ pkgver() {
     -DCMAKE_INSTALL_PREFIX=/usr
   make
 
+  make DESTDIR="${pkgdir}" install
+
 # Build with Qmake
 
   qmake-qt5 .pro

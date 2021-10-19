@@ -2,7 +2,7 @@
 # Contributor: 
 
 pkgname=nx-software-center-git
-pkgver=1.0.0.r10.g03b4612
+pkgver=r552.geaca5ac
 pkgrel=1
 pkgdesc="graphical front end to manage AppImage applications built using MauiKit"
 arch=(x86_64)
@@ -19,7 +19,8 @@ sha256sums=('SKIP')
 
 pkgver() {
   cd nx-software-center
-  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  #git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  printf "r%s.g%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 prepare() {

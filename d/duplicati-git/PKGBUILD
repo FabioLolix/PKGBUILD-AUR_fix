@@ -4,7 +4,7 @@
 # aarch64 tester: Irissman    <irissman@probus.ca>
 
 pkgname=duplicati-git
-pkgver=2.0.6.100.2.0.6.100_canary_2021.08.11.r0.g7d71c6a47
+pkgver=2.0.6.100.2.0.6.100_canary_2021.08.11.r46.g0a1b32e18
 pkgrel=1
 pkgdesc="FOSS backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)

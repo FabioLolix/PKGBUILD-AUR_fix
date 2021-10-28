@@ -1,21 +1,28 @@
 # Maintainer: 
 
-pkgname=protonup-qt
-pkgver=2.1.0
+pkgname=protonup-qt-git
+pkgver=2.1.0.r0.gbcd7d65
 pkgrel=1
 pkgdesc="Qt-based graphical user interface for ProtonUp"
 arch=(any)
 url="https://github.com/DavidoTek/ProtonUp-Qt"
 license=(GPL3)
 depends=(python pyside6 qt6-tools python-requests) #python-configparser
-makedepends=(python-setuptools)
-source=("${pkgname}-${pkgver}.tar.gz::https://github.com/DavidoTek/ProtonUp-Qt/archive/refs/tags/v${pkgver}.tar.gz"
+makedepends=(git python-setuptools)
+provides=(protonup-qt)
+conflicts=(protonup-qt)
+source=("${pkgname%-git}::git+https://github.com/DavidoTek/ProtonUp-Qt.git"
         'protonup-qt.sh')
-sha256sums=('93d23ef80b3579797c69b1682cc92eb6a6114a08e2580d4d52abe6fe1c9661bd'
+sha256sums=('SKIP'
             '2d4db84a3147f8359d763761a9047b04a99df30eb99b9c8877c43b2f92ec2b1d')
 
+pkgver() {
+  cd "${pkgname%-git}"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
 package() {
-  cd "${srcdir}/ProtonUp-Qt-${pkgver}"
+  cd "${pkgname%-git}"
   install -Dm755 ../protonup-qt.sh "${pkgdir}/usr/bin/protonup-qt"
 
   install -d ${pkgdir}/usr/src

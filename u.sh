@@ -64,7 +64,7 @@ VAR2=b
   VAR=bubbleupnpserver
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,bubbleupnpserver,bubbleupnpserver.config,bubbleupnpserver.service,bubbleupnpserver.sh,bubbleupnpserver-sysuser.conf} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,bubbleupnpserver,bubbleupnpserver.config,bubbleupnpserver.service,bubbleupnpserver.sh,bubbleupnpserver-sysuser.conf,bubbleupnpserver.install} "$DEST/$VAR2/$VAR"
 
 echo "Done B"
 

@@ -17,6 +17,9 @@ sha256sums=('93d23ef80b3579797c69b1682cc92eb6a6114a08e2580d4d52abe6fe1c9661bd'
 package() {
   cd "${srcdir}/ProtonUp-Qt-${pkgver}"
   install -Dm755 ../protonup-qt.sh "${pkgdir}/usr/bin/protonup-qt"
+  
+  echo -e "[Desktop Entry]\nName=ProtonUp-Qt\nVersion=$pkgver\nComment=$pkgdesc\nIcon=pupgui2\nExec=protonup-qt\nType=Application\nCategories=Game;" > net.davidotek.protonup-qt.desktop
+  install -Dm755 net.davidotek.protonup-qt.desktop "${pkgdir}/usr/share/applications/"
 
   install -d ${pkgdir}/usr/src
   cp -r pupgui2 ${pkgdir}/usr/src/

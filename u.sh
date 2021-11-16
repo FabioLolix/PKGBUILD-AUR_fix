@@ -175,15 +175,10 @@ echo "Done F"
 
 
 VAR2=g
-  VAR=glimpse-editor
+  VAR=gitahead-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-
-  VAR=glimpse-editor-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,gitahead.desktop} "$DEST/$VAR2/$VAR"
 
   VAR=gotop
   cd "$DEST/$VAR2/$VAR"

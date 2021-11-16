@@ -4,7 +4,7 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gitahead-git
-pkgver=2.6.3.r88.gb774160
+pkgver=2.6.3.r89.g711a963
 pkgrel=1
 pkgdesc="Graphical Git client"
 url="https://gitahead.github.io/gitahead.com/"
@@ -15,6 +15,8 @@ makedepends=(git cmake ninja qt5-tools qt5-translations libgnome-keyring)
 optdepends=('libgnome-keyring: for GNOME Keyring for auth credentials'
             'qt5-translations: translations '
             'git-lfs: git-lfs support')
+provides=(gitahead)
+conflicts=(gitahead)
 source=("git+https://github.com/gitahead/gitahead.git"
         "git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/git/git.git"

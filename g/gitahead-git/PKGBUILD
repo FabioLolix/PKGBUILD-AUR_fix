@@ -38,7 +38,6 @@ prepare() {
 
   git submodule init
   git config 'submodule.dep/libgit2/libgit2.url' "${srcdir}/libgit2"
-  git config 'submodule.dep/libssh2/libssh2.url' "${srcdir}/libssh2"
   git config 'submodule.dep/git/git.url' "${srcdir}/git"
   git config 'submodule.dep/hunspell/hunspell.url' "${srcdir}/hunspell"
   git -c submodule.dep/openssl/openssl.update=none -c submodule.dep/cmark/cmark.update=none -c submodule.dep/libssh2/libssh2.update=none submodule update

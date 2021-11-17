@@ -180,6 +180,11 @@ VAR2=g
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO,gitahead.desktop} "$DEST/$VAR2/$VAR"
 
+  VAR=gittyup-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO,gittyup.desktop} "$DEST/$VAR2/$VAR"
+
   VAR=gotop
   cd "$DEST/$VAR2/$VAR"
     git pull

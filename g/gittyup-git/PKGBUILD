@@ -4,7 +4,7 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gittyup-git
-pkgver=r508.0d74358
+pkgver=r533.73bf3db
 pkgrel=1
 pkgdesc="Graphical Git client"
 url="https://github.com/Murmele/Gittyup"
@@ -15,8 +15,8 @@ makedepends=(git cmake ninja qt5-tools qt5-translations libgnome-keyring)
 optdepends=('libgnome-keyring: for GNOME Keyring for auth credentials'
             'qt5-translations: translations '
             'git-lfs: git-lfs support')
-provides=(gitahead gittyup)
-conflicts=(gitahead gittyup)
+provides=(gittyup)
+conflicts=(gittyup gitahead)
 source=("${pkgname%-git}::git+https://github.com/Murmele/Gittyup.git"
         "git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/git/git.git"
@@ -28,7 +28,7 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
-            '7728b8fef6f0a20cfe4bef96278874caea4ec3e7adc60a6cecac3c8c6d2d695d')
+            '537674eec14d36761691e7ab803ceed47107c60f34cfe556f708284ebda9a96f')
 
 pkgver() {
   cd "${srcdir}/${pkgname%-git}"
@@ -67,7 +67,7 @@ package() {
 
   rm -rf "${pkgdir}/usr/lib/gitahead/"*.so.*
   install -d "${pkgdir}/usr/bin"
-#  ln -s /usr/lib/gitahead/Gittyup "${pkgdir}/usr/bin/gittyup"
+  ln -s /usr/lib/gitahead/Gittyup "${pkgdir}/usr/bin/gittyup"
 
   install -Dm644 LICENSE.md "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
   install -Dm644 "${srcdir}/gittyup.desktop" "${pkgdir}/usr/share/applications/gittyup.desktop"
@@ -78,4 +78,6 @@ package() {
   install -Dm644 "${pkgdir}/usr/lib/gitahead/Resources/Gittyup.iconset/icon_128x128.png" "${pkgdir}/usr/share/icons/hicolor/128x128/apps/gitahead.png"
   install -Dm644 "${pkgdir}/usr/lib/gitahead/Resources/Gittyup.iconset/icon_256x256.png" "${pkgdir}/usr/share/icons/hicolor/256x256/apps/gitahead.png"
   install -Dm644 "${pkgdir}/usr/lib/gitahead/Resources/Gittyup.iconset/icon_512x512.png" "${pkgdir}/usr/share/icons/hicolor/512x512/apps/gitahead.png"
+
+  rm -rf "${pkgdir}/usr/share/man" # libssh2 man pages
 }

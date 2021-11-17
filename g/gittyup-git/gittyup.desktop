@@ -2,7 +2,7 @@
 Name= Gittyup
 Comment=Graphical git client
 Exec=gittyup
-Icon=gittyup
+Icon=gitahead
 Terminal=false
 Type=Application
 StartupNotify=true

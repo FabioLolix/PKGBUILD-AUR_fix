@@ -1,14 +1,14 @@
 # Maintainer: Sander Jansen <sander@knology.net>
 
 pkgname=gogglesmm-git
-pkgver=1.2.2.r0.g4eb0eb66
+pkgver=1.2.2.r0.g4eb0eb6
 pkgrel=1
 pkgdesc="Music Manager and Player"
 arch=(i686 x86_64 arm armv6h armv7h aarch64)
 url="https://gogglesmm.github.io"
 license=(GPL3)
-depends=(openjpeg2 libepoxy libwebp taglib glu opus libmad faad2)
-makedepends=(git cmake pkgconfig libpulse alsa-lib fontconfig)
+depends=(libepoxy libwebp libxcursor libxrandr libxft taglib glu opus libmad faad2 sqlite)
+makedepends=(git cmake libpulse alsa-lib)
 optdepends=('libpulse: PulseAudio Output'
             'alsa-lib: Alsa Output')
 provides=(gogglesmm)

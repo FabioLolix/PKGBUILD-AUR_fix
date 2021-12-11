@@ -1,7 +1,7 @@
 # Maintainer: Paweł Lidwin <linguin@tutanota.com>
 
 pkgname=jelly-desktop-git
-pkgver=1.0.0.r19.g240bb94
+pkgver=1.0.1.r0.g240bb94
 pkgrel=1
 pkgdesc="Simple community made desktop client for Jellyfin"
 arch=(x86_64)

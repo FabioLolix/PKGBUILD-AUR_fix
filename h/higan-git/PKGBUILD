@@ -2,22 +2,23 @@
 # Contributor: Salvador Pardiñas <darkfm@vera.com.uy>
 
 pkgname=higan-git
-pkgver=110.r38.g2a110b44
+pkgver=r1550.9bf1b3314
 pkgrel=1
+epoch=1
 pkgdesc="Nintendo multi-system emulator by Byuu"
 arch=(x86_64 i686)
-url="https://higan.byuu.org/"
+url="https://higan-emu.com/"
 license=(GPL3)
 depends=(qt5-base libpulse gtksourceview2 sdl2 libxv libao libgl openal)
 makedepends=(git mesa)
 provides=(higan)
 conflicts=(higan)
-source=("git+https://github.com/byuu/higan")
+source=("git+https://github.com/higan-emu/higan.git")
 sha256sums=('SKIP')
 
 pkgver() {
   cd higan
-  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 prepare() {

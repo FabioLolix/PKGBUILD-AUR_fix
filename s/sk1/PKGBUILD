@@ -2,7 +2,7 @@
 # Contributor: Ihor Novikov <sk1.project.org@gmail.com>
 
 pkgname=sk1
-pkgver=2.0rc4
+pkgver=2.0rc5
 pkgrel=1
 pkgdesc="Open source vector graphics editor for prepress"
 url="https://sk1project.net/"
@@ -10,16 +10,16 @@ arch=(i686 x86_64)
 license=(GPL3)
 depends=(lcms2 cairo imagemagick pango wxpython python2-cairo 
          python2-pillow python2-reportlab python2-pycups)
-source=("https://downloads.sk1project.net/sk1/2.0rc4/sk1-${pkgver}.tar.gz")
-sha256sums=('65ef0856389d3972e758d55eea33357a4bccec8b97d95eb8dc6be186a7956063')
+source=("https://downloads.sk1project.net/sk1/sk1-${pkgver}.tar.gz")
+sha256sums=('1f70dd490a62aad97118454bd18f13c3459dcbd910823835404d6b639f7ef637')
 
 build() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-  python2 setup-sk1.py build
+  python2 setup.py build
 }
 
 package() {
   cd "${srcdir}/${pkgname}-${pkgver}"
-  python2 setup-sk1.py install --root="${pkgdir}" --optimize=1 --skip-build
+  python2 setup.py install --root="${pkgdir}" --optimize=1 --skip-build
 }
 

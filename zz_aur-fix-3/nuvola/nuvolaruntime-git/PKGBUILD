@@ -3,7 +3,7 @@
 # Contributor: Mark Wagie <mark dot wagie at tutanota dot com>
 # Contributor: Laramy Black <laramy2020@gmail.com>
 
-pkgname=nuvolaruntime
+pkgname=nuvolaruntime-git
 pkgver=4.24.0.dev.r4.g2e95e61
 pkgrel=1
 pkgdesc="Nuvola Apps Runtime - Tight integration of web apps with your desktop"
@@ -43,7 +43,7 @@ build() {
 }
 
 #check() {
-#	cd "nuvolaplayer-${pkgver}/build"
+#	cd "${srcdir}/${pkgname%-git}/build"
 #	LD_LIBRARY_PATH+=:$PWD LD_PRELOAD=libnuvolaruntime-tests.so ./run-nuvolaruntime-tests 
 #}
 

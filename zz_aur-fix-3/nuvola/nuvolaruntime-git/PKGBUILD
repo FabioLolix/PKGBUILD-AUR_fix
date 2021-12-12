@@ -12,11 +12,10 @@ url="https://nuvola.tiliado.eu"
 license=(BSD)
 depends=(diorite python-gobject json-glib webkit2gtk
          libnotify gst-plugins-ugly libdri2 libpulse
-         libdrm libsecret libappindicator-gtk3)
+         libdrm libsecret)
+#libappindicator-gtk3 is mandatory if enabled, need ayatana-appindicator3-0.1
 makedepends=(git vala)
-#optdepends=('nodejs-engine.io-client'
-#            'nodejs-unit.js: for JavaScript unit tests')
-#libappindicator-gtk3 is mandatory if enabled
+#makedepends=(git vala standard nodejs-engine.io-client nodejs-unit.js)
 provides=(nuvolaplayer)
 conflicts=(nuvolaplayer)
 source=("git+https://github.com/tiliado/nuvolaruntime.git")

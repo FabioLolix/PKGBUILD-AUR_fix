@@ -1,9 +1,9 @@
 # Maintainer: Gabriel Jülke <pyriand3r at gmail dot com>
 
-pkgname=nuvola-app-youtube-git
-pkgver=2.3.r0.gdfaa8ed
+pkgname=nuvola-app-youtube-music-git
+pkgver=1.6.r0.gd8bd7f0
 pkgrel=1
-pkgdesc="Integration of YouTube into your linux desktop via Nuvola Player."
+pkgdesc="Integration of YouTube Music into your linux desktop via Nuvola Player."
 arch=(any)
 url="https://github.com/tiliado/nuvola-app-youtube"
 license=(BSD)
@@ -11,22 +11,22 @@ depends=(nuvolaplayer)
 makedepends=(git)
 provides=(nuvola-app-youtube)
 conflicts=(nuvola-app-youtube)
-source=("git+https://github.com/tiliado/nuvola-app-youtube.git")
+source=("git+https://github.com/tiliado/nuvola-app-youtube-music.git")
 md5sums=('SKIP')
 
 pkgver() {
-  cd "${srcdir}/nuvola-app-youtube"
+  cd "${srcdir}/${pkgname%-git}"
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-  cd "${srcdir}/nuvola-app-youtube"
+  cd "${srcdir}/${pkgname%-git}"
   ./configure --prefix=/usr 
   make all
 }
 
 package() {
-  cd "${srcdir}/nuvola-app-youtube"
+  cd "${srcdir}/${pkgname%-git}"
   make DESTDIR="${pkgdir}" install
   install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

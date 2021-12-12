@@ -2,24 +2,25 @@
 # CO-Maintainer: Laramy Black <laramy2020@gmail.com>
 
 pkgname=nuvola-app-bandcamp
-pkgver=2.3
+pkgver=2.4
 pkgrel=1
 pkgdesc="bandcamp integration for Nuvola Player."
-arch=("any")
+arch=(any)
 url="https://github.com/tiliado/nuvola-app-bandcamp"
-license=('custom:BSD')
-depends=('nuvolaruntime' 'imagemagick')
-makedepends=('nuvolasdk' 'scour')
-source=(https://github.com/tiliado/${pkgname}/archive/${pkgver}.tar.gz)
-sha256sums=('35b3520d7801bfc6e0a35fce7fa4ec7385a74af396a31bd201e60e080e975bba')
+license=(BSD)
+depends=(nuvolaruntime)
+makedepends=(python-nuvolasdk python-pillow imagemagick scour)
+source=("$pkgname-$pkgver.tar.gz::https://github.com/tiliado/nuvola-app-bandcamp/archive/${pkgver}.tar.gz")
+sha256sums=('081e7af82bcbd5b1cee23b49b613446b9548e6a40e19a24ff065a741b08d0bb8')
 
 build() {
-    cd "$srcdir/${pkgname}-${pkgver}"
-    ./configure --prefix=/usr 
-    make all
+  cd "$srcdir/${pkgname}-${pkgver}"
+  ./configure --prefix=/usr 
+  make all
 }
 
 package() {
-    cd "$srcdir/${pkgname}-${pkgver}"
-    make DESTDIR="${pkgdir}" install
+  cd "$srcdir/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

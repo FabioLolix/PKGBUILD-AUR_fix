@@ -29,14 +29,14 @@ pkgver() {
 build() {
 	cd "${srcdir}/${pkgname%-git}"
 	./waf configure \
-		--prefix=/usr \
-		--libdir=/usr/lib \
+        --prefix=/usr \
+        --libdir=/usr/lib \
         --dummy-engine \
         --no-appindicator \
-		--no-vala-lint \
-		--no-js-lint \
+        --no-vala-lint \
+        --no-js-lint \
         --no-strict \
-		--no-unity
+        --no-unity
 
 	./waf build -v
 }

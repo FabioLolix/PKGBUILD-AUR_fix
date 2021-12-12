@@ -25,14 +25,14 @@ sha256sums=('afc5115383410ab1207bd9e1d9ceab31c312100c11343239b1e4cac4588a6f31')
 build() {
 	cd "nuvolaplayer-${pkgver}"
 	./waf configure \
-		--prefix=/usr \
-		--libdir=/usr/lib \
+        --prefix=/usr \
+        --libdir=/usr/lib \
         --dummy-engine \
         --no-appindicator \
-		--no-vala-lint \
-		--no-js-lint \
+        --no-vala-lint \
+        --no-js-lint \
         --no-strict \
-		--no-unity
+        --no-unity
 
 	./waf build -v
 }

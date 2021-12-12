@@ -4,7 +4,7 @@
 # Contributor: Laramy Black <laramy2020@gmail.com>
 
 pkgname=nuvolaruntime
-pkgver=4.24.0.dev.r0.gaf13ecf
+pkgver=4.24.0.dev.r4.g2e95e61
 pkgrel=1
 pkgdesc="Nuvola Apps Runtime - Tight integration of web apps with your desktop"
 arch=(x86_64)

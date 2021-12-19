@@ -4,8 +4,8 @@
 # Contributor: WaveHack <email@wavehack.net>
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
-pkgname=gittyup-git
-pkgver=1.0.0.r80.g6001a44
+pkgname=gittyup
+pkgver=1.0.0
 pkgrel=1
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
@@ -18,7 +18,7 @@ optdepends=('git-lfs: git-lfs support'
             'qt5-translations: translations')
 provides=(gittyup)
 conflicts=(gittyup)
-source=("${pkgname%-git}::git+https://github.com/Murmele/Gittyup.git"
+source=("${pkgname%-git}::git+https://github.com/Murmele/Gittyup.git#tag=gittyup_v${pkgver}"
         "git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/git/git.git"
         "git+https://github.com/libssh2/libssh2.git"
@@ -30,11 +30,6 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'a07943687afee5f3664219373b60ae54eaa207414646181df107893407119462')
-
-pkgver() {
-  cd "${srcdir}/${pkgname%-git}"
-  git describe --long --tags | sed 's/^gittyup_v//;s/\([^-]*-g\)/r\1/;s/-/./g'
-}
 
 prepare() {
   cd "${srcdir}/${pkgname%-git}"

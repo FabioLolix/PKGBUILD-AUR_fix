@@ -3,12 +3,12 @@
 
 pkgname=higan-git
 pkgver=115.r232.g9bf1b3314
-pkgrel=2
+pkgrel=1
 pkgdesc="Multi-system emulator focused on accuracy, preservation, and configurability"
 arch=(x86_64)
 url="https://higan-emu.com/"
 license=(GPL3)
-depends=(libpulse qt5-base sdl2 libxv libao libgl openal libxrandr)
+depends=(libpulse gtksourceview3 sdl2 libxv libao libgl openal)
 makedepends=(git mesa)
 provides=(higan)
 conflicts=(higan)
@@ -28,8 +28,8 @@ prepare() {
 build() {
   cd higan
 
-  make -C higan-ui hiro=qt5
-  make -C icarus   hiro=qt5
+  make -C higan-ui hiro=gtk3
+  make -C icarus   hiro=gtk3
 }
 
 package() {

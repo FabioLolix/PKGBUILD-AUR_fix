@@ -1,7 +1,7 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
 pkgname=nfs-ganesha
-pkgver=4.dev.72.r0.gbe092f7e5
+pkgver=4.0.r0.g6156de38f
 pkgrel=1
 pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
 arch=(x86_64 i686 arm armv6h armv7h aarch64)

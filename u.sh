@@ -225,6 +225,16 @@ echo "Done G"
 
 
 
+VAR2=h
+  VAR=higan-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
+echo "Done H"
+
+
+
 VAR2=i
   VAR=ibus-avro-git
   cd "$BASE/$VAR2/$VAR"

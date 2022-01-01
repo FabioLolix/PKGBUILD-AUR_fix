@@ -1,0 +1,25 @@
+
+
+pkgname=valalint-git
+pkgver=0.50.0.r6.g45807f4
+pkgrel=1
+pkgdesc="WIP Vala linter"
+arch=(x86_64)
+url="https://github.com/tiliado/valalint"
+license=(LGPL2.1)
+depends=(vala)
+makedepends=(git vala)
+provides=(valalint)
+conflicts=(valalintvalalint)
+source=("git+https://github.com/tiliado/valalint.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/${pkgname%-git}"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+package() {
+  cd "$srcdir/${pkgname%-git}"
+  make PREFIX=/usr DESTDIR=${pkgdir} install
+}

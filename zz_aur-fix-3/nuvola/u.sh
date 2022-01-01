@@ -24,4 +24,14 @@ DEST=~/Dev/AUR/zz_aur-fix-3/nuvola
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR"
 
+  VAR=nuvola-app-bbc-iplayer
+  cd "$BASE/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR"
+
+  VAR=nuvola-app-jupiter-broadcasting
+  cd "$BASE/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR"
+
 

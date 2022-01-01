@@ -1,4 +1,6 @@
-# Maintainer: Laramy Black <laramy2020@gmail.com>
+# Maintainer:
+# Contributor: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Laramy Black <laramy2020@gmail.com>
 
 _nuvola=bbc-iplayer
 pkgname=nuvola-app-${_nuvola}

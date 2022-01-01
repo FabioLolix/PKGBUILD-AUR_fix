@@ -1,24 +1,26 @@
 # Maintainer: Laramy Black <laramy2020@gmail.com>
 
-pkgname=nuvola-app-google-calendar
-pkgver=1.3
+_nuvola=google-calendar
+pkgname=nuvola-app-${_nuvola}
+pkgver=1.5
 pkgrel=1
-pkgdesc="google calendar integration for Nuvola Player."
-arch=("any")
-url="https://github.com/tiliado/nuvola-app-google-calendar"
-license=('custom:BSD')
-depends=('nuvolaruntime' 'imagemagick')
-makedepends=('nuvolasdk' 'scour')
-source=(https://github.com/tiliado/${pkgname}/archive/${pkgver}.tar.gz)
-sha256sums=('ad6dafb2367b652ee2ef084cd752e5389ed46cef42f268d5c73f9427f7e12ef2')
+pkgdesc=" integration for Nuvola Player"
+arch=(any)
+url="https://github.com/tiliado/nuvola-app-${_nuvola}"
+license=(BSD)
+depends=(nuvolaruntime)
+makedepends=(python-nuvolasdk scour)
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/tiliado/nuvola-app-${_nuvola}/archive/${pkgver}.tar.gz")
+sha256sums=('3daf64b18d5724f0c36bbd1ff82690e8ec402840a3395249ac571aa954df7ed4')
 
 build() {
-    cd "$srcdir/${pkgname}-${pkgver}"
-    ./configure --prefix=/usr 
-    make all
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  ./configure --prefix=/usr 
+  make all
 }
 
 package() {
-    cd "$srcdir/${pkgname}-${pkgver}"
-    make DESTDIR="${pkgdir}" install
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

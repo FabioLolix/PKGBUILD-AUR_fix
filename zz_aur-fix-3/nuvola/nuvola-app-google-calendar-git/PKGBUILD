@@ -1,0 +1,33 @@
+
+
+_nuvola=google-calendar
+pkgname=nuvola-app-${_nuvola}-git
+pkgver=1.5.r0.g87aca43
+pkgrel=1
+pkgdesc=" integration for Nuvola Player"
+arch=(any)
+url="https://github.com/tiliado/nuvola-app-${_nuvola}"
+license=(BSD)
+depends=(nuvolaruntime)
+makedepends=(git python-nuvolasdk scour)
+provides=(${pkgname%-git})
+conflicts=(${pkgname%-git})
+source=("git+https://github.com/tiliado/nuvola-app-${_nuvola}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${pkgname%-git}"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "${srcdir}/${pkgname%-git}"
+  ./configure --prefix=/usr 
+  make all
+}
+
+package() {
+  cd "${srcdir}/${pkgname%-git}"
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}

@@ -1,24 +1,26 @@
 # Maintainer: Laramy Black <laramy2020@gmail.com>
 
-pkgname=nuvola-app-pocket-casts
-pkgver=1.1
+_nuvola=pocket-casts
+pkgname=nuvola-app-${_nuvola}
+pkgver=1.5
 pkgrel=1
-pkgdesc="pocket casts integration for Nuvola Player."
-arch=("any")
-url="https://github.com/tiliado/nuvola-app-pocket-casts"
-license=('custom:BSD')
-depends=('nuvolaruntime' 'imagemagick')
-makedepends=('nuvolasdk' 'scour')
-source=(https://github.com/tiliado/${pkgname}/archive/${pkgver}.tar.gz)
-sha256sums=('39b645c4d6ea5fc9f4b048904d003e4442aba87c6fffcec47267b52ba5e38321')
+pkgdesc=" integration for Nuvola Player"
+arch=(any)
+url="https://github.com/tiliado/nuvola-app-${_nuvola}"
+license=(BSD)
+depends=(nuvolaruntime)
+makedepends=(python-nuvolasdk scour)
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/tiliado/nuvola-app-${_nuvola}/archive/${pkgver}.tar.gz")
+sha256sums=('50ecb60b87860a4cb89cb5a28c1659e3032cd99b7ece9411f8daf8f442828139')
 
 build() {
-    cd "$srcdir/${pkgname}-${pkgver}"
-    ./configure --prefix=/usr 
-    make all
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  ./configure --prefix=/usr 
+  make all
 }
 
 package() {
-    cd "$srcdir/${pkgname}-${pkgver}"
-    make DESTDIR="${pkgdir}" install
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

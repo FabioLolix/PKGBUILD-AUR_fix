@@ -1,24 +1,26 @@
 # Maintainer: Laramy Black <laramy2020@gmail.com>
 
-pkgname=nuvola-app-tunein
-pkgver=1.4
+_nuvola=tunein
+pkgname=nuvola-app-${_nuvola}
+pkgver=1.5
 pkgrel=1
-pkgdesc="tunein integration for Nuvola Player."
-arch=("any")
-url="https://github.com/tiliado/nuvola-app-tunein"
-license=('custom:BSD')
-depends=('nuvolaruntime' 'imagemagick')
-makedepends=('nuvolasdk' 'scour')
-source=(https://github.com/tiliado/${pkgname}/archive/${pkgver}.tar.gz)
-sha256sums=('3b08f358be822caef89d29b4d83da94a953ef86f3b7bf88bd2e908e3198eaa95')
+pkgdesc=" integration for Nuvola Player"
+arch=(any)
+url="https://github.com/tiliado/nuvola-app-${_nuvola}"
+license=(BSD)
+depends=(nuvolaruntime)
+makedepends=(python-nuvolasdk scour)
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/tiliado/nuvola-app-${_nuvola}/archive/${pkgver}.tar.gz")
+sha256sums=('588ffb1a749abab26ab12a40d7be7abf4937fa59219ef3802bdcac0390f18a9e')
 
 build() {
-    cd "$srcdir/${pkgname}-${pkgver}"
-    ./configure --prefix=/usr 
-    make all
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  ./configure --prefix=/usr 
+  make all
 }
 
 package() {
-    cd "$srcdir/${pkgname}-${pkgver}"
-    make DESTDIR="${pkgdir}" install
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

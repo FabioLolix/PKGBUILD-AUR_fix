@@ -1,27 +1,26 @@
 # Maintainer: Laramy Black <laramy2020@gmail.com>
 
-pkgname=nuvola-app-yandex-music
-pkgver=1.6
+_nuvola=yandex-music
+pkgname=nuvola-app-${_nuvola}
+pkgver=1.9
 pkgrel=1
-pkgdesc="yandex music integration for Nuvola Player."
-arch=("any")
-url="https://github.com/tiliado/nuvola-app-yandex-music"
-license=('custom:BSD')
-depends=('nuvolaruntime' 'imagemagick')
-makedepends=('nuvolasdk' 'scour')
-source=(https://github.com/tiliado/${pkgname}/archive/${pkgver}.tar.gz
-metadata.patch)
-sha256sums=('e4892239bde484df7077dd5f8cfca4db520da8068ecf7091d31c2e2964f95958'
-            '9768ccaeacc34907f727bdda4bdf1b625270f2b5606f27ccd1e3fb474352ba45')
+pkgdesc=" integration for Nuvola Player"
+arch=(any)
+url="https://github.com/tiliado/nuvola-app-${_nuvola}"
+license=(BSD)
+depends=(nuvolaruntime)
+makedepends=(python-nuvolasdk scour)
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/tiliado/nuvola-app-${_nuvola}/archive/${pkgver}.tar.gz")
+sha256sums=('bb3b627026cf0b2fcfd7e96fa9b39c0018271e779bea09dd7ef7db6b871bdb3c')
 
 build() {
-    patch "$srcdir/${pkgname}-${pkgver}"/metadata.in.json < metadata.patch
-    cd "$srcdir/${pkgname}-${pkgver}"
-    ./configure --prefix=/usr 
-    make all
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  ./configure --prefix=/usr 
+  make all
 }
 
 package() {
-    cd "$srcdir/${pkgname}-${pkgver}"
-    make DESTDIR="${pkgdir}" install
+  cd "${srcdir}/${pkgname}-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+  install -Dm644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

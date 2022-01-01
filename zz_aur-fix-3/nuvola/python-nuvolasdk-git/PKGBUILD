@@ -4,7 +4,7 @@
 # Contributor: swiftscythe
 
 pkgname=python-nuvolasdk
-pkgver=4.23.0.r0.g929784f
+pkgver=4.24.0.r0.g9f61dcf
 pkgrel=1
 pkgdesc="SDK for building Nuvola Player's web app scripts"
 arch=(any)
@@ -12,6 +12,9 @@ url="https://github.com/tiliado/nuvolasdk"
 license=(BSD)
 depends=(python-pillow)
 makedepends=(git python-setuptools)
+provides=(python-nuvolasdk)
+conflicts=(python-nuvolasdk)
+replaces=(nuvolasdk)
 source=("git+https://github.com/tiliado/nuvolasdk.git")
 sha256sums=('SKIP')
 

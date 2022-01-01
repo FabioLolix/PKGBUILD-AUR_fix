@@ -1,18 +1,19 @@
 # Maintainer: Gabriel Jülke <pyriand3r at gmail dot com>
 
-pkgname=nuvola-app-youtube-music-git
+_nuvola=youtube-music
+pkgname=nuvola-app-${_nuvola}
 pkgver=1.6.r0.gd8bd7f0
 pkgrel=1
-pkgdesc="Integration of YouTube Music into your linux desktop via Nuvola Player."
+pkgdesc=" integration for Nuvola Player"
 arch=(any)
-url="https://github.com/tiliado/nuvola-app-youtube"
+url="https://github.com/tiliado/nuvola-app-${_nuvola}"
 license=(BSD)
-depends=(nuvolaplayer)
+depends=(nuvolaruntime)
 makedepends=(git python-nuvolasdk scour)
-provides=(nuvola-app-youtube)
-conflicts=(nuvola-app-youtube)
-source=("git+https://github.com/tiliado/nuvola-app-youtube-music.git")
-md5sums=('SKIP')
+provides=(${pkgname%-git})
+conflicts=(${pkgname%-git})
+source=("git+https://github.com/tiliado/nuvola-app-${_nuvola}.git")
+sha256sums=('SKIP')
 
 pkgver() {
   cd "${srcdir}/${pkgname%-git}"

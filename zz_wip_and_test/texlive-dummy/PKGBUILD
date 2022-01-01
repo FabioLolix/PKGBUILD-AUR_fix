@@ -1,0 +1,9 @@
+
+pkgname=texlive-dummy
+pkgver=1
+pkgrel=1
+pkgdesc="Fake the presence of texlive for pacman"
+url="http://www.tug.org/texlive/"
+arch=(any)
+license=(GPL)
+provides=(texlive-bin $(pacman -Sgq texlive-most texlive-lang))

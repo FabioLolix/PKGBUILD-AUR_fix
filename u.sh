@@ -106,6 +106,11 @@ VAR2=c
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+  VAR=cinelerra-gg
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=cinelerra-hv
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

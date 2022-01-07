@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=popsicle
-pkgver=1.1.0+56+g1a94779
+pkgver=1.3.0+47+gb02ebf5
 pkgrel=1
 pkgdesc="Linux utility for flashing multiple USB devices in parallel, written in Rust"
 url="https://github.com/pop-os/popsicle"
@@ -9,12 +9,12 @@ arch=(x86_64 i686 aarch64 armv7h)
 license=(MIT)
 depends=(gtk3)
 makedepends=(git cargo help2man xorgproto)
-source=("git+https://github.com/pop-os/popsicle.git#commit=1a9477948be930033b8f0df872e19b494962ba43")
+source=("git+https://github.com/pop-os/popsicle.git#commit=b02ebf5f2e6c18777453ca9a144d69689a6fa901")
 sha256sums=('SKIP')
 
 pkgver() {
   cd "${pkgname}"
-  git describe --long | sed 's/-/+/g'
+  git describe --long --tags | sed 's/-/+/g'
 }
 
 build() {

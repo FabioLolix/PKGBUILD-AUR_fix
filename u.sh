@@ -331,6 +331,11 @@ VAR2=m
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+  VAR=mldonkey
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=mstreamexpress-bin
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

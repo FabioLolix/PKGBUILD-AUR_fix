@@ -1,0 +1,69 @@
+# Maintainer: Your Name <youremail@domain.com>
+
+pkgname=q2rtx
+pkgver=1.6.0
+pkgrel=1
+pkgdesc=""
+arch=(x86_64)
+url=""
+license=(GPL2)
+depends=()
+makedepends=(git cmake openal libglvnd)
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+options=()
+source=("git+https://github.com/NVIDIA/Q2RTX.git#tag=v${pkgver}"
+        "git+https://github.com/madler/zlib.git"
+        "git+https://github.com/curl/curl.git"
+        "git+https://github.com/spurious/SDL-mirror.git"
+        "git+https://github.com/nothings/stb.git"
+        "git+https://github.com/syoyo/tinyobjloader-c.git"
+        "git+https://github.com/KhronosGroup/Vulkan-Headers.git"
+        "git+https://github.com/KhronosGroup/glslang.git")
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP')
+
+prepare() {
+  cd Q2RTX
+
+  git submodule init
+  git config 'submodule.extern/zlib.url' "${srcdir}/zlib"
+  git config 'submodule.extern/curl.url' "${srcdir}/curl"
+  git config 'submodule.extern/SDL2.url' "${srcdir}/SDL-mirror"
+  git config 'submodule.extern/stb.url' "${srcdir}/stb"
+  git config 'submodule.extern/tinyobjloader-c.url' "${srcdir}/tinyobjloader-c"
+  git config 'submodule.extern/Vulkan-Headers.url' "${srcdir}/Vulkan-Headers"
+  git config 'submodule.extern/glslang.url' "${srcdir}/glslang"
+  git submodule update
+
+  [[ -d build ]] || mkdir build
+}
+
+build() {
+  cd Q2RTX/build
+  cmake .. -Wno-dev \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCONFIG_BUILD_GLSLANG=ON \
+    -DVIDEO_RPI:BOOL=OFF \
+    -DVIDEO_VIVANTE:BOOL=OFF \
+    -DVIDEO_WAYLAND:BOOL=OFF \
+    -DVIDEO_WAYLAND_QT_TOUCH:BOOL=OFF \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+  make
+}
+
+package() {
+  cd Q2RTX/build
+  make DESTDIR="${pkgdir}" install
+  install -D ../license.txt -t "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -D ../notice.txt -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}

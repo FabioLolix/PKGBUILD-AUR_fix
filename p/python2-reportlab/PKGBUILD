@@ -1,9 +1,9 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 # Contributor: Joermungand <joermungand at gmail dot com>
-# Maintainer: Joermungand <joermungand at gmail dot com>
 
 pkgname=python2-reportlab
 pkgver=3.5.34
-pkgrel=1
+pkgrel=2
 pkgdesc="A proven industry-strength PDF generating solution"
 url="http://www.reportlab.com/"
 depends=('freetype2' 'python2-pillow' )

@@ -1,0 +1,25 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+
+pkgname=fusepdf
+pkgver=2.0.0
+pkgrel=1
+pkgdesc="Merge PDF documents"
+arch=(x86_64)
+url="https://nettstudio.github.io/fusepdf/"
+license=(GPL3)
+depends=(qt5-base ghostscript)
+makedepends=(git)
+source=("git+https://github.com/nettstudio/fusepdf.git#tag=v${pkgver}")
+sha256sums=('SKIP')
+
+build() {
+  cd fusepdf
+  qmake-qt5 PREFIX=/usr
+  make
+}
+
+package() {
+  cd fusepdf
+  make install INSTALL_ROOT="${pkgdir}/"
+  ln -s /usr/bin/FusePDF "${pkgdir}/usr/bin/fusepdf"
+}

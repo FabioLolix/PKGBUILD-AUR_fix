@@ -5,7 +5,7 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gittyup-git
-pkgver=1.0.0.r80.g6001a44
+pkgver=1.0.0.r128.ga7c818b
 pkgrel=1
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
@@ -33,7 +33,7 @@ sha256sums=('SKIP'
 
 pkgver() {
   cd "${srcdir}/${pkgname%-git}"
-  git describe --long --tags | sed 's/^gittyup_v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags --exclude latest | sed 's/^gittyup_v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {

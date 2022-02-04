@@ -9,7 +9,7 @@ url="https://xiph.org/flac/"
 license=(BSD GPL)
 depends=(gcc-libs libogg)
 makedepends=(git nasm doxygen)
-source=(git+https://github.com/xiph/flac.git)
+source=("git+https://github.com/xiph/flac.git")
 sha256sums=('SKIP')
 
 pkgver() {
@@ -24,7 +24,6 @@ prepare() {
 
 build() {
   cd "flac"
-  ./autogen.sh
   ./configure --prefix=/usr --disable-sse
   make
 }

@@ -3,7 +3,7 @@
 pkgname=pplib
 pkgver=7.0.1
 pkgrel=1
-pkgdesc="OpenStopMotion Animation Capture"
+pkgdesc="Collection of C++ functions and classes"
 arch=(x86_64)
 url="https://www.pfp.de/ppl/"
 license=(BSD)
@@ -14,12 +14,20 @@ sha256sums=('7cab7ca3c31be4726c4b45025bd49bda34239ade30853edd778d4851e808be37')
 
 build() {
   cd "pplib-REL_${pkgver//./_}"
-  ./configure LDFLAGS= --with-imlib=/usr/include/ImageMagick-7 --with-pcre=/usr --with-jpeg --with-libtiff=/usr --with-nasm --prefix=/usr --with-sqlite3 -with-mysql=no
+  ./configure \
+    --with-libtiff=/usr \
+    --with-pcre=/usr \
+    --with-jpeg \
+    --with-nasm \
+    --with-sqlite3 \
+    --with-mysql=no \
+    --prefix=/usr
 }
 
 package() {
   cd "pplib-REL_${pkgver//./_}"
   make DESTDIR="$pkgdir" install
+  install -D LICENSE.TXT -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }
 
 

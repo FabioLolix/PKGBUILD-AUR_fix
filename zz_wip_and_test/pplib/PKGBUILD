@@ -9,8 +9,15 @@ url="https://www.pfp.de/ppl/"
 license=(BSD)
 #depends=(pcre libtiff)
 makedepends=(nasm pcre sdl2 lame libshout sqlite3 libtiff imagemagick)
-source=("$pkgname-$pkgver.tar.gz::https://github.com/pfedick/pplib/archive/REL_${pkgver//./_}.tar.gz")
-sha256sums=('7cab7ca3c31be4726c4b45025bd49bda34239ade30853edd778d4851e808be37')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/pfedick/pplib/archive/REL_${pkgver//./_}.tar.gz"
+        'https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/pplib-MagickWand-header.patch')
+sha256sums=('7cab7ca3c31be4726c4b45025bd49bda34239ade30853edd778d4851e808be37'
+            'b73e73a3adde061db8425ce80e061df94d31461a3a71bfcd6d0db76a8f7116a6')
+
+prepare() {
+  cd "pplib-REL_${pkgver//./_}"
+  patch -Np1 -i ../pplib-MagickWand-header.patch
+}
 
 build() {
   cd "pplib-REL_${pkgver//./_}"
@@ -21,7 +28,10 @@ build() {
     --with-nasm \
     --with-sqlite3 \
     --with-mysql=no \
+    --with-postgresql=no \
     --prefix=/usr
+
+  make
 }
 
 package() {

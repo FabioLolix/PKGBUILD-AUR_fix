@@ -9,24 +9,35 @@ url="https://www.pfp.de/ppl/"
 license=(BSD)
 #depends=(pcre libtiff)
 makedepends=(git nasm pcre sdl2 lame libshout sqlite3 libtiff imagemagick)
-source=("git+https://github.com/pfedick/pplib.git")
-sha256sums=('SKIP')
+source=("git+https://github.com/pfedick/pplib.git"
+        'https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/pplib-MagickWand-header.patch')
+sha256sums=('SKIP'
+            'b73e73a3adde061db8425ce80e061df94d31461a3a71bfcd6d0db76a8f7116a6')
 
 pkgver() {
   cd "${pkgname%-git}"
   git describe --long --tags | sed 's/^REL_//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
+prepare() {
+  cd "${pkgname%-git}"
+  patch -Np1 -i ../pplib-MagickWand-header.patch
+}
+
 build() {
   cd "${pkgname%-git}"
   ./configure \
+    --with-imlib=/usr/include/ImageMagick-7 \
     --with-libtiff=/usr \
     --with-pcre=/usr \
     --with-jpeg \
     --with-nasm \
     --with-sqlite3 \
     --with-mysql=no \
+    --with-postgresql=no \
     --prefix=/usr
+
+  make
 }
 
 package() {

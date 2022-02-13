@@ -1,6 +1,7 @@
 
-pkgname=duplicati-git
-pkgver=2.0.6.100.2.0.6.100_canary_2021.08.11.r65.g27ff8cd20
+pkgname=duplicati-experimental
+_pkgver=2.0.6.2-2.0.6.2_experimental_2021-05-29
+pkgver=${_pkgver//-/_}
 pkgrel=1
 pkgdesc="FOSS backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
@@ -9,21 +10,16 @@ license=(LGPL)
 depends=(gtk-sharp-2 mono)
 makedepends=(git nuget mono-msbuild)
 optdepends=('notify-sharp: for tray notifications')
-source=("git+https://github.com/duplicati/duplicati.git"
+source=("git+https://github.com/duplicati/duplicati.git#tag=v${_pkgver}"
         "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati-no-tar.gz-thanks.patch"
         "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati.sysusers")
 sha256sums=('SKIP'
             '5a0f843c9f444b39fca94e9391aeb98346dde683885f3820aa341af2a20bd162'
             'b9389b399467f3e02aa8e76bb98f6efbca1166fbc4d0bdf939493f8403462959')
 
-pkgver() {
-  cd "duplicati"
-  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
-}
-
 prepare() {
   cd "duplicati"
-#  patch -Np1 -i ../duplicati-no-tar.gz-thanks.patch
+  #patch -Np1 -i ../duplicati-no-tar.gz-thanks.patch
 }
 
 build() {

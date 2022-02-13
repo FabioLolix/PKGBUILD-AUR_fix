@@ -3,10 +3,10 @@
 # Contributor: Danny Su       <contact@dannysu.com>
 # aarch64 tester: Irissman    <irissman@probus.ca>
 
-pkgname=duplicati-canary-bin
-_pkgver=2.0.6.100
-_branch=canary
-_date=2021-08-11
+pkgname=duplicati-experimental-bin
+_pkgver=2.0.6.2
+_branch=experimental
+_date=2021-05-29
 pkgver=${_pkgver}_${_pkgver}_${_branch}_${_date//-/.}
 pkgrel=1
 pkgdesc='A free backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers'
@@ -17,7 +17,7 @@ source=(https://github.com/duplicati/duplicati/releases/download/v${_pkgver}-${_
         "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati.service"
         "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati.sysusers"
         "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati-cli")
-sha256sums=('06e84a698e9723598bf821e1a3df2bb62423a362c7075dc521768389cdd6f1f8'
+sha256sums=('3762edf2aa75e75fef1dd3bc49a40bd8fab00c12742c5ca93cd903cd4bb5d6ab'
             '2eb973cef79731d407bfbc83f754cef588c62ec83dae2112ac93f9c9f0baa403'
             '499eb63532bcad50b897c0874b723eebc6693816fcb9626532f367b5ff51da70'
             'b9389b399467f3e02aa8e76bb98f6efbca1166fbc4d0bdf939493f8403462959'

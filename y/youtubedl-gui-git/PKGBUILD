@@ -2,7 +2,7 @@
 # Contributor: Jason Goulet-Lipman <jason.gouletlipman@gmail.com>
 
 pkgname=youtubedl-gui-git
-pkgver=2.5.r3.g986b6a1
+pkgver=3.0.r0.g6ea9ad8
 pkgrel=1
 pkgdesc="Download Youtube videos to local audio or video files"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)

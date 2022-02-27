@@ -1,7 +1,7 @@
 # Maintainer: Tony Lambiris <tony@criticalstack.com>
 
 pkgname=gotop-git
-pkgver=4.1.1.r24.ge9b197a
+pkgver=4.1.2.r22.gb08c67b
 pkgrel=1
 pkgdesc='A terminal based graphical activity monitor inspired by gtop and vtop'
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
@@ -21,7 +21,7 @@ pkgver() {
 build() {
   cd "$srcdir/${pkgname%-git}"
 
-  export GOPATH="$SRCDEST/go-modules"
+  export GOPATH="$SRCDEST/go-cache"
 
   go build \
     -gcflags "all=-trimpath=${PWD}" \

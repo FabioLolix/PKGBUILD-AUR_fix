@@ -3,8 +3,8 @@
 # Contributor: Philip Goto <philip.goto@gmail.com>
 
 pkgname=fragments-git
-pkgver=1.9.1.r54.gae38fee
-pkgrel=2
+pkgver=2.0.2.r11.g79060ec
+pkgrel=1
 pkgdesc="BitTorrent client for GNOME"
 arch=(i686 x86_64 armv6h armv7h)
 url="https://gitlab.gnome.org/World/Fragments"

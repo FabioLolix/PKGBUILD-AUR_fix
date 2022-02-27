@@ -1,7 +1,7 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
-pkgname=nfs-ganesha
-pkgver=4.0.r0.g6156de38f
+pkgname=nfs-ganesha-git
+pkgver=4.0.3.r0.gc40241d1e
 pkgrel=1
 pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
@@ -9,6 +9,8 @@ url="http://nfs-ganesha.github.io/"
 license=(GPL3)
 depends=(jemalloc liburcu)
 makedepends=(cmake git python-sphinx)
+provides=(nfs-ganesha)
+conflicts=(nfs-ganesha)
 source=("git+https://github.com/nfs-ganesha/nfs-ganesha.git"
         "git+https://github.com/nfs-ganesha/ntirpc.git")
 sha256sums=('SKIP'

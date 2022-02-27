@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=fusepdf-git
-pkgver=2.0.0.r0.g4ab3fd2
+pkgver=2.0.0.r6.gf562a51
 pkgrel=1
 pkgdesc="Merge PDF documents"
 arch=(x86_64)

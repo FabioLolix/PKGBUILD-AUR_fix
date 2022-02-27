@@ -2,8 +2,8 @@
 # Contributor: Maxime Gauduin <alucryd@archlinux.org>
 
 pkgname=pantheon-code-git
-pkgver=3.4.1.r149.g93118f56
-pkgrel=2
+pkgver=6.1.0.r80.gc17c41737
+pkgrel=1
 pkgdesc="The Pantheon Code Editor"
 arch=(x86_64)
 url="https://github.com/elementary/code"

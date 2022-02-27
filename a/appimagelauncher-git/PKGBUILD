@@ -3,7 +3,7 @@
 # Contributor: TheAssassin
 
 pkgname=appimagelauncher-git
-pkgver=2.2.0.r102.a05cc3c
+pkgver=2.2.0.r117.cbe7f29
 pkgrel=1
 pkgdesc="A Helper application for running and integrating AppImages."
 arch=(x86_64)

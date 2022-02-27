@@ -1,7 +1,7 @@
 # Maintainer: robertfoster
 
 pkgname=gst-plugins-rs-git
-pkgver=0.8.0.r5.g07a74205
+pkgver=0.8.2.r0.g7d093ffc
 pkgrel=1
 pkgdesc="GStreamer plugins written in Rust"
 arch=(x86_64)

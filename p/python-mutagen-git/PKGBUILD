@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=python-mutagen-git
-pkgver=1.45.1.r8.gabd58ee
+pkgver=1.45.1.r22.g399513b
 pkgrel=1
 arch=(any)
 pkgdesc="An audio metadata tag reader and writer (python library)"

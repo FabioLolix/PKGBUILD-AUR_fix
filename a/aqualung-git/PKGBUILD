@@ -2,13 +2,13 @@
 
 pkgname=aqualung-git
 pkgver=1.1.r4.g44a3f40
-pkgrel=1
+pkgrel=2
 pkgdesc="High quality music player w/ gapless support"
 arch=(i686 x86_64)
-url="http://aqualung.jeremyevans.net/"
+url="https://aqualung.jeremyevans.net/"
 license=(GPL)
 depends=(gtk2 libxml2 alsa-lib sndio jack libpulse liboggz libusb-compat
-         libifp ffmpeg libvorbis libsndfile lua52 wavpack libcdio-paranoia
+         libifp ffmpeg4.4 libvorbis libsndfile lua52 wavpack libcdio-paranoia
          libmad flac liblrdf libmpcdec libsamplerate)
 makedepends=(git ladspa libcddb speex lame libmodplug)
 optdepends=('libcddb: CDDB / FreeDB support'
@@ -26,6 +26,8 @@ pkgver() {
   cd "${srcdir}/${pkgname%-git}"
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
+
+export PKG_CONFIG_PATH='/usr/lib/ffmpeg4.4/pkgconfig'
 
 prepare() {
   cd "${srcdir}/${pkgname%-git}"

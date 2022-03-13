@@ -1,20 +1,29 @@
 
 pkgname=duplicati-git
-pkgver=2.0.6.100.2.0.6.100_canary_2021.08.11.r65.g27ff8cd20
+pkgver=2.0.6.101.2.0.6.101_canary_2022.03.13.r0.g2f3b0e83a
 pkgrel=1
 pkgdesc="FOSS backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
 url="https://www.duplicati.com/"
 license=(LGPL)
-depends=(gtk-sharp-2 mono)
-makedepends=(git nuget mono-msbuild)
-optdepends=('notify-sharp: for tray notifications')
+depends=(mono )
+makedepends=(git nuget mono-msbuild gtk-sharp-2)
+optdepends=('notify-sharp: for tray notifications'
+            gtk-sharp-2)
+install=duplicati.install
 source=("git+https://github.com/duplicati/duplicati.git"
-        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati-no-tar.gz-thanks.patch"
-        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati.sysusers")
+        0001-no-gzip-1.patch
+        duplicati.service
+        duplicati.sysusers
+        duplicati.tmpfiles.conf
+        duplicati-user.service
+        )
 sha256sums=('SKIP'
-            '5a0f843c9f444b39fca94e9391aeb98346dde683885f3820aa341af2a20bd162'
-            'b9389b399467f3e02aa8e76bb98f6efbca1166fbc4d0bdf939493f8403462959')
+            'b8a685c2c8add57e3a5812ba8a74d79eb6de76ad48318c28802b3a25287f8ac2'
+            '2ff538f11370fcdebaf15a46212dde4de9ea2910c3e7e9f3adef1b1d1f7e8d28'
+            'b9389b399467f3e02aa8e76bb98f6efbca1166fbc4d0bdf939493f8403462959'
+            'b6ca3d280feb753ded94bb44eef821a0dac0c0c7ed7f37dea76d445a64386c86'
+            'b32bcb8da734767497671b30f77def8b42fc7910eb1698009050c66abaca5e15')
 
 pkgver() {
   cd "duplicati"
@@ -23,7 +32,7 @@ pkgver() {
 
 prepare() {
   cd "duplicati"
-#  patch -Np1 -i ../duplicati-no-tar.gz-thanks.patch
+  patch -Np1 -i ../0001-no-gzip-1.patch
 }
 
 build() {
@@ -34,8 +43,10 @@ build() {
 package() {
   cd "duplicati"/Installer/Makefile/pkg
   cp -r . "${pkgdir}"/
+  install -d "${pkgdir}/var/lib/duplicati"
 
-#  install -Dm644 duplicati.service  "${pkgdir}/usr/lib/systemd/system/duplicati.service"
-#  install -Dm644 duplicati-user.service  "${pkgdir}/usr/lib/systemd/user/duplicati.service"
-#  install -Dm644 duplicati.sysusers" "$pkgdir/usr/lib/sysusers.d/duplicati.conf"
+  install -Dm644 "${srcdir}"/duplicati.service         -t "${pkgdir}"/usr/lib/systemd/system/
+  install -Dm644 "${srcdir}"/duplicati-user.service    -t "${pkgdir}"/usr/lib/systemd/user/
+  install -Dm644 "${srcdir}"/duplicati.sysusers        -t "${pkgdir}"/usr/lib/sysusers.d/
+  install -Dm644 "${srcdir}"/duplicati.tmpfiles.conf   -t "${pkgdir}"/usr/lib/tmpfiles.d/
 }

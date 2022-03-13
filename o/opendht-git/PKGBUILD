@@ -4,7 +4,7 @@
 
 pkgname=opendht-git
 pkgver=2.3.3.r2.gf590980c
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="C++14 implementation of the Kademlia DHT (Distributed Hash Table)"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)

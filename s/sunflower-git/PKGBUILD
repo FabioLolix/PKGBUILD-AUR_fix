@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=sunflower-git
-pkgver=0.4.62.r146.gbe06112a
+pkgver=0.4.62.r211.g52f1a0d2
 pkgrel=1
 pkgdesc="Small and highly customizable twin-panel file manager for Linux with support for plugins"
 arch=(any)
@@ -12,9 +12,9 @@ makedepends=(git python-setuptools libnotify)
 optdepends=('libnotify'
             'python-mutagen: audio-metadata support'
             'gvfs: mount-management')
-provide=(sunflower)
+provides=(sunflower)
 conflicts=(sunflower)
-source=("${pkgname%-git}::git+https://github.com/MeanEYE/Sunflower.git")
+source=("${pkgname%-git}::git+https://github.com/MeanEYE/Sunflower.git#branch=v0.5")
 sha256sums=('SKIP')
 
 pkgver() {

@@ -9,7 +9,7 @@ pkgdesc="An implementation of the board game Nine Men's Morris"
 arch=('i686' 'x86_64')
 url="http://nine-mens-morris.net/"
 license=('GPL3')
-depends=('gtk2' 'gconf' 'boost-libs')
+depends=('gtk2' 'boost-libs')
 makedepends=('intltool' 'boost')
 source=("http://www.nine-mens-morris.net/data/${pkgname}-${pkgver}.tar.bz2"
         "http://deb.debian.org/debian/pool/main/m/morris/morris_${pkgver}-6.debian.tar.xz")

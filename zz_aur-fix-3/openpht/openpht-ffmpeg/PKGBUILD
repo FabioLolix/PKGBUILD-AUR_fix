@@ -2,31 +2,31 @@
 # Contributor: Jeff Keyte <jeff@keyte.me>
 
 pkgname=openpht-ffmpeg
-pkgver=2.8.11
+pkgver=2.8.14
 pkgrel=2
 pkgdesc='FFMPEGmodified for OpenPHT 1.8'
 arch=('i686' 'x86_64')
 url='http://ffmpeg.org'
 license=('GPL2')
-openpht='v1.8.0.148-573b6d73'
-depends=('alsa-lib' 'avahi' 'boost-libs' 'curl' 'expat' 'freetype2' 'fribidi'
-         'gcc-libs' 'glew' 'glibc' 'glu' 'libcdio' 'libgl' 'libjpeg' 'libmad'
-         'libmicrohttpd' 'libmpeg2' 'libpng' 'libpulse' 'libsamplerate' 'llvm-libs'
-         'libssh' 'libtiff' 'libusb-compat' 'libva' 'libvdpau' 'libx11'
-         'libxext' 'libxrandr' 'lzo' 'pcre' 'python2' 'sdl' 'sdl_image'
-         'sdl_mixer' 'sqlite' 'smbclient' 'taglib' 'tinyxml' 'yajl' 'zlib')
-makedepends=('boost' 'cmake' 'doxygen' 'svn' 'java-environment'
-             'libcec' 'libplist' 'nasm' 'swig' 'unzip' 'zip')
+_openpht='v1.8.0b'
+#depends=('alsa-lib' 'avahi' 'curl' 'expat' 'freetype2' 'fribidi'
+#         'gcc-libs' 'glew' 'glibc' 'glu' 'libcdio' 'libgl' 'libjpeg' 'libmad'
+#         'libmicrohttpd' 'libmpeg2' 'libpng' 'libpulse' 'libsamplerate' 'llvm-libs'
+#         'libssh' 'libtiff' 'libusb-compat' 'libva' 'libvdpau' 'libx11'
+#         'libxext' 'libxrandr' 'lzo' 'pcre' 'sdl' 'sdl_image'
+#         'sdl_mixer' 'sqlite' 'smbclient' 'taglib' 'tinyxml' 'yajl' 'zlib')
+depends=(libvorbis)
+makedepends=('svn'
+             'libcec' 'libplist' 'yasm' 'swig' 'unzip' 'zip')
 optdepends=('libplist: AirPlay support'
             'libcec: Pulse-Eight USB-CEC adapter support'
             'pulseaudio: PulseAudio support')
 source=("http://ffmpeg.org/releases/ffmpeg-${pkgver}.tar.bz2"
-  'openpht.conf'
-)
+        'openpht.conf')
 
-prepare() {
-  svn export https://github.com/RasPlex/OpenPHT.git/tags/"${openpht}"/lib/ffmpeg/patches "${srcdir}"/ffmpeg-"${pkgver}"/patches
-}
+#prepare() {
+#  svn export https://github.com/RasPlex/OpenPHT.git/tags/"${_openpht}"/lib/ffmpeg/patches "${srcdir}"/ffmpeg-"${pkgver}"/patches
+#}
 
 build() {
   cd ffmpeg-"${pkgver}"
@@ -39,5 +39,5 @@ package() {
   make DESTDIR="${pkgdir}" install
   install -D -m 644 "${srcdir}"/openpht.conf "${pkgdir}"/etc/ld.so.conf.d/openpht.conf
 }
-sha256sums=('9987e0f6b1f66311390f807a0c18ad9c90652b5097cff17b3dcbeabdd89f8d32'
-  '290ab6ad8ad388b0911e2aad4a5b297d273616698065f47ee70e66358405ba8f')
+sha256sums=('d61ba18692eb3255b2369936e23a78fe243983d13ec81ff574f4072a3d1dddbc'
+            '290ab6ad8ad388b0911e2aad4a5b297d273616698065f47ee70e66358405ba8f')

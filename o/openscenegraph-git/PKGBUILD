@@ -4,7 +4,7 @@
 
 pkgname=openscenegraph-git
 pkgver=3.6.5.r103.g06558a5dd
-pkgrel=1
+pkgrel=2
 pkgdesc="An open source, high performance real-time graphics toolkit"
 arch=(x86_64)
 url="http://www.openscenegraph.org"

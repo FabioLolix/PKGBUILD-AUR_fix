@@ -33,5 +33,5 @@ VAR2=t
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
-echo "Done G"
+echo "Done T"
 

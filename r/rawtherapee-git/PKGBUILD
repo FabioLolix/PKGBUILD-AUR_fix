@@ -2,7 +2,7 @@
 # Contributor: Lukas Jirkovsky <l.jirkovsky AT gmail.com>
 
 pkgname=rawtherapee-git
-pkgver=5.8.r2854.g1c9d1f522
+pkgver=5.8.r3075.g5502f52f9
 pkgrel=1
 epoch=1
 pkgdesc="A powerful cross-platform raw image processing program"

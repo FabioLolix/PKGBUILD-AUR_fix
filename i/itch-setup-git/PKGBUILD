@@ -1,0 +1,35 @@
+# Maintainer: 
+
+pkgname=itch-setup-git
+pkgver=1.24.0.r6.g48f97b3
+pkgrel=1
+pkgdesc="Installer for the itch.io desktop app"
+arch=(x86_64)
+url="https://itch.io/"
+license=(MIT)
+depends=(gtk3)
+makedepends=(git go npm nodejs-lts-fermium)
+source=("git+https://github.com/itchio/itch-setup.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${srcdir}/${pkgname%-git}"
+  git describe --long | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "${srcdir}/${pkgname%-git}"
+  npm install
+
+  go build \
+    -gcflags "all=-trimpath=${PWD}" \
+    -asmflags "all=-trimpath=${PWD}" \
+    -ldflags "-X main.Version=v${pkgver} -extldflags ${LDFLAGS}" \
+    -buildmode=pie \
+    .
+}
+
+package() {
+  install -Dm755 "bin/itch-setup" "${pkgdir}/usr/bin/itch-setup"
+  install -Dm644 "itch-setup/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}/"
+}

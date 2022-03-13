@@ -1,0 +1,73 @@
+# Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
+
+pkgname=nfs-ganesha-full-git
+pkgver=4.0.3.r0.gc40241d1e
+pkgrel=1
+pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="http://nfs-ganesha.github.io/"
+license=(GPL3)
+depends=(jemalloc liburcu ceph-libs glusterfs nfsidmap dbus xfsprogs)
+makedepends=(git cmake python-sphinx doxygen gssproxy libmspack
+             
+)
+#lizardfs(aur)
+# KVSNS ?
+# Lustre ?
+
+provides=(nfs-ganesha)
+conflicts=(nfs-ganesha)
+source=("git+https://github.com/nfs-ganesha/nfs-ganesha.git"
+        "git+https://github.com/nfs-ganesha/ntirpc.git")
+sha256sums=('SKIP'
+            'SKIP')
+backup=(etc/ganesha/ganesha.conf etc/sysconfig/ganesha)
+
+pkgver() {
+  cd "nfs-ganesha"
+  git describe --long --tags | sed 's/^V//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd "nfs-ganesha"
+  git submodule init
+  git config 'submodule.src/libntirpc.url' "${srcdir}/ntirpc"
+  git submodule update
+
+#  install -d "/src/build"
+}
+
+build() {
+  cd "nfs-ganesha/src"
+  cmake .  -Wno-dev \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DUSE_MAN_PAGE=ON \
+    -DUSE_9P=ON
+
+    #-DUSE_RADOS_RECOV=OFF \
+    #-DRADOS_URLS=OFF \
+    #-DUSE_FSAL_LUSTRE=OFF \
+    #-DUSE_FSAL_LIZARDFS=OFF \
+    #-DUSE_FSAL_CEPH=OFF \
+    #-DUSE_FSAL_GLUSTER=OFF \
+    #-DUSE_FSAL_RGW=OFF \
+
+  make
+}
+
+package() {
+  cd "nfs-ganesha/src"
+  make install DESTDIR="$pkgdir"
+#  mv "$pkgdir"/var/run "$pkgdir"/run
+#  rmdir "$pkgdir"/var
+#  install -d "$pkgdir"/usr/lib/systemd/system "$pkgdir"/etc/sysconfig "$pkgdir"/usr/libexec/ganesha
+#  install src/scripts/ganeshactl/org.ganesha.nfsd.conf "$pkgdir"/etc/dbus-1/system.d/
+#  install src/scripts/systemd/nfs-ganesha.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha.service
+#  install src/scripts/systemd/nfs-ganesha-lock.service.el7 "$pkgdir"/usr/lib/systemd/system/nfs-ganesha-lock.service
+#  install src/scripts/systemd/nfs-ganesha-config.service-in.cmake "$pkgdir"/usr/lib/systemd/system/nfs-ganesha-config.service
+#  install src/scripts/systemd/sysconfig/nfs-ganesha "$pkgdir"/etc/sysconfig/ganesha
+#  install src/scripts/systemd/tmpfiles.d/ganesha.conf "$pkgdir"/etc/tmpfiles.d/ganesha.conf
+#  install src/scripts/nfs-ganesha-config.sh "$pkgdir"/usr/libexec/ganesha
+}

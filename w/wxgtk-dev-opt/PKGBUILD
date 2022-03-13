@@ -4,7 +4,7 @@
 pkgbase=wxgtk-dev-opt
 pkgname=(wxgtk2-dev-opt wxgtk3-dev-opt wxgtk-common-dev-opt)
 pkgver=3.1.5
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 url="https://wxwidgets.org"
 license=('custom:wxWindows')

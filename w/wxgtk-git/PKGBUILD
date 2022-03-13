@@ -2,34 +2,79 @@
 
 _pkgname=wxgtk
 pkgname=$_pkgname-git
-pkgver=r62004.4775853
+pkgver=3.1.5.r1203.g0f8ab824a3
 pkgrel=1
 pkgdesc='Cross-Platform GUI Library - GTK+ port'
 arch=('i686' 'x86_64')
 url='https://www.wxwidgets.org'
 license=('custom: wxWindows Library Licence')
-depends=('gtk3' 'webkitgtk' 'libmspack' 'gst-plugins-bad' 'libnotify')
-makedepends=('git' 'cppunit' 'glu')
-provides=("$_pkgname")
-conflicts=("$_pkgname")
-source=("${_pkgname}::git+https://github.com/wxWidgets/wxWidgets.git")
-sha256sums=("SKIP")
+depends=('gtk3' 'gst-plugins-bad' 'libnotify')
+makedepends=('git' 'glu')
+#provides=("$_pkgname")
+#conflicts=("$_pkgname")
+source=("wxwidgets::git+https://github.com/wxWidgets/wxWidgets.git"
+        'make-abicheck-non-fatal.patch'
+        'wxGTK-collision.patch'
+        "git+https://github.com/wxWidgets/Catch.git"
+        "git+https://github.com/wxWidgets/pcre.git"
+        "git+https://github.com/wxWidgets/nanosvg")
+sha256sums=('SKIP'
+            '214c2d9211e3505e94008747352f5fa07203d4d9087535985a1b6084d4e40ac7'
+            '48b528acbbbbb0bc409c1efed04a0a055a5c81393ae3133c6339aee6821acfe5'
+            'SKIP'
+            'SKIP'
+            'SKIP')
 
 pkgver() {
-  cd $_pkgname
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  cd wxwidgets
+  #printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd wxwidgets
+  git config submodule.3rdparty/catch.url "${srcdir}/Catch"
+  git submodule update --init 3rdparty/catch
+
+  git config submodule.3rdparty/pcre.url "${srcdir}/pcre"
+  git submodule update --init 3rdparty/pcre
+
+  git config submodule.3rdparty/nanosvg.url "${srcdir}/nanosvg"
+  git submodule update --init 3rdparty/nanosvg
+
+  patch -Np1 -i "${srcdir}/wxGTK-collision.patch"
+
+  # C++ ABI check is too strict and breaks with GCC 5.1
+  # https://bugzilla.redhat.com/show_bug.cgi?id=1200611
+  patch -Np1 -i "${srcdir}/make-abicheck-non-fatal.patch"
 }
 
 build() {
-  cd $_pkgname
+  cd wxwidgets
   ./autogen.sh
-  ./configure --prefix=/usr --with-gtk=3 --enable-stl --with-libmspack
+  ./configure \
+    --prefix=/usr \
+    --libdir=/usr/lib \
+    --with-gtk=3 \
+    --with-opengl \
+    --enable-unicode \
+    --enable-graphics_ctx \
+    --enable-mediactrl \
+    --enable-webview \
+    --with-regex=builtin \
+    --with-libpng=sys \
+    --with-libxpm=sys \
+    --with-libjpeg=sys \
+    --with-libtiff=sys \
+    --disable-precomp-headers
   make
   make -C locale allmo
 }
 
 package() {
-  cd $_pkgname
+  cd wxwidgets
   make DESTDIR="$pkgdir" install
+  mv "${pkgdir}/usr/bin/wx-config-3.1" "${pkgdir}/usr/bin/wx-config-gtk3-3.1"
+
   install -D -m644 docs/licence.txt $pkgdir/usr/share/licenses/$pkgname/LICENSE
 }

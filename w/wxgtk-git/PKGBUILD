@@ -1,17 +1,17 @@
-# Maintainer: Peter Mattern <pmattern at arcor dot de>
+# Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Peter Mattern <pmattern at arcor dot de>
 
-_pkgname=wxgtk
-pkgname=$_pkgname-git
+pkgname=wxgtk-git
 pkgver=3.1.5.r1546.g1c5e66a12c
 pkgrel=1
-pkgdesc='Cross-Platform GUI Library - GTK+ port'
-arch=('i686' 'x86_64')
+pkgdesc="GTK+3 implementation of wxWidgets API for GUI"
+arch=(x86_64)
 url='https://www.wxwidgets.org'
 license=('custom: wxWindows Library Licence')
-depends=('gtk3' 'gst-plugins-bad' 'libnotify')
-makedepends=('git' 'glu')
-#provides=("$_pkgname")
-#conflicts=("$_pkgname")
+depends=(gtk3 gst-plugins-bad libnotify libsecret)
+makedepends=(git glu)
+provides=(wxgtk3 wxgtk-common)
+conflicts=(wxgtk3 wxgtk-common wxgtk2)
 source=("wxwidgets::git+https://github.com/wxWidgets/wxWidgets.git"
         'make-abicheck-non-fatal.patch'
         'wxGTK-collision.patch'
@@ -27,7 +27,6 @@ sha256sums=('SKIP'
 
 pkgver() {
   cd wxwidgets
-  #printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
   git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 

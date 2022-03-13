@@ -10,6 +10,8 @@ url="https://itch.io/"
 license=(MIT)
 depends=(gtk3)
 makedepends=(git go npm nodejs-lts-fermium)
+provides=(itch-setup)
+conflicts=(itch-setup)
 _itchver=25.5.1
 source=("git+https://github.com/itchio/itch-setup.git"
         "itch-${_itchver}.tar.gz::https://github.com/itchio/itch/archive/refs/tags/v${_itchver}.tar.gz"

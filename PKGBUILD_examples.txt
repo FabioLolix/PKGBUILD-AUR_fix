@@ -51,6 +51,15 @@ pkgver() {
 	printf "r%s" "$(svnversion | tr -d 'A-z')"
 
 
+# Git fixed commit from Arch pkgbuilds
+
+  git describe --tags | sed 's/^v//;s/-/+/g'
+
+
+# Exclude a tag (i.e. continuous, nightly) with
+
+--exclude continuous
+
 
 # Git submodules configuration
 
@@ -95,6 +104,7 @@ package() {
 
   install -D LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
   install -D README.MD -t "${pkgdir}/usr/share/doc/${pkgname}"
+  install -D doc/man/*.1 "${pkgdir}"/usr/share/man/man1/*.1
   ln -s /opt/${pkgname}/${pkgname} ${pkgdir}/usr/bin/${pkgname}
 }
 

@@ -1,0 +1,46 @@
+# Maintainer: FabioLolix
+
+pkgname=inertial-sense-sdk-git
+pkgver=1.8.5.r0.g68893b02
+pkgrel=1
+pkgdesc=""
+arch=(x86_64 i686 arm armv6h armv7h aarch64)
+url="https://github.com/inertialsense/inertial-sense-sdk"
+license=(MIT)
+depends=()
+makedepends=(git cmake)
+checkdepends=()
+optdepends=()
+provides=(inertial-sense-sdk)
+conflicts=(inertial-sense-sdk)
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("git+https://github.com/inertialsense/inertial-sense-sdk.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd inertial-sense-sdk
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd inertial-sense-sdk
+  [[ -d build ]] || mkdir build
+}
+
+build() {
+  cd inertial-sense-sdk/build
+  cmake .. -Wno-dev \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  make
+}
+
+package() {
+  cd inertial-sense-sdk/build
+  make DESTDIR="${pkgdir}" install
+  install -D LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}

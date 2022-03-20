@@ -1,21 +1,23 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
-pkgname=cyan-git
-pkgver=r1039.g52d22e9
+pkgname=cyan-converter-git
+pkgver=r482.gb8fb7a9
 pkgrel=1
 pkgdesc="Open source prepress color converter and image editor"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://cyan.fxarena.net/"
-license=(GPL2)
+license=('custom: CeCILL')
 depends=(qt5-base imagemagick)
 makedepends=(git cmake)
-source=("git+https://github.com/rodlie/cyan.git")
+provides=(cyan-converter)
+conflicts=(cyan-converter)
+source=("cyan-converter::git+https://github.com/rodlie/cyan.git")
 sha256sums=('SKIP')
 
 pkgver() {
   cd "${srcdir}/${pkgname%-git}"
   printf "r%s.g%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-#  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  #git describe --long --tags --exclude continuous | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare(){
@@ -26,7 +28,7 @@ prepare(){
 build() {
   cd "${srcdir}/${pkgname%-git}/build"
   cmake .. \
-    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr
 
   make
@@ -35,4 +37,5 @@ build() {
 package() {
   cd "${srcdir}/${pkgname%-git}/build"
   make DESTDIR="${pkgdir}" install
+  install -D ../LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

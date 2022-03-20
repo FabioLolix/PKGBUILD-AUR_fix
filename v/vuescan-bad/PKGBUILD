@@ -1,6 +1,6 @@
 
 pkgname=vuescan-bin
-pkgver=9.7.80
+pkgver=9.7.82
 pkgrel=1
 pkgdesc="A powerful proprietary scanning tool developed by Hamrick Software"
 arch=(i686 x86_64 armv6h aarch64)

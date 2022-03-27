@@ -1,19 +1,19 @@
 # Maintainer: robertfoster
+
 pkgname=abyss-engine-git
-pkgver=r221.79be7ba
+pkgver=r243.811c452
 pkgrel=1
 pkgdesc="A game engine designed to run games similar to 2000's style ARPGs such as Diablo II"
 arch=('i686' 'x86_64')
 url="https://github.com/AbyssEngine/AbyssEngine"
 license=('GPL3')
 depends=('cppzmq' 'ffmpeg' 'lua' 'sdl2_ttf' 'spdlog' 'sol2')
-makedepends=('cmake' 'git')
+makedepends=('cmake' 'git' abseil-cpp casclib stormlib lua-lpeg argh)
 provides=("${pkgname%-git}" "opendiablo2-git")
 conflicts=("${pkgname%-git}" "opendiablo2-git")
 source=("${pkgname%-git}::git+${url}"
-  "opendiablo2::git+https://github.com/AbyssEngine/OpenDiablo2"
-  "opendiablo2.sh"
-)
+        "opendiablo2::git+https://github.com/AbyssEngine/OpenDiablo2"
+        "opendiablo2.sh")
 install="${pkgname%-git}.install"
 
 sha256sums=('SKIP'
@@ -35,16 +35,14 @@ prepare() {
 }
 
 build() {
-  cd "${srcdir}/${pkgname%-git}"
-  cd build
+  cd "${srcdir}/${pkgname%-git}/build"
   cmake .. \
     -DCMAKE_INSTALL_PREFIX=/usr
   make
 }
 
 package() {
-  cd "${srcdir}/${pkgname%-git}"
-  cd build
+  cd "${srcdir}/${pkgname%-git}/build"
   make DESTDIR="$pkgdir" install
   mkdir -p "${pkgdir}/usr/share"
   cp -r "${srcdir}/opendiablo2" \

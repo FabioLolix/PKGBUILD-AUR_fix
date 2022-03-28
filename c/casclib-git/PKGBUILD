@@ -11,6 +11,7 @@ depends=(gcc-libs)
 makedepends=(git cmake)
 provides=(casclib)
 conflicts=(casclib)
+options=(staticlibs)
 source=("git+https://github.com/ladislav-zezula/CascLib.git")
 sha256sums=('SKIP')
 
@@ -28,6 +29,7 @@ build() {
   cd "CascLib/build"
   cmake .. \
     -DCMAKE_BUILD_TYPE=None \
+    -DCASC_BUILD_STATIC_LIB=ON \
     -DCMAKE_INSTALL_PREFIX=/usr
 	make
 }

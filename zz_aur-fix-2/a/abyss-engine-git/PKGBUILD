@@ -8,7 +8,7 @@ arch=('i686' 'x86_64')
 url="https://github.com/AbyssEngine/AbyssEngine"
 license=('GPL3')
 depends=('cppzmq' 'ffmpeg' 'lua' 'sdl2_ttf' 'spdlog' 'sol2')
-makedepends=('cmake' 'git' abseil-cpp casclib stormlib lua-lpeg argh)
+makedepends=('cmake' 'git' abseil-cpp casclib stormlib casclib lua-lpeg argh gtest)
 provides=("${pkgname%-git}" "opendiablo2-git")
 conflicts=("${pkgname%-git}" "opendiablo2-git")
 source=("${pkgname%-git}::git+${url}"
@@ -36,7 +36,7 @@ prepare() {
 
 build() {
   cd "${srcdir}/${pkgname%-git}/build"
-  cmake .. \
+  cmake .. -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr
   make
 }

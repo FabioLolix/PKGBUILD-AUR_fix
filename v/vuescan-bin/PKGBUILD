@@ -111,8 +111,18 @@ package() {
   mv "${pkgdir}"/usr/bin/* "${pkgdir}"/usr/lib/"${pkgname}"
   ln -s /usr/lib/"${pkgname}"/vuescan "${pkgdir}"/usr/bin/vuescan
 
-  # Copy the ocr_* files
-  cp "${srcdir}"/ocr_* "${pkgdir}"/usr/lib/"${pkgname}"
+
+  cd "${pkgdir}"/usr/lib/"${pkgname}"
+  # Copy the ocr-* files
+  cp "${srcdir}"/ocr-*$(date +%F-%H).bin ./
+  # Remove date
+  for i in ./ocr-*$(date +%F-%H).bin; do
+    # Remove date suffix in the filename like ocr-fr-2022-03-28-00.bin
+    mv "$i" "${i/%-$(date +%F-%H).bin/.bin}"
+    i="${i/%-$(date +%F-%H).bin/.bin}"
+    # Replace underscores by dashes to be recognized by vuescan
+    mv "$i" "${i//-/_}"
+  done
 
   install -Dm644 "${srcdir}/vuescan-LICENSE.txt" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE.txt"
 }

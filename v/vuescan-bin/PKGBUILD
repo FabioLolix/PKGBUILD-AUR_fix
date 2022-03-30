@@ -1,9 +1,10 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: wget
 # Contributor: ninian <mcfadzean.org.uk ta linux>
 
 pkgname=vuescan-bin
 pkgver=9.7.82
-pkgrel=1
+pkgrel=2
 pkgdesc="A powerful proprietary scanning tool developed by Hamrick Software"
 arch=(i686 x86_64 armv6h aarch64)
 url="https://www.hamrick.com/"
@@ -105,7 +106,7 @@ package() {
   # now being in lib.
   install -dm755 "${pkgdir}/usr/lib/vuescan"
   mv "${pkgdir}"/usr/bin/* "${pkgdir}/usr/lib/vuescan"
-  ln -s /usr/lib/"${pkgname}"/vuescan "${pkgdir}/usr/bin/vuescan"
+  ln -s /usr/lib/vuescan/vuescan "${pkgdir}/usr/bin/vuescan"
 
 
   cd "${pkgdir}/usr/lib/vuescan"

@@ -9,7 +9,6 @@ url="http://www.zezula.net/en/casc/casclib.html"
 license=(MIT)
 depends=(gcc-libs)
 makedepends=(cmake)
-options=(staticlibs)
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/ladislav-zezula/CascLib/archive/refs/tags/${pkgver}.tar.gz")
 sha256sums=('1c77464b7b7dbf1f6a14cf220dc0eb6c9a36a7006ad8a77ae2803fe4bfd3058c')
 
@@ -22,7 +21,7 @@ build() {
   cd "CascLib-${pkgver}/build"
   cmake .. \
     -DCMAKE_BUILD_TYPE=None \
-    -DCASC_BUILD_STATIC_LIB=ON \
+    -DCASC_BUILD_STATIC_LIB=OFF \
     -DCMAKE_INSTALL_PREFIX=/usr
 	make
 }

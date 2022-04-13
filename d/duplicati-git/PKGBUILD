@@ -1,6 +1,6 @@
 
 pkgname=duplicati-git
-pkgver=2.0.6.101.2.0.6.101_canary_2022.03.13.r0.g2f3b0e83a
+pkgver=2.0.6.102.2.0.6.102_canary_2022.04.06.r0.gf3bc7ec3a
 pkgrel=1
 pkgdesc="FOSS backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)

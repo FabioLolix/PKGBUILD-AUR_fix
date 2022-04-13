@@ -131,12 +131,12 @@ VAR2=c
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
-  VAR=cyan
+  VAR=cyan-converter
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
-  VAR=cyan-git
+  VAR=cyan-converter-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
@@ -466,6 +466,11 @@ VAR2=p
 #    makepkg --printsrcinfo > .SRCINFO
 #    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+  VAR=python2-pillow
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=python2-reportlab
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -550,6 +555,11 @@ VAR2=s
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO,serpent-browser.desktop} "$DEST/$VAR2/$VAR"
+
+  VAR=shotwell-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
   VAR=sk1
   cd "$BASE/$VAR2/$VAR"

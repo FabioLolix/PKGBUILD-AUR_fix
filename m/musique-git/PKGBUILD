@@ -12,7 +12,7 @@ pkgdesc="A finely crafted music player"
 arch=(x86_64)
 url="https://flavio.tordini.org/musique"
 license=(GPL3)
-depends=(qt5-base taglib mpv)
+depends=(qt5-base qt5-declarative taglib mpv)
 makedepends=(git qt5-tools)
 source=("git+https://github.com/flaviotordini/musique.git"
         "git+https://github.com/flaviotordini/http.git"

@@ -12,6 +12,8 @@ makedepends=(git gtk2 librsvg ocaml-num camlp4 lablgtk2)
 optdepends=('librsvg: GUI support'
             'gtk2: GUI support')
 backup=(etc/conf.d/mldonkey)
+provides=(mldonkey)
+conflicts=(mldonkey)
 source=("git+https://github.com/ygrek/mldonkey.git"
         "https://raw.githubusercontent.com/gentoo/gentoo/master/net-p2p/mldonkey/files/cpp17-byte-namespace.patch"
         "https://github.com/ygrek/mldonkey/pull/66/commits/20ff84c185396f3d759cf4ef46b9f0bd33a51060.patch"

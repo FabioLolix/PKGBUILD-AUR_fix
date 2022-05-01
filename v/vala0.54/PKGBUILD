@@ -3,8 +3,8 @@
 # Contributor: Ionut Biru <ibiru@archlinux.org>
 # Contributor: Timm Preetz <timm@preetz.us>
 
-pkgname=vala0.48
-pkgver=0.48.24
+pkgname=vala0.54
+pkgver=0.54.8
 pkgrel=1
 pkgdesc="Compiler for the GObject type system"
 url="https://wiki.gnome.org/Projects/Vala"
@@ -15,8 +15,8 @@ makedepends=(libxslt vala git help2man autoconf-archive)
 checkdepends=(dbus libx11 gobject-introspection)
 provides=(vala valadoc libvala-${pkgver%.*}.so libvaladoc-${pkgver%.*}.so)
 conflicts=(vala valadoc)
-source=("https://download.gnome.org/sources/vala/0.48/vala-${pkgver}.tar.xz")
-sha256sums=('3649ef84573b6865fc3470640ee603720099eb915b39faad19b7498de1a7df24')
+source=("https://download.gnome.org/sources/vala/0.54/vala-${pkgver}.tar.xz")
+sha256sums=('edfb3e79486a4bf48cebaea9291e57fc77da9322b6961e9549df6d973d04bc80')
 
 build() {
   cd "vala-$pkgver"

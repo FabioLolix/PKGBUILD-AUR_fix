@@ -86,6 +86,11 @@ VAR2=b
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+  VAR=bottles-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=bubbleupnpserver
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

@@ -90,8 +90,13 @@ pkgver() {
 
   make install INSTALL_ROOT="${pkgdir}/"
 
+  export CC=/usr/bin/gcc-8 CXX=/usr/bin/g++-8
 
+  export CC=/usr/bin/gcc-9 CXX=/usr/bin/g++-9
 
+  export CC=/usr/bin/gcc-10 CXX=/usr/bin/g++-10
+
+  export CC=/usr/bin/gcc-11 CXX=/usr/bin/g++-11
 
 build() {
   cd "${pkgname%-git}"
@@ -104,7 +109,7 @@ package() {
 
   install -D LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
   install -D README.MD -t "${pkgdir}/usr/share/doc/${pkgname}"
-  install -D doc/man/*.1 "${pkgdir}"/usr/share/man/man1/*.1
+  install -D doc/man/*.1 -t "${pkgdir}"/usr/share/man/man1/
   ln -s /opt/${pkgname}/${pkgname} ${pkgdir}/usr/bin/${pkgname}
 }
 

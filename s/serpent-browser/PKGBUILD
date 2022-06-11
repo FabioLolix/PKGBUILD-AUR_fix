@@ -4,7 +4,7 @@
 # Contributor: Frederic Bezies <fredbezies at gmail dot com>
 
 pkgname=serpent-browser
-pkgver=2021.12.14
+pkgver=2022.01.27
 pkgrel=1
 pkgdesc="Unbranded version of Basilisk web browser"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
@@ -20,7 +20,7 @@ conflicts=(basilisk)
 options=(!emptydirs !makeflags)
 source=("http://archive.palemoon.org/source/basilisk-${pkgver}-source.tar.xz"
         'serpent-browser.desktop') #{,.sig}
-sha256sums=('cf5305a6d232e6a8493be521fa45b110edf9d911f04f029dd4b433a726a84e49'
+sha256sums=('31721a0e8ee54fe90b71168bd2028e9c83165ba038886e1f493065f22987496f'
             'ba1502352e069f6945519228ef776e4c2eadaf5165132ec9edcbe71135b7c848')
 
 # (the public key 3DAD8CD107197488D2A2A0BD40481E7B8FCF9CEC is not trusted)

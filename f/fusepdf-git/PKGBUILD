@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=fusepdf-git
-pkgver=2.0.0.r6.gf562a51
+pkgver=2.2.0.r1.gc89cec7
 pkgrel=1
 pkgdesc="Merge PDF documents"
 arch=(x86_64)
@@ -28,5 +28,4 @@ build() {
 package() {
   cd fusepdf
   make install INSTALL_ROOT="${pkgdir}/"
-  ln -s /usr/bin/FusePDF "${pkgdir}/usr/bin/fusepdf"
 }

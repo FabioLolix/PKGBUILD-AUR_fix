@@ -8,6 +8,7 @@ arch=(x86_64)
 url='https://github.com/GeertJohan/go.rice'
 license=("BSD")
 makedepends=(go)
+options=(!lto)
 source=("$pkgname-$pkgver.tar.gz::https://github.com/GeertJohan/$pkgname/archive/v$pkgver.tar.gz")
 sha256sums=('540cb64258fc2422664c73454b5dbaac5487a45906c935d25285a2a60085d877')
 

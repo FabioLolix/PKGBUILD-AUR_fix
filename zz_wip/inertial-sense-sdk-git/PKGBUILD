@@ -1,7 +1,7 @@
 # Maintainer: FabioLolix
 
 pkgname=inertial-sense-sdk-git
-pkgver=1.8.5.r0.g68893b02
+pkgver=1.8.6.r0.gc436d389
 pkgrel=1
 pkgdesc=""
 arch=(x86_64 i686 arm armv6h armv7h aarch64)

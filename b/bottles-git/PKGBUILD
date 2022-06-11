@@ -11,30 +11,30 @@ url="https://usebottles.com/"
 license=(GPL3)
 depends=(
   cabextract
-  dconf 
-  gtk3 
+  dconf
+  gtk3
   gtksourceview4
-  hicolor-icon-theme 
+  hicolor-icon-theme
   icoextract
   lib32-gnutls
-  libhandy 
-  p7zip 
-  patool 
-  python 
-  python-gobject 
+  libhandy
+  p7zip
+  patool
+  python
+  python-gobject
   python-markdown
-  python-requests 
-  python-yaml 
+  python-requests
+  python-yaml
   webkit2gtk
-  wine 
+  wine
   xorg-xdpyinfo
   )
 optdepends=(
   gamemode
-  gvfs 
-  lib32-vkd3d 
-  lib32-vulkan-icd-loader 
-  vkd3d 
+  gvfs
+  lib32-vkd3d
+  lib32-vulkan-icd-loader
+  vkd3d
   vulkan-icd-loader
   )
 makedepends=(meson ninja git)

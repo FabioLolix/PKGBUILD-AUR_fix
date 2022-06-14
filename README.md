@@ -38,8 +38,3 @@ when Pinta pkgbuild was in the AUR it failed to build with CZ_cz language due to
     + for ease of use when git source have uppercase name `${pkgname}::git+url/Name.git ${pkgname%-git}::git+url/Name.git`
 
 * install not common licenses in `${pkgdir}/usr/share/licenses/${pkgname}`, not mandatory to install common licenses; see 'licenses' package
-  
- 
-
-
-

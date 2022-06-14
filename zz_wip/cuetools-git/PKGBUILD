@@ -1,6 +1,6 @@
 
 pkgname=cuetools-git
-pkgver=2.2.1.r12.gc27a4c4
+pkgver=2.2.2.r0.gdd0404d
 pkgrel=1
 pkgdesc="FOSS backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
@@ -35,7 +35,6 @@ prepare() {
   cd cuetools.net
 
   git submodule init
-
   git config submodule.ThirdParty/taglib-sharp.url    "${srcdir}/taglib-sharp"
   git config submodule.ThirdParty/flac.url            "${srcdir}/flac"
   git config submodule.ThirdParty/MAC_SDK.url         "${srcdir}/MAC_SDK"
@@ -43,10 +42,9 @@ prepare() {
   git config submodule.ThirdParty/WavPack.url         "${srcdir}/WavPack"
   git config submodule.ThirdParty/WindowsMediaLib.url "${srcdir}/WindowsMediaLib"
   git config submodule.ThirdParty/FFmpeg.AutoGen.url  "${srcdir}/FFmpeg.AutoGen"
-
   git submodule update --recursive
 
-  #git apply --directory=ThirdParty/flac ThirdParty/submodule_flac_CUETools.patch --verbose
+  git apply --directory=ThirdParty/flac ThirdParty/submodule_flac_CUETools.patch --verbose
   git apply --directory=ThirdParty/MAC_SDK ThirdParty/submodule_MAC_SDK_CUETools.patch --verbose
   git apply --directory=ThirdParty/taglib-sharp ThirdParty/submodule_taglib-sharp_CUETools.patch --verbose
   git apply --directory=ThirdParty/WavPack ThirdParty/submodule_WavPack_CUETools.patch --verbose
@@ -62,7 +60,7 @@ done
 
 build() {
   cd cuetools.net/CUETools
-  #nuget restore
+  nuget restore
 
   msbuild /p:Configuration=Release CUETools.sln
 }

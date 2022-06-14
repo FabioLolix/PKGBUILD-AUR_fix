@@ -1,7 +1,7 @@
 # Maintainer: 
 
 pkgname=pplib-git
-pkgver=7_0_1.r97.g7a4d4f9a
+pkgver=7_0_1.r120.g6ad88fc6
 pkgrel=1
 pkgdesc="Collection of C++ functions and classes"
 arch=(x86_64)

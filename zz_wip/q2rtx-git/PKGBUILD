@@ -1,14 +1,14 @@
 # Maintainer: Your Name <youremail@domain.com>
 
 pkgname=q2rtx-git
-pkgver=1.6.0.r0.g701cf318
+pkgver=1.6.0.r57.g27760349
 pkgrel=1
 pkgdesc=""
 arch=(x86_64)
 url=""
 license=(GPL2)
 depends=()
-makedepends=(git cmake openal libglvnd)
+makedepends=(git cmake openal libglvnd python)
 checkdepends=()
 optdepends=()
 provides=(q2rtx)

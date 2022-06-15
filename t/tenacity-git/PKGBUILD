@@ -17,7 +17,7 @@ groups=(pro-audio)
 depends=(gtk3 wxgtk3-3.1.5 libid3tag lilv lv2 portsmf suil libmad twolame vamp-plugin-sdk libsoxr
          soundtouch portaudio portmidi lame jack)
 makedepends=(git cmake clang sdl2 libsoup libnotify gstreamer gst-plugins-bad-libs
-             ffmpeg4.4 ffmpeg nasm chrpath)
+             ffmpeg4.4 nasm chrpath)
 optdepends=('ffmpeg4.4: additional import/export capabilities')
 provides=(tenacity)
 conflicts=(tenacity)
@@ -48,11 +48,11 @@ build() {
   CC=clang CXX=clang++ cmake \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DFFMPEG_DEFINITIONS:STRING="-Wno-deprecated" \
     -DwxWidgets_CONFIG_EXECUTABLE=/opt/wxgtk-3.1.5/bin/wx-config-gtk3 \
     -DwxWidgets_INCLUDE_DIRS=/opt/wxgtk-3.1.5/include/wx-3.1 \
     -DwxWidgets_LIBRARIES=/opt/wxgtk-3.1.5/lib \
-    audacity_use_ffmpeg:STRING=loaded \
+    -Daudacity_use_ffmpeg:STRING=loaded \
+    -Wno-dev \
     ..
   cmake --build .
   make .

@@ -716,6 +716,11 @@ VAR2=w
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO,wxgtk-3.15.conf} "$DEST/$VAR2/$VAR"
 
+  VAR=wxgtk-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
 echo "Done W"
 
 

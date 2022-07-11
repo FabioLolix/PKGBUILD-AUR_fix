@@ -2,7 +2,7 @@
 # Contributor: Philipp Kühn <p dot kuehn at posteo dot de>
 
 pkgname=sioyek-git
-pkgver=1.4.0.r4.gd65898a
+pkgver=1.4.0.r10.g21da6c7
 pkgrel=1
 epoch=1
 pkgdesc="PDF viewer for research papers and technical books."
@@ -14,9 +14,13 @@ makedepends=(git qt5-3d libmupdf mujs)
 provides=(sioyek)
 conflicts=(sioyek)
 source=("git+https://github.com/ahrm/sioyek.git"
+        "https://github.com/ahrm/sioyek/pull/294/commits/35fa37f9485bf933e754b995902f69d53dac1670.patch"
+        "https://github.com/ahrm/sioyek/pull/294/commits/5b2488e7cd9a454faf0ff488ba97c11f22805e25.patch"
         "git+https://github.com/ArtifexSoftware/mupdf.git"
         "git+https://github.com/madler/zlib.git")
 sha256sums=('SKIP'
+            '2e15edc2e8633d763e638fd222336f66bdf65b643fb8e53721956fde6fcab513'
+            '084bda66ed9359cb6de6633e56d481ccac13ee83648095cf25c25e4a0dc993b1'
             'SKIP'
             'SKIP')
 
@@ -31,17 +35,27 @@ prepare() {
     git config submodule.mupdf.url "${srcdir}/mupdf"
     git config submodule.zlib.url "${srcdir}/zlib"
 	git submodule update
+
+  #patch -Np1 -i ../35fa37f9485bf933e754b995902f69d53dac1670.patch
+  #patch -Np1 -i ../5b2488e7cd9a454faf0ff488ba97c11f22805e25.patch
+
+  git apply ../35fa37f9485bf933e754b995902f69d53dac1670.patch
+  git apply ../5b2488e7cd9a454faf0ff488ba97c11f22805e25.patch
 }
 
 build() {
 	#cd "sioyek/mupdf"
     #make USE_SYSTEM_HARFBUZZ=yes
     #cd ..
-	cd "sioyek"
+	#cd "sioyek"
 
-    sed -i 's/-lmupdf-third -lmupdf-threads -lharfbuzz/-lmupdf-third -lharfbuzz -lfreetype -lgumbo -ljbig2dec -lopenjp2 -ljpeg/' pdf_viewer_build_config.pro
-    qmake-qt5 pdf_viewer_build_config.pro DEFINES+="LINUX_STANDARD_PATHS"
-    make
+    #sed -i 's/-lmupdf-third -lmupdf-threads -lharfbuzz/-lmupdf-third -lharfbuzz -lfreetype -lgumbo -ljbig2dec -lopenjp2 -ljpeg/' pdf_viewer_build_config.pro
+    #qmake-qt5 pdf_viewer_build_config.pro DEFINES+="LINUX_STANDARD_PATHS"
+    #make
+
+  cd "sioyek"
+  sed -i 's/-lmupdf-third -lmupdf-threads -lharfbuzz/-lmupdf-third -lharfbuzz -lfreetype -lgumbo -ljbig2dec -lopenjp2 -ljpeg/' pdf_viewer_build_config.pro
+  ./build_linux.sh
 }
 
 package() {

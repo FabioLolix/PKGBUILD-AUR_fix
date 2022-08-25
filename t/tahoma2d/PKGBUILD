@@ -1,5 +1,6 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 # Contributor: Campbell Barton <ideasman42@gmail.com>
+# Contributor: Arthus Belliqueux <contact@arthus.net>
 
 export GIT_LFS_SKIP_SMUDGE=1
 
@@ -30,6 +31,19 @@ build() {
   ./configure --with-pic --disable-jbig
   make
   popd
+
+  # substitute binaries names
+
+  sed -i 's/(tcleanup/(tdcleanup/g' "${pkgname%-git}"/toonz/sources/tcleanupper/CMakeLists.txt
+  sed -i 's/(tcomposer/(tdcomposer/g' "${pkgname%-git}"/toonz/sources/tcomposer/CMakeLists.txt
+  sed -i 's/(tconverter/(tdconverter/g' "${pkgname%-git}"/toonz/sources/tconverter/CMakeLists.txt
+  sed -i 's/(tfarmcontroller/(tdfarmcontroller/g' "${pkgname%-git}"/toonz/sources/toonzfarm/tfarmcontroller/CMakeLists.txt
+  sed -i 's/(tfarmserver/(tdfarmserver/g' "${pkgname%-git}"/toonz/sources/toonzfarm/tfarmserver/CMakeLists.txt
+   
+  sed -i 's/(lzocompress/(tdlzocompress/g'  "${pkgname%-git}"/thirdparty/lzo/driver/CMakeLists.txt
+  sed -i 's/(lzodecompress/(tdlzodecompress/g'  "${pkgname%-git}"/thirdparty/lzo/driver/CMakeLists.txt
+     
+  sed -i 's/TARGET_FILE:tcleanup/TARGET_FILE:tdcleanup/g; s/TARGET_FILE:tcomposer/TARGET_FILE:tdcomposer/g; s/TARGET_FILE:tconverter/TARGET_FILE:tdconverter/g; s/TARGET_FILE:tfarmcontroller/TARGET_FILE:tdfarmcontroller/g; s/TARGET_FILE:tfarmserver/TARGET_FILE:tdfarmserver/g; s/TARGET_FILE:lzocompress/TARGET_FILE:tdlzocompress/g; s/TARGET_FILE:lzodecompress/TARGET_FILE:tdlzodecompress/g' "${pkgname%-git}"/toonz/sources/toonz/CMakeLists.txt
 
   cd build
   cmake -G "Unix Makefiles" ../"${pkgname%-git}"/toonz/sources \

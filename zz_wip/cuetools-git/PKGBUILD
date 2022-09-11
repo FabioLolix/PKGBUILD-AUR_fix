@@ -1,9 +1,9 @@
 
 pkgname=cuetools-git
-pkgver=2.2.2.r0.gdd0404d
+pkgver=2.2.2.r9.g5208391
 pkgrel=1
 pkgdesc="FOSS backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers"
-arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
+arch=(x86_64)
 url="https://www.duplicati.com/"
 license=(LGPL)
 depends=(mono )
@@ -16,8 +16,10 @@ source=("git+https://github.com/gchudov/cuetools.net.git"
         "git+https://github.com/dbry/WavPack.git"
         "git+https://github.com/gchudov/WindowsMediaLib.git"
         "git+https://github.com/Ruslan-B/FFmpeg.AutoGen.git"
+        "git+https://github.com/f-spot/raw-samples.git"
         )
 sha256sums=('SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -42,27 +44,24 @@ prepare() {
   git config submodule.ThirdParty/WavPack.url         "${srcdir}/WavPack"
   git config submodule.ThirdParty/WindowsMediaLib.url "${srcdir}/WindowsMediaLib"
   git config submodule.ThirdParty/FFmpeg.AutoGen.url  "${srcdir}/FFmpeg.AutoGen"
-  git submodule update --recursive
+
+  git config submodule.ThirdParty/taglib-sharp/src/TaglibSharp.Tests/raw-samples.url    "${srcdir}/raw-samples"
+  git submodule update
 
   git apply --directory=ThirdParty/flac ThirdParty/submodule_flac_CUETools.patch --verbose
   git apply --directory=ThirdParty/MAC_SDK ThirdParty/submodule_MAC_SDK_CUETools.patch --verbose
   git apply --directory=ThirdParty/taglib-sharp ThirdParty/submodule_taglib-sharp_CUETools.patch --verbose
   git apply --directory=ThirdParty/WavPack ThirdParty/submodule_WavPack_CUETools.patch --verbose
   git apply --directory=ThirdParty/WindowsMediaLib ThirdParty/submodule_WindowsMediaLib_CUETools.patch --verbose
-
-
-for folder in /*
-  do
-    nuget restore || true
-done
-
 }
 
 build() {
   cd cuetools.net/CUETools
-  nuget restore
 
-  msbuild /p:Configuration=Release CUETools.sln
+  dotnet publish -f netcoreapp3.1 --no-self-contained -r linux-x64
+
+  #nuget restore
+  #msbuild /p:Configuration=Release CUETools.sln
 }
 
 package() {

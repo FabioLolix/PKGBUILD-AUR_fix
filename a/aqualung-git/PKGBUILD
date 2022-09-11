@@ -33,7 +33,7 @@ prepare() {
   cd "${srcdir}/${pkgname%-git}"
   # Enlarge MAX_SAMPLERATE
   sed -i 's/MAX_SAMPLERATE 96000/MAX_SAMPLERATE 192000/g' src/core.h
-  sh autogen.sh
+  ./autogen.sh
 }
 
 build() {

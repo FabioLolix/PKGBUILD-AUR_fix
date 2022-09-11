@@ -4,7 +4,7 @@
 # Contributor: Frederic Bezies <fredbezies at gmail dot com>
 
 pkgname=serpent-browser-git
-pkgver=2021.07.19.r0.gf94c0da
+pkgver=2022.08.06.r0.g15de7c4
 pkgrel=1
 pkgdesc="Unbranded version of Basilisk web browser"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
@@ -18,7 +18,7 @@ optdepends=('hunspell: spell checker and morphological analyzer'
 provides=(basilisk)
 conflicts=(basilisk)
 options=(!emptydirs !makeflags)
-source=("${pkgname%-git}::git+https://repo.palemoon.org/MoonchildProductions/Basilisk.git"
+source=("${pkgname%-git}::git+https://repo.palemoon.org/Basilisk-Dev/Basilisk.git#branch=release"
         serpent-browser.desktop
         "git+https://repo.palemoon.org/MoonchildProductions/UXP.git")
 sha256sums=('SKIP'

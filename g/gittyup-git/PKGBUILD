@@ -5,14 +5,14 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gittyup-git
-pkgver=1.1.0.r120.g91dda04
+pkgver=1.1.1.r45.ge237d41
 pkgrel=1
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
 arch=(x86_64)
 license=(MIT)
-depends=(qt5-base cmark libsecret hunspell lua)
-makedepends=(git cmake ninja qt5-tools qt5-translations libgnome-keyring libssh2) #libssh2 detected but not used
+depends=(qt5-base libsecret hunspell lua)
+makedepends=(git cmake ninja qt5-tools qt5-translations libgnome-keyring libssh2 cmark) #libssh2 detected but not used
 optdepends=('git-lfs: git-lfs support'
             'libgnome-keyring: for GNOME Keyring for auth credentials'
             'qt5-translations: translations')
@@ -21,12 +21,14 @@ conflicts=(gittyup)
 source=("${pkgname%-git}::git+https://github.com/Murmele/Gittyup.git"
         "git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/git/git.git"
+        "git+https://github.com/commonmark/cmark.git"
         "git+https://github.com/libssh2/libssh2.git"
         "git+https://github.com/kuba--/zip.git"
         "git+https://github.com/ScintillaOrg/lexilla.git"
         "git+https://github.com/orbitalquark/scintillua.git"
         'gittyup.desktop')
 sha256sums=('SKIP'
+            'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -46,13 +48,23 @@ prepare() {
   git submodule init
   git config 'submodule.dep/libgit2/libgit2.url' "${srcdir}/libgit2"
   git config 'submodule.dep/git/git.url' "${srcdir}/git"
+  git config 'submodule.dep/cmark/cmark.url' "${srcdir}/cmark"
   git config 'submodule.dep/libssh2/libssh2.url' "${srcdir}/libssh2"
   git config 'submodule.test/dep/zip.url' "${srcdir}/zip"
   git config 'submodule.dep/scintilla/lexilla.url' "${srcdir}/lexilla"
   git config 'submodule.dep/scintilla/scintillua.url' "${srcdir}/scintillua"
-  git -c submodule.dep/openssl/openssl.update=none -c submodule.dep/cmark/cmark.update=none -c submodule.dep/hunspell/hunspell.update=none submodule update
+  git -c submodule.dep/openssl/openssl.update=none -c submodule.dep/hunspell/hunspell.update=none submodule update
+
+# -c submodule.dep/cmark/cmark.update=none
 
   install -d build
+
+	sed -i -e 's/cmark_exe/cmark/' src/app/CMakeLists.txt
+	# https://github.com/Murmele/Gittyup/issues/167
+	sed -i \
+		-e '/CONF_DIR/{s!SOURCE!BINARY!;s!/conf!/Resources!}' \
+		-e '/L10N_DIR/{s!/l10n!/Resources/l10n!}' \
+		src/conf/CMakeLists.txt
 }
 
 build() {

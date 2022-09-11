@@ -2,7 +2,7 @@
 # Contributor: Lukas Jirkovsky <l.jirkovsky@gmail.com>
 
 pkgname=linux-test-project
-pkgver=20210927
+pkgver=20220527
 pkgrel=1
 pkgdesc="Collection of tools for testing the Linux kernel and related features"
 arch=(i686 x86_64)
@@ -10,7 +10,7 @@ license=(GPL2)
 url="https://linux-test-project.github.io/"
 depends=(acl bash gawk libcap libtirpc python numactl)
 source=("https://github.com/linux-test-project/ltp/releases/download/${pkgver}/ltp-full-${pkgver}.tar.xz")
-sha256sums=('779e9e5cc9af4f2b3d4cb32f5439ebd635504d2c4591bf900f0942dac290ed15')
+sha256sums=('d635afb5ec7b0de763ab50713baf9fbf65cf089da6e6768f816e4a166cbd17c4')
 
 build() {
   cd "${srcdir}/ltp-full-${pkgver}"

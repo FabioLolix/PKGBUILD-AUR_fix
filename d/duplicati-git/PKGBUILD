@@ -1,6 +1,6 @@
 
 pkgname=duplicati-git
-pkgver=2.0.6.102.2.0.6.102_canary_2022.04.06.r0.gf3bc7ec3a
+pkgver=2.0.6.102.2.0.6.102_canary_2022.04.06.r12.g93a4e2cb6
 pkgrel=1
 pkgdesc="FOSS backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
@@ -12,14 +12,14 @@ optdepends=('notify-sharp: for tray notifications'
             gtk-sharp-2)
 install=duplicati.install
 source=("git+https://github.com/duplicati/duplicati.git"
-        0001-no-gzip-1.patch
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati-no-tar.gz-v3.patch"
         duplicati.service
         duplicati.sysusers
         duplicati.tmpfiles.conf
         duplicati-user.service
         )
 sha256sums=('SKIP'
-            'b8a685c2c8add57e3a5812ba8a74d79eb6de76ad48318c28802b3a25287f8ac2'
+            '32781c14e01a603df80aa88e51ac44b1e968535386ee9420c9a1fd3ae7c6dd7b'
             '2ff538f11370fcdebaf15a46212dde4de9ea2910c3e7e9f3adef1b1d1f7e8d28'
             'b9389b399467f3e02aa8e76bb98f6efbca1166fbc4d0bdf939493f8403462959'
             'b6ca3d280feb753ded94bb44eef821a0dac0c0c7ed7f37dea76d445a64386c86'
@@ -32,7 +32,7 @@ pkgver() {
 
 prepare() {
   cd "duplicati"
-  patch -Np1 -i ../0001-no-gzip-1.patch
+  patch -Np1 -i ../duplicati-no-tar.gz-v3.patch
 }
 
 build() {

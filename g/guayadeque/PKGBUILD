@@ -8,25 +8,31 @@
 
 pkgname=guayadeque
 pkgver=0.4.6
-pkgrel=2
+pkgrel=3
 pkgdesc="Lightweight music player"
 arch=(i686 x86_64)
-url="http://guayadeque.org/"
+url="https://guayadeque.org/"
 license=(GPL3)
-depends=(wxsqlite3 wxgtk3 webkit2gtk taglib gst-plugins-base gst-plugins-good)
+depends=(wxsqlite3 wxwidgets-gtk3 webkit2gtk taglib gst-plugins-base gst-plugins-good)
 makedepends=(cmake)
 optdepends=('gst-libav: additional codecs'
             'gst-plugins-bad: additional codecs'
             'gst-plugins-ugly: additional codecs')
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/anonbeat/guayadeque/archive/v${pkgver}.tar.gz"
-        "https://github.com/anonbeat/guayadeque/commit/6be35ba2153f1c36400b8c535d8ba49292a1f51e.diff")
+        "https://github.com/anonbeat/guayadeque/commit/6be35ba2153f1c36400b8c535d8ba49292a1f51e.diff"
+wxwidgets.patch
+        "https://github.com/anonbeat/guayadeque/commit/a9ecb9d8bf785281ed8ccf292cccf3525ffeb457.patch")
 sha256sums=('3c0d782c6f4aa511c7a635a78742542d130d1a13e20648db886ccfce4e1b9d4f'
-            'ac536bb3aa23fedd7634b31dbb309c0e130c5bd1a3bfbbab096bcc897091363a')
+            'ac536bb3aa23fedd7634b31dbb309c0e130c5bd1a3bfbbab096bcc897091363a'
+            '98ec9ad8481025f83a92008599ad060ca3b5866bd58b42c531774b33f4d88f36'
+            '046883477c149fb78668285cbd7293be343adc3010631ff55ab2eae2dc2d12e0')
+options=(debug)
 
 prepare() {
   cd "${srcdir}/${pkgname}-${pkgver}"
   install -d build-guayadeque
   patch -Np1 -i ../6be35ba2153f1c36400b8c535d8ba49292a1f51e.diff
+  patch -Np1 -i ../wxwidgets.patch
 }
 
 build() {
@@ -36,10 +42,9 @@ build() {
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -D_GUREVISION_:STRING="${pkgrel}" \
-    -DCMAKE_EXE_LINKER_FLAGS=-lwx_gtk3u_aui-3.0 \
-    -DwxWidgets_wxrc_EXECUTABLE=/usr/bin/wxrc-3.0 \
-    -DwxWidgets_CONFIG_EXECUTABLE=/usr/bin/wx-config-gtk3 \
-    -DwxWidgets_INCLUDE_DIRS=/usr/include/wx-3.0
+    -DwxWidgets_wxrc_EXECUTABLE=/usr/bin/wxrc-3.2 \
+    -DwxWidgets_CONFIG_EXECUTABLE=/usr/bin/wx-config \
+    -DwxWidgets_INCLUDE_DIRS=/usr/include/wx-3.2/
   make
 }
 

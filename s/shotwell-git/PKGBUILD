@@ -2,7 +2,7 @@
 # Contributor: gaelic
 
 pkgname=shotwell-git
-pkgver=0.31.3.r161.g285afa5e
+pkgver=0.31.4.r0.g4888c8ed
 pkgrel=1
 pkgdesc="A digital photo organizer designed for the GNOME desktop environment"
 arch=(x86_64)

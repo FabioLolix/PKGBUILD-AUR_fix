@@ -4,7 +4,7 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gitahead-git
-pkgver=2.6.3.r89.g711a963
+pkgver=2.6.3.r91.g81df5b4
 pkgrel=1
 pkgdesc="Graphical Git client"
 url="https://gitahead.github.io/gitahead.com/"

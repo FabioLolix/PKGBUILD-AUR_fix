@@ -5,7 +5,7 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gittyup
-pkgver=1.1.0
+pkgver=1.1.1
 pkgrel=1
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
@@ -18,18 +18,28 @@ optdepends=('git-lfs: git-lfs support'
             'qt5-translations: translations')
 provides=(gittyup)
 conflicts=(gittyup)
-source=("${pkgname%-git}::git+https://github.com/Murmele/Gittyup.git#tag=gittyup_v${pkgver}"
+_commit=57d7aff03c9337db6f28217d5e865eafd1c191f5
+source=("${pkgname%-git}::git+https://github.com/Murmele/Gittyup.git#commit=${_commit}"
         "git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/git/git.git"
         "git+https://github.com/libssh2/libssh2.git"
         "git+https://github.com/kuba--/zip.git"
+        "git+https://github.com/ScintillaOrg/lexilla.git"
+        "git+https://github.com/orbitalquark/scintillua.git"
         'gittyup.desktop')
 sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
             'SKIP'
+            'SKIP'
+            'SKIP'
             'a07943687afee5f3664219373b60ae54eaa207414646181df107893407119462')
+
+pkgver() {
+  cd "${srcdir}/${pkgname%-git}"
+  git describe --tags | sed 's/^gittyup_v//g' | sed 's/-/+/g' 
+}
 
 prepare() {
   cd "${srcdir}/${pkgname%-git}"
@@ -39,9 +49,18 @@ prepare() {
   git config 'submodule.dep/git/git.url' "${srcdir}/git"
   git config 'submodule.dep/libssh2/libssh2.url' "${srcdir}/libssh2"
   git config 'submodule.test/dep/zip.url' "${srcdir}/zip"
+  git config 'submodule.dep/scintilla/lexilla.url' "${srcdir}/lexilla"
+  git config 'submodule.dep/scintilla/scintillua.url' "${srcdir}/scintillua"
   git -c submodule.dep/openssl/openssl.update=none -c submodule.dep/cmark/cmark.update=none -c submodule.dep/hunspell/hunspell.update=none submodule update
 
   install -d build
+
+	sed -i -e 's/cmark_exe/cmark/' src/app/CMakeLists.txt
+	# https://github.com/Murmele/Gittyup/issues/167
+	sed -i \
+		-e '/CONF_DIR/{s!SOURCE!BINARY!;s!/conf!/Resources!}' \
+		-e '/L10N_DIR/{s!/l10n!/Resources/l10n!}' \
+		src/conf/CMakeLists.txt
 }
 
 build() {

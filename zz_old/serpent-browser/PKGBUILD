@@ -4,7 +4,7 @@
 # Contributor: Frederic Bezies <fredbezies at gmail dot com>
 
 pkgname=serpent-browser
-pkgver=2021.07.19
+pkgver=2022.08.06.r0.g15de7c4
 pkgrel=1
 pkgdesc="Unbranded version of Basilisk web browser"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
@@ -18,7 +18,7 @@ optdepends=('hunspell: spell checker and morphological analyzer'
 provides=(basilisk)
 conflicts=(basilisk)
 options=(!emptydirs !makeflags)
-source=("${pkgname%-git}::git+https://repo.palemoon.org/MoonchildProductions/Basilisk.git#tag=v${pkgver}"
+source=("${pkgname}::git+https://repo.palemoon.org/Basilisk-Dev/Basilisk.git#commit=15de7c4adc5408ff70843f80d75e0635f534091f"
         serpent-browser.desktop
         "git+https://repo.palemoon.org/MoonchildProductions/UXP.git")
 sha256sums=('SKIP'
@@ -27,8 +27,13 @@ sha256sums=('SKIP'
 
 export CC=/usr/bin/gcc-10 CXX=/usr/bin/g++-10
 
+pkgver() {
+  cd "${srcdir}/${pkgname}"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
 prepare() {
-  cd "${srcdir}/${pkgname%-git}"
+  cd "${srcdir}/${pkgname}"
 
   git submodule init
   git config 'submodule.platform.url' "${srcdir}/UXP"
@@ -66,13 +71,13 @@ EOF
 }
 
 build() {
-  cd "${srcdir}/${pkgname%-git}"
+  cd "${srcdir}/${pkgname}"
 
   make -f client.mk build
 }
 
 package() {
-  cd "${srcdir}/${pkgname%-git}"
+  cd "${srcdir}/${pkgname}"
 
   make -f client.mk DESTDIR="$pkgdir" install
 

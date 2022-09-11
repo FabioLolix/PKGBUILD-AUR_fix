@@ -1,7 +1,7 @@
 # Maintainer: robertfoster
 
 pkgname=gst-plugins-rs-git
-pkgver=0.8.3.r32.g449649ef
+pkgver=0.8.4.r13.gbdf0f799
 pkgrel=1
 pkgdesc="GStreamer plugins written in Rust"
 arch=(x86_64)
@@ -23,7 +23,11 @@ pkgver() {
 
 build() {
   cd "${pkgname%-git}"
-  arch-meson build -D csound=disabled -D sodium=system 
+  arch-meson build \
+    -D csound=disabled \
+    -D dav1d=disabled \
+    -D sodium=system
+
   ninja -C build
 }
 

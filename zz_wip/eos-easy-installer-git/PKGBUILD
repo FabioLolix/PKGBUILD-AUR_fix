@@ -1,13 +1,14 @@
 # Maintainer: 
 
 pkgname=eos-easy-installer-git
-pkgver=0.12.3.beta.r10.ge34dcc4
+pkgver=0.15.0.r0.ge52e79b5
 pkgrel=1
 pkgdesc="/e/OS “easy” installer"
 arch=(x86_64)
 url="https://community.e.foundation/c/community/easy-installer"
 license=(GPL3)
-depends=(jdk11-openjdk java-runtime-common java-environment-common)
+_java=11
+depends=(jdk${_java}-openjdk java-runtime-common java-environment-common)
 makedepends=(git)
 provides=(eos-easy-installer)
 conflicts=(eos-easy-installer)
@@ -23,7 +24,9 @@ pkgver() {
 
 build() {
   cd "${srcdir}/easy-installer/"
-  ./gradlew
+  export JAVA_HOME="/usr/lib/jvm/java-${_java}-openjdk"
+  #gradle -Dorg.gradle.daemon=false
+  ./gradlew -Dorg.gradle.daemon=false dist
 }
 
 package() {

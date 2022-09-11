@@ -1,13 +1,13 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
 pkgname=nfs-ganesha-git
-pkgver=4.0.3.r0.gc40241d1e
+pkgver=4.0.7.r0.gd6ad1b227
 pkgrel=1
 pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="http://nfs-ganesha.github.io/"
 license=(GPL3)
-depends=(jemalloc liburcu)
+depends=(jemalloc liburcu libcap acl)
 makedepends=(cmake git python-sphinx)
 provides=(nfs-ganesha)
 conflicts=(nfs-ganesha)
@@ -18,12 +18,12 @@ sha256sums=('SKIP'
 backup=(etc/ganesha/ganesha.conf etc/sysconfig/ganesha)
 
 pkgver() {
-  cd "${pkgname}"
+  cd nfs-ganesha
   git describe --long --tags | sed 's/^V//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
-  cd "${pkgname}"
+  cd nfs-ganesha
   git submodule init
   git config 'submodule.src/libntirpc.url' "${srcdir}/ntirpc"
   git submodule update
@@ -32,11 +32,11 @@ prepare() {
 }
 
 build() {
-  cd "${pkgname}/src"
+  cd nfs-ganesha/src
   cmake .  -Wno-dev \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_INSTALL_LIBDIR=lib \
+    -DCMAKE_INSTALL_LIBDIR=/usr/lib \
     -DUSE_MAN_PAGE=ON \
     -DUSE_RADOS_RECOV=OFF \
     -DRADOS_URLS=OFF \
@@ -51,7 +51,7 @@ build() {
 }
 
 package() {
-  cd "${pkgname}/src"
+  cd nfs-ganesha/src
   make install DESTDIR="$pkgdir"
 #  mv "$pkgdir"/var/run "$pkgdir"/run
 #  rmdir "$pkgdir"/var

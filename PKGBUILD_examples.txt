@@ -58,13 +58,15 @@ pkgver() {
 
 # Exclude a tag (i.e. continuous, nightly) with
 
---exclude continuous
+  --exclude continuous
+
+  --exclude nightly
 
 
 # Git submodules configuration
 
   git submodule init
-  git config 'submodule.PATH/NAME.url' "${srcdir}/NAME"
+  git config submodule.PATH/NAME.url "${srcdir}/NAME"
   git submodule update
 
 
@@ -83,12 +85,26 @@ pkgver() {
 
   make DESTDIR="${pkgdir}" install
 
+
 # Build with Qmake
 
   qmake-qt5 .pro
   make
-
   make install INSTALL_ROOT="${pkgdir}/"
+
+
+# Build with autotools
+
+  autoreconf -f -i
+  ./configure --prefix=usr
+  make
+  make DESTDIR="${pkgdir}" install
+
+
+
+# Export a different compiler
+
+  export CC=/usr/bin/clang CXX=/usr/bin/clang++
 
   export CC=/usr/bin/gcc-8 CXX=/usr/bin/g++-8
 
@@ -98,14 +114,8 @@ pkgver() {
 
   export CC=/usr/bin/gcc-11 CXX=/usr/bin/g++-11
 
-build() {
-  cd "${pkgname%-git}"
-  make
-}
 
 package() {
-  cd "${pkgname%-git}"
-  make DESTDIR="${pkgdir}" install
 
   install -D LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
   install -D README.MD -t "${pkgdir}/usr/share/doc/${pkgname}"
@@ -115,5 +125,3 @@ package() {
 
 # Python version variable
   _pyver=$(python -c "from sys import version_info; print(\"%d.%d\" % (version_info[0],version_info[1]))")
-
-

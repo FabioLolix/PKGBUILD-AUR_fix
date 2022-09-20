@@ -1,0 +1,13 @@
+[Unit]
+Description=Duplicati
+After=network.target
+
+[Service]
+ExecStart=duplicati-server --webservice-port=8200
+Restart=on-abort
+Environment=AUTOUPDATER_Duplicati_SKIP_UPDATE=1
+User=duplicati
+Group=duplicati
+
+[Install]
+WantedBy=default.target

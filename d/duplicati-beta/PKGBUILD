@@ -10,16 +10,24 @@ license=(LGPL)
 depends=(gtk-sharp-2 mono)
 makedepends=(git nuget mono-msbuild)
 optdepends=('notify-sharp: for tray notifications')
+install=duplicati.install
 source=("git+https://github.com/duplicati/duplicati.git#tag=v${_pkgver}"
-        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati-no-tar.gz-thanks.patch"
-        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati/duplicati.sysusers")
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati-no-tar.gz-v2.patch"
+        duplicati.service
+        duplicati.sysusers
+        duplicati.tmpfiles.conf
+        duplicati-user.service
+        )
 sha256sums=('SKIP'
-            '5a0f843c9f444b39fca94e9391aeb98346dde683885f3820aa341af2a20bd162'
-            'b9389b399467f3e02aa8e76bb98f6efbca1166fbc4d0bdf939493f8403462959')
+            '90122f945e6e2357b33405b4f33ffd9bfed56a4226483b96cd626127b39e2f54'
+            '2ff538f11370fcdebaf15a46212dde4de9ea2910c3e7e9f3adef1b1d1f7e8d28'
+            'b9389b399467f3e02aa8e76bb98f6efbca1166fbc4d0bdf939493f8403462959'
+            'b6ca3d280feb753ded94bb44eef821a0dac0c0c7ed7f37dea76d445a64386c86'
+            'b32bcb8da734767497671b30f77def8b42fc7910eb1698009050c66abaca5e15')
 
 prepare() {
   cd "duplicati"
-  #patch -Np1 -i ../duplicati-no-tar.gz-thanks.patch
+  patch -Np1 -i ../duplicati-no-tar.gz-v2.patch
 }
 
 build() {

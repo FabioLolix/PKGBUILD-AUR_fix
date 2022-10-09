@@ -246,6 +246,11 @@ VAR2=g
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO,gittyup.desktop} "$DEST/$VAR2/$VAR"
 
+  VAR=gmrender-resurrect-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=gogglesmm-develop-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

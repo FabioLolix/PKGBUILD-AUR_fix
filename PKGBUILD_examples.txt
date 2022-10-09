@@ -106,13 +106,14 @@ pkgver() {
 
   export CC=/usr/bin/clang CXX=/usr/bin/clang++
 
-  export CC=/usr/bin/gcc-8 CXX=/usr/bin/g++-8
-
-  export CC=/usr/bin/gcc-9 CXX=/usr/bin/g++-9
+  export CC=/usr/bin/gcc-11 CXX=/usr/bin/g++-11
 
   export CC=/usr/bin/gcc-10 CXX=/usr/bin/g++-10
 
-  export CC=/usr/bin/gcc-11 CXX=/usr/bin/g++-11
+  export CC=/usr/bin/gcc-9 CXX=/usr/bin/g++-9
+
+  export CC=/usr/bin/gcc-8 CXX=/usr/bin/g++-8
+
 
 
 package() {

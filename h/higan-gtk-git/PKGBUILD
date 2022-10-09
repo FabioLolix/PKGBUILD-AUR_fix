@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 # Contributor: Salvador Pardiñas <darkfm@vera.com.uy>
 
-pkgname=higan-git
+pkgname=higan-gtk-git
 pkgver=115.r232.g9bf1b3314
 pkgrel=1
 pkgdesc="Multi-system emulator focused on accuracy, preservation, and configurability"
@@ -27,7 +27,6 @@ prepare() {
 
 build() {
   cd higan
-
   make -C higan-ui hiro=gtk3
   make -C icarus   hiro=gtk3
 }

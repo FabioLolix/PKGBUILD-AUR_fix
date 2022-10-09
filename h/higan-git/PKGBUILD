@@ -27,7 +27,6 @@ prepare() {
 
 build() {
   cd higan
-
   make -C higan-ui hiro=qt5
   make -C icarus   hiro=qt5
 }

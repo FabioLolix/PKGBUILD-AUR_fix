@@ -8,9 +8,10 @@ pkgdesc="Small, clear and fast audio player for Linux written in C++, supported 
 arch=(x86_64 i686 aarch64)
 url="https://sayonara-player.com/"
 license=(GPL3)
-depends=(qt5-base gst-plugins-base gst-plugins-good)
-makedepends=(cmake qt5-tools qt5-svg git gst-plugins-bad)
+depends=(qt5-base qt5-svg gst-plugins-base taglib python)
+makedepends=(cmake git qt5-tools)
 optdepends=('gst-libav: additional codecs'
+            'gst-plugins-good: additional codecs'
             'gst-plugins-bad: additional codecs'
             'gst-plugins-ugly: additional codecs')
 provides=(sayonara-player)

@@ -29,13 +29,18 @@ prepare() {
 build() {
   cd pe-bear/build
   cmake .. -Wno-dev \
-    -DCMAKE_BUILD_TYPE=None \
-    -DCMAKE_INSTALL_PREFIX=/usr
+    -DCMAKE_BUILD_TYPE=None
 
   make
 }
 
 package() {
-  cd pe-bear/build
-  make DESTDIR="${pkgdir}" install
+  cd pe-bear
+  #make DESTDIR="${pkgdir}" install
+  install -D build/pe-bear/PE-bear -t "${pkgdir}/usr/lib/pe-bear/"
+  install -D SIG.txt               -t "${pkgdir}/usr/lib/pe-bear/"
+  install -d "${pkgdir}/usr/bin"
+  ln -s /usr/lib/pe-bear/PE-bear "$pkgdir/usr/bin/pe-bear"
+
+  install -D logo/main_ico.png "${pkgdir}/usr/share/pixmaps/pe-bear.png"
 }

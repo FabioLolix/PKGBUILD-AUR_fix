@@ -1,0 +1,38 @@
+# Maintainer: Your Name <youremail@domain.com>
+
+pkgname=gitnuro-git
+pkgver=1.0.1.r82.gfceb559
+pkgrel=1
+pkgdesc="FOSS Git multiplatform client based on Compose and JGit"
+arch=(any)
+url="https://gitnuro.jetpackduba.com/"
+license=(GPL3)
+depends=(jdk17-openjdk java-runtime-common java-environment-common)
+makedepends=(git gradle)
+provides=(gitnuro)
+conflicts=(gitnuro)
+source=("git+https://github.com/JetpackDuba/Gitnuro.git")
+sha256sums=('SKIP')
+
+export JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
+
+pkgver() {
+  cd Gitnuro
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd Gitnuro
+  gradle -Dorg.gradle.daemon=false run
+}
+
+check() {
+  cd Gitnuro
+  gradle -Dorg.gradle.daemon=false check
+  gradle -Dorg.gradle.daemon=false test
+}
+
+package() {
+  cd Gitnuro
+  #build/libs/Gitnuro-1.1.0.jar
+}

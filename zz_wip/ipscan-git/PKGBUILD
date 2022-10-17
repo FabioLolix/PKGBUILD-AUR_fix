@@ -1,0 +1,43 @@
+# Maintainer:
+# Contributor: max.bra <max dot bra at alice dot it>
+# Contributor: Rorschach <r0schach@lavabit.com>
+
+pkgname=ipscan-git
+pkgver=3.8.2.r13.g7a806c92
+pkgrel=1
+pkgdesc='Angry IP Scanner (or simply ipscan) is an open-source and cross-platform network scanner designed to be fast and simple to use. It scans IP addresses and ports as well as has many other features.'
+arch=(x86_64)
+license=(GPL2)
+url="https://angryip.org/"
+_java=17
+depends=(java-runtime)
+makedepends=(git jre${_java}-openjdk-headless)
+source=("git+https://github.com/angryip/ipscan.git"
+        ipscan.png
+        ipscan.sh
+        ipscan.desktop)
+sha256sums=('SKIP'
+            'ed7a5049da538312a2f7138e986482e85328c6ec5a0b77a4380b5a2ca1f872f2'
+            '38f16340f62e8db9a048cafd2d0f73a2c3f658e93be00bc35736987798694137'
+            '44e4e83d0664410a385ac57a3fb6abc3289b302038b9f2ef870e2a0257d558fe')
+
+pkgver() {
+  cd ipscan
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd ipscan
+  export JAVA_HOME="/usr/lib/jvm/java-${_java}-openjdk"
+  #gradle -Dorg.gradle.daemon=false
+  ./gradlew -Dorg.gradle.daemon=false --warning-mode all --stacktrace linux64
+}
+
+package() {
+  cd ipscan
+  install -Dm755 ipscan $pkgdir/usr/bin/$pkgname
+  install -Dm644 ipscan.png $pkgdir/usr/share/pixmaps/$pkgname.png
+  install -Dm644 ipscan.desktop $pkgdir/usr/share/applications/$pkgname.desktop
+  install -Dm644 ipscan-$_intarch-$_pkgintver.jar $pkgdir/usr/share/java/$pkgname/$pkgname-$_intarch-$_pkgintver.jar
+}
+

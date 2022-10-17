@@ -1,0 +1,32 @@
+# Maintainer: Your Name <youremail@domain.com>
+
+pkgname=isowriter-git
+pkgver=1.1.3.r24.gbcd9d85
+pkgrel=1
+pkgdesc=""
+arch=(x86_64)
+url="https://github.com/KaOSx/isowriter"
+license=(GPL3)
+depends=(qt5-base kdialog)
+makedepends=(git)
+optdepends=(kdialog)
+provides=(isowriter)
+conflicts=(isowriter)
+source=("git+https://github.com/KaOSx/isowriter.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "$srcdir/isowriter"
+  git describe --long --tags | sed 's/^isowriter-//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "$srcdir/isowriter"
+  qmake-qt5
+  make
+}
+
+package() {
+  cd "$srcdir/isowriter"
+  make install INSTALL_ROOT="${pkgdir}/"
+}

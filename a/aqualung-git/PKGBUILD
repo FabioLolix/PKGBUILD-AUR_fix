@@ -1,8 +1,8 @@
 # Maintainer: jdn06 <jdn06.jdn06@outlook.fr>
 
 pkgname=aqualung-git
-pkgver=1.1.r4.g44a3f40
-pkgrel=2
+pkgver=1.1.r9.g6a721dd
+pkgrel=1
 pkgdesc="High quality music player w/ gapless support"
 arch=(i686 x86_64)
 url="https://aqualung.jeremyevans.net/"

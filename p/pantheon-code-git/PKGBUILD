@@ -2,7 +2,7 @@
 # Contributor: Maxime Gauduin <alucryd@archlinux.org>
 
 pkgname=pantheon-code-git
-pkgver=6.1.0.r80.gc17c41737
+pkgver=6.2.0.r98.g91eebdbc5
 pkgrel=1
 pkgdesc="The Pantheon Code Editor"
 arch=(x86_64)
@@ -10,7 +10,7 @@ url="https://github.com/elementary/code"
 license=(GPL3)
 groups=(pantheon-unstable)
 depends=(libgranite.so editorconfig-core-c gtksourceview4 libgit2-glib libpeas zeitgeist libhandy)
-makedepends=(appstream git gobject-introspection
+makedepends=(appstream git gobject-introspection polkit
              gtkspell3 intltool meson vala vte3 webkit2gtk)
 optdepends=('gtkspell3: Spell Check extension'
             'vala: Outline extension'
@@ -29,11 +29,11 @@ pkgver() {
 
 build() {
   arch-meson pantheon-code build
-  ninja -C build
+  meson compile -C build
 }
 
 package() {
-  DESTDIR="${pkgdir}" meson install -C build
+  meson install -C build --destdir "${pkgdir}"
   ln -s /usr/bin/io.elementary.code "${pkgdir}/usr/bin/e.code"
   ln -s /usr/bin/io.elementary.code "${pkgdir}/usr/bin/elementary.code"
   ln -s /usr/bin/io.elementary.code "${pkgdir}/usr/bin/elementary-code"

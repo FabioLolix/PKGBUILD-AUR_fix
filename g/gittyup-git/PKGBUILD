@@ -47,7 +47,7 @@ prepare() {
   git config submodule.test/dep/zip.url "${srcdir}/zip"
   git config submodule.dep/scintilla/lexilla.url "${srcdir}/lexilla"
   git config submodule.dep/scintilla/scintillua.url "${srcdir}/scintillua"
-  git -c protocol.file.allow=always submodule--helper update
+  git -c protocol.file.allow=always submodule update
 
   [[ -d build ]] || mkdir build
 }

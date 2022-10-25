@@ -1,7 +1,7 @@
 # Maintainer:
 
 pkgname=cinelerra-hv
-pkgver=7.4
+pkgver=8
 pkgrel=1
 pkgdesc="Professional video editing and compositing environment"
 arch=(x86_64)
@@ -21,16 +21,16 @@ makedepends=(alsa-lib atk bzip2 cairo expat fftw flac
              pango pcre pixman xorg-server
              ttf-dejavu
 
-             yasm  cmake libtool
+             yasm nasm cmake libtool
         	 libxml2 perl-xml-libxml perl-xml-parser
         	 xorg-mkfontdir xorg-mkfontscale
 )
 source=("$pkgname-$pkgver-src.tar.xz::https://sourceforge.net/projects/heroines/files/cinelerra-$pkgver-src.tar.xz")
-sha256sums=('b518b5dd3f851ce88f71c604e204364f826716c9d1a99a9159b4afb19741477d')
+sha256sums=('558bac9580149057bf8d8330bcd2d34a1bc5df4a084ee821c9f599ace2ea8c89')
 
 build() {
   cd "${srcdir}/cinelerra-$pkgver"
-  ./configure --prefix=/usr
+  ./configure --prefix=/usr || true
   make -j1
 }
 

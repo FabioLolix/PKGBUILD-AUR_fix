@@ -20,8 +20,7 @@ optdepends=('gst-libav: additional codecs'
             'gst-plugins-ugly: additional codecs')
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/anonbeat/guayadeque/archive/v${pkgver}.tar.gz"
         "https://github.com/anonbeat/guayadeque/commit/6be35ba2153f1c36400b8c535d8ba49292a1f51e.diff"
-wxwidgets.patch
-        "https://github.com/anonbeat/guayadeque/commit/a9ecb9d8bf785281ed8ccf292cccf3525ffeb457.patch")
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/guayadeque-wxwidgets.patch")
 sha256sums=('3c0d782c6f4aa511c7a635a78742542d130d1a13e20648db886ccfce4e1b9d4f'
             'ac536bb3aa23fedd7634b31dbb309c0e130c5bd1a3bfbbab096bcc897091363a'
             '98ec9ad8481025f83a92008599ad060ca3b5866bd58b42c531774b33f4d88f36'
@@ -32,7 +31,7 @@ prepare() {
   cd "${srcdir}/${pkgname}-${pkgver}"
   install -d build-guayadeque
   patch -Np1 -i ../6be35ba2153f1c36400b8c535d8ba49292a1f51e.diff
-  patch -Np1 -i ../wxwidgets.patch
+  patch -Np1 -i ../guayadeque-wxwidgets.patch
 }
 
 build() {

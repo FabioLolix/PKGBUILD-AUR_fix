@@ -7,7 +7,7 @@ pkgdesc="Lightweight music player"
 arch=(i686 x86_64)
 url="https://guayadeque.org/"
 license=(GPL3)
-depends=(wxsqlite3 wxgtk3 webkit2gtk taglib gst-plugins-base gst-plugins-good jsoncpp)
+depends=(wxsqlite3 wxgtk3 taglib gst-plugins-base gst-plugins-good jsoncpp)
 makedepends=(cmake git)
 optdepends=('gst-libav: additional codecs'
             'gst-plugins-bad: additional codecs'

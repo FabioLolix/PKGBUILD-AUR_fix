@@ -17,16 +17,6 @@ echo "Done C"
 
 
 
-VAR2=g
-  VAR=gotop
-  cd "$DEST/$VAR2/$VAR"
-    git pull
-    rsync {PKGBUILD,.SRCINFO} "$BASE/$VAR2/$VAR"
-
-echo "Done G"
-
-
-
 VAR2=t
   VAR=tenacity-git
   cd "$DEST/$VAR2/$VAR"

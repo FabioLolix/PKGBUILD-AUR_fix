@@ -17,16 +17,6 @@ echo "Done C"
 
 
 
-VAR2=g
-  VAR=gotop
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-
-echo "Done G"
-
-
-
 VAR2=t
   VAR=tenacity-git
   cd "$BASE/$VAR2/$VAR"

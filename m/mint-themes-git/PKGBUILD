@@ -2,7 +2,7 @@
 
 _pkgname=mint-themes
 pkgname=${_pkgname}-git
-pkgver=1.9.6.r13.g4e19d767
+pkgver=2.0.5.r2.gdb49287a
 pkgrel=1
 pkgdesc="Linux Mint themes"
 arch=(any)

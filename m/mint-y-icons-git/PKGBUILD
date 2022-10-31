@@ -2,7 +2,7 @@
 # Contributor: twa022 <twa022 at gmail dot com>
 
 pkgname=mint-y-icons-git
-pkgver=r497.36cdc3c19
+pkgver=r515.1962ac688
 pkgrel=1
 epoch=1
 pkgdesc="New icons from LinuxMint 18 inspired by the Moka icon set"

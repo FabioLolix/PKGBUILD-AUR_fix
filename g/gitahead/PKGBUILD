@@ -16,7 +16,7 @@ optdepends=('libgnome-keyring: for GNOME Keyring for auth credentials'
             'qt5-translations: translations '
             'git-lfs: git-lfs support')
 source=("git+https://github.com/gitahead/gitahead.git#tag=v${pkgver}"
-        "git+https://github.com/stinb/libgit2.git"
+        "Gittyup-libgit2::git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/git/git.git"
         "git+https://github.com/hunspell/hunspell.git"
         "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/gitahead-Fix-translations-path.patch"
@@ -32,10 +32,13 @@ prepare() {
   cd "${srcdir}/gitahead"
 
   git submodule init
-  git config 'submodule.dep/libgit2/libgit2.url' "${srcdir}/libgit2"
-  git config 'submodule.dep/git/git.url' "${srcdir}/git"
-  git config 'submodule.dep/hunspell/hunspell.url' "${srcdir}/hunspell"
-  git -c submodule.dep/openssl/openssl.update=none -c submodule.dep/cmark/cmark.update=none -c submodule.dep/libssh2/libssh2.update=none submodule update
+  git config submodule.dep/libgit2/libgit2.url "${srcdir}/Gittyup-libgit2"
+  git config submodule.dep/git/git.url "${srcdir}/git"
+  git config submodule.dep/hunspell/hunspell.url "${srcdir}/hunspell"
+  git config submodule.dep/openssl/openssl.update none
+  git config submodule.dep/cmark/cmark.update none
+  git config submodule.dep/libssh2/libssh2.update none
+  git -c protocol.file.allow=always submodule update
 
   patch -Np1 -i ../gitahead-Fix-translations-path.patch
 

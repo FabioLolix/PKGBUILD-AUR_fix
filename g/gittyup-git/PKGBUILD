@@ -5,8 +5,8 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gittyup-git
-pkgver=1.2.0.r0.gb663589
-pkgrel=1
+pkgver=1.2.0.r17.gb35e527
+pkgrel=2
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
 arch=(x86_64)
@@ -19,7 +19,7 @@ optdepends=('git-lfs: git-lfs support'
 provides=(gittyup)
 conflicts=(gittyup)
 source=("git+https://github.com/Murmele/Gittyup.git"
-        "Gittyup-libgit2::git+https://github.com/stinb/libgit2.git"
+        "stinb-libgit2::git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/kuba--/zip.git"
         "git+https://github.com/ScintillaOrg/lexilla.git"
         "git+https://github.com/orbitalquark/scintillua.git")
@@ -38,7 +38,7 @@ prepare() {
   cd "${srcdir}/Gittyup"
 
   git submodule init
-  git config submodule.dep/libgit2/libgit2.url "${srcdir}/Gittyup-libgit2"
+  git config submodule.dep/libgit2/libgit2.url "${srcdir}/stinb-libgit2"
   git config submodule.dep/git/git.update none
   git config submodule.dep/cmark/cmark.update none
   git config submodule.dep/libssh2/libssh2.update none

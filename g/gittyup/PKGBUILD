@@ -6,7 +6,7 @@
 
 pkgname=gittyup
 pkgver=1.1.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
 arch=(x86_64)
@@ -18,7 +18,7 @@ optdepends=('git-lfs: git-lfs support'
             'qt5-translations: translations')
 _commit=7fa0bce2adb87c301180277363fea0f1264cd118
 source=("git+https://github.com/Murmele/Gittyup.git#commit=$_commit"
-        "Gittyup-libgit2::git+https://github.com/stinb/libgit2.git"
+        "stinb-libgit2::git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/kuba--/zip.git"
         "git+https://github.com/ScintillaOrg/lexilla.git"
         "git+https://github.com/orbitalquark/scintillua.git")
@@ -37,7 +37,7 @@ prepare() {
   cd "${srcdir}/Gittyup"
 
   git submodule init
-  git config submodule.dep/libgit2/libgit2.url "${srcdir}/Gittyup-libgit2"
+  git config submodule.dep/libgit2/libgit2.url "${srcdir}/stinb-libgit2"
   git config submodule.dep/git/git.update none
   git config submodule.dep/cmark/cmark.update none
   git config submodule.dep/libssh2/libssh2.update none

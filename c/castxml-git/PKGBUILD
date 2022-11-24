@@ -2,7 +2,7 @@
 
 pkgname=castxml-git
 pkgdesc="C-family abstract syntax tree XML output tool."
-pkgver=0.4.6.r43.gbe4ab08
+pkgver=0.4.7.r47.g2e92f73
 pkgrel=1
 arch=(i686 x86_64)
 url="https://github.com/CastXML/CastXML"

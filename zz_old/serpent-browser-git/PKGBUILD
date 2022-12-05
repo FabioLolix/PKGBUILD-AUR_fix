@@ -36,8 +36,8 @@ prepare() {
   cd "${srcdir}/${pkgname%-git}"
 
   git submodule init
-  git config 'submodule.platform.url' "${srcdir}/UXP"
-  git submodule update
+  git config submodule.platform.url "${srcdir}/UXP"
+  git -c protocol.file.allow=always submodule update
 
 
   cat > .mozconfig << EOF

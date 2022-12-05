@@ -5,7 +5,7 @@
 # Contributor: dieghen89 <dieghen89@gmail.com>
 
 pkgname=musique
-pkgver=1.9
+pkgver=1.10.1
 pkgrel=1
 pkgdesc="A finely crafted music player"
 arch=(x86_64)
@@ -14,7 +14,7 @@ license=(GPL3)
 depends=(qt5-base taglib mpv)
 makedepends=(qt5-tools)
 source=("https://github.com/flaviotordini/musique/releases/download/${pkgver}/musique-${pkgver}.tar.bz2")
-sha256sums=('c914e768c84031658b5a9760eb44af9f21bc29097a1b5b8261b5053ea1b853a4')
+sha256sums=('4ddc67c65aedfd4abe49fc8cbc4b05a0a99b07332b6d8da481994be3997960f6')
 
 prepare() {
   cd "${pkgname}-${pkgver}"

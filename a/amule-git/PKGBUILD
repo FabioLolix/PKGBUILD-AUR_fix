@@ -9,7 +9,7 @@ pkgdesc="Client for the eD2k and Kad networks"
 arch=('x86_64')
 url=http://amule.org/
 license=(GPL2)
-depends=(boost-libs crypto++ geoip libupnp wxgtk2 gd boost-libs)
+depends=(boost-libs crypto++ geoip libupnp wxwidgets-gtk3 gd)
 makedepends=(git boost)
 conflicts=(amule)
 source=("git+https://github.com/amule-project/amule.git"
@@ -50,6 +50,7 @@ build() {
     --enable-geoip \
     --enable-upnp \
     --enable-fileview \
+    --with-wx-config=/usr/bin/wx-config \
     --with-boost
 
   make

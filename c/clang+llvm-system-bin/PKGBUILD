@@ -2,21 +2,27 @@
 # Contributor: JFelix Golatofski <contact@xdfr.de>
 # Contributor: Javier Tiá <javier dot tia at gmail dot com>
 
-pkgname=clang+llvm-binaries
+# test for fun, use at your own risk, especially if it isn't the same clang/llvm version in the official repo
+
+pkgname=clang+llvm-system-bin
 pkgver=15.0.6
 pkgrel=1
 pkgdesc="Official Clang and LLVM pre-built binaries"
 arch=(x86_64)
 url="https://llvm.org/"
 license=('custom:Apache 2.0 with LLVM Exception')
+provides=(clang llvm lld lldb)
+conflicts=(clang llvm lld lldb)
 options=(!strip)
-source=('clang+llvm-binaries.conf')
 source_x86_64=("https://github.com/llvm/llvm-project/releases/download/llvmorg-${pkgver}/clang+llvm-${pkgver}-x86_64-linux-gnu-ubuntu-18.04.tar.xz")
 sha256sums_x86_64=('38bc7f5563642e73e69ac5626724e206d6d539fbef653541b34cae0ba9c3f036')
 
 package() {
   cd "${srcdir}/clang+llvm-${pkgver}-x86_64-linux-gnu-ubuntu-18.04"
-  install -D ../clang+llvm-binaries.conf -t "${pkgdir}/etc/ld.so.conf.d/"
-  install -d "${pkgdir}/opt/clang+llvm"
-  cp -r * "${pkgdir}/opt/clang+llvm/"
+  install -d "${pkgdir}/usr"
+  cp -r * "${pkgdir}/usr"
+
+  rm "${pkgdir}"/usr/lib/libLTO.so      # already in llvm-libs
+  rm "${pkgdir}"/usr/lib/libRemarks.so  # already in llvm-libs
+  rm "${pkgdir}"/usr/lib/libgomp.so     # already in gcc-libs
 }

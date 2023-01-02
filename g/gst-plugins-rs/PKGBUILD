@@ -10,8 +10,14 @@ url="https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs"
 license=(Apache LGPL2.1 MIT MPL2)
 depends=(gstreamer gtk4 dav1d libsodium libwebp)
 makedepends=(git rust meson cargo-c clang hotdoc)
+options=(!lto)
 source=("git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git#tag=${pkgver}")
 sha256sums=(SKIP)
+
+prepare() {
+  cargo add 'dav1d@0.8' --manifest-path "${srcdir}/${pkgname}/video/dav1d/Cargo.toml"
+  cargo fetch --target x86_64-unknown-linux-gnu --manifest-path "${srcdir}/${pkgname}/Cargo.toml"
+}
 
 build() {
   cd "${srcdir}/${pkgname}"

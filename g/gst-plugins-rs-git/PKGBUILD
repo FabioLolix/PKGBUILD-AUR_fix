@@ -11,14 +11,19 @@ depends=(gstreamer gtk4 dav1d libsodium libwebp)
 makedepends=(git rust meson cargo-c clang hotdoc)
 provides=(gst-plugins-rs)
 conflicts=(gst-plugins-rs)
+options=(!lto)
 source=("git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git#branch=0.9")
 sha256sums=(SKIP)
 
 pkgver() {
   cd "${pkgname%-git}"
   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-  # no tags on main
-  #git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd "${pkgname%-git}"
+  cargo add 'dav1d@0.8' --manifest-path "${srcdir}/${pkgname%-git}/video/dav1d/Cargo.toml"
+  cargo fetch --target x86_64-unknown-linux-gnu --manifest-path "${srcdir}/${pkgname%-git}/Cargo.toml"
 }
 
 build() {
@@ -36,4 +41,3 @@ package() {
   DESTDIR="${pkgdir}" meson install -C build
   install -D LICENSE-* -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }
-

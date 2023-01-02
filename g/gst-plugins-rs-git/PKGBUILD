@@ -1,31 +1,31 @@
 # Maintainer: robertfoster
 
 pkgname=gst-plugins-rs-git
-pkgver=0.8.4.r13.gbdf0f799
+pkgver=r2383.f4cb4b9d
 pkgrel=1
 pkgdesc="GStreamer plugins written in Rust"
 arch=(x86_64)
 url="https://gstreamer.freedesktop.org/"
 license=(Apache LGPL2.1 MIT MPL2)
 depends=(gstreamer gtk4 dav1d libsodium libwebp)
-makedepends=(git rust meson cargo-c clang)
+makedepends=(git rust meson cargo-c clang hotdoc)
 provides=(gst-plugins-rs)
 conflicts=(gst-plugins-rs)
-source=("git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git#branch=0.8")
+source=("git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git#branch=0.9")
 sha256sums=(SKIP)
 
 pkgver() {
   cd "${pkgname%-git}"
-  #printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
   # no tags on main
-  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  #git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
   cd "${pkgname%-git}"
   arch-meson build \
     -D csound=disabled \
-    -D dav1d=disabled \
+    -D dav1d=enabled \
     -D sodium=system
 
   ninja -C build

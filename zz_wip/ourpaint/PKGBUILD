@@ -29,6 +29,5 @@ package() {
   cd OurPaint/build
   #make DESTDIR="${pkgdir}" install #No rule to make target 'install'
   install -D OurPaint -t ${pkgdir}/usr/bin
-
-  #install default_brushes.udf #file is being created in ~/preferences.udf at first launch!
+  ln -s "/usr/bin/OurPaint" "${pkgdir}/usr/bin/ourpaint"
 }

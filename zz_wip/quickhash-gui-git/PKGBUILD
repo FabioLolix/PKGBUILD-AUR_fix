@@ -1,0 +1,39 @@
+# Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org> -> https://github.com/FabioLolix
+
+pkgname=quickhash-gui-git
+pkgver=3.3.1.r0.ga0715cb
+pkgrel=1
+pkgdesc="QuickHash is an open-source Linux GUI that enables hashing of files, text, entire folder trees of files, and physical disks"
+arch=(x86_64)
+url="https://quickhash-gui.org/"
+license=(GPL2)
+depends=(gtk2)
+makedepends=(git lazarus lazarus-gtk2)
+provides=(quickhash-gui)
+conflicts=(quickhash-gui)
+source=("git+https://github.com/tedsmith/quickhash.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd quickhash
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "${srcdir}"/quickhash/HashLib4Pascal/src/Packages/FPC
+  lazbuild --lazarusdir=/usr/lib/lazarus HashLib4PascalPackage.lpk
+
+  cd "${srcdir}"/quickhash/DateTimePicker
+  lazbuild --lazarusdir=/usr/lib/lazarus zvdatetimectrls.lpk
+
+  cd "${srcdir}"/quickhash
+  lazbuild --lazarusdir=/usr/lib/lazarus quickhash.lpi
+}
+
+package() {
+  cd quickhash
+
+
+  install -d "${pkgdir}/usr/share/licenses/${pkgname}"
+  cp -r LICENSES/* "${pkgdir}/usr/share/licenses/${pkgname}"
+}

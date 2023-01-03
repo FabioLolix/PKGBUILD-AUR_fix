@@ -2,7 +2,7 @@
 # Contributor: Peter Mattern <pmattern at arcor dot de>
 
 pkgname=wxgtk-git
-pkgver=3.2.1.r0.g97e99707c5
+pkgver=3.2.1.r53.gaf3db51d71
 pkgrel=1
 pkgdesc="GTK+3 implementation of wxWidgets API for GUI"
 arch=(x86_64)
@@ -29,13 +29,13 @@ pkgver() {
 prepare() {
   cd wxwidgets
   git config submodule.3rdparty/catch.url "${srcdir}/Catch"
-  git submodule update --init 3rdparty/catch
+  git -c protocol.file.allow=always submodule update --init 3rdparty/catch
 
   git config submodule.3rdparty/pcre.url "${srcdir}/pcre"
-  git submodule update --init 3rdparty/pcre
+  git -c protocol.file.allow=always submodule update --init 3rdparty/pcre
 
   git config submodule.3rdparty/nanosvg.url "${srcdir}/nanosvg"
-  git submodule update --init 3rdparty/nanosvg
+  git -c protocol.file.allow=always submodule update --init 3rdparty/nanosvg
 
   ./autogen.sh
 }

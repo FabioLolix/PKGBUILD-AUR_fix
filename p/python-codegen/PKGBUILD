@@ -1,4 +1,5 @@
-# Maintainer: Felipe F. Tonello <eu@felipetonello.com>
+# Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Felipe F. Tonello <eu@felipetonello.com>
 
 pkgname=python-codegen
 pkgver=1.0

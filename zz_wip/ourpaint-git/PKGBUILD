@@ -1,16 +1,23 @@
 # Maintainer:
 
-pkgname=ourpaint
-pkgver=0.1
+pkgname=ourpaint-git
+pkgver=r71.e4cd5e7
 pkgrel=1
 pkgdesc="Paint program that uses programmable brushes using a visual language"
 arch=(x86_64)
 url="https://www.wellobserve.com/index.php?post=20230102172212"
-license=(GPL3)
+license=(GPL3 'CCPL:cc-by-nc-2.0')
 depends=(noto-fonts noto-fonts-cjk libxi libxcursor glew freetype2 lcms2)
-makedepends=(cmake lagui libpng libx11 libxext)
-source=("https://www.wellobserve.com/Files/OurPaint/Releases/OurPaint_src_v${pkgver}.tar.gz")
-sha256sums=('66579ea853122baca1e43cfb673f8b6cda55f3a4eda1fc92d87ccc9af8a4e109')
+makedepends=(git cmake lagui libpng libx11 libxext)
+provides=(ourpaint)
+conflicts=(ourpaint)
+source=("git+https://www.wellobserve.com/repositories/chengdulittlea/OurPaint.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd OurPaint
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
 
 prepare() {
   cd OurPaint

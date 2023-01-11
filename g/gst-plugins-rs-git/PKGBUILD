@@ -1,7 +1,7 @@
 # Maintainer: robertfoster
 
 pkgname=gst-plugins-rs-git
-pkgver=r2383.f4cb4b9d
+pkgver=r2417.df3b9088
 pkgrel=1
 pkgdesc="GStreamer plugins written in Rust"
 arch=(x86_64)
@@ -22,7 +22,6 @@ pkgver() {
 
 prepare() {
   cd "${pkgname%-git}"
-  cargo add 'dav1d@0.8' --manifest-path "${srcdir}/${pkgname%-git}/video/dav1d/Cargo.toml"
   cargo fetch --target x86_64-unknown-linux-gnu --manifest-path "${srcdir}/${pkgname%-git}/Cargo.toml"
 }
 
@@ -31,7 +30,7 @@ build() {
   arch-meson build \
     -D csound=disabled \
     -D dav1d=enabled \
-    -D sodium=system
+    -D sodium=enabled
 
   ninja -C build
 }

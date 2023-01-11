@@ -15,7 +15,7 @@ source=("git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git#tag=${p
 sha256sums=(SKIP)
 
 prepare() {
-  cargo add 'dav1d@0.8' --manifest-path "${srcdir}/${pkgname}/video/dav1d/Cargo.toml"
+  cd "${srcdir}/${pkgname}"
   cargo fetch --target x86_64-unknown-linux-gnu --manifest-path "${srcdir}/${pkgname}/Cargo.toml"
 }
 

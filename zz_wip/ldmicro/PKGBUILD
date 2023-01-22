@@ -1,0 +1,35 @@
+# Maintainer: 
+
+pkgname=ldmicro
+pkgver=5.4.1.1
+pkgrel=1
+pkgdesc="Ladder Logic for PIC and AVR"
+arch=(x86_64)
+url="https://cq.cx/ladder.pl"
+license=(GPL3)
+depends=()
+makedepends=(cmake ninja perl)
+#options=(!makeflags)
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/LDmicro/LDmicro/archive/refs/tags/${pkgver}.tar.gz")
+sha256sums=('12f7cc534452deaf8260a65bb088db699adc5234f7ec925d546245895ec9745b')
+
+prepare() {
+  cd LDmicro-${pkgver}/ldmicro
+  [[ -d build ]] || mkdir build
+
+  cp -r PASCAL.CPP pascal.cpp
+  cp -r PCPORTS.CPP pcports.cpp
+}
+
+build() {
+  cd "LDmicro-${pkgver}/ldmicro/build"
+  cmake -G Ninja .. \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  ninja
+}
+
+package() {
+  cd "LDmicro-${pkgver}/ldmicro/build"
+  make DESTDIR="${pkgdir}" install
+}

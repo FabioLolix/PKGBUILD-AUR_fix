@@ -6,7 +6,7 @@ pkgrel=1
 pkgdesc='A multi-network P2P client'
 arch=(x86_64)
 url='http://mldonkey.sourceforge.net/'
-license=(GPL)
+license=(GPL2)
 depends=(file gd hicolor-icon-theme miniupnpc libnatpmp libminiupnpc.so)
 makedepends=(git gtk2 librsvg ocaml-num camlp4 lablgtk2)
 optdepends=('librsvg: GUI support'
@@ -24,7 +24,7 @@ source=("git+https://github.com/ygrek/mldonkey.git"
         mldonkey.sysusers)
 sha256sums=('SKIP'
             'eef21187cecc6f1052ff6e0d988093a6fed8b4745ecb257b9e127c23c60cb27d'
-            '2ad62fb539579cb67f86924eba3cf185eec99f36db072eb35c1a1ed1f6e25169'
+            '66bb133de910142ce558ed68ba21b0fb19ce807068059513fee7944523a29bf9'
             '2d6fa5e8d2806cb7397db8ef90e69dbf09f699f9d019567c8586cfaf83ef5520'
             'f1d9401cefd591662d49011c53fdb2788755a6f745a963e46d8037b990edeb6a'
             '778cebe8edcffd63db3594054c2daa62ce571644a96ad235b8c95470b55c0415'

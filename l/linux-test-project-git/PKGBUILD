@@ -2,7 +2,7 @@
 # Contributor: Lukas Jirkovsky <l.jirkovsky@gmail.com>
 
 pkgname=linux-test-project-git
-pkgver=20220930.r75.g8cd3bf314
+pkgver=20230127.r8.g7b5ee0389
 pkgrel=1
 pkgdesc="Collection of tools for testing the Linux kernel and related features"
 arch=(i686 x86_64)

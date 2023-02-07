@@ -1,7 +1,7 @@
 # Maintainer: Peter Semiletov <peter.semiletov@gmail.com>
 
 pkgname=tea-qt-git
-pkgver=61.1.0.r1.ga52db41
+pkgver=61.2.0.r3.g035dae5
 pkgrel=1
 pkgdesc="Powerful text editor for Linux, *BSD, Windows, OS/2, Mac and Haiku OS"
 arch=(x86_64)

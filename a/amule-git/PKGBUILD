@@ -11,7 +11,7 @@ url="https://amule.org/"
 license=(GPL2)
 depends=(crypto++ geoip libupnp wxwidgets-gtk3 gd)
 makedepends=(git boost cmake)
-provides=(amule)
+provides=(amule amule-daemon)
 conflicts=(amule)
 source=("git+https://github.com/amule-project/amule.git"
         #git+https://repo.or.cz/amule.git

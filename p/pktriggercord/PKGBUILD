@@ -12,17 +12,8 @@ depends=(gtk2)
 source=("https://github.com/asalamon74/pktriggercord/releases/download/v${pkgver}/pkTriggerCord-${pkgver}.src.tar.gz")
 sha256sums=('9a6ee80e8b786f89a6ddb87e9afa14e2c72187e9614bbeda7ef6d7f383ffbe06')
 
-prepare() {
-  cd "${pkgname}-${pkgver}"
-  sed -i 's|PREFIX ?=.*|PREFIX = /usr|' Makefile
-}
-
-build() {
-  cd "${pkgname}-${pkgver}"
-  make PREFIX=/usr
-}
-
 package() {
   cd "${pkgname}-${pkgver}"
-  make DESTDIR="${pkgdir}" install
+  CFLAGS+=" -Isrc/external/js0n"
+  make LDFLAGS=-lm PREFIX=/usr DESTDIR="${pkgdir}/" install
 }

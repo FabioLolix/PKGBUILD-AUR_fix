@@ -5,7 +5,7 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gittyup-git
-pkgver=1.2.0.r80.g8580fd8
+pkgver=1.2.2.r52.g359d28f
 pkgrel=1
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
@@ -58,6 +58,7 @@ build() {
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr/lib/gittyup \
     -DCMAKE_INSTALL_DATADIR=/usr/lib \
+    -DCMAKE_INSTALL_BINDIR=/usr/lib/gittyup \
     -DENABLE_REPRODUCIBLE_BUILDS=ON \
     -DBUILD_SHARED_LIBS=OFF \
     -DUSE_SYSTEM_CMARK=ON \

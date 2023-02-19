@@ -1,0 +1,43 @@
+# Maintainer: Your Name <youremail@domain.com>
+
+pkgname=design-git
+pkgver=43.alpha3.r11.g08d5c2d
+pkgrel=1
+pkgdesc="(alpha) 2D CAD For GNOME"
+arch=(any)
+url="https://github.com/dubstar-04/Design"
+license=(GPL3)
+depends=(gtk4 libadwaita)
+makedepends=(git meson blueprint-compiler gjs gtk-update-icon-cache desktop-file-utils)
+checkdepends=(appstream appstream-glib)
+provides=(design)
+conflicts=(design)
+source=("git+https://github.com/dubstar-04/Design.git"
+        "git+https://github.com/dubstar-04/Design-Core.git")
+sha256sums=('SKIP'
+            'SKIP')
+
+pkgver() {
+  cd Design
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  #printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd Design
+  git submodule init
+  git config submodule.src/Design-Core.url "${srcdir}/Design-Core"
+  git -c protocol.file.allow=always submodule update
+}
+
+build() {
+  cd Design
+  #arch-meson . build
+  meson setup . build --prefix=/usr
+  ninja -C build
+}
+
+package() {
+  cd Design/src
+  DESTDIR="${pkgdir}" ninja -C build install
+}

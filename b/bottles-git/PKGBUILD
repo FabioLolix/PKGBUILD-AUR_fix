@@ -2,9 +2,9 @@
 # Contributor: Talebian <talebian@sovietunion.xyz>
 
 pkgname=bottles-git
-pkgver=2022.11.14.r72.gf9c44242
+pkgver=50.1.r23.g6954b8ad
 pkgrel=1
-epoch=1
+epoch=2
 pkgdesc="Easily manage wineprefix using environments"
 arch=(any)
 url="https://usebottles.com/"
@@ -29,6 +29,8 @@ depends=(
   python-gobject
   python-markdown
   python-orjson
+  python-pathvalidate
+  python-pycurl
   python-requests
   python-steamgriddb
   python-yaml
@@ -64,7 +66,7 @@ prepare () {
 
 build () {
   cd "$srcdir/${pkgname%-git}"
-  arch-meson build
+  arch-meson build -Ddevel=true
   ninja -C build
 }
 

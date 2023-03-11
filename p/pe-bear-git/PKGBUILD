@@ -1,8 +1,8 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=pe-bear-git
-pkgver=0.6.1.r4.g89ea8d4
-pkgrel=2
+pkgver=0.6.5.r0.g424c954
+pkgrel=1
 pkgdesc="Portable Executable reversing tool with a friendly GUI"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://hshrzd.wordpress.com/pe-bear/"

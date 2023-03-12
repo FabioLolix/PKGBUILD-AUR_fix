@@ -1,17 +1,17 @@
 # Maintainer: 
-# Contributor: 
 
 pkgname=openseachest-git
-pkgver=21.06.r99.gca034ae
-pkgrel=1
+pkgver=23.03.r1.g03a4576
+pkgrel=2
 pkgdesc="Utilities for performing various operations on SATA, SAS, NVMe, and USB storage devices"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://github.com/Seagate/openSeaChest"
 license=(MPL2)
-makedepends=(git)
+depends=(glibc)
+makedepends=(git ninja meson)
 provides=(openseachest)
 conflicts=(openseachest)
-source=("${pkgname%-git}::git+https://github.com/Seagate/openSeaChest.git"
+source=("git+https://github.com/Seagate/openSeaChest.git"
         "git+https://github.com/Seagate/opensea-common.git"
         "git+https://github.com/Seagate/opensea-transport.git"
         "git+https://github.com/Seagate/opensea-operations.git"
@@ -23,26 +23,27 @@ sha256sums=('SKIP'
             'SKIP')
 
 prepare() {
-  cd "${srcdir}/${pkgname%-git}"
+  cd openSeaChest
   git submodule init
-  git config 'submodule.opensea-common.url' "${srcdir}/opensea-common"
-  git config 'submodule.opensea-transport.url' "${srcdir}/opensea-transport"
-  git config 'submodule.opensea-operations.url' "${srcdir}/opensea-operations"
-  git config 'submodule.wingetopt.url' "${srcdir}/seagate-wingetopt"
-  git submodule update
+  git config submodule.opensea-common.url     "${srcdir}/opensea-common"
+  git config submodule.opensea-transport.url  "${srcdir}/opensea-transport"
+  git config submodule.opensea-operations.url "${srcdir}/opensea-operations"
+  git config submodule.wingetopt.url          "${srcdir}/seagate-wingetopt"
+  git -c protocol.file.allow=always submodule update
 }
 
 pkgver() {
-  cd "${srcdir}/${pkgname%-git}"
-  git describe --long --tags | sed 's/^Release.//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  cd openSeaChest
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-  cd "${srcdir}/${pkgname%-git}/Make/gcc"
-  make release
+  cd openSeaChest
+  arch-meson --buildtype=release builddir
+  ninja -C builddir
 }
 
 package() {
-  cd "${srcdir}/${pkgname%-git}"
-  make DESTDIR="${pkgdir}/" install
+  cd openSeaChest
+  DESTDIR="${pkgdir}/" ninja -C builddir install
 }

@@ -3,7 +3,7 @@
 
 pkgbase=sol2-git
 pkgname=(sol2-git sol2-single-git)
-pkgver=3.3.0.r12.g19898d8d
+pkgver=3.3.0.r13.geab1430c
 pkgrel=1
 pkgdesc="C++ <-> Lua Wrapper Library"
 arch=(any)

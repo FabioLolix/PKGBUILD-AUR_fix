@@ -2,7 +2,7 @@
 # Contributor: Michael DeGuzis <mdeguzis@gmail.com>
 
 pkgname=play-emu-git
-pkgver=0.49.r147.ge492d6ab
+pkgver=0.59.r52.g8e1cc18b
 pkgrel=1
 pkgdesc="Play! is an experimental Playstation 2 emulator."
 arch=(x86_64)
@@ -63,6 +63,6 @@ package() {
   cd "${pkgname%-git}"
   install -Dm755 build/Source/ui_qt/Play    "${pkgdir}"/usr/bin/play-emu
   install -D icons/icon.svg                 "${pkgdir}"/usr/share/pixmaps/play.svg
-  install -D installer_unix/Play.desktop    "${pkgdir}"/usr/share/applications/play-emu.desktop
+  install -D installer_unix/org.purei.Play.desktop -t "${pkgdir}"/usr/share/applications/
   install -D License.txt                    "${pkgdir}/usr/share/licenses/${pkgname}"/License.txt
 }

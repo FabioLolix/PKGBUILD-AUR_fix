@@ -1,0 +1,36 @@
+# Maintainer: Your Name <youremail@domain.com>
+
+pkgname=resonance-git
+pkgver=r3.6e5930d
+pkgrel=1
+pkgdesc="Music player"
+arch=(x86_64)
+url="https://github.com/nate-xyz/resonance"
+license=(GPL3)
+depends=(gtk4 libadwaita
+         python-mutagen
+         python-loguro
+         python-tqdm
+)
+makedepends=(git cargo meson ninja)
+provides=(resonance)
+conflicts=(resonance)
+options=()
+source=("git+https://github.com/nate-xyz/resonance.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd resonance
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd resonance
+  arch-meson build
+  ninja -C build
+}
+
+package() {
+  cd resonance
+  DESTDIR="${pkgdir}" ninja -C build install
+}

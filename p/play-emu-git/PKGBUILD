@@ -3,7 +3,7 @@
 
 pkgname=play-emu-git
 pkgver=0.59.r52.g8e1cc18b
-pkgrel=1
+pkgrel=2
 pkgdesc="Play! is an experimental Playstation 2 emulator."
 arch=(x86_64)
 url="https://purei.org/"

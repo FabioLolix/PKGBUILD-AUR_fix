@@ -7,7 +7,7 @@ pkgdesc="NVIDIA’s implementation of RTX ray-tracing in Quake II "
 arch=(x86_64)
 url="https://github.com/NVIDIA/Q2RTX"
 license=(GPL2)
-depends=(gcc-libs libssh2 vulkan-icd-loader)
+depends=(gcc-libs libssh2 vulkan-icd-loader sndio)
 makedepends=(git cmake openal libglvnd python pipewire alsa-lib libpulse jack portaudio)
 options=(!lto)
 source=("git+https://github.com/NVIDIA/Q2RTX.git#tag=v${pkgver}"

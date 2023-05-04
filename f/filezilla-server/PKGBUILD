@@ -1,0 +1,26 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+
+pkgname=filezilla-server
+pkgver=1.6.7
+pkgrel=1
+pkgdesc="A simple FTP, FTPS or SFTP server for ArchLinux"
+arch=(x86_64)
+url="https://filezilla-project.org/download.php?type=server"
+license=(GPL3)
+depends=(libfilezilla pugixml)
+makedepends=(wxwidgets-gtk3)
+source=("https://download.filezilla-project.org/server/FileZilla_Server_${pkgver}_src.tar.bz2")
+sha256sums=('901e2467f6880f5d809a2f5fc2dfc92cc2dbd6833b3cc0b6dae972a0d1ef7804')
+
+build() {
+  cd "filezilla-server-${pkgver}"
+  ./configure --prefix=/usr
+  #make
+}
+
+package() {
+  cd "filezilla-server-${pkgver}"
+  make DESTDIR="${pkgdir}" install
+
+  # pkg/unix .service .desktop sed them
+}

@@ -1,51 +1,51 @@
 # Maintainer:
 
 pkgname=mailspring-git
-pkgver=1.9.1.r2.g2b89469bb
+pkgver=1.10.8.r5.gb404b3cdf
 pkgrel=1
 pkgdesc="A beautiful, fast and maintained fork of Nylas Mail by one of the original authors."
 arch=(x86_64)
 license=(GPL3)
 url="https://getmailspring.com/"
-makedepends=(git npm gcc5 cmake wget)
+depends=(alsa-lib gtk3 libsecret nss)
+makedepends=(git npm nodejs-lts-gallium grunt-cli)
 source=("${pkgname%-git}::git+https://github.com/Foundry376/Mailspring.git"
-        "git+https://github.com/Foundry376/Mailspring-Sync.git"
-        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/mailspring_0001-linux-don-t-build-a-deb-or-rpm-please.patch"
-)
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/mailspring_0001-linux-don-t-build-a-deb-or-rpm-please.patch")
 sha256sums=('SKIP'
-            'SKIP'
             'fd2158e0e3d39df0fa498b2afbcfa55c30607018ae144656f9575a6ec9e3dc98')
 
 pkgver() {
-  cd "${pkgname%-git}"
+  cd mailspring
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
-
 prepare() {
-  cd "${pkgname%-git}"
-#  patch -p1 < ../mailspring_0001-linux-don-t-build-a-deb-or-rpm-please.patch
-
-  git submodule init
-  git config 'submodule.mailsync.url' "${srcdir}/Mailspring-Sync"
-  git submodule update
+  cd mailspring
+  patch -p1 < ../mailspring_0001-linux-don-t-build-a-deb-or-rpm-please.patch
 }
 
 build() {
-  cd "${pkgname%-git}/mailsync"
-  ./build.sh
-
-  cd ..
-  npm config set unsafe-perm=true
+  cd "${pkgname%-git}/"
   npm install
-  npm audit
-  npm audit fix
-  npm audit fix --force
   npm run-script build
 }
 
 package() {
-  cd "${pkgname%-git}"
-true
-}
+  cd mailspring
+  install -d "${pkgdir}/opt/mailspring"
+  cp -r app/dist/mailspring-linux-x64/* "${pkgdir}/opt/mailspring"
 
+  install -d "${pkgdir}/usr/bin"
+  ln -s /opt/mailspring/mailspring "${pkgdir}/usr/bin/mailspring"
+
+  cd app/build/resources/linux
+
+  install -D Mailspring.desktop.in "${pkgdir}/usr/share/applications/Mailspring.desktop"
+  install -D mailspring.appdata.xml.in "${pkgdir}/usr/share/metainfo/mailspring.appdata.xml"
+
+  for s in 16 32 64 128 256 512; do
+    install -Dm0644 "icons/$s.png" "${pkgdir}/usr/share/icons/hicolor/$s/apps/mailspring.png"
+  done
+
+#Insecure RPATH '/opt/openssl/lib' in file ('opt/mailspring/resources/app.asar.unpacked/mailsync.bin')
+}

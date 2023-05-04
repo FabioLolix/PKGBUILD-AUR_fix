@@ -1,7 +1,7 @@
 # Maintainer: Your Name <youremail@domain.com>
 
 pkgname=gitnuro-git
-pkgver=1.1.1.r4.g52539c2
+pkgver=1.2.0.r0.g33c7db5
 pkgrel=1
 pkgdesc="FOSS Git multiplatform client based on Compose and JGit"
 arch=(any)
@@ -23,16 +23,16 @@ pkgver() {
 
 build() {
   cd Gitnuro
-  gradle -Dorg.gradle.daemon=false run
+  gradle -Dorg.gradle.daemon=false
 }
 
 check() {
   cd Gitnuro
-  gradle -Dorg.gradle.daemon=false check || true
+  #gradle -Dorg.gradle.daemon=false check || true
   gradle -Dorg.gradle.daemon=false test || true
 }
 
 package() {
   cd Gitnuro
-  #build/libs/Gitnuro-1.1.0.jar
+  #install -D build/libs/Gitnuro-1.1.0.jar ${pkgdir}/usr/bin
 }

@@ -7,7 +7,7 @@ pkgver=3.21.0.r11.g4a6af2671
 pkgrel=1
 pkgdesc='A tool to help find memory-management problems in programs'
 arch=(x86_64)
-url='http://valgrind.org/'
+url="https://valgrind.org/"
 license=(GPL)
 depends=(glibc perl debuginfod)
 makedepends=(gdb openmpi git docbook-xsl)
@@ -22,9 +22,9 @@ b2sums=('SKIP'
 options=(!lto) # https://bugs.kde.org/show_bug.cgi?id=338252
 
 pkgver() {
-    cd "${_name}"
-    #git describe --long --tags | sed -e 's|-|.|g' -e 's|VALGRIND_||g' -e 's|_|.|g'
-    git describe --long --tags | sed 's/^VALGRIND_//;s/\([^-]*-g\)/r\1/;s/-/./g;s|_|.|g'
+  cd "${_name}"
+  #git describe --long --tags | sed -e 's|-|.|g' -e 's|VALGRIND_||g' -e 's|_|.|g'
+  git describe --long --tags | sed 's/^VALGRIND_//;s/\([^-]*-g\)/r\1/;s/-/./g;s|_|.|g'
 }
 
 prepare() {

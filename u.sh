@@ -806,6 +806,11 @@ VAR2=v
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+  VAR=valgrind-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=vkbasalt-cli
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

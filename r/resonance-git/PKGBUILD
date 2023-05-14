@@ -1,7 +1,7 @@
 # Maintainer: Your Name <youremail@domain.com>
 
 pkgname=resonance-git
-pkgver=r3.6e5930d
+pkgver=r14.901e76f
 pkgrel=1
 pkgdesc="Music player"
 arch=(x86_64)
@@ -9,7 +9,7 @@ url="https://github.com/nate-xyz/resonance"
 license=(GPL3)
 depends=(gtk4 libadwaita
          python-mutagen
-         python-loguro
+         python-loguru
          python-tqdm
 )
 makedepends=(git cargo meson ninja)

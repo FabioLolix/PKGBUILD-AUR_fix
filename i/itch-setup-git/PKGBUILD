@@ -3,13 +3,13 @@
 
 pkgname=itch-setup-git
 pkgver=1.26.0.r12.gc718b87
-pkgrel=1
+pkgrel=2
 pkgdesc="Installer for the itch.io desktop app"
 arch=(x86_64)
 url="https://itch.io/"
 license=(MIT)
 depends=(gtk3)
-makedepends=(git go npm nodejs-lts-fermium)
+makedepends=(git go npm nodejs)
 provides=(itch-setup)
 conflicts=(itch-setup)
 _itchver=25.5.1

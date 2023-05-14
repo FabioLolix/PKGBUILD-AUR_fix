@@ -3,7 +3,7 @@
 # Contributor: Lerentis <lerentis@burntbunch.org>
 
 pkgname=index-fm-git
-pkgver=2.2.0.r18.ga3c6279
+pkgver=2.2.2.r59.g577bcff
 pkgrel=1
 pkgdesc="Index is a file manager that works on desktops, Android and Plasma Mobile"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)

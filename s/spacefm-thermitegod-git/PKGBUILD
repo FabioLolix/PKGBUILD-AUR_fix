@@ -1,0 +1,46 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: skydrome
+# Contributor: IgnorantGuru http://igurublog.wordpress.com/contact-ignorantguru/
+
+pkgname=spacefm-git
+pkgver=2.1.0.r37.gead6c8f
+pkgrel=1
+pkgdesc="Multi-panel tabbed file manager"
+arch=(i686 x86_64)
+url="https://github.com/thermitegod/spacefm"
+license=(GPL3)
+conflicts=(spacefm)
+provides=(spacefm)
+depends=(gtk3 ffmpegthumbnailer libbsd) # startup-notification
+makedepends=(git meson exo) #intltool
+optdepends=('dbus: dbus integration'
+            'util-linux: disk eject support'
+            'lsof: device processes'
+            'wget: plugin download'
+            'gksu: perform as root functionality'
+            'udevil: mount as non-root user and mount networks'
+            'udisks2: mount as non-root user'
+            'pmount: mount as non-root user'
+            'curlftpfs: mount FTP shares'
+            'jmtpfs: mount MTP devices'
+            'gphotofs: mount cameras'
+            'ifuse: mount your iPhone/iPod Touch'
+            'fuseiso: mount ISO files')
+source=("git+https://github.com/thermitegod/spacefm")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "spacefm"
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd "spacefm"
+  meson build --prefix=/usr
+  ninja -C build
+}
+
+package() {
+  cd "spacefm"
+  DESTDIR="${pkgdir}" ninja -C build install
+}

@@ -4,7 +4,7 @@
 _name=valgrind
 pkgname=valgrind-git
 pkgver=3.21.0.r11.g4a6af2671
-pkgrel=1
+pkgrel=2
 pkgdesc='A tool to help find memory-management problems in programs'
 arch=(x86_64)
 url="https://valgrind.org/"

@@ -1,17 +1,16 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
 pkgname=nfs-ganesha-full-git
-pkgver=4.0.7.r0.gd6ad1b227
+pkgver=5.1.r0.g38ae53541
 pkgrel=1
 pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
-arch=(x86_64 i686 arm armv6h armv7h aarch64)
+arch=(x86_64 i686 armv7h aarch64)
 url="http://nfs-ganesha.github.io/"
 license=(GPL3)
-depends=(jemalloc liburcu ceph-libs glusterfs nfsidmap dbus xfsprogs smbclient)
-makedepends=(git cmake python-sphinx doxygen gssproxy libmspack
-             
-)
-#lizardfs(aur)
+depends=(jemalloc liburcu glusterfs nfsidmap dbus xfsprogs smbclient)
+makedepends=(git cmake python-sphinx doxygen gssproxy libmspack)
+# ceph-libs #AUR
+# lizardfs #AUR
 # KVSNS ?
 # Lustre ?
 
@@ -31,10 +30,8 @@ pkgver() {
 prepare() {
   cd "nfs-ganesha"
   git submodule init
-  git config 'submodule.src/libntirpc.url' "${srcdir}/ntirpc"
-  git submodule update
-
-#  install -d "/src/build"
+  git config submodule.src/libntirpc.url "${srcdir}/ntirpc"
+  git -c protocol.file.allow=always  submodule update
 }
 
 build() {

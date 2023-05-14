@@ -1,7 +1,7 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
 pkgname=nfs-ganesha
-_pkgver=4.0.7
+_pkgver=5.1
 pkgver=${_pkgver//-/.}
 pkgrel=1
 pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode."
@@ -19,8 +19,8 @@ backup=(etc/ganesha/ganesha.conf etc/sysconfig/ganesha)
 prepare() {
   cd "${pkgname}"
   git submodule init
-  git config 'submodule.src/libntirpc.url' "${srcdir}/ntirpc"
-  git submodule update
+  git config submodule.src/libntirpc.url "${srcdir}/ntirpc"
+  git -c protocol.file.allow=always  submodule update
 }
 
 build() {

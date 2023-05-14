@@ -5,8 +5,8 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gittyup
-pkgver=1.1.2
-pkgrel=2
+pkgver=1.3.0
+pkgrel=1
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
 arch=(x86_64)
@@ -16,7 +16,7 @@ makedepends=(git cmake ninja qt5-tools qt5-translations ) #libgit2 libgnome-keyr
 optdepends=('git-lfs: git-lfs support'
             'libgnome-keyring: for GNOME Keyring for auth credentials'
             'qt5-translations: translations')
-_commit=7fa0bce2adb87c301180277363fea0f1264cd118
+_commit=6bf49f007a9fb0577910885607833373d0552101
 source=("git+https://github.com/Murmele/Gittyup.git#commit=$_commit"
         "stinb-libgit2::git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/kuba--/zip.git"
@@ -30,7 +30,7 @@ sha256sums=('SKIP'
 
 pkgver() {
   cd "${srcdir}/Gittyup"
-  git describe --tags | sed 's/^gittyup_v//g' | sed 's/-/+/g' 
+  git describe --tags | sed 's/^gittyup_v//g' | sed 's/-/+/g'
 }
 
 prepare() {

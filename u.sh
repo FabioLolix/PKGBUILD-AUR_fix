@@ -496,6 +496,11 @@ echo "Done M"
 
 
 VAR2=n
+  VAR=nomacs
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=nx-software-center
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

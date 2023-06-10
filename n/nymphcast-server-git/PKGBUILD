@@ -3,7 +3,7 @@
 
 pkgname=nymphcast-server-git
 _reponame=NymphCast
-pkgver=0.1.r39.gd77d5bb
+pkgver=0.1.r48.gc79c225
 pkgrel=1
 pkgdesc="Audio and video casting system with support for custom applications."
 arch=(x86_64 i686 armv7h aarch64)

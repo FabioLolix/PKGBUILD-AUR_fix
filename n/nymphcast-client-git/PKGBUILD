@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=nymphcast-client-git
-pkgver=0.1.r39.gd77d5bb
+pkgver=0.1.r48.gc79c225
 pkgrel=1
 pkgdesc="Audio and video casting system with support for custom applications."
 arch=(x86_64 i686 armv7h aarch64)

@@ -2,7 +2,7 @@
 
 pkgname=libnymphcast-git
 pkgver=0.1.r2.gd5400e8
-pkgrel=1
+pkgrel=2
 pkgdesc="Core functionality for a NymphCast client"
 arch=(x86_64 i686 armv7h aarch64)
 url="https://github.com/MayaPosch/libnymphcast"

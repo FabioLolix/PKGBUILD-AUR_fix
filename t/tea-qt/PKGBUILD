@@ -28,6 +28,7 @@ build() {
   cd "${srcdir}/tea-qt/build"
   cmake .. \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DQT_DIR=/usr/lib/cmake/Qt6 \
     -DUSE_PDF=ON \
     -DUSE_DJVU=ON
 

@@ -22,7 +22,7 @@ pkgver() {
 build() {
   mkdir -p "${srcdir}/tea-qt/b"
   cd "${srcdir}/tea-qt/b"
-  cmake .. -DCMAKE_INSTALL_PREFIX=/usr
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr -DQT_DIR=/usr/lib/cmake/Qt6 \
   make
 }
 

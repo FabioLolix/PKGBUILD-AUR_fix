@@ -9,8 +9,7 @@ pkgdesc="C++ <-> Lua Wrapper Library"
 arch=(any)
 url="https://sol2.rtfd.io/"
 license=(MIT)
-makedepends=(git cmake python)
-optdepends=(lua lua51 lua52 lua53 luajit)
+makedepends=(git cmake python lua)
 source=("git+https://github.com/ThePhD/sol2.git")
 sha256sums=('SKIP')
 
@@ -23,9 +22,10 @@ build() {
   cmake \
     -S sol2 \
     -B build \
-    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_CXX_COMPILER=g++ \
+    -DSOL2_BUILD_LUA:BOOL=FALSE \
     -Wno-dev
 }
 
@@ -37,7 +37,7 @@ package_sol2-git() {
 }
 
 package_sol2-single-git() {
- conflicts=(sol2-single)
+ conflicts=(sol2-single sol2)
  provides=(sol2-single)
   cd sol2/single
 

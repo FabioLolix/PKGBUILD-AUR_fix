@@ -25,10 +25,14 @@ build() {
     -Wno-dev \
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCPR_BUILD_TESTS=OFF \
+    -DCPR_BUILD_TESTS=ON \
     -DCPR_USE_SYSTEM_CURL=ON
 
   cmake --build build
+}
+
+check() {
+  ctest --test-dir build --output-on-failure
 }
 
 package() {

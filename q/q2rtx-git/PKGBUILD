@@ -12,7 +12,7 @@ depends=(gcc-libs libssh2 vulkan-icd-loader sndio)
 makedepends=(git cmake openal libglvnd python pipewire alsa-lib libpulse jack portaudio sdl2)
 optdepends=(q2rtx-data)
 provides=(q2rtx)
-conflicts=(q2rtx)
+conflicts=(q2rtx quake2rtx quake2rtx-bin)
 options=(!lto)
 source=("git+https://github.com/NVIDIA/Q2RTX.git"
         "git+https://github.com/madler/zlib.git"

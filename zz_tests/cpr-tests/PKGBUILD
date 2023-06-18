@@ -9,6 +9,7 @@ url="https://github.com/libcpr/cpr"
 license=(MIT)
 depends=(glibc gcc-libs curl openssl)
 makedepends=(cmake)
+checkdepends=(gtest)
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/libcpr/cpr/archive/refs/tags/$pkgver.tar.gz")
 sha256sums=('7b9d3504ffdaf7ce3189f1b91d135888776b6a1b26ea1bf2c3c4986b8a5af06f')
 
@@ -18,6 +19,7 @@ build() {
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCPR_BUILD_TESTS=ON \
+    -DCPR_USE_SYSTEM_GTEST=ON \
     -DCPR_USE_SYSTEM_CURL=ON
 
   cmake --build build

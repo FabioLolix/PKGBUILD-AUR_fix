@@ -10,6 +10,7 @@ url="https://github.com/libcpr/cpr"
 license=(MIT)
 depends=(glibc gcc-libs curl openssl)
 makedepends=(git cmake )
+checkdepends=(gtest)
 provides=(cpr)
 conflicts=(cpr)
 source=("git+${url}.git")
@@ -26,6 +27,7 @@ build() {
     -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCPR_BUILD_TESTS=ON \
+    -DCPR_USE_SYSTEM_GTEST=ON \
     -DCPR_USE_SYSTEM_CURL=ON
 
   cmake --build build

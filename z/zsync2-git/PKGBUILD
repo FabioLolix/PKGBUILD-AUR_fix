@@ -1,0 +1,42 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+
+pkgname=zsync2-git
+pkgver=2.0.0.alpha.1.20230304.r2.ge57e1fc
+pkgrel=1
+pkgdesc="Graphical front end to manage AppImage applications built using MauiKit"
+arch=(x86_64)
+url="https://github.com/AppImageCommunity/AppImageUpdate"
+license=(PerlArtistic)
+depends=(glibc gcc-libs cpr curl libgcrypt)
+makedepends=(git cmake args gtest)
+provides=(zsync2)
+conflicts=(zsync2)
+source=("git+https://github.com/AppImageCommunity/zsync2.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd zsync2
+  git describe --long --tags --exclude continuous | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd zsync2
+  [[ -d build ]] || mkdir build
+}
+
+build() {
+  cd zsync2/build
+  cmake .. -Wno-dev \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DUSE_SYSTEM_CPR=ON \
+    -DUSE_SYSTEM_ARGS=ON
+
+  make
+}
+
+package() {
+  cd zsync2/build
+  make DESTDIR="${pkgdir}/" install
+  install -D ../COPYING -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}

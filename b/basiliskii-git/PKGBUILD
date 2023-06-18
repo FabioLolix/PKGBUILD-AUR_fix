@@ -2,7 +2,7 @@
 # Contributor: William Termini <aur@termini.me>
 
 pkgname=basiliskii-git
-pkgver=r2682.6393d14a
+pkgver=r2687.720eb598
 pkgrel=1
 pkgdesc="Open Source 68k Macintosh Emulator"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)

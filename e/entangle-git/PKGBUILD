@@ -2,8 +2,8 @@
 # Contributor: Zdeněk Janeček <jan.zdenek@gmail.com>
 
 pkgname=entangle-git
-pkgver=3.0.r29.gd5bdff8
-pkgrel=2
+pkgver=3.0.r32.gd2d9acf
+pkgrel=1
 pkgdesc="GTK graphical interface for tethered photography with digital cameras powered by libgphoto2"
 arch=(x86_64 i686)
 url="https://entangle-photo.org/"

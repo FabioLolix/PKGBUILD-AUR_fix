@@ -2,7 +2,7 @@
 # Contributor: Kaushal M
 
 pkgname=fuse-overlayfs-git
-pkgver=1.8.2.r4.g8ec0b4f
+pkgver=1.12.r2.gbcea6c9
 pkgrel=1
 epoch=1
 pkgdesc="FUSE implementation for overlayfs"

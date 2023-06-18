@@ -6,7 +6,7 @@
 # Contributor: Alexander Rødseth <rodseth@gmail.com>
 
 pkgname=cinelerra-cv-git
-pkgver=2.3.r397.g294ee730
+pkgver=2.3.r401.gbb00ac6b
 pkgrel=1
 pkgdesc="Professional video editing and compositing environment - Community version"
 arch=(x86_64)

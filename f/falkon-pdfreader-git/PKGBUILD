@@ -3,8 +3,8 @@
 # Contributor: Yochanan
 
 pkgname=falkon-pdfreader-git
-pkgver=r7.eefc135
-pkgrel=2
+pkgver=r12.dcb8453
+pkgrel=1
 pkgdesc="PDF reader plugin for Falkon browser"
 arch=(any)
 url="https://github.com/Tarptaeya/PDFReader"

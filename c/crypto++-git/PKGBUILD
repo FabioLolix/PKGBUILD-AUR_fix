@@ -6,7 +6,7 @@
 # Contributor: jlvsimoes <jlvsimoes@oninet.pt>
 
 pkgname=crypto++-git
-pkgver=8.7.0.r13.geaa1bf57
+pkgver=8.7.0.r42.g2038ab19
 pkgrel=1
 pkgdesc="A free C++ class library of cryptographic schemes"
 arch=(x86_64)

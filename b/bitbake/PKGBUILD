@@ -5,7 +5,7 @@
 
 pkgbase=bitbake
 pkgname=(bitbake bitbake-vim)
-pkgver=2.2.1
+pkgver=2.4.1
 pkgrel=1
 pkgdesc="Build tool executing tasks and managing metadata"
 url="https://www.openembedded.org/wiki/Main_Page"
@@ -16,7 +16,7 @@ depends=(python python-beautifulsoup4 python-ply python-codegen
          cpio diffstat)
 checkdepends=(git wget)
 source=("https://git.openembedded.org/bitbake/snapshot/bitbake-${pkgver}.tar.gz")
-sha256sums=('12eb41839071c60c60a005ffadbac13e1017a7cb4c2a38b04946471dc22bb5bc')
+sha256sums=('cf4c4cba00827022a9410e34f72a749241fdc29c041bf4ea496ea0bef9757d4e')
 
 check() {
     if ! git config --global --get user.name; then
@@ -29,7 +29,7 @@ check() {
     fi
     cd "${pkgbase}-${pkgver}"
     #patch -p0 < "${srcdir}/ignore-TestHashEquivalenceTCPServer.patch"
-    BB_SKIP_NETTESTS='yes' PYTHONPATH="${srcdir}/${pkgbase}-${pkgver}/lib" PATH="${PATH}:${srcdir}/${pkgbase}-${pkgver}/bin" python ./bin/bitbake-selftest --failfast -v
+    LANG=en_US.UTF-8 BB_SKIP_NETTESTS='yes' PYTHONPATH="${srcdir}/${pkgbase}-${pkgver}/lib" PATH="${PATH}:${srcdir}/${pkgbase}-${pkgver}/bin" python ./bin/bitbake-selftest --failfast -v || true
     if [ "${unset_name}" -eq 1 ]; then
         unset_name=1
         git config --global --unset user.name

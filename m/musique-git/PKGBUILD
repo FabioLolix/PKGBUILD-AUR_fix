@@ -6,8 +6,8 @@
 # Contributor: dieghen89 <dieghen89@gmail.com>
 
 pkgname=musique-git
-pkgver=1.10.1.r11.g4396af9
-pkgrel=2
+pkgver=1.10.1.r48.gbaeb3fe
+pkgrel=1
 pkgdesc="A finely crafted music player"
 arch=(x86_64)
 url="https://flavio.tordini.org/musique"

@@ -11,7 +11,7 @@ depends=(libpng12)
 provides=(cinelerra-hv)
 conflicts=(cinelerra-hv)
 source_x86_64=("https://sourceforge.net/projects/heroines/files/cinelerra-${pkgver}-x86_64.tar.xz")
-sha256sums_x86_64=('14413264ed4207baa7d4c174b21cf0d7e8ff8769db2cdc3f00720180494c1bd8')
+sha256sums_x86_64=('aa1ab5959366a8b3ea6153b8afd7a62abf3737ded6a0810dc4acb6569ea067ff')
 options=(!strip)
 
 package() {

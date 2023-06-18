@@ -3,16 +3,17 @@
 # Contributor: Philip Goto <philip.goto@gmail.com>
 
 pkgname=fragments-git
-pkgver=2.0.2.r37.g99c25b0
+pkgver=2.1.1.r1.g0d6f2a3
 pkgrel=1
 pkgdesc="BitTorrent client for GNOME"
 arch=(i686 x86_64 armv6h armv7h)
 url="https://gitlab.gnome.org/World/Fragments"
 license=(GPL3)
 depends=(gtk4 libadwaita transmission-cli)
-makedepends=(git meson rust)
+makedepends=(git meson cargo)
 provides=(fragments)
 conflicts=(fragments)
+options=(!lto)
 source=("git+https://gitlab.gnome.org/World/Fragments.git")
 sha256sums=('SKIP')
 

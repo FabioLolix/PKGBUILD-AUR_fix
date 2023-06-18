@@ -2,8 +2,8 @@
 # Maintainer: pingplug < aur at pingplug dot me >
 
 pkgname=cinelerra-gg-git
-pkgver=2023.03.r3.g3a4fc0d9
-pkgrel=2
+pkgver=2023.04.r3.g2e9b85a9
+pkgrel=1
 pkgdesc="Professional video editing and compositing environment"
 arch=(x86_64)
 url="https://www.cinelerra-gg.org"

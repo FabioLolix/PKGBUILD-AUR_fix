@@ -4,7 +4,7 @@
 export GIT_LFS_SKIP_SMUDGE=1
 
 pkgname=opentoonz-git
-pkgver=1.5.0rc2.r338.945bef656
+pkgver=1.7.1.r147.dd1ea1ebe
 pkgrel=1
 pkgdesc='Software for producing a 2D animation'
 arch=(x86_64)
@@ -43,7 +43,8 @@ build() {
   cd build
   cmake -G "Unix Makefiles" ../"${pkgname%-git}"/toonz/sources \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_SKIP_RPATH=YES
+    -DCMAKE_SKIP_RPATH=YES \
+    -DWITH_TRANSLATION=OFF
   make
 }
 

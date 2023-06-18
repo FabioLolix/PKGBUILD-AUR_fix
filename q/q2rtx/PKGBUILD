@@ -10,7 +10,8 @@ license=(GPL2 custom)
 depends=(gcc-libs libssh2 vulkan-icd-loader sndio)
 makedepends=(git cmake openal libglvnd python pipewire alsa-lib libpulse jack portaudio)
 optdepends=(q2rtx-data)
-conflicts=(quake2rtx quake2rtx-bin)
+conflicts=(quake2rtx)
+replaces=(quake2rtx)
 options=(!lto)
 source=("git+https://github.com/NVIDIA/Q2RTX.git#tag=v${pkgver}"
         "git+https://github.com/madler/zlib.git"

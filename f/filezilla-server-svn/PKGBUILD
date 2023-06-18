@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=filezilla-server-svn
-pkgver=r10960
+pkgver=r10975
 pkgrel=1
 pkgdesc="A simple FTP, FTPS or SFTP server for ArchLinux"
 arch=(x86_64)
@@ -18,9 +18,10 @@ pkgver() {
 }
 
 build() {
-  cd filezilla-server
-  ./configure --prefix=/usr
+  cd filezilla-server/source
+  #./configure --prefix=/usr
   #make
+  msbuild /p:Configuration=Release "FileZilla server.sln"
 }
 
 package() {

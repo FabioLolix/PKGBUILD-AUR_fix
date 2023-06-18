@@ -1,6 +1,6 @@
 
 pkgname=duplicati-git
-pkgver=2.0.6.102.2.0.6.102_canary_2022.04.06.r12.g93a4e2cb6
+pkgver=2.0.7.2.2.0.7.2_canary_2023.05.25.r0.g8fad3ed5d
 pkgrel=1
 pkgdesc="FOSS backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers"
 arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
@@ -12,14 +12,12 @@ optdepends=('notify-sharp: for tray notifications'
             gtk-sharp-2)
 install=duplicati.install
 source=("git+https://github.com/duplicati/duplicati.git"
-        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/duplicati-no-tar.gz-v3.patch"
         duplicati.service
         duplicati.sysusers
         duplicati.tmpfiles.conf
         duplicati-user.service
         )
 sha256sums=('SKIP'
-            '32781c14e01a603df80aa88e51ac44b1e968535386ee9420c9a1fd3ae7c6dd7b'
             '2ff538f11370fcdebaf15a46212dde4de9ea2910c3e7e9f3adef1b1d1f7e8d28'
             'b9389b399467f3e02aa8e76bb98f6efbca1166fbc4d0bdf939493f8403462959'
             'b6ca3d280feb753ded94bb44eef821a0dac0c0c7ed7f37dea76d445a64386c86'
@@ -32,7 +30,9 @@ pkgver() {
 
 prepare() {
   cd "duplicati"
-  patch -Np1 -i ../duplicati-no-tar.gz-v3.patch
+  #remove creating tar/gzip archive which slow build()
+  sed -i '/tar -C "$(PACKAGE_DIR)" -cf "duplicati.tar" ./,//d' Installer/Makefile/Makefile
+  sed -i '/gzip --best "duplicati.tar"/,//d'                   Installer/Makefile/Makefile
 }
 
 build() {

@@ -2,7 +2,7 @@
 # Contributor: Lukas Jirkovsky <l.jirkovsky@gmail.com>
 
 pkgname=hugin-hg
-pkgver=r8480.907170838d2e
+pkgver=r8608.d0a5f7c6b7ef
 pkgrel=1
 pkgdesc="A frontend to the panorama-tools"
 arch=(x86_64)

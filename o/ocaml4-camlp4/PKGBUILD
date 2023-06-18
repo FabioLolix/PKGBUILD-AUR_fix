@@ -1,29 +1,29 @@
-# Maintainer: Alexander F. Rødseth <xyproto@archlinux.org>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Alexander F. Rødseth <xyproto@archlinux.org>
 # Contributor: Tobias Powalowski <tpowa@archlinux.org>
 
-pkgname=camlp4
-_ocaml_ver=4.14.0
-pkgver=${_ocaml_ver%.*}+1
-pkgrel=3
+pkgname=ocaml4-camlp4
+pkgver=4.14+1
+pkgrel=1
 pkgdesc='Caml preprocessor and pretty-printer'
 arch=(x86_64)
-license=(GPL2)
 url='https://github.com/ocaml/camlp4/releases'
-depends=("ocaml>=${_ocaml_ver}")
-makedepends=(git ocamlbuild ocaml-compiler-libs)
+license=(GPL2)
+depends=(ocaml4)
+makedepends=(ocaml4-ocamlbuild ocaml4-compiler-libs ocaml4-findlib ocaml4-camlp-streams)
 options=(!makeflags !emptydirs staticlibs)
-source=("$pkgname-$pkgver.tar.gz::https://github.com/ocaml/camlp4/archive/$pkgver.tar.gz")
+source=("camlp4-${pkgver}.tar.gz::https://github.com/camlp4/camlp4/archive/refs/tags/${pkgver}.tar.gz")
 b2sums=('93d52b5be818c3662f6aa462a33c908a68bc85a19554f2352e2a146edbe0b39f7c9de2807a507c4f83fc59188030d085eca473afd03e71e05b039950683542ef')
 
 build() {
-  cd "$pkgname-${pkgver/+/-}"
+  cd "camlp4-${pkgver//+/-}"
   CFLAGS+=' -ffat-lto-objects -w'
   ./configure
   make all camlp4/META
 }
 
 package() {
-  cd "$pkgname-${pkgver/+/-}"
+  cd "camlp4-${pkgver//+/-}"
   make \
     BINDIR="$pkgdir/usr/bin" \
     LIBDIR="$pkgdir/usr/lib/ocaml" \

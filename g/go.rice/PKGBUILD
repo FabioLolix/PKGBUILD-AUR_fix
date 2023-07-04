@@ -1,7 +1,7 @@
 # Maintainer: Matt Harrison <matt@harrison.us.com>
 
 pkgname=go.rice
-pkgver=1.0.0
+pkgver=1.0.3
 pkgrel=1
 pkgdesc='Go package that makes working with resources such as html,js,css,images,templates, etc very easy.'
 arch=(x86_64)
@@ -10,7 +10,7 @@ license=("BSD")
 makedepends=(go)
 options=(!lto)
 source=("$pkgname-$pkgver.tar.gz::https://github.com/GeertJohan/$pkgname/archive/v$pkgver.tar.gz")
-sha256sums=('540cb64258fc2422664c73454b5dbaac5487a45906c935d25285a2a60085d877')
+sha256sums=('dda8be9c9c594e164e664479001e7113d0f6571b3fc93253ef132096540f0673')
 
 build() {
   cd "$srcdir/$pkgname-$pkgver/rice"

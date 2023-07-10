@@ -202,15 +202,15 @@ VAR2=c
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
-  VAR=cyan-converter
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+  #VAR=cyan-converter
+  #cd "$BASE/$VAR2/$VAR"
+  #  makepkg --printsrcinfo > .SRCINFO
+  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
-  VAR=cyan-converter-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+  #VAR=cyan-converter-git
+  #cd "$BASE/$VAR2/$VAR"
+  #  makepkg --printsrcinfo > .SRCINFO
+  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
 echo "Done C"
 
@@ -671,11 +671,6 @@ VAR2=p
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-
-#  VAR=ptxconf-git
-#  cd "$BASE/$VAR2/$VAR"
-#    makepkg --printsrcinfo > .SRCINFO
-#    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
   VAR=python2-pillow
   cd "$BASE/$VAR2/$VAR"

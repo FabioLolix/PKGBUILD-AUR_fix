@@ -12,7 +12,7 @@ license=(GPL3)
 conflicts=(spacefm)
 provides=(spacefm)
 depends=(gtk3 ffmpegthumbnailer libbsd) # startup-notification
-makedepends=(git meson exo) #intltool
+makedepends=(git meson exo fish fmt spdlog libsigc++-3.0 nlohmann-json cli11 zmqpp glibmm-2.68) #intltool
 optdepends=('dbus: dbus integration'
             'util-linux: disk eject support'
             'lsof: device processes'

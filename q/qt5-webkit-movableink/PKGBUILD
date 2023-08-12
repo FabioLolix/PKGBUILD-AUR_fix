@@ -1,0 +1,35 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+
+pkgname=qt5-webkit-movableink-git
+_pkgver=2022-09-07
+pkgver=${_pkgver//-/.}
+pkgrel=1
+pkgdesc='Classes for a WebKit2 based implementation and a new QML API'
+arch=(x86_64)
+url='https://github.com/qtwebkit/qtwebkit'
+license=(GPL3 LGPL3 FDL custom)
+depends=(qt5-location libwebp libxslt libxcomposite gst-plugins-base hyphen woff2 icu71 harfbuzz)
+makedepends=(git cmake ruby gperf python qt5-tools)
+optdepends=('gst-plugins-good: Webm codec support')
+provides=(qt5-webkit)
+conflicts=(qt5-webkit)
+options=(!lto)
+source=("qt5-webkit-movableink::git+https://github.com/movableink/webkit.git#tag=2022.09.07")
+sha256sums=('SKIP')
+
+build() {
+  cmake -B build -S qt5-webkit-movableink -Wno-dev \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DPORT=Qt \
+    -DENABLE_TOOLS=OFF
+
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+
+  install -d "$pkgdir"/usr/share/licenses
+  ln -s /usr/share/licenses/qt5-base "$pkgdir"/usr/share/licenses/${pkgname}
+}

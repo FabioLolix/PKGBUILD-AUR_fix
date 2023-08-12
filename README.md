@@ -1,14 +1,14 @@
 ## Packaging guidelines & tips
 
-* prefer git+https over git:// for taking advantage of TLS encryption, also on github don't work since about April 2022
+* prefer `git+https` over `git://` for taking advantage of TLS encryption, also on github don't work since about April 2022
 
-* sha256 is the preferred hash check
+* `sha256sums` or higher is the preferred
 
-* cut 'v' and other prefixes from pkgver
+* cut `v` and other prefixes from pkgver
 
-* don't use custom variables when not needed (like use ${pkgname%-git})
+* don't use custom variables when not needed (like use `${pkgname%-git}`)
 
-* pkgrel is for internal use of the PKGBUILD and must not be used in source=() or as part of pkgver
+* `pkgrel` is for internal use of the PKGBUILD and must not be used in `source=()` or as part of `pkgver`
 
 * quoting in arch=() license=() depends=() makedepends=() depends=() is pointless and a personal choice,
 except when needed.

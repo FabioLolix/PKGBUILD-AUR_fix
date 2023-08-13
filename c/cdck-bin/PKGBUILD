@@ -1,4 +1,5 @@
-# Maintainer: ninian <mcfadzean.org.uk ta linux>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: ninian <mcfadzean.org.uk ta linux>
 
 pkgname=cdck-bin
 pkgver=0.7.0

@@ -1,24 +1,22 @@
 # Maintainer: Wojciech Szymecki <w.szymecki-at-g;mail-com>
-pkgname="zmqpp"
+pkgname=zmqpp
 pkgver=4.2.0
 pkgrel=2
-pkgdesc="High-level C++ binding for ZMQ."
-arch=('i686' 'x86_64')
-url="http://zeromq.github.io/zmqpp/"
-license=('custom:MPL2')
-depends=('zeromq')
-source=("https://github.com/zeromq/zmqpp/archive/${pkgver}.tar.gz")
-md5sums=('5107edd1423187be7e26d9dd738753b8')
+pkgdesc="High-level C++ binding for ZMQ"
+arch=(x86_64 i686)
+url="https://zeromq.github.io/zmqpp/"
+license=(MPL2)
+depends=(glibc gcc-libs zeromq)
+source=("${pkgname}-${pkgver}.tar.gz::https://github.com/zeromq/zmqpp/archive/${pkgver}.tar.gz")
+sha256sums=('c1d4587df3562f73849d9e5f8c932ca7dcfc7d8bec31f62d7f35073ef81f4d29')
 
 build() {
   cd "${pkgname}-${pkgver}"
-
   make
+  #make client
 }
 
 package() {
   cd "${pkgname}-${pkgver}"
-
   make PREFIX="/usr/" DESTDIR="${pkgdir}/" install
-  install -D -m644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }

@@ -9,7 +9,7 @@ pkgdesc="Multi-panel tabbed file manager"
 arch=(x86_64)
 url="https://github.com/thermitegod/spacefm"
 license=(GPL3)
-depends=(gtk3 ffmpegthumbnailer exo fmt spdlog glibmm-2.68 pugixml zeromq zmqpp python libsigc++-3.0)
+depends=(gtk3 ffmpegthumbnailer exo fmt spdlog glibmm-2.68 pugixml zeromq zmqpp ztd-git python libsigc++-3.0)
 makedepends=(git meson cmake magic_enum toml11 fish nlohmann-json cli11)
 #cmake required to find toml11
 #optdepends=('dbus: dbus integration'
@@ -37,7 +37,7 @@ pkgver() {
 
 build() {
   cd "spacefm-thermitegod"
-  meson build --prefix=/usr
+  arch-meson build
   ninja -C build
 }
 

@@ -1,0 +1,32 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Evert Vorster <evorster@gmail.com>
+
+pkgname=vegastrike-git
+pkgver=0.8.1.beta1.r0.g59ba743e
+pkgrel=1
+pkgdesc="Vega Strike - Upon the Coldest Sea. Space flight and trading simulator with realistic distances"
+arch=(any)
+url="https://www.vega-strike.org/"
+license=(GPL2)
+depends=(vegastrike-engine)
+makedepends=(git cmake)
+options=(!strip)
+source=("Vega-Strike-Assets-Production::git+https://github.com/vegastrike/Assets-Production#branch=0.8.x")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd Vega-Strike-Assets-Production
+  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build(){
+  cmake -B build -S "Vega-Strike-Assets-Production" -Wno-dev \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}

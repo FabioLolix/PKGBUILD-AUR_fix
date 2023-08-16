@@ -1,0 +1,29 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Evert Vorster <evorster@gmail.com>
+
+pkgname=vegastrike-engine
+pkgver=0.8.0
+pkgrel=1
+pkgdesc="A spaceflight simulator in massive universe"
+arch=(x86_64)
+url="https://www.vega-strike.org/"
+license=(GPL2)
+depends=(boost-libs python freeglut gtk3 libvorbis openal sdl glu)
+makedepends=(git cmake boost ogre ffmpeg)
+source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source#tag=v${pkgver}")
+sha256sums=('SKIP')
+
+build(){
+  cmake -B build -S "Vega-Strike-Engine-Source/engine" -Wno-dev \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DENABLE_PIE=ON
+
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+  rm -rf ${pkgdir}/usr/include
+  rm -rf ${pkgdir}/usr/lib
+}

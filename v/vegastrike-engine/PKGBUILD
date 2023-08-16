@@ -10,8 +10,15 @@ url="https://www.vega-strike.org/"
 license=(GPL2)
 depends=(boost-libs python freeglut gtk3 libvorbis openal sdl glu)
 makedepends=(git cmake boost ogre ffmpeg)
-source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source#tag=v${pkgver}")
-sha256sums=('SKIP')
+source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source#tag=v${pkgver}"
+         https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/vegastrike-delete-include-eval.h.patch)
+sha256sums=('SKIP'
+            '6f2f6ea1fef1710e7bc696bc0bb7b30749d48949090ddcf7f60d6d9db78c699b')
+
+prepare(){
+  cd Vega-Strike-Engine-Source
+  patch -Np1 -i ../vegastrike-delete-include-eval.h.patch
+}
 
 build(){
   cmake -B build -S "Vega-Strike-Engine-Source/engine" -Wno-dev \

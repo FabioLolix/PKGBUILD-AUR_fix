@@ -7,7 +7,7 @@ pkgdesc="A C++11 header-only toml parser/encoder depending only on C++ standard 
 arch=(any)
 url="https://github.com/ToruNiina/toml11"
 license=(MIT)
-makedepends=(git cmake)
+makedepends=(git cmake boost)
 provides=(toml11)
 conflicts=(toml11)
 source=("git+https://github.com/ToruNiina/toml11.git")
@@ -23,9 +23,13 @@ build() {
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_CXX_STANDARD=COMPILER \
-    -Dtoml11_BUILD_TEST=OFF
+    -Dtoml11_BUILD_TEST=ON
 
   cmake --build build
+}
+
+check() {
+  ctest --test-dir build --output-on-failure
 }
 
 package() {

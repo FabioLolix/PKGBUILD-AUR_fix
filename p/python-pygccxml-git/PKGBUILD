@@ -4,7 +4,7 @@
 # Contributor: zarra <zarraxx@gmail.com>
 
 pkgname=python-pygccxml-git
-pkgver=2.3.0.r4.g3a5534b
+pkgver=2.4.0.r8.g3a656b8
 pkgrel=1
 pkgdesc="Simple framework to navigate C++ declarations, using Python classes."
 arch=(any)
@@ -16,7 +16,7 @@ makedepends=(git python-build python-wheel python-installer python-setuptools)
 provides=(python-pygccxml pygccxml)
 conflicts=(python-pygccxml pygccxml)
 replaces=(pygccxml)
-source=("git+https://github.com/gccxml/pygccxml.git")
+source=("git+https://github.com/gccxml/pygccxml.git#branch=develop")
 sha256sums=('SKIP')
 
 pkgver() {
@@ -33,7 +33,8 @@ check() {
   cd pygccxml
   python -m unittests.test_all
   python -m coverage report -m
-  #pytest
+
+  #pytest -v
 }
 
 package() {

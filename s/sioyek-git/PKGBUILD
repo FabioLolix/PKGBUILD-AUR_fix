@@ -2,8 +2,8 @@
 # Contributor: Philipp Kühn <p dot kuehn at posteo dot de>
 
 pkgname=sioyek-git
-pkgver=1.5.0.r34.g95fe563
-pkgrel=2
+pkgver=2.0.0.r103.g5517425
+pkgrel=1
 epoch=1
 pkgdesc="PDF viewer for research papers and technical books."
 arch=(x86_64)
@@ -13,18 +13,29 @@ depends=(qt5-base harfbuzz gumbo-parser openjpeg2 jbig2dec)
 makedepends=(git qt5-3d mujs libmupdf)
 provides=(sioyek)
 conflicts=(sioyek)
-source=("git+https://github.com/ahrm/sioyek.git")
-sha256sums=('SKIP')
+source=(
+  "git+https://github.com/ahrm/sioyek.git"
+  "0001-Mupdf-0.23-support.patch"
+)
+sha256sums=(
+  'SKIP'
+  '37c05f9d0da21697827d31b20e91bb38f1f251fb6bf77e08ae86f1150f717f01'
+)
 
 pkgver() {
 	cd "sioyek"
     git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
+prepare() {
+  cd "sioyek"
+  patch -p1 < "../0001-Mupdf-0.23-support.patch"
+}
+
 build() {
   cd sioyek
   sed -i 's/\/\/#define LINUX_STANDARD_PATHS/#define LINUX_STANDARD_PATHS/' pdf_viewer/main.cpp
-  sed -i 's/-lmupdf-third -lmupdf-threads -lharfbuzz/-lmupdf-third -lharfbuzz -lfreetype -lgumbo -ljbig2dec -lopenjp2 -ljpeg/' pdf_viewer_build_config.pro
+  sed -i 's/-lmupdf-third -lmupdf-threads -lharfbuzz/-lmupdf -lharfbuzz -lfreetype -lgumbo -ljbig2dec -lopenjp2 -ljpeg/' pdf_viewer_build_config.pro
   qmake "CONFIG+=linux_app_image" pdf_viewer_build_config.pro
   make
 }

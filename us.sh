@@ -14,13 +14,3 @@ VAR2=c
     rsync {PKGBUILD,.SRCINFO} "$BASE/$VAR2/$VAR"
 
 echo "Done C"
-
-
-
-VAR2=t
-  VAR=tenacity-git
-  cd "$DEST/$VAR2/$VAR"
-    git pull
-    rsync {PKGBUILD,.SRCINFO} "$BASE/$VAR2/$VAR"
-
-echo "Done T"

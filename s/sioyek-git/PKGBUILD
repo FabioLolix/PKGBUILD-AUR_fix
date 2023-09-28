@@ -1,5 +1,6 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 # Contributor: Philipp Kühn <p dot kuehn at posteo dot de>
+# Contributor: hrdl <git@hrdl.eu>
 
 pkgname=sioyek-git
 pkgver=2.0.0.r103.g5517425

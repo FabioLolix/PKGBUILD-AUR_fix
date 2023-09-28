@@ -14,7 +14,7 @@ makedepends=(git qt5-3d mujs libmupdf)
 provides=(sioyek)
 conflicts=(sioyek)
 # patch retreived from https://paste.debian.net/plain/1290973 (source: https://aur.archlinux.org/packages/sioyek-git#comment-932428)
-source=("git+https://github.com/ahrm/sioyek.git" "mupdf-1.23.0.patch")
+source=("git+https://github.com/ahrm/sioyek.git" "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/sioyek-mupdf/sioyek-mupdf-1.23.0.patch")
 sha256sums=('SKIP' 'b71f3658803c80bd7a5cf59b38bb80418fd85cec06ee631a14d39736f2bfe39c')
 
 pkgver() {
@@ -25,7 +25,7 @@ pkgver() {
 prepare() {
   cd "sioyek"
 
-  patch --forward --strip=1 --input="${srcdir}/mupdf-1.23.0.patch"
+  patch --forward --strip=1 --input="${srcdir}/sioyek-mupdf-1.23.0.patch"
   sed -i 's/-lmupdf-threads/-lfreetype -lgumbo -ljbig2dec -lopenjp2 -ljpeg/' pdf_viewer_build_config.pro
   sed -i '/#define LINUX_STANDARD_PATHS/s/\/\///' pdf_viewer/main.cpp
   sed -i 's/-lmupdf-third//' pdf_viewer_build_config.pro

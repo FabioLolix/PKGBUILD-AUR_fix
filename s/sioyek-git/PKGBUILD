@@ -5,12 +5,13 @@
 pkgname=sioyek-git
 pkgver=2.0.0.r103.g5517425
 pkgrel=2
+epoch=1
 pkgdesc="PDF viewer for research papers and technical books."
 arch=(x86_64)
 license=(GPL3)
 url="https://github.com/ahrm/sioyek"
-depends=(qt5-base  libmupdf)
-makedepends=(git qt5-3d mujs ) #gumbo-parser openjpeg2 jbig2dec harfbuzz
+depends=(qt5-base libmupdf)
+makedepends=(git qt5-3d mujs) #gumbo-parser openjpeg2 jbig2dec harfbuzz
 provides=(sioyek)
 conflicts=(sioyek)
 # patch retreived from https://paste.debian.net/plain/1290973 (source: https://aur.archlinux.org/packages/sioyek-git#comment-932428)

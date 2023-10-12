@@ -1,5 +1,4 @@
-# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
-# Contributor: max.bra <max dot bra at alice dot it>
+# Maintainer: max.bra <max dot bra at alice dot it>
 # Contributor: Rorschach <r0schach@lavabit.com>
 
 pkgname=ipscan
@@ -10,9 +9,8 @@ arch=(any)
 license=(GPL2)
 url="https://angryip.org/"
 _java=17
-depends=(java-runtime )
-#makedepends=(git jdk${_java}-openjdk gradle dpkg rpm-tools)
-makedepends=(git jdk-openjdk gradle dpkg rpm-tools)
+depends=(java-runtime)
+makedepends=(git jdk${_java}-openjdk gradle dpkg rpm-tools)
 source=("git+https://github.com/angryip/ipscan.git#tag=${pkgver}"
         ipscan.sh)
 sha256sums=('SKIP'
@@ -21,8 +19,8 @@ sha256sums=('SKIP'
 build() {
   cd ipscan
   export JAVA_HOME="/usr/lib/jvm/java-${_java}-openjdk"
-  gradle -Dorg.gradle.daemon=false --warning-mode all --stacktrace linux64
-  #./gradlew -Dorg.gradle.daemon=false --warning-mode all --stacktrace linux64
+  gradle -Dorg.gradle.daemon=false linux64
+  #./gradlew -Dorg.gradle.daemon=false linux64
 }
 
 package() {

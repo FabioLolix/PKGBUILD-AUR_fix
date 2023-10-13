@@ -1,8 +1,8 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 # Contributor: Igor Dyatlov <dyatlov.igor@protonmail.com>
 
-pkgname=cartridges
-pkgver=2.6.r0.g3a052b6
+pkgname=cartridges-git
+pkgver=2.6.r1.g82ff5b3
 pkgrel=1
 pkgdesc="A GTK4 + Libadwaita game launcher"
 arch=(any)
@@ -26,7 +26,7 @@ pkgver() {
 }
 
 build() {
-  arch-meson cartridges build
+  arch-meson cartridges build -D tiff_compression=jpeg
   meson compile -C build
 }
 

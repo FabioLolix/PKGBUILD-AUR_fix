@@ -1,29 +1,27 @@
-# Maintainer: 
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Roberto Hueso < roberto at robertohueso dot org >
 
 pkgname=ensmallen
-pkgver=1.15.1
+pkgver=2.19.1
 pkgrel=1
-pkgdesc="Flexible C++ library for efficient mathematical optimization"
-arch=(x86_64 i686 arm armv6h armv7h aarch64)
+pkgdesc="Flexible C++ header library for efficient mathematical optimization"
+arch=(any)
 url="https://ensmallen.org/"
 license=(BSD)
-depends=(armadillo)
-makedepends=(cmake)
-source=("https://ensmallen.org/files/ensmallen-$pkgver.tar.gz")
-sha256sums=('e597a7d488b59add432dba7e8a3911eddbbce30ab665e9e3fc0541466245997a')
-
-prepare() {
-  cd "${pkgname}-${pkgver}"
-  install -d build
-}
+makedepends=(cmake openmp armadillo lapack)
+source=("https://ensmallen.org/files/${pkgname}-${pkgver}.tar.gz")
+sha256sums=('f36ad7f08b0688d2a8152e1c73dd437c56ed7a5af5facf65db6ffd977b275b2e')
 
 build() {
-  cd "${pkgname}-${pkgver}/build"
-  cmake .. \
+  cmake -B build -S "$pkgname-$pkgver" -Wno-dev \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DCMAKE_INSTALL_PREFIX=/usr
+
+  cmake --build build
 }
 
 package() {
-  cd "${pkgname}-${pkgver}/build"
-  make DESTDIR=${pkgdir} install
+  DESTDIR="${pkgdir}" cmake --install build
+
+  install -D "$pkgname-$pkgver"/LICENSE.txt  -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

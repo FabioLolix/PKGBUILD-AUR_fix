@@ -237,6 +237,11 @@ VAR2=e
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
+  VAR=ensmallen
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+
   VAR=entangle
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

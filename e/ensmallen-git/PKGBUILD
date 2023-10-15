@@ -1,0 +1,31 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Roberto Hueso < roberto at robertohueso dot org >
+
+pkgname=ensmallen
+pkgver=2.20.0.r3.g868793bd
+pkgrel=1
+pkgdesc="Flexible C++ header library for efficient mathematical optimization"
+arch=(any)
+url="https://ensmallen.org/"
+license=(BSD)
+makedepends=(git cmake openmp armadillo lapack)
+source=("git+https://github.com/mlpack/ensmallen.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd ensmallen
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cmake -B build -S "ensmallen" -Wno-dev \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+  cmake --build build
+}
+
+package() {
+  DESTDIR="${pkgdir}" cmake --install build
+  install -D ensmallen/LICENSE.txt  -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}

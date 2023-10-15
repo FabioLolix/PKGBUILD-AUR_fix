@@ -2,7 +2,7 @@
 # Contributor: Ivan "Penter" <ivaiva1999ivaiva@gmail.com>
 
 pkgname=cpr-git
-pkgver=1.10.1.r20.ge65e685
+pkgver=1.10.5.r0.g3b15fa8
 pkgrel=1
 pkgdesc="C++ Requests: Curl for People"
 arch=(x86_64 i686)
@@ -13,7 +13,7 @@ makedepends=(git cmake )
 checkdepends=(gtest)
 provides=(cpr)
 conflicts=(cpr)
-source=("git+${url}.git")
+source=("git+${url}.git#branch=1.10.x")
 sha512sums=("SKIP")
 
 pkgver() {

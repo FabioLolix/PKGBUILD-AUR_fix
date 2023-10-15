@@ -21,7 +21,8 @@ source=("git+https://github.com/TheAssassin/AppImageLauncher.git"
         "git+https://github.com/TheAssassin/libdesktopenvironments.git"
         "git+https://github.com/arsenm/sanitizers-cmake.git"
         "git+https://github.com/google/googletest.git"
-        "AppImage-cpr::git+https://github.com/AppImage/cpr.git"
+        #"AppImage-cpr::git+https://github.com/AppImage/cpr.git"
+        "git+https://github.com/libcpr/cpr.git#tag=1.10.3"
         "git+https://github.com/Taywee/args.git"
         'appimage-binfmt-remove.hook')
 sha256sums=('SKIP'
@@ -65,10 +66,12 @@ prepare() {
 
   cd "$srcdir/AppImageLauncher/lib/AppImageUpdate/lib/zsync2"
   git submodule init
-  git config submodule.lib/cpr.url "${srcdir}/AppImage-cpr"
+  #git config submodule.lib/cpr.url "${srcdir}/AppImage-cpr"
   git config submodule.lib/args.url "${srcdir}/args"
   git config submodule.lib/gtest.url "${srcdir}/googletest"
   git -c protocol.file.allow=always submodule update
+
+  cp -vr $srcdir/cpr/* lib/cpr
 }
 
 build() {

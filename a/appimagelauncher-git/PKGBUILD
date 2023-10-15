@@ -3,20 +3,20 @@
 # Contributor: TheAssassin
 
 pkgname=appimagelauncher-git
-pkgver=r1251.71e8e32
+pkgver=r1254.a4fadd1
 pkgrel=1
 pkgdesc="A Helper application for running and integrating AppImages."
 arch=(x86_64)
 url="https://assassinate-you.net/tags/appimagelauncher/"
 license=(MIT)
 depends=(qt5-base fuse2 squashfuse libappimage libxpm)
-makedepends=(git cmake boost qt5-tools qt5-declarative lib32-glibc lib32-gcc-libs xxd chrpath)
+makedepends=(git cmake boost qt5-tools qt5-declarative lib32-glibc lib32-gcc-libs xxd chrpath  appimageupdate-git)
 provides=(appimagelauncher)
 conflicts=(appimagelauncher)
 source=("git+https://github.com/TheAssassin/AppImageLauncher.git"
         "git+https://github.com/AppImageCommunity/AppImageUpdate.git"
-        #"git+https://github.com/AppImageCommunity/libappimage.git"
-        "git+https://github.com/TheAssassin/zsync2.git"
+        #"git+https://github.com/AppImage/libappimage.git"
+        "git+https://github.com/AppImageCommunity/zsync2.git"
         "git+https://github.com/TheAssassin/fltk-1.3.4.git"
         "git+https://github.com/TheAssassin/libdesktopenvironments.git"
         "git+https://github.com/arsenm/sanitizers-cmake.git"
@@ -74,12 +74,16 @@ prepare() {
 build() {
   cd AppImageLauncher
 
-  cmake . -Wno-dev \
-        -DCMAKE_INSTALL_PREFIX=/usr/ \
-        -DUSE_SYSTEM_LIBAPPIMAGE=ON \
-        -DBUILD_TESTING=OFF
+  cmake . \
+    -Wno-dev \
+    -DCMAKE_INSTALL_PREFIX=/usr/ \
+    -DUSE_SYSTEM_LIBAPPIMAGE=ON \
+    -DBUILD_TESTING=OFF
+
   make libappimageupdate libappimageupdate-qt
+
   cmake .
+
   make
 }
 
@@ -95,3 +99,7 @@ package() {
   #chrpath --delete "${pkgdir}/usr/bin/ail-cli"
   #chrpath --delete "${pkgdir}/usr/bin/appimagelauncherd"
 }
+
+# USE_SYSTEM_GTEST=ON don't have effect on zsync2 submodule
+
+# problems with system's libappimageupdate (not recognized)

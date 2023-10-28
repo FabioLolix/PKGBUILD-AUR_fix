@@ -31,7 +31,6 @@ build(){
   cmake -B build -S "Vega-Strike-Engine-Source/engine" -Wno-dev \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_CXX_FLAGS="$CXXFLAGS -Wno-error=format-security" \
     -DENABLE_PIE=ON
 
   cmake --build build

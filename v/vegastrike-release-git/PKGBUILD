@@ -1,12 +1,12 @@
 
-pkgname=vegastrike-0.8.x-git
+pkgname=vegastrike-release-git
 pkgver=0.8.1.beta1.r0.g59ba743e
 pkgrel=1
 pkgdesc="Vega Strike - Upon the Coldest Sea. Space flight and trading simulator with realistic distances"
 arch=(any)
 url="https://www.vega-strike.org/"
 license=(GPL2)
-depends=(vegastrike-engine-0.8.x-git)
+depends=(vegastrike-engine-release-git)
 makedepends=(git cmake)
 conflicts=(vegastrike)
 options=(!strip)

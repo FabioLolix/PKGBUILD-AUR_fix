@@ -1,7 +1,7 @@
 
 pkgname=vegastrike-engine-git
 pkgver=0.8.0.alpha4.r422.ga720ce59b
-pkgrel=1
+pkgrel=2
 pkgdesc="A spaceflight simulator in massive universe"
 arch=(x86_64)
 url="https://www.vega-strike.org/"
@@ -10,7 +10,7 @@ depends=(boost-libs python freeglut gtk3 libvorbis openal sdl2 glu
 
          # namcap implicit depends
          glibc gcc-libs glib2 zlib libglvnd libpng libjpeg-turbo expat)
-makedepends=(git cmake boost gcc12)
+makedepends=(git cmake boost gcc12 lsb-release)
 provides=(vegastrike-engine)
 conflicts=(vegastrike-engine)
 source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source")
@@ -38,3 +38,6 @@ package() {
   rm -rf ${pkgdir}/usr/include
   rm -rf ${pkgdir}/usr/lib
 }
+
+# lsb-release as makedepends avoid issue if dpkg is installed, recognized as Debian.
+# Don't happen the same if rpm-tools is intalled

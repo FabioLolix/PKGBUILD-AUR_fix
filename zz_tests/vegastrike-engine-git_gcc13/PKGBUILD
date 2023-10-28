@@ -10,7 +10,7 @@ depends=(boost-libs python freeglut gtk3 libvorbis openal sdl2 glu
 
          # namcap implicit depends
          glibc gcc-libs glib2 zlib libglvnd libpng libjpeg-turbo expat)
-makedepends=(git cmake boost gcc12 lsb-release)
+makedepends=(git cmake boost lsb-release)
 provides=(vegastrike-engine)
 conflicts=(vegastrike-engine)
 source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source")
@@ -25,7 +25,6 @@ build(){
   # buildtype None, enable ffmpeg, ogre will fail, not supported
   # https://github.com/vegastrike/Vega-Strike-Engine-Source/issues/777#issuecomment-1763235378
 
-  export CC=/usr/bin/gcc-12 CXX=/usr/bin/g++-12
   cmake -B build -S "Vega-Strike-Engine-Source/engine" -Wno-dev \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr

@@ -1,0 +1,50 @@
+# Maintainer: Peter Mattern <pmattern at arcor dot de>
+
+_pkgname=nomacs
+pkgname=$_pkgname-git
+pkgver=3.17.2287.r0.g9eedbb1c
+pkgrel=1
+pkgdesc='Free, open source image viewer, which supports multiple platforms.'
+arch=('i686' 'x86_64')
+url='https://github.com/nomacs/nomacs'
+license=('GPL3')
+depends=('qt5-svg' 'exiv2' 'libraw' 'opencv' 'quazip')
+makedepends=('git' git-lfs 'cmake' 'qt5-tools' python)
+provides=("$_pkgname")
+conflicts=("$_pkgname")
+source=("git+https://github.com/$_pkgname/$_pkgname.git"
+        "git+https://github.com/nomacs/nomacs-plugins.git"
+        "https://github.com/nomacs/nomacs/files/11703502/nomacs-fix-exiv2-0.28.patch.txt")
+sha256sums=('SKIP'
+            'SKIP'
+            'f5117545580e23f2e2db21bf41724148749b78326a557643a9acc9319fc25a68')
+
+export GIT_LFS_SKIP_SMUDGE=1
+
+pkgver() {
+  cd "$srcdir/$_pkgname"
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd "$srcdir/$_pkgname"
+  # https://github.com/nomacs/nomacs/issues/951
+  #patch -Np1 -i ../nomacs-fix-exiv2-0.28.patch.txt
+  # copy plugin sources into place
+  cp -av "${srcdir}/nomacs-plugins/"* "ImageLounge/plugins"
+}
+
+build() {
+  cd nomacs
+  cmake -B build -S ImageLounge -Wno-dev \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DUSE_SYSTEM_QUAZIP=ON \
+    -DENABLE_TRANSLATIONS=ON
+
+  cmake --build build
+}
+
+package() {
+  cd nomacs
+  DESTDIR="$pkgdir" cmake --install build
+}

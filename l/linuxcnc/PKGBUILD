@@ -9,7 +9,7 @@ pkgrel=1
 pkgdesc="Controls CNC machines. It can drive milling machines, lathes, 3d printers, laser cutters, plasma cutters, robot arms, hexapods, and more (formerly EMC2)"
 arch=(x86_64)
 license=(GPL2 'custom: unredestributable')
-url="http://linuxcnc.org"
+url="https://linuxcnc.org/"
 depends=(glibc python gtk3 libusb libxss python-cairo gobject-introspection-runtime dbus-python python-pillow libxmu
          python-gobject tk python-matplotlib boost-libs python-numpy gstreamer at-spi2-core libepoxy libtirpc libxft
          harfbuzz gcc-libs fontconfig gdk-pixbuf2 libxext librsvg glib2 zlib cairo readline systemd-libs freetype2

@@ -1,19 +1,31 @@
-# Maintainer: Dario Ostuni <dario.ostuni@gmail.com>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Dario Ostuni <dario.ostuni@gmail.com>
 
-pkgname=python-vulkan
-pkgver=1.1.99.1
+pkgname=python-vulkan-git
+pkgver=1.1.99.1.r8.gc858f33
 pkgrel=1
 pkgdesc="The ultimate Python binding for Vulkan API"
-arch=('any')
+arch=(any)
 url="https://github.com/realitix/vulkan"
-license=('MIT')
-depends=('python' 'python-cffi' 'vulkan-icd-loader')
-makedepends=('python-pycparser')
-options=(!emptydirs)
-source=("https://github.com/realitix/vulkan/archive/${pkgver}.tar.gz")
-sha384sums=('43675c9ae7092a31b02478768da8bb89ec53bca74dafa692f9fac687e096e40dc8cef879f104e84d0b8a1e18b5853ff7')
+license=(Apache)
+depends=(python python-cffi vulkan-icd-loader)
+makedepends=(git python-build python-wheel python-installer python-setuptools)
+provides=(python-vulkan)
+conflicts=(python-vulkan)
+source=("python-vulkan::git+https://github.com/realitix/vulkan.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd python-vulkan
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cd python-vulkan
+  python -m build --wheel --no-isolation
+}
 
 package() {
-    cd "$srcdir/vulkan-${pkgver}"
-    python setup.py install --root="$pkgdir/" --optimize=1
+  cd python-vulkan
+  python -m installer --destdir="$pkgdir" dist/*.whl
 }

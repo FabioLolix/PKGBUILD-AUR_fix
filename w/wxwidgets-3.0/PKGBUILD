@@ -3,9 +3,9 @@
 # Contributor: Qirui Wang <wqr.prg@gmail.com>
 
 pkgbase=wxwidgets-3.0
-pkgname=(wxwidgets-gtk2-3.0 wxwidgets-gtk3-3.0 wxwidgets-gtk-common-3.0)
+pkgname=(wxwidgets-gtk2-3.0 wxwidgets-gtk3-3.0 wxwidgets-common-3.0)
 pkgver=3.0.5
-pkgrel=1
+pkgrel=3
 arch=(x86_64)
 url="https://wxwidgets.org"
 license=('custom:wxWindows')
@@ -29,7 +29,7 @@ build() {
   make
   make -C locale allmo
 
-  cd ../wxWidgets-${pkgver}-gtk3
+  cd ../"wxWidgets-${pkgver}-gtk3"
   ./configure --prefix=/opt/wxgtk-3.0 --libdir=/opt/wxgtk-3.0/lib --with-gtk=3 --with-opengl --enable-unicode \
     --enable-graphics_ctx --enable-mediactrl --enable-webview --with-regex=builtin \
     --with-libpng=sys --with-libxpm=sys --with-libjpeg=sys --with-libtiff=sys \
@@ -37,7 +37,7 @@ build() {
   make
 }
 
-package_wxwidgets-gtk-common-3.0() {
+package_wxwidgets-common-3.0() {
   pkgdesc='Common libraries and headers for wxgtk2 and wxgtk3, v3.0 installed in /opt/wxgtk-3.0/'
   depends=(zlib gcc-libs expat)
 
@@ -51,7 +51,7 @@ package_wxwidgets-gtk-common-3.0() {
 
 package_wxwidgets-gtk2-3.0() {
   pkgdesc='GTK+2 implementation of wxWidgets API for GUI, v3.0 installed in /opt/wxgtk-3.0/'
-  depends=(gtk2 libgl gst-plugins-base-libs libsm libxxf86vm wxgtk-common-3.0 libnotify)
+  depends=(gtk2 libgl gst-plugins-base-libs libsm libxxf86vm wxwidgets-common-3.0 libnotify)
 
   cd "wxWidgets-${pkgver}"
   make DESTDIR="${pkgdir}" install
@@ -62,10 +62,10 @@ package_wxwidgets-gtk2-3.0() {
 
 package_wxwidgets-gtk3-3.0() {
   pkgdesc='GTK+3 implementation of wxWidgets API for GUI, v3.0 installed in /opt/wxgtk-3.0/'
-  depends=(gtk3 gst-plugins-base-libs libsm libxxf86vm wxgtk-common-3.0 libnotify)
+  depends=(gtk3 gst-plugins-base-libs libsm libxxf86vm wxwidgets-common-3.0 libnotify)
   optdepends=('webkit2gtk: for webview support')
 
-  cd "wxWidgets-${pkgver}"
+  cd "wxWidgets-${pkgver}-gtk3"
   make DESTDIR="${pkgdir}" install
   rm -r "$pkgdir"/opt/wxgtk-3.0/{include,share,lib/libwx_base*,bin/wxrc*}
   mv "$pkgdir"/opt/wxgtk-3.0/bin/wx-config{,-gtk3}

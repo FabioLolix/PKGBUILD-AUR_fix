@@ -882,6 +882,12 @@ VAR2=p
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
+  VAR=python2-wxpython3
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO,*.patch} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
   VAR=python-codegen
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -1042,6 +1048,12 @@ VAR2=s
     echo "    synced $VAR"
 
   VAR=sayonara-player-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=setzer-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
@@ -1297,6 +1309,18 @@ VAR2=w
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=wxwidgets-3.0
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO,*.conf} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=wxwidgets-3.1
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO,*.conf} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
 echo "Done W"

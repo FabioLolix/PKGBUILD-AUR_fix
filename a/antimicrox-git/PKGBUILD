@@ -2,11 +2,11 @@
 # Contributor: Piotr Górski <lucjan.lucjanov@gmail.com>
 
 pkgname=antimicrox-git
-pkgver=3.3.3.r2.g7a39dc43
+pkgver=3.3.4.updated.SDL.r8.g557dcad2
 pkgrel=1
 pkgdesc='Map keyboard and mouse actions to gamepad buttons, inspired by qjoypad. Antimicro fork'
 url="https://github.com/AntiMicroX/antimicroX"
-arch=(x86_64 i686 pentium4 arm armv6h armv7h aarch64)
+arch=(x86_64 i686 pentium4 armv7h aarch64)
 license=(GPL3)
 depends=(qt5-base libxtst hicolor-icon-theme sdl2)
 makedepends=(git cmake qt5-tools itstool extra-cmake-modules)

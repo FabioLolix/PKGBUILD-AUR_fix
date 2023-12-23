@@ -3,7 +3,7 @@
 # Contributor: Luca Bennati <lucak3 AT gmail DOT com>
 
 pkgname=apitrace-git
-pkgver=11.1.r112.g892ab4ce
+pkgver=11.1.r145.gddf60215
 pkgrel=1
 pkgdesc="Graphics API Tracing"
 arch=(x86_64)

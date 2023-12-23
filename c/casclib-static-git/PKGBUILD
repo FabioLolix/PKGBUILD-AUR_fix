@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=casclib-static-git
-pkgver=2.1.r105.g0d65a1c
+pkgver=2.1.r160.g43d6f01
 pkgrel=1
 pkgdesc="Open-source implementation of library for reading CASC storages from Blizzard games"
 arch=(x86_64)

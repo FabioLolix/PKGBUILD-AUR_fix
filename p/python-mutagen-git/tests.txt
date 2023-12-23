@@ -1,0 +1,13 @@
+
+Need python-pytest
+
+ModuleNotFoundError: No module named 'hypothesis' -> python-hypothesis
+
+liboggz -> oggz-validate reference tests.
+
+vorbis-tools -> FLAC, ogginfo, Ogg Vorbis reference tests.
+
+faad2 -> FAAD reference tests.
+
+WARNING: Skipping eyeD3 tests.
+WARNING: Skipping Ogg Vorbis reference tests.

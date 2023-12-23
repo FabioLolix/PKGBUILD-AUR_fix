@@ -1,42 +1,43 @@
 # Maintainer: robertfoster
 
 pkgname=gst-plugins-rs-git
-pkgver=r2527.d67eb1d4
+pkgver=r2932.17f0b615
 pkgrel=1
 pkgdesc="GStreamer plugins written in Rust"
 arch=(x86_64)
 url="https://gstreamer.freedesktop.org/"
 license=(Apache LGPL2.1 MIT MPL2)
 depends=(gstreamer gtk4 dav1d libsodium libwebp)
-makedepends=(git rust meson cargo-c clang hotdoc)
+makedepends=(git rust meson cargo-c clang hotdoc nasm)
 provides=(gst-plugins-rs)
 conflicts=(gst-plugins-rs)
 options=(!lto)
-source=("git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git#branch=0.9")
+source=("git+https://gitlab.freedesktop.org/gstreamer/gst-plugins-rs.git")
 sha256sums=(SKIP)
 
 pkgver() {
   cd "${pkgname%-git}"
+  #git describe --long --tags --exclude  0.1* | sed 's/^foo-//;s/\([^-]*-g\)/r\1/;s/-/./g'
   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 prepare() {
   cd "${pkgname%-git}"
-  cargo fetch --target x86_64-unknown-linux-gnu --manifest-path "${srcdir}/${pkgname%-git}/Cargo.toml"
+  #cargo fetch --target x86_64-unknown-linux-gnu --manifest-path "${srcdir}/${pkgname%-git}/Cargo.toml"
 }
 
 build() {
   cd "${pkgname%-git}"
   arch-meson build \
-    -D csound=disabled \
-    -D dav1d=enabled \
+    -D csound=enabled \
+    -D dav1d=disabled \
     -D sodium=enabled
 
-  ninja -C build
+  meson compile -C build
 }
 
 package() {
   cd "${pkgname%-git}"
-  DESTDIR="${pkgdir}" meson install -C build
+  meson install -C build --destdir "${pkgdir}"
   install -D LICENSE-* -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

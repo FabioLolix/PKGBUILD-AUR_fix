@@ -2,7 +2,7 @@
 # Maintainer: pingplug < aur at pingplug dot me >
 
 pkgname=cinelerra-gg-git
-pkgver=2023.04.r3.g2e9b85a9
+pkgver=2023.11.r0.gfdf615e4
 pkgrel=1
 pkgdesc="Professional video editing and compositing environment"
 arch=(x86_64)
@@ -35,6 +35,7 @@ build() {
     --prefix=/usr \
     --disable-static-build \
     --with-exec-name=cinelerra-gg
+
   make -j1
 }
 

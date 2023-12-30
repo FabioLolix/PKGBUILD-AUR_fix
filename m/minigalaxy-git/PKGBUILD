@@ -3,15 +3,15 @@
 # Contributor: Wouter Wijsman <wwijsman@live.nl>
 
 pkgname=minigalaxy-git
-pkgver=1.2.2.r37.g8c9d4ef
+pkgver=1.2.5.r1.g910e030
 pkgrel=1
 pkgdesc="A simple GOG client for Linux"
 arch=(any)
 url="https://github.com/sharkwouter/minigalaxy"
 license=(GPL3 'CCPL:cc-by-sa-3.0')
 depends=(python python-requests python-gobject gtk3 webkit2gtk)
-makedepends=(python-setuptools git)
-checkdepends=(python-pytest python-simplejson)
+makedepends=(git python-build python-installer python-setuptools python-wheel)
+checkdepends=(python-coverage python-simplejson dosbox scummvm innoextract)
 optdepends=('dosbox: Use the system DOSBox installation'
             'innoextract: Extract Windows installers'
             'scummvm: Use the system ScummVM installation'
@@ -27,17 +27,18 @@ pkgver() {
 
 build() {
   cd "$srcdir/${pkgname%-git}"
-  python setup.py build
+  python -m build --wheel --no-isolation
 }
 
 check() {
   cd "$srcdir/${pkgname%-git}"
-  pytest -v
+  #LANG=EN_us.UTF-8 python -m coverage run --source minigalaxy -m unittest discover -v tests
+  #LANG=EN_us.UTF-8 python -m coverage report -m
 }
 
 package() {
   cd "$srcdir/${pkgname%-git}"
-  python setup.py install --root="$pkgdir" --prefix=/usr --skip-build
+  python -m installer --destdir="$pkgdir" dist/*.whl
   install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
   install -Dm644 THIRD-PARTY-LICENSES.md "$pkgdir/usr/share/licenses/$pkgname/THIRD-PARTY-LICENSES.md"
   install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"

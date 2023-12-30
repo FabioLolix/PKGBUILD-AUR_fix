@@ -5,16 +5,16 @@
 # Contributor: dieghen89 <dieghen89@gmail.com>
 
 pkgname=musique
-pkgver=1.10.1
+pkgver=1.12
 pkgrel=1
 pkgdesc="A finely crafted music player"
 arch=(x86_64)
 url="https://flavio.tordini.org/musique"
 license=(GPL3)
-depends=(qt5-base qt5-declarative taglib mpv)
-makedepends=(qt5-tools)
+depends=(qt6-base qt6-declarative taglib mpv)
+makedepends=(qt6-tools)
 source=("https://github.com/flaviotordini/musique/releases/download/${pkgver}/musique-${pkgver}.tar.bz2")
-sha256sums=('4ddc67c65aedfd4abe49fc8cbc4b05a0a99b07332b6d8da481994be3997960f6')
+sha256sums=('2d678c0c07e751cc3cd284e02134e2d800e2a8876959b253f9b4dcc773e7e8f5')
 
 prepare() {
   cd "${pkgname}-${pkgver}"
@@ -23,7 +23,8 @@ prepare() {
 
 build() {
   cd "${pkgname}-${pkgver}/build"
-  qmake-qt5 .. PREFIX=/usr
+  PATH="$PATH:/usr/lib/qt6/bin"
+  qmake6 .. PREFIX=/usr
   make
 }
 

@@ -1380,10 +1380,10 @@ VAR2=z
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  #VAR=zsync2-git
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+  VAR=zsync2-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
   VAR=ztd-git
   cd "$BASE/$VAR2/$VAR"

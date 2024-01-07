@@ -5,7 +5,7 @@
 export GIT_LFS_SKIP_SMUDGE=1
 
 pkgname=tahoma2d-git
-pkgver=1.3.r299.g56c392958
+pkgver=1.4.r42.g9add68d79
 pkgrel=1
 pkgdesc="Software for producing a 2D animation"
 arch=(x86_64)
@@ -15,13 +15,12 @@ depends=(cblas ffmpeg freeglut glew hicolor-icon-theme libmypaint qt5-multimedia
 makedepends=(git git-lfs boost cmake qt5-tools)
 provides=(tahoma2d)
 conflicts=(tahoma2d)
+options=(!lto)
 source=("git+https://github.com/tahoma2d/tahoma2d.git")
 sha256sums=('SKIP')
 
 pkgver() {
   cd tahoma2d
-  #printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-  #git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
   git describe --long --tags --exclude nightly | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
@@ -53,11 +52,14 @@ build() {
   sed -i 's/TARGET_FILE:tcleanup/TARGET_FILE:tdcleanup/g; s/TARGET_FILE:tcomposer/TARGET_FILE:tdcomposer/g; s/TARGET_FILE:tconverter/TARGET_FILE:tdconverter/g; s/TARGET_FILE:tfarmcontroller/TARGET_FILE:tdfarmcontroller/g; s/TARGET_FILE:tfarmserver/TARGET_FILE:tdfarmserver/g; s/TARGET_FILE:lzocompress/TARGET_FILE:tdlzocompress/g; s/TARGET_FILE:lzodecompress/TARGET_FILE:tdlzodecompress/g' tahoma2d/toonz/sources/toonz/CMakeLists.txt
 
   cd build
-  cmake -G "Unix Makefiles" ../tahoma2d/toonz/sources \
+  cmake -G "Unix Makefiles" ../tahoma2d/toonz/sources -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_CXX_FLAGS="$CXXFLAGS -Wno-#warnings -Wno-deprecated-declarations" \
     -DCMAKE_SKIP_RPATH=YES \
     -DWITH_TRANSLATION=OFF
-  make
+
+  #make
+  CMAKE_CXX_FLAGS="-ldeflate -lwebp" make
 }
 
 package() {

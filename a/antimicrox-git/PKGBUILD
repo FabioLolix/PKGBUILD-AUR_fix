@@ -2,7 +2,7 @@
 # Contributor: Piotr Górski <lucjan.lucjanov@gmail.com>
 
 pkgname=antimicrox-git
-pkgver=3.3.4.updated.SDL.r8.g557dcad2
+pkgver=3.4.0.rc1.r25.gb4fe64bc
 pkgrel=1
 pkgdesc='Map keyboard and mouse actions to gamepad buttons, inspired by qjoypad. Antimicro fork'
 url="https://github.com/AntiMicroX/antimicroX"

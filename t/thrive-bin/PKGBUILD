@@ -3,7 +3,7 @@
 # Contributor: Sebastien Duthil
 
 pkgname=thrive-bin
-pkgver=0.6.4.1
+pkgver=0.6.5.0
 pkgrel=1
 pkgdesc="Game about evolution, in which the player guides a species from their origin as a microbe to the space age and beyond."
 arch=(x86_64)
@@ -12,8 +12,11 @@ license=(GPL3 'CCPL:cc-by-sa-3.0' custom)
 depends=(glibc zlib libxi libxinerama libxrender libxcursor libxext libglvnd libxrandr libx11)
 provides=(thrive)
 conflicts=(thrive)
+source=(thrive.sh)
 source_x86_64=("https://github.com/Revolutionary-Games/Thrive/releases/download/v${pkgver%.0}/Thrive_${pkgver}_linux_x11.7z")
-sha256sums_x86_64=('79886f5d69c26896e4123ba6b6f10b70e2d3b94ef8086dd731afa5d6fdbdd941')
+sha256sums=('6ec074bbee0ac3f21e51e41247f376e2684ab1215ac2e0346af632d5b94f688d')
+sha256sums_x86_64=('c4dda134a603276e9338ca96973bcf0e331626d8d65d9cdac7c7d4017b9d6c2d')
+options=(!strip)
 
 prepare() {
   mv "Thrive_${pkgver}_linux_x11"/Thrive.{desktop,png} .
@@ -24,8 +27,11 @@ package() {
   install -dm755 --group games "$pkgdir/opt/thrive"
   cp -r "Thrive_${pkgver}_linux_x11"/* "$pkgdir/opt/thrive"
 
-  install -d "${pkgdir}/usr/bin"
-  ln -s "/opt/thrive/Thrive" "${pkgdir}/usr/bin/thrive"
+
+  install -D thrive.sh "${pkgdir}/usr/bin/thrive"
+
+  #install -d "${pkgdir}/usr/bin"
+  #ln -s "/opt/thrive/Thrive" "${pkgdir}/usr/bin/thrive"
 
   install -D -t "${pkgdir}/usr/share/icons/" Thrive.png
   install -D -t "${pkgdir}/usr/share/applications" Thrive.desktop

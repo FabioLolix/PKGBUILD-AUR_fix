@@ -6,7 +6,7 @@
 # Contributor: Alexander Rødseth <rodseth@gmail.com>
 
 pkgname=cinelerra-cv-git
-pkgver=2.3.r401.gbb00ac6b
+pkgver=2.3.r419.g18a69342
 pkgrel=1
 pkgdesc="Professional video editing and compositing environment - Community version"
 arch=(x86_64)
@@ -31,8 +31,7 @@ pkgver() {
 }
 
 prepare() {
-  cd cinelerra-cv
-#  patch -Np1 -i ../71fb05327d17a76d5735416a48d6175a6bac235a.patch
+  cd "${srcdir}/cinelerra-cv"
   ./autogen.sh
 }
 

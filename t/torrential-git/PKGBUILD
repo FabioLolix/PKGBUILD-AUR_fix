@@ -2,33 +2,31 @@
 # Contributor: Helder Bertoldo <helder.bertoldo@gmail.com>
 
 pkgname=torrential-git
-pkgver=3.0.0.r0.g86556ff
+pkgver=3.0.0.r2.g2ddabd7
 pkgrel=1
 pkgdesc="Download torrents in style with this speedy, minimalist torrent client designed for Pantheon Shell"
 arch=(i686 x86_64)
 url="https://github.com/davidmhewitt/torrential"
 license=(GPL2)
 depends=(libgranite-7.so libb64 libevent libnatpmp miniupnpc)
-makedepends=(git meson ninja vala dht libutp libtransmission)
+makedepends=(git meson vala dht libutp libtransmission3)
 provides=(torrential)
 conflicts=(torrential)
+options=(!lto)
 source=("git+https://github.com/davidmhewitt/torrential.git#branch=main")
 sha256sums=('SKIP')
 
 pkgver() {
-  cd "${pkgname%-git}"
+  cd torrential
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-  cd "${pkgname%-git}"
-  meson build --prefix=/usr
-  ninja -C build
+  arch-meson torrential build
+  meson compile -C build
 }
 
 package() {
-  cd "${pkgname%-git}"
-  DESTDIR="${pkgdir}" ninja -C build install
+  meson install -C build --destdir "${pkgdir}"
   ln -s /usr/bin/com.github.davidmhewitt.torrential "$pkgdir/usr/bin/torrential"
 }
-

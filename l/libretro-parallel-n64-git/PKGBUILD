@@ -5,24 +5,31 @@
 # Contributor: Thomas Schneider <maxmusterm@gmail.com>
 
 pkgname=libretro-parallel-n64-git
-pkgver=r5243.a03fdcba
-pkgrel=1
+pkgver=r5246.49eadb4d
+pkgrel=2
 epoch=1
 pkgdesc="Nintendo 64 core"
-arch=(x86_64 i686  armv6h armv7h aarch64)
+arch=(x86_64 i686 armv7h aarch64)
 url="https://github.com/libretro/parallel-n64"
 license=(GPL2 'custom:multiple OSI licenses')
 groups=(libretro)
 depends=(libgl libretro-core-info)
-makedepends=(git mesa)
+makedepends=(git mesa gcc-git)
 provides=(libretro-parallel-n64)
+options=(!lto)
 conflicts=(libretro-parallel-n64)
-source=("${pkgname}::git+https://github.com/libretro/parallel-n64")
-sha256sums=('SKIP')
+source=("${pkgname}::git+https://github.com/libretro/parallel-n64" libretro-parallel-n64-fix-build-with-GCC-13.patch)
+sha256sums=('SKIP'
+            '729ca3001fc49c6b93cebb50f7a7c305539e569baa2b8e1492efd887a28708e0')
 
 pkgver() {
   cd "$pkgname"
   printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+prepare() {
+  cd "$pkgname"
+  patch -Np1 -i ../libretro-parallel-n64-fix-build-with-GCC-13.patch
 }
 
 build() {

@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 # Contributor: Pellegrino Prevete (tallero) <pellegrinoprevete@gmail.com>
 
-pkgname=tepl
+pkgname=tepl-git
 pkgver=6.9.0.r4.gdec59c9
 pkgrel=1
 pkgdesc="Library that eases the development of GtkSourceView-based text editors and IDEs"
@@ -14,6 +14,7 @@ depends=(
   glib2
   glibc
   gsettings-desktop-schemas
+  gtk3
   gtksourceview4
   icu
   pango
@@ -28,7 +29,7 @@ makedepends=(
 )
 checkdepends=(xorg-server-xvfb)
 provides=("tepl=${pkgver}")
-conflicts=("tepl")
+conflicts=(tepl)
 source=("git+${url}.git")
 sha256sums=('SKIP')
 

@@ -1,10 +1,9 @@
-# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
-# Contributor: Campbell Barton <ideasman42@gmail.com>
+# Maintainer: Campbell Barton <ideasman42@gmail.com>
 
 export GIT_LFS_SKIP_SMUDGE=1
 
 pkgname=opentoonz-git
-pkgver=1.7.1.r147.dd1ea1ebe
+pkgver=1.7.1.r248.5b8e90ec1
 pkgrel=1
 pkgdesc='Software for producing a 2D animation'
 arch=(x86_64)

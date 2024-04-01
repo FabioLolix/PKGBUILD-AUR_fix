@@ -1,0 +1,49 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Maintainer: Maxim Mikityanskiy <maxtram95@gmail.com>
+
+pkgname=mindforger-git
+pkgver=2.0.0.r35.g2bba6e71
+pkgrel=1
+pkgdesc="Thinking notebook and Markdown IDE. Search, browse, view and edit your Markdown files. Get as much as possible from knowledge in your remarks"
+arch=(x86_64 i686 armv7h aarch64)
+url="https://www.mindforger.com/"
+license=(GPL2)
+depends=(qt5-base qt5-webkit zlib hunspell glibc gcc-libs)
+makedepends=(git cmake)
+provides=(mindforger)
+conflicts=(mindforger)
+source=("git+https://github.com/dvorka/mindforger.git#branch=dev/2.1.0"
+        "git+https://github.com/dvorka/mindforger-repository.git"
+        "mindforger-cmark::git+https://github.com/dvorka/cmark.git")
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP')
+
+pkgver() {
+  cd mindforger
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd mindforger
+  git submodule init
+  git config 'submodule.doc.url' "${srcdir}/mindforger-repository"
+  git config 'submodule.deps/cmark-gfm.url' "${srcdir}/mindforger-cmark"
+  git -c protocol.file.allow=always submodule update
+}
+
+build() {
+  mkdir -p mindforger/deps/cmark-gfm/build
+  cd mindforger/deps/cmark-gfm/build
+  cmake -DCMARK_TESTS=OFF -DCMARK_SHARED=OFF ..
+  cmake --build .
+
+  cd "${srcdir}/mindforger"
+  qmake -r CONFIG+=mfnoccache mindforger.pro
+  make
+}
+
+package() {
+  cd "${srcdir}/mindforger"
+  make INSTALL_ROOT="$pkgdir/usr" install
+}

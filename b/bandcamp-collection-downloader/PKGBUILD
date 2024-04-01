@@ -9,7 +9,7 @@ arch=(any)
 url="https://framagit.org/Ezwen/bandcamp-collection-downloader"
 license=(AGPL3)
 depends=(java-runtime-headless)
-makedepends=(git gradle)
+makedepends=(git gradle7)
 source=("git+https://framagit.org/Ezwen/bandcamp-collection-downloader.git#tag=v${_pkgver}"
         'bandcamp-collection-downloader.sh')
 sha256sums=('SKIP'
@@ -17,7 +17,7 @@ sha256sums=('SKIP'
 
 build() {
   cd bandcamp-collection-downloader
-  gradle -Dorg.gradle.daemon=false fatjar
+  gradle7 -Dorg.gradle.daemon=false fatjar
 }
 
 package() {

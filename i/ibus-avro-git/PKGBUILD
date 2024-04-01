@@ -3,14 +3,14 @@
 
 pkgname=ibus-avro-git
 epoch=1
-pkgver=1.2.r4.g47274e1
+pkgver=1.2.r5.g4da8b05
 pkgrel=1
 pkgdesc="Avro Phonetic Bangla typing for Linux"
 url="http://linux.omicronlab.com"
 arch=(any)
 license=(MPL)
 depends=(ibus gjs)
-makedepends=(git autoconf automake)
+makedepends=(git)
 source=("git+https://github.com/sarim/ibus-avro")
 sha256sums=('SKIP')
 

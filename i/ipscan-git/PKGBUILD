@@ -3,8 +3,8 @@
 # Contributor: Rorschach <r0schach@lavabit.com>
 
 pkgname=ipscan-git
-pkgver=3.9.1.r0.g42253321
-pkgrel=3
+pkgver=3.9.1.r2.g7950484a
+pkgrel=1
 pkgdesc='Angry IP Scanner (or simply ipscan) is an open-source and cross-platform network scanner designed to be fast and simple to use. It scans IP addresses and ports as well as has many other features.'
 arch=(any)
 license=(GPL2)

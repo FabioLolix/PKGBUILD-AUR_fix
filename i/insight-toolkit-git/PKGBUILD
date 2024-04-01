@@ -5,8 +5,8 @@
 # Contributor: Thomas Dziedzic < gostrc at gmail >
 # Contributor: joel schaerer <joel.schaerer@laposte.net>
 
-pkgname=insight-toolkit
-pkgver=5.4rc01.r59.g16f42267a0
+pkgname=insight-toolkit-git
+pkgver=5.4rc02.r352.g1986b54f89
 pkgrel=1
 pkgdesc="Cross-platform system that provides developers with an extensive suite of software tools for image analysis"
 arch=(x86_64)

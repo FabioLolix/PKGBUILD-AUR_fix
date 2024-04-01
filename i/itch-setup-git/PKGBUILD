@@ -2,8 +2,8 @@
 # Contributor: Jeremy Symon <jtsymon@gmail.com>
 
 pkgname=itch-setup-git
-pkgver=1.26.0.r12.gc718b87
-pkgrel=2
+pkgver=1.26.0.r26.g2ff5d56
+pkgrel=1
 pkgdesc="Installer for the itch.io desktop app"
 arch=(x86_64)
 url="https://itch.io/"

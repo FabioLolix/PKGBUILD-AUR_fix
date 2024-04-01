@@ -2,8 +2,8 @@
 # Contributor: Evert Vorster <evorster@gmail.com>
 
 pkgname=vegastrike-engine-release-git
-pkgver=0.8.1.beta2.r25.g057726978
-pkgrel=2
+pkgver=0.8.1.beta2.r31.gff497c647
+pkgrel=1
 pkgdesc="A spaceflight simulator in massive universe"
 arch=(x86_64)
 url="https://www.vega-strike.org/"

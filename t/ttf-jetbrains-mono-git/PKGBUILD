@@ -3,7 +3,7 @@
 # Contributor: Tom Carrio <tom@carrio.dev>
 
 pkgname=ttf-jetbrains-mono-git
-pkgver=2.242.r0.gd0a7fbf
+pkgver=2.304.r15.g8c3ccf7
 pkgrel=1
 pkgdesc="Typeface for developers, by JetBrains"
 arch=(any)

@@ -2,8 +2,8 @@
 # Contributor: marcin mikołajczak <me@mkljczk.pl>
 
 pkgname=tokodon-git
-pkgver=23.08.2.r16.ge9f36469
-pkgrel=2
+pkgver=23.08.4.r10.g51717b74
+pkgrel=1
 pkgdesc="Native Mastodon client"
 arch=(x86_64)
 url="https://invent.kde.org/network/tokodon"

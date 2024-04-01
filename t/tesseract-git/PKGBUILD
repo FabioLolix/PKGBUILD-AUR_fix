@@ -11,7 +11,7 @@ _langs=(afr amh ara asm aze aze_cyrl bel ben bod bos bre bul cat ceb ces
     tel tgk tgl tha tir ton tur uig ukr urd uzb uzb_cyrl vie yid yor)
 
 pkgname=tesseract-git
-pkgver=5.2.0.r0.g5ad5325a
+pkgver=5.3.3.r30.gea0b245c
 pkgrel=1
 epoch=1
 pkgdesc="Open Source OCR Engine"
@@ -19,9 +19,8 @@ arch=(x86_64)
 url="https://tesseract-ocr.github.io/"
 license=(Apache)
 depends=(libtiff libpng leptonica giflib libarchive icu)
-makedepends=(git pango icu)
+makedepends=(git pango)
 optdepends=('pango: text2image'
-            'icu: text2image'
             $(for l in ${_langs[@]}; do echo tesseract-data-${l}; done))
 provides=(tesseract)
 conflicts=(tesseract)

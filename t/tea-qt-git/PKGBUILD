@@ -1,13 +1,13 @@
 # Maintainer: Peter Semiletov <peter.semiletov@gmail.com>
 
 pkgname=tea-qt-git
-pkgver=62.2.1.r0.gfea020b
+pkgver=62.3.0.r0.g2b17c20
 pkgrel=1
 pkgdesc="Powerful text editor for Linux, *BSD, Windows, OS/2, Mac and Haiku OS"
 arch=(x86_64)
 url="http://tea.ourproject.org"
 license=(GPL)
-depends=(qt6-base qt6-5compat gcc-libs zlib hunspell desktop-file-utils)
+depends=(qt6-base qt6-5compat gcc-libs zlib hunspell)
 makedepends=(cmake git)
 provides=(tea-qt)
 conflicts=(tea-qt)

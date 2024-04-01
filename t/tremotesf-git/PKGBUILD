@@ -1,7 +1,7 @@
 # Maintainer: Alexey Rochev <equeim@gmail.com>
 
 pkgname=tremotesf-git
-pkgver=1.6.1.r24.ga30f55c
+pkgver=2.4.0.r48.g4522728
 pkgrel=1
 pkgdesc="Remote GUI for transmission-daemon"
 url="https://github.com/equeim/tremotesf2"

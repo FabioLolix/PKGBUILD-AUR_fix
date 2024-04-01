@@ -1,7 +1,7 @@
 # Maintainer: Wes Jackson <icebal dot 7 at gmail dot com>
 
 pkgname=nfs-ganesha-semifull-git
-pkgver=6.dev.1.r0.g14efa5105
+pkgver=6.dev.2.r0.g83712d6dd
 pkgrel=1
 pkgdesc="NFS-Ganesha supports both the NFS and 9P protocols in user mode. All options in official Arch repo"
 arch=(x86_64 i686 armv7h aarch64)

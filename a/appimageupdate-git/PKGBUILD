@@ -1,8 +1,8 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=appimageupdate-git
-pkgver=2.0.0.alpha.1.20230526.r0.g496a69e
-pkgrel=2
+pkgver=2.0.0.alpha.1.20230526.r1.gd89e6bf
+pkgrel=1
 pkgdesc="Graphical front end to manage AppImage applications built using MauiKit"
 arch=(x86_64)
 url="https://github.com/AppImageCommunity/AppImageUpdate"
@@ -17,7 +17,7 @@ sha256sums=('SKIP')
 
 pkgver() {
   cd AppImageUpdate
-  git describe --long --tags --exclude latest | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags --exclude latest --exclude continuous | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {

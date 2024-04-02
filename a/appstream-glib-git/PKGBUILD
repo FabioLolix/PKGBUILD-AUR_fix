@@ -3,7 +3,7 @@
 # Contributor: Jan de Groot <jgc@archlinux.org>
 
 pkgname=appstream-glib-git
-pkgver=0.8.2.r11.gd26446e
+pkgver=0.8.2.r12.g3247336
 pkgrel=1
 pkgdesc="Objects and methods for reading and writing AppStream metadata"
 url="https://people.freedesktop.org/~hughsient/appstream-glib/"

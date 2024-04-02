@@ -6,19 +6,22 @@
 
 pkgname=musique
 pkgver=1.12
-pkgrel=1
+pkgrel=2
 pkgdesc="A finely crafted music player"
 arch=(x86_64)
 url="https://flavio.tordini.org/musique"
 license=(GPL3)
 depends=(qt6-base qt6-declarative taglib mpv)
 makedepends=(qt6-tools)
-source=("https://github.com/flaviotordini/musique/releases/download/${pkgver}/musique-${pkgver}.tar.bz2")
-sha256sums=('2d678c0c07e751cc3cd284e02134e2d800e2a8876959b253f9b4dcc773e7e8f5')
+source=("https://github.com/flaviotordini/musique/releases/download/${pkgver}/musique-${pkgver}.tar.bz2"
+        "musique-taglib2.0-fix.patch::https://github.com/flaviotordini/musique/commit/ba468521e5998f14fe387cd3051be95cead2e9ac.patch")
+sha256sums=('2d678c0c07e751cc3cd284e02134e2d800e2a8876959b253f9b4dcc773e7e8f5'
+            'b7334990ecb87d6bcfac8c1064a25108ba68aa034e5435aa5e6b5f3197324562')
 
 prepare() {
   cd "${pkgname}-${pkgver}"
   install -d build
+  patch -Np1 -i ../musique-taglib2.0-fix.patch
 }
 
 build() {

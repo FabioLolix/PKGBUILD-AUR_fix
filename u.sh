@@ -384,7 +384,7 @@ VAR2=g
   VAR=gfxreconstruct-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,gitahead.desktop} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=gitahead-git
@@ -442,6 +442,18 @@ VAR2=g
     echo "    synced $VAR"
 
   VAR=gst-plugins-rs
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=gtkhash-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=gtkhash-nemo-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
@@ -713,6 +725,18 @@ VAR2=m
     echo "    synced $VAR"
 
   VAR=mldonkey
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=msquic
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=msquic-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
@@ -1300,17 +1324,17 @@ echo "Done U"
 
 
 VAR2=v
-  VAR=vala0.26
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
+  #VAR=vala0.26
+  #cd "$BASE/$VAR2/$VAR"
+  #  makepkg --printsrcinfo > .SRCINFO
+  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+  #  echo "    synced $VAR"
 
-  VAR=vala0.54
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
+  #VAR=vala0.54
+  #cd "$BASE/$VAR2/$VAR"
+  #  makepkg --printsrcinfo > .SRCINFO
+  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+  #  echo "    synced $VAR"
 
   VAR=vala-git
   cd "$BASE/$VAR2/$VAR"
@@ -1394,11 +1418,11 @@ echo "Done W"
 
 
 VAR2=x
-  VAR=xboxdrv-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
+  #VAR=xboxdrv-git
+  #cd "$BASE/$VAR2/$VAR"
+  #  makepkg --printsrcinfo > .SRCINFO
+  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+  #  echo "    synced $VAR"
 
 echo "Done X"
 

@@ -2,7 +2,7 @@
 
 pkgname=guayadeque-git
 pkgver=0.4.7.r6.gd5246757
-pkgrel=1
+pkgrel=2
 pkgdesc="Lightweight music player"
 arch=(i686 x86_64)
 url="https://www.guayadeque.org/"
@@ -13,12 +13,13 @@ optdepends=('gst-libav: additional codecs'
             'gst-plugins-bad: additional codecs'
             'gst-plugins-ugly: additional codecs')
 provides=(guayadeque)
-provides=(guayadeque)
+conflicts=(guayadeque)
 source=("git+https://github.com/anonbeat/guayadeque.git"
-        "https://github.com/sluedecke/guayadeque/commit/a9ecb9d8bf785281ed8ccf292cccf3525ffeb457.patch"
-)
+        "guayadeque-wxWidgets-3.2.patch::https://github.com/sluedecke/guayadeque/commit/a9ecb9d8bf785281ed8ccf292cccf3525ffeb457.patch"
+        "guayadeque-taglib2.patch::https://github.com/openmonk/guayadeque/pull/5/commits/20315f28a6003287067e3da893af0499494a061d.patch")
 sha512sums=('SKIP'
-            '05cfaca64fa27e901c7b874c0878bd8726fcbcd2d5a38edd67ddfe836266853aeaaf6ed26855e627d5327141e8667403acd56fadd2f6268a7472e4f21421072a')
+            '05cfaca64fa27e901c7b874c0878bd8726fcbcd2d5a38edd67ddfe836266853aeaaf6ed26855e627d5327141e8667403acd56fadd2f6268a7472e4f21421072a'
+            '8d6e1d7949bdb4efaf1a9e1c20c0f6967fd6fa492cd4717dc25b7750e36de88d79bd1adada2de3e41d6f28856d3308ff2ce797e09db775a65693ec09b6c7549b')
 
 pkgver() {
   cd "${srcdir}/${pkgname%-git}"
@@ -27,7 +28,8 @@ pkgver() {
 
 prepare() {
   cd "${srcdir}/${pkgname%-git}"
-  patch -Np1 -i ../a9ecb9d8bf785281ed8ccf292cccf3525ffeb457.patch
+  patch -Np1 -i ../guayadeque-wxWidgets-3.2.patch
+  patch -Np1 -i ../guayadeque-taglib2.patch
 }
 
 build() {

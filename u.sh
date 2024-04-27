@@ -317,6 +317,12 @@ echo "Done E"
 
 
 VAR2=f
+  VAR=fastfetch-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
   VAR=filebrowser
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

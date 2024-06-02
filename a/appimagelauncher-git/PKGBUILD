@@ -41,6 +41,8 @@ pkgver() {
   #git describe --long --tags --exclude continuous | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
+CFLAGS="$CFLAGS -Wno-deprecated-declarations -Wno-discarded-qualifiers -Wno-implicit-function-declaration -Wno-incompatible-pointer-types"
+
 prepare() {
   cd AppImageLauncher
 

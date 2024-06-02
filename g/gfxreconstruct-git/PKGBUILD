@@ -2,14 +2,13 @@
 # Contributor: Yevhenii Kolesnikov <sigexp.acc at gmail dot com>
 
 pkgname=gfxreconstruct-git
-pkgver=1.0.1.r1.gc988668d
-pkgrel=3
+pkgver=1.0.4.r7.ga95789f4
+pkgrel=1
 pkgdesc="Graphics API capture and replay tools for reconstructing graphics application behavior"
 arch=(x86_64)
 url="https://github.com/LunarG/gfxreconstruct"
 license=(Apache)
 depends=(glibc gcc-libs python zlib lz4 zstd)
-#depends=(python  xcb-util-keysyms  libxrandr zlib lz4 zstd)
 makedepends=(git cmake libx11 libxcb wayland xcb-util-keysyms)
 provides=(gfxreconstruct)
 conflicts=(gfxreconstruct)

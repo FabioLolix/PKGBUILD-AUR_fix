@@ -3,7 +3,7 @@
 # Contributor: Wouter Wijsman <wwijsman@live.nl>
 
 pkgname=minigalaxy-git
-pkgver=1.2.5.r1.g910e030
+pkgver=1.2.6.r17.gb0f01ab
 pkgrel=1
 pkgdesc="A simple GOG client for Linux"
 arch=(any)

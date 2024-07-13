@@ -1,28 +1,36 @@
-# Maintainer: Fernando Fernández <fernando at softwareperonista dot com dot ar>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Fernando Fernández <fernando at softwareperonista dot com dot ar>
 # Contributor: Mark Wagie <mark dot wagie at tutanota dot com>
 # Contributor: Balló György
 # Contributor: Artem Vorotnikov <artem at vorotnikov dot me>
-pkgname=gxml
-pkgver=0.20.3
+
+pkgname=gxml-git
+pkgver=0.20.3.r18.g13c93b4
 pkgrel=1
 pkgdesc="GObject-based XML parser and writer library"
-arch=('x86_64')
+arch=(x86_64)
 url="https://wiki.gnome.org/GXml"
-license=('LGPL')
-depends=('glib2' 'libgee' 'libxml2')
-makedepends=('gobject-introspection' 'meson' 'vala')
-source=("https://gitlab.gnome.org/GNOME/${pkgname}/-/archive/${pkgver}/gxml-${pkgver}.tar.gz")
-sha256sums=('66d7c761ae2dad14960911708d042382436c6b10f0b68e77d7c536697f663f53')
+license=(LGPL)
+depends=(glib2 libgee libxml2)
+makedepends=(git gobject-introspection meson vala)
+provides=(gxml)
+conflicts=(gxml)
+source=("git+https://gitlab.gnome.org/GNOME/gxml.git#branch=gxml-0.20")
+sha256sums=('SKIP')
+
+pkgver() {
+  git -C gxml describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
-	arch-meson "$pkgname-$pkgver" build
-	meson compile -C build
+  arch-meson gxml build
+  meson compile -C build
 }
 
 check() {
-	meson test -C build --print-errorlogs
+  meson test -C build --print-errorlogs
 }
 
 package() {
-	DESTDIR="$pkgdir" meson install -C build
+  DESTDIR="$pkgdir" meson install -C build
 }

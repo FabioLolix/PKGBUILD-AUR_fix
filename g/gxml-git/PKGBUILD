@@ -5,17 +5,17 @@
 # Contributor: Artem Vorotnikov <artem at vorotnikov dot me>
 
 pkgname=gxml-git
-pkgver=0.20.3.r18.g13c93b4
+pkgver=0.20.4.r20.ga6538aa
 pkgrel=1
 pkgdesc="GObject-based XML parser and writer library"
 arch=(x86_64)
 url="https://wiki.gnome.org/GXml"
 license=(LGPL)
-depends=(glib2 libgee libxml2)
+depends=(glibc glib2 libgee libxml2)
 makedepends=(git gobject-introspection meson vala)
 provides=(gxml)
 conflicts=(gxml)
-source=("git+https://gitlab.gnome.org/GNOME/gxml.git#branch=gxml-0.20")
+source=("git+https://gitlab.gnome.org/GNOME/gxml.git")
 sha256sums=('SKIP')
 
 pkgver() {

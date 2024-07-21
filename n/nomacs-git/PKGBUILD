@@ -2,25 +2,23 @@
 
 _pkgname=nomacs
 pkgname=$_pkgname-git
-pkgver=3.17.2295.r0.g94e9adaa
+pkgver=3.19.0.r2.gf2c6c4d3
 pkgrel=1
-pkgdesc='Free, open source image viewer, which supports multiple platforms.'
+pkgdesc='Free, open source image viewer, which supports multiple platforms. Qt6 Lolix pkgbuild'
 arch=('i686' 'x86_64')
 url='https://github.com/nomacs/nomacs'
 license=('GPL3')
-depends=('qt5-svg' 'exiv2' 'libraw' 'opencv' 'quazip')
+depends=(exiv2 gcc-libs glibc libraw libtiff opencv qt6-base qt6-svg)
 #depends+=(libopencv_imgproc.so)
-makedepends=('git' git-lfs 'cmake' 'qt5-tools' python)
-optdepends=('qt5-imageformats: support additional image formats'
+makedepends=('git' git-lfs 'cmake' 'qt6-tools' python)
+optdepends=('qt6-imageformats: support additional image formats'
             'kimageformats: support QOI (Quite OK Image Format)')
 provides=("$_pkgname")
 conflicts=("$_pkgname")
 source=("git+https://github.com/$_pkgname/$_pkgname.git"
-        "git+https://github.com/nomacs/nomacs-plugins.git"
-        "https://github.com/nomacs/nomacs/files/11703502/nomacs-fix-exiv2-0.28.patch.txt")
-sha256sums=('SKIP'
-            'SKIP'
-            'f5117545580e23f2e2db21bf41724148749b78326a557643a9acc9319fc25a68')
+        #"git+https://github.com/nomacs/nomacs-plugins.git"
+        )
+sha256sums=('SKIP')
 
 export GIT_LFS_SKIP_SMUDGE=1
 
@@ -34,14 +32,17 @@ prepare() {
   # https://github.com/nomacs/nomacs/issues/951
   #patch -Np1 -i ../nomacs-fix-exiv2-0.28.patch.txt
   # copy plugin sources into place
-  cp -av "${srcdir}/nomacs-plugins/"* "ImageLounge/plugins"
+  #cp -av "${srcdir}/nomacs-plugins/"* "ImageLounge/plugins"
 }
 
 build() {
   cd nomacs
   cmake -B build -S ImageLounge -Wno-dev \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DQT_VERSION_MAJOR=6 \
     -DUSE_SYSTEM_QUAZIP=ON \
+    -DENABLE_AVIF=ON \
     -DENABLE_TRANSLATIONS=ON
 
   cmake --build build

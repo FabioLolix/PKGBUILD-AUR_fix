@@ -46,6 +46,8 @@ prepare() {
 }
 
 build() {
+  CFLAGS+=" -Wno-error=incompatible-pointer-types"
+
   cd "spacefm-thermitegod"
   arch-meson build
   ninja -C build

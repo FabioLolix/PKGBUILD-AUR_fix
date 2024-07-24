@@ -3,7 +3,7 @@
 
 pkgbase=wxgtk-git
 pkgname=(wxwidgets-gtk3-git wxwidgets-qt5-git wxwidgets-common-git)
-pkgver=3.2.4.with.msvs2012.fix.r47.gc372724b34
+pkgver=3.2.5.r33.g51094c6f0a
 pkgrel=1
 pkgdesc="GTK+3 implementation of wxWidgets API for GUI"
 arch=(x86_64)
@@ -39,7 +39,7 @@ prepare() {
 }
 
 build() {
-  cmake -B build-gtk3 -S wxWidgets \
+  cmake -B build-gtk3 -S wxWidgets -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=None \
     -DwxBUILD_TOOLKIT=gtk3 \
@@ -54,9 +54,10 @@ build() {
     -DwxUSE_LIBMSPACK=ON \
     -DwxUSE_PRIVATE_FONTS=ON \
     -DwxUSE_GTKPRINT=ON
+
   cmake --build build-gtk3
 
-  cmake -B build-qt5 -S wxWidgets \
+  cmake -B build-qt5 -S wxWidgets -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=None \
     -DwxBUILD_TOOLKIT=qt \
@@ -70,6 +71,7 @@ build() {
     -DwxUSE_LIBLZMA=sys \
     -DwxUSE_LIBMSPACK=ON \
     -DwxUSE_PRIVATE_FONTS=ON
+
   cmake --build build-qt5
 
 # Run configure to generate the Makefile, cmake doesn't install translations
@@ -101,7 +103,7 @@ package_wxwidgets-gtk3-git() {
 
   DESTDIR="$pkgdir" cmake --install build-gtk3
   rm -r "$pkgdir"/usr/{include,lib/libwx_base*,bin/wxrc*}
-  
+
   install -Dm644 wxWidgets/docs/licence.txt "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
 }
 

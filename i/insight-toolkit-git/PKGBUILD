@@ -6,7 +6,7 @@
 # Contributor: joel schaerer <joel.schaerer@laposte.net>
 
 pkgname=insight-toolkit-git
-pkgver=5.4rc02.r352.g1986b54f89
+pkgver=5.4.0.r74.g0f8b7e7fea
 pkgrel=1
 pkgdesc="Cross-platform system that provides developers with an extensive suite of software tools for image analysis"
 arch=(x86_64)

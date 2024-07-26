@@ -2,7 +2,7 @@
 # Contributor: Mr.Smith1974
 
 pkgname=openloco
-pkgver=24.04
+pkgver=24.07
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
@@ -10,8 +10,8 @@ url="https://github.com/OpenLoco/OpenLoco"
 license=(MIT)
 depends=(sdl2 libpng openal)
 depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal lib32-yaml-cpp lib32-fmt)
-makedepends=(cmake yaml-cpp gtest fmt git)
-makedepends_x86_64+=(lib32-gtest)
+makedepends=(cmake yaml-cpp gtest fmt sfl git)
+makedepends_x86_64+=(lib32-gtest lib32-sfl)
 optdepends=(
     'lib32-libpipewire: audio output'
     'lib32-libpulse: audio output'

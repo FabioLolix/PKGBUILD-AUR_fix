@@ -1,0 +1,38 @@
+# Maintainer: Your Name <youremail@domain.com>
+
+pkgname=armadillo-git
+pkgver=r1879.df74f400
+pkgrel=1
+pkgdesc="High quality linear algebra library (matrix maths) for the C++ language"
+arch=(x86_64)
+#url="https://arma.sourceforge.net/"
+url="https://gitlab.com/conradsnicta/armadillo-code"
+license=(Apache-2.0)
+depends=(glibc gcc-libs lapack blas arpack superlu hdf5-openmpi intel-oneapi-mkl)
+makedepends=(git cmake)
+provides=(armadillo)
+conflicts=(armadillo)
+source=("armadillo::git+https://gitlab.com/conradsnicta/armadillo-code.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd armadillo
+  #git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cmake -B build -S "armadillo" -Wno-dev \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+  cmake --build build
+}
+
+check() {
+  ctest --test-dir build --output-on-failure
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+}

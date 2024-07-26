@@ -6,7 +6,7 @@
 # Contributor: Maël Kerbiriou <mael.kerbiriou-at-free-dot-fr>
 
 pkgname=amarok-git
-pkgver=3.0.1.r5.gc7a28f0
+pkgver=3.0.81.r16.g410ec17
 pkgrel=1
 pkgdesc="The powerful music player for KDE"
 arch=("i686" "x86_64")

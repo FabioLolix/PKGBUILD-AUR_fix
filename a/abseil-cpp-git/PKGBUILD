@@ -3,7 +3,7 @@
 # Contributor: Martin Sandsmark <martin.sandsmark@kde.org>
 
 pkgname=abseil-cpp-git
-pkgver=r2192.ca81d343
+pkgver=r2214.65dfbf2b
 pkgrel=1
 pkgdesc="Collection of C++ library code designed to augment the C++ standard library"
 arch=(x86_64 i686 armv7h aarch64)

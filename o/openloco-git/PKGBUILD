@@ -2,7 +2,7 @@
 
 pkgname=openloco-git
 pkgver=24.07.r4.g509bcc144
-pkgrel=1
+pkgrel=2
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
 url="https://github.com/OpenLoco/OpenLoco"
@@ -33,11 +33,16 @@ pkgver() {
 }
 
 build() {
+
+    # -Dfmt_DIR:PATH=/usr/lib/cmake/fmt -> pointless; want lib32-fmt
+    # -Dsfl_DIR:PATH=/usr/include/sfl   -> pointless; want to checkout it, no system version
+
+
 	local _flags=(
     -DFETCHCONTENT_QUIET:BOOL=OFF
-    -DFETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON
+    #-DFETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON
     #-Dfmt_DIR:PATH=/usr/lib/cmake/fmt
-    -Dsfl_DIR:PATH=/usr/include/sfl
+    #-Dsfl_DIR:PATH=/usr/include/sfl
     -Dyaml-cpp_DIR:PATH=/usr/lib/cmake/yaml-cpp
 	)
 
@@ -55,7 +60,10 @@ check() {
 }
 
 package() {
-  install -Dm644 "openloco.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
   DESTDIR="${pkgdir}" cmake --install build
+  install -Dm644 "openloco.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
+  ln -s /usr/bin/OpenLoco           "${pkgdir}/usr/bin/openloco"
   install -D "openloco/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
+
+  # TODO remove bundled sfl from package
 }

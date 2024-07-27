@@ -559,12 +559,6 @@ VAR2=i
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=index-fm-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
   VAR=insight-toolkit
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

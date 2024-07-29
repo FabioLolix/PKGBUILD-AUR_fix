@@ -16,18 +16,11 @@ backup=(etc/conf.d/mldonkey)
 provides=(mldonkey)
 conflicts=(mldonkey)
 source=("git+https://github.com/ygrek/mldonkey.git"
-        "https://raw.githubusercontent.com/gentoo/gentoo/master/net-p2p/mldonkey/files/cpp17-byte-namespace.patch"
-        "https://github.com/ygrek/mldonkey/pull/66/commits/20ff84c185396f3d759cf4ef46b9f0bd33a51060.patch"
-        "https://github.com/ygrek/mldonkey/pull/66/commits/4c7206b2cb6e9be6cec587da9153e3d9932d05e8.patch"
-        #"mldonkey-gcc14.patch::https://github.com/ygrek/mldonkey/pull/92/commits/50fc63fb125e848ca238bd23e55e9d596b3339a8.patch"
         mldonkey.conf
         mldonkey.service
         mldonkey.tmpfiles
         mldonkey.sysusers)
 sha256sums=('SKIP'
-            'eef21187cecc6f1052ff6e0d988093a6fed8b4745ecb257b9e127c23c60cb27d'
-            '66bb133de910142ce558ed68ba21b0fb19ce807068059513fee7944523a29bf9'
-            '2d6fa5e8d2806cb7397db8ef90e69dbf09f699f9d019567c8586cfaf83ef5520'
             'f1d9401cefd591662d49011c53fdb2788755a6f745a963e46d8037b990edeb6a'
             '778cebe8edcffd63db3594054c2daa62ce571644a96ad235b8c95470b55c0415'
             '9c78fbfbba4f8286e2c2299e4da6f76d0f34f33fde26964922707c34fb75157b'
@@ -40,19 +33,11 @@ pkgver() {
 
 prepare() {
   cd "mldonkey"
-  #patch -Np1 -i ../cpp17-byte-namespace.patch
-  #patch -Np1 -i ../20ff84c185396f3d759cf4ef46b9f0bd33a51060.patch
-  #patch -Np1 -i ../4c7206b2cb6e9be6cec587da9153e3d9932d05e8.patch
-  #patch -Np1 -i ../4c7206b2cb6e9be6cec587da9153e3d9932d05e8.patch
-
   # UPNP build error https://github.com/ygrek/mldonkey/issues/101
   sed -i 's/sizeof( map->lanaddr )/sizeof( map->lanaddr ), NULL , 0/g' src/utils/net/upnp_stubs.c
 }
 
 build() {
-  # GCC 14, not reported yet
-  #CFLAGS+=" -Wno-error=incompatible-pointer-types"
-
   cd "mldonkey"
   ./configure \
     --prefix=/usr \

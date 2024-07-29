@@ -1,8 +1,8 @@
-# Maintainer: Lolix
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=openloco-git
-pkgver=24.07.r4.g509bcc144
-pkgrel=2
+pkgver=24.07.r5.gea8d2b826
+pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
 url="https://github.com/OpenLoco/OpenLoco"
@@ -23,7 +23,8 @@ provides=(openloco)
 conflicts=(openloco)
 options=(!lto)
 source=("git+https://github.com/openloco/openloco.git"
-	    "openloco.desktop")
+	    #"openloco.desktop"
+        )
 sha256sums=('SKIP'
             '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae')
 
@@ -43,7 +44,7 @@ build() {
     #-DFETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON
     #-Dfmt_DIR:PATH=/usr/lib/cmake/fmt
     #-Dsfl_DIR:PATH=/usr/include/sfl
-    -Dyaml-cpp_DIR:PATH=/usr/lib/cmake/yaml-cpp
+    #-Dyaml-cpp_DIR:PATH=/usr/lib/cmake/yaml-cpp
 	)
 
   export CXXFLAGS="$CXXFLAGS -m32 -Wno-error=null-dereference"
@@ -61,7 +62,7 @@ check() {
 
 package() {
   DESTDIR="${pkgdir}" cmake --install build
-  install -Dm644 "openloco.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
+  #install -Dm644 "openloco.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
   ln -s /usr/bin/OpenLoco           "${pkgdir}/usr/bin/openloco"
   install -D "openloco/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
 

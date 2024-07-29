@@ -23,7 +23,7 @@ sha256sums=('2141891fc795460e92657aead379a3bdf32069f7f938e42eae4a1e595edd686b'
 options=(!lto)
 
 build() {
-  export CXXFLAGS="$CXXFLAGS -m32"
+  export CXXFLAGS="$CXXFLAGS -m32 -Wno-error=null-dereference"
   cmake -G "Unix Makefiles" -B build -S "OpenLoco-${pkgver}" -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr

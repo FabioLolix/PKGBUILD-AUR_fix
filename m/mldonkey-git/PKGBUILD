@@ -2,7 +2,7 @@
 # Contributor: Anatol Pomozov <anatol.pomozov@gmail.com>
 
 pkgname=mldonkey-git
-pkgver=3.1.7.2.r15.ge136e743
+pkgver=3.1.7.2.r33.gd201d577
 pkgrel=1
 pkgdesc='A multi-network P2P client'
 arch=(x86_64)
@@ -19,6 +19,7 @@ source=("git+https://github.com/ygrek/mldonkey.git"
         "https://raw.githubusercontent.com/gentoo/gentoo/master/net-p2p/mldonkey/files/cpp17-byte-namespace.patch"
         "https://github.com/ygrek/mldonkey/pull/66/commits/20ff84c185396f3d759cf4ef46b9f0bd33a51060.patch"
         "https://github.com/ygrek/mldonkey/pull/66/commits/4c7206b2cb6e9be6cec587da9153e3d9932d05e8.patch"
+        #"mldonkey-gcc14.patch::https://github.com/ygrek/mldonkey/pull/92/commits/50fc63fb125e848ca238bd23e55e9d596b3339a8.patch"
         mldonkey.conf
         mldonkey.service
         mldonkey.tmpfiles
@@ -40,11 +41,18 @@ pkgver() {
 prepare() {
   cd "mldonkey"
   #patch -Np1 -i ../cpp17-byte-namespace.patch
-  patch -Np1 -i ../20ff84c185396f3d759cf4ef46b9f0bd33a51060.patch
-  patch -Np1 -i ../4c7206b2cb6e9be6cec587da9153e3d9932d05e8.patch
+  #patch -Np1 -i ../20ff84c185396f3d759cf4ef46b9f0bd33a51060.patch
+  #patch -Np1 -i ../4c7206b2cb6e9be6cec587da9153e3d9932d05e8.patch
+  #patch -Np1 -i ../4c7206b2cb6e9be6cec587da9153e3d9932d05e8.patch
+
+  # UPNP build error https://github.com/ygrek/mldonkey/issues/101
+  sed -i 's/sizeof( map->lanaddr )/sizeof( map->lanaddr ), NULL , 0/g' src/utils/net/upnp_stubs.c
 }
 
 build() {
+  # GCC 14, not reported yet
+  #CFLAGS+=" -Wno-error=incompatible-pointer-types"
+
   cd "mldonkey"
   ./configure \
     --prefix=/usr \
@@ -52,7 +60,7 @@ build() {
     --enable-upnp-natpmp \
     --enable-batch
 
-  make depend
+  #make depend
   make
   make utils
 }

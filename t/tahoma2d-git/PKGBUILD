@@ -3,9 +3,10 @@
 # Contributor: Campbell Barton <ideasman42@gmail.com>
 
 export GIT_LFS_SKIP_SMUDGE=1
+export GIT_CLONE_PROTECTION_ACTIVE=false
 
 pkgname=tahoma2d-git
-pkgver=1.4.r42.g9add68d79
+pkgver=1.4.4.r0.ge3d0640e9
 pkgrel=1
 pkgdesc="Software for producing a 2D animation"
 arch=(x86_64)
@@ -16,7 +17,7 @@ makedepends=(git git-lfs boost cmake qt5-tools)
 provides=(tahoma2d)
 conflicts=(tahoma2d)
 options=(!lto)
-source=("git+https://github.com/tahoma2d/tahoma2d.git")
+source=("git+https://github.com/tahoma2d/tahoma2d.git#branch=v1.4.4")
 sha256sums=('SKIP')
 
 pkgver() {
@@ -33,6 +34,9 @@ prepare() {
 }
 
 build() {
+  #export CFLAGS+=" -w"
+  #export CXXFLAGS+=" -w"
+
   pushd  "tahoma2d/thirdparty/tiff-4.2.0"
   ./configure --with-pic --disable-jbig
   make
@@ -54,7 +58,6 @@ build() {
   cd build
   cmake -G "Unix Makefiles" ../tahoma2d/toonz/sources -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_CXX_FLAGS="$CXXFLAGS -Wno-#warnings -Wno-deprecated-declarations" \
     -DCMAKE_SKIP_RPATH=YES \
     -DWITH_TRANSLATION=OFF
 

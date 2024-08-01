@@ -3,9 +3,10 @@
 # Contributor: Campbell Barton <ideasman42@gmail.com>
 
 export GIT_LFS_SKIP_SMUDGE=1
+export GIT_CLONE_PROTECTION_ACTIVE=false
 
 pkgname=tahoma2d
-pkgver=1.4
+pkgver=1.4.4
 pkgrel=1
 pkgdesc="Software for producing a 2D animation"
 arch=(x86_64)

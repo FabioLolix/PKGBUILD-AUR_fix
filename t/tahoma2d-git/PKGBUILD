@@ -38,7 +38,7 @@ build() {
   #export CXXFLAGS+=" -w"
 
   pushd  "tahoma2d/thirdparty/tiff-4.2.0"
-  ./configure --with-pic --disable-jbig
+  ./configure --with-pic --disable-jbig --disable-webp
   make
   popd
 
@@ -61,8 +61,7 @@ build() {
     -DCMAKE_SKIP_RPATH=YES \
     -DWITH_TRANSLATION=OFF
 
-  #make
-  CMAKE_CXX_FLAGS="-ldeflate -lwebp" make
+  make
 }
 
 package() {

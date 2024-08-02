@@ -2,7 +2,7 @@
 # Contributor: Anatol Pomozov <anatol.pomozov@gmail.com>
 
 pkgname=mldonkey-git
-pkgver=3.1.7.2.r33.gd201d577
+pkgver=3.1.7.2.r37.gddeaf5c6
 pkgrel=1
 pkgdesc='A multi-network P2P client'
 arch=(x86_64)
@@ -43,7 +43,11 @@ build() {
     --prefix=/usr \
     --enable-gui=newgui2 \
     --enable-upnp-natpmp \
-    --enable-batch
+    --disable-fasttrack \
+    --disable-gnutella \
+    --disable-gnutella2
+
+#    --enable-batch \
 
   #make depend
   make

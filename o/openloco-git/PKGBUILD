@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=openloco-git
-pkgver=24.07.r5.gea8d2b826
+pkgver=24.07.r21.g03f2cd30e
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
@@ -21,12 +21,11 @@ optdepends_i686=(
 )
 provides=(openloco)
 conflicts=(openloco)
-options=(!lto)
+#options=(!lto)
 source=("git+https://github.com/openloco/openloco.git"
 	    #"openloco.desktop"
         )
-sha256sums=('SKIP'
-            '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae')
+sha256sums=('SKIP')
 
 pkgver() {
   cd openloco
@@ -47,7 +46,7 @@ build() {
     #-Dyaml-cpp_DIR:PATH=/usr/lib/cmake/yaml-cpp
 	)
 
-  export CXXFLAGS="$CXXFLAGS -m32 -Wno-error=null-dereference"
+  export CXXFLAGS="$CXXFLAGS -m32 " #-Wno-error=null-dereference
   cmake -G "Unix Makefiles" -B build -S "openloco" -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \

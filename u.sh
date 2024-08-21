@@ -805,7 +805,7 @@ VAR2=m
   VAR=musescore-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,mudita24.desktop,mudita24.png} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=musique-git
@@ -1118,7 +1118,7 @@ VAR2=q
   VAR=qt5-webkit-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,*.patch} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   #VAR=qt5-webkit-movableink

@@ -5,7 +5,7 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gittyup
-pkgver=1.3.0
+pkgver=1.4.0
 pkgrel=1
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
@@ -16,7 +16,7 @@ makedepends=(git cmake ninja qt5-tools qt5-translations ) #libgit2 libgnome-keyr
 optdepends=('git-lfs: git-lfs support'
             'libgnome-keyring: for GNOME Keyring for auth credentials'
             'qt5-translations: translations')
-_commit=6bf49f007a9fb0577910885607833373d0552101
+_commit=52bf8bebe2c2e38b435ce2bed269574b5cf47153
 source=("git+https://github.com/Murmele/Gittyup.git#commit=$_commit"
         "stinb-libgit2::git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/kuba--/zip.git"
@@ -27,6 +27,7 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             'SKIP')
+options=(!lto)
 
 pkgver() {
   cd "${srcdir}/Gittyup"
@@ -52,6 +53,7 @@ prepare() {
 }
 
 build() {
+  export CC=/usr/bin/gcc-13 CXX=/usr/bin/g++-13
   cd "${srcdir}/Gittyup/build"
   cmake -G Ninja .. -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \

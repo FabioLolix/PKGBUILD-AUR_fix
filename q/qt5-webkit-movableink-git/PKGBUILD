@@ -27,13 +27,19 @@ provides=(qt5-webkit) #qt5-webkit-movableink
 conflicts=(qt5-webkit) #qt5-webkit-movableink
 options=(!lto)
 source=("movableink-webkit::git+https://github.com/movableink/webkit.git"
-        001-fix-build.patch)
+        001-fix-build.patch
+        qtwebkit-ruby3.2.patch)
 sha256sums=('SKIP'
-            '30634c6480fc97e0bc5e0246175de65892b142b34f64355f7040cb9e063f2dcf')
+            '30634c6480fc97e0bc5e0246175de65892b142b34f64355f7040cb9e063f2dcf'
+            '977221aca9471072d64a46e7541a0d3c540387841f47bb05b0af6c2fa25b034d')
 
 prepare() {
   cd movableink-webkit
   patch -Np1 -i ../001-fix-build.patch
+  echo "Done patch 'fix build'"
+
+  patch -Np1 -i ../qtwebkit-ruby3.2.patch
+  echo "Done patch for Ruby 3.2"
 }
 
 pkgver() {

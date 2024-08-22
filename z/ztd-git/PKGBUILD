@@ -1,14 +1,14 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=ztd-git
-pkgver=r413.fdbafde
-pkgrel=2
+pkgver=r459.6dfe696
+pkgrel=1
 pkgdesc="thermitegod spacefm dependency"
 arch=(any)
 url="https://github.com/thermitegod/ztd"
 license=(GPL3)
 depends=(spdlog openssl)
-makedepends=(git meson ninja gtest)
+makedepends=(git meson ninja gtest magic_enum)
 provides=(ztd)
 conflicts=(ztd)
 source=("git+https://github.com/thermitegod/ztd.git")

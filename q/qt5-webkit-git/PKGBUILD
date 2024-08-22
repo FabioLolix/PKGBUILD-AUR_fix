@@ -22,10 +22,12 @@ conflicts=(qt5-webkit)
 options=(!lto)
 source=("git+https://github.com/qtwebkit/qtwebkit.git#branch=qtwebkit-5.212"
         "https://src.fedoraproject.org/rpms/qt5-qtwebkit/raw/rawhide/f/qtwebkit-cstdint.patch"
-        "https://src.fedoraproject.org/rpms/qt5-qtwebkit/raw/rawhide/f/qtwebkit-fix-build-gcc14.patch")
+        "https://src.fedoraproject.org/rpms/qt5-qtwebkit/raw/rawhide/f/qtwebkit-fix-build-gcc14.patch"
+        qtwebkit-ruby3.2.patch)
 sha256sums=('SKIP'
             '4c71c958eae45cae65c9f002024eb1369d06029b668e595158138ff7971e64f1'
-            'eea38db22078700887bf22b6a49bb628fd8444cdb2e506770c993df883d0e8fb')
+            'eea38db22078700887bf22b6a49bb628fd8444cdb2e506770c993df883d0e8fb'
+            '977221aca9471072d64a46e7541a0d3c540387841f47bb05b0af6c2fa25b034d')
 
 pkgver() {
   cd "qtwebkit"
@@ -36,11 +38,11 @@ pkgver() {
 
 prepare() {
   cd "qtwebkit"
-  #patch -p1 -i ../qtwebkit-cstdint.patch
-  #echo "Done patch for GCC 11.1"
-
-  patch -p1 -i ../qtwebkit-fix-build-gcc14.patch # GCC 14.1
+  patch -p1 -i ../qtwebkit-fix-build-gcc14.patch
   echo "Done patch for GCC 14.1"
+
+  patch -Np1 -i ../qtwebkit-ruby3.2.patch
+  echo "Done patch for Ruby 3.2"
 }
 
 build() {

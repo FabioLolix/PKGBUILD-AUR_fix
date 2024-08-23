@@ -1,6 +1,6 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
-pkgname=openloco-git
+pkgname=openloco-git_clang
 pkgver=24.08.r9.g05444a30c
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
@@ -9,7 +9,7 @@ url="https://github.com/OpenLoco/OpenLoco"
 license=(MIT)
 depends=(sdl2 libpng openal)
 depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal)
-makedepends=(cmake yaml-cpp git gtest fmt)
+makedepends=(cmake clang yaml-cpp git gtest fmt)
 makedepends_x86_64+=(lib32-gtest lib32-yaml-cpp lib32-fmt)
 optdepends_x86_64=(
     'lib32-libpipewire: audio output'
@@ -46,6 +46,7 @@ build() {
     #-Dyaml-cpp_DIR:PATH=/usr/lib/cmake/yaml-cpp
 	)
 
+  export CC=/usr/bin/clang CXX=/usr/bin/clang++
   export CXXFLAGS="$CXXFLAGS -m32 -Wno-error=null-dereference"
   cmake -G "Unix Makefiles" -B build -S "openloco" -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \

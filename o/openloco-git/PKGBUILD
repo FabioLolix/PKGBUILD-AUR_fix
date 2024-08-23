@@ -46,7 +46,7 @@ build() {
     #-Dyaml-cpp_DIR:PATH=/usr/lib/cmake/yaml-cpp
 	)
 
-  export CXXFLAGS="$CXXFLAGS -m32 " #-Wno-error=null-dereference
+  export CXXFLAGS="$CXXFLAGS -m32 -Wno-error=null-dereference"
   cmake -G "Unix Makefiles" -B build -S "openloco" -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \

@@ -3,13 +3,14 @@
 # Contributor: Luca Bennati <lucak3 AT gmail DOT com>
 
 pkgname=apitrace-git
-pkgver=11.1.r184.g1807d6ae
-pkgrel=1
+pkgver=12.0.r6.g0022a7ec
+pkgrel=2
 pkgdesc="Graphics API Tracing"
 arch=(x86_64)
 url="https://github.com/apitrace/apitrace"
-license=(BSD)
-depends=(qt6-base python-pillow python-numpy libgl procps-ng)
+license=(MIT)
+depends=(qt6-base python-pillow python-numpy libgl procps-ng
+         glibc gcc-libs python libpng libx11 zlib)
 makedepends=(cmake git mesa)
 provides=(apitrace)
 conflicts=(apitrace)

@@ -1,14 +1,14 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=filezilla-server-svn
-pkgver=r11110
+pkgver=r11176
 pkgrel=1
 pkgdesc="A simple FTP, FTPS or SFTP server"
 arch=(x86_64)
 url="https://filezilla-project.org/download.php?type=server"
 license=(GPL2)
 depends=(libfilezilla pugixml)
-makedepends=(wxwidgets-gtk3 subversion)
+makedepends=(wxwidgets-gtk3 subversion mono-msbuild)
 source=("filezilla-server::svn+https://svn.filezilla-project.org/svn/FileZilla%20Server/trunk/")
 sha256sums=('SKIP')
 

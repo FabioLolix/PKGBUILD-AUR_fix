@@ -14,10 +14,8 @@ makedepends=(git cmake)
 provides=(augustus)
 conflicts=(augustus-game)
 replaces=(augustus-game)
-source=("git+https://github.com/Keriew/augustus.git"
-        augustus-game.desktop)
-sha256sums=('SKIP'
-            '7cd4fa8cdf5e46e41c2041525e6b8aeff9010de110d285928d8cbd1986525536')
+source=("git+https://github.com/Keriew/augustus.git")
+sha256sums=('SKIP')
 
 pkgver() {
   cd "augustus"

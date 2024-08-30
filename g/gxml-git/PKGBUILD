@@ -6,17 +6,24 @@
 
 pkgname=gxml-git
 pkgver=0.20.4.r20.ga6538aa
-pkgrel=1
+pkgrel=2
 pkgdesc="GObject-based XML parser and writer library"
 arch=(x86_64)
 url="https://wiki.gnome.org/GXml"
-license=(LGPL)
+license=(LGPL-2.1-only)
 depends=(glibc glib2 libgee libxml2)
 makedepends=(git gobject-introspection meson vala)
 provides=(gxml)
 conflicts=(gxml)
-source=("git+https://gitlab.gnome.org/GNOME/gxml.git")
-sha256sums=('SKIP')
+source=("git+https://gitlab.gnome.org/GNOME/gxml.git"
+        "gxml-fix-gxml.pc.patch::https://gitlab.gnome.org/GNOME/gxml/-/commit/6551103abd5143e51814ec1dce9b36bb9a46e09f.patch")
+sha256sums=('SKIP'
+            '3536002359b89f716e76642fb1fbdafcb1cc92f418111a70601814c90dfee15b')
+
+prepare() {
+  cd gxml
+  patch -Np1 -i ../gxml-fix-gxml.pc.patch
+}
 
 pkgver() {
   git -C gxml describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'

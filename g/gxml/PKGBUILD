@@ -4,22 +4,22 @@
 # Contributor: Artem Vorotnikov <artem at vorotnikov dot me>
 
 pkgname=gxml
-pkgver=0.20.3
-pkgrel=2
+pkgver=0.20.4
+pkgrel=1
 pkgdesc="GObject-based XML parser and writer library"
 arch=('x86_64')
 url="https://wiki.gnome.org/GXml"
-license=('LGPL')
+license=(LGPL-2.1-only)
 depends=('glib2' 'libgee' 'libxml2')
 makedepends=('gobject-introspection' 'meson' 'vala')
 source=("https://gitlab.gnome.org/GNOME/${pkgname}/-/archive/${pkgver}/gxml-${pkgver}.tar.gz"
-        "https://gitlab.gnome.org/GNOME/gxml/-/commit/ff91818ca0f711646635bf9bd1bc0d9dde3e6426.patch")
-sha256sums=('66d7c761ae2dad14960911708d042382436c6b10f0b68e77d7c536697f663f53'
-            '0c4048fc9cb35952b487db3e192c53dab4efd782fea43e4f7d3b56997d4194de')
+        "gxml-fix-gxml.pc.patch::https://gitlab.gnome.org/GNOME/gxml/-/commit/6551103abd5143e51814ec1dce9b36bb9a46e09f.patch")
+sha256sums=('237f5d3984b6aa7378bfa030b7dadfad43041720f097bb5b4104e84829d741a5'
+            '3536002359b89f716e76642fb1fbdafcb1cc92f418111a70601814c90dfee15b')
 
 prepare() {
   cd "$pkgname-$pkgver"
-  patch -Np1 -i ../ff91818ca0f711646635bf9bd1bc0d9dde3e6426.patch
+  patch -Np1 -i ../gxml-fix-gxml.pc.patch
 }
 
 build() {

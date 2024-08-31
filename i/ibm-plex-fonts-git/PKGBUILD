@@ -1,0 +1,68 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+
+pkgbase=ibm-plex-fonts-git
+pkgname=(#otf-ibm-plex-git ttf-ibm-plex-git 
+         woff-ibm-plex-git woff2-ibm-plex-git) #eot-ibm-plex-git
+pkgver=r335.3ddca8c9e
+pkgrel=1
+pkgdesc="IBM Plex fonts"
+arch=(any)
+url="https://github.com/IBM/plex"
+license=('custom:OFL')
+makedepends=(git)
+source=("ibm-plex::git+https://github.com/IBM/plex.git")
+sha256sums=(SKIP)
+
+pkgver() {
+  cd ibm-plex
+  #git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+# Sans-JP hinted/unhinted
+# IBM-Plex-Sans-Variable no otf
+# IBM-Plex-Sans-KR ttf hinted/unhinted
+
+package_otf-ibm-plex-git() {
+  cd ibm-plex
+
+  for variant in Mono Sans Sans-Arabic Sans-Condensed Sans-Devanagari Sans-Hebrew Sans-KR Sans-Thai Sans-Thai-Looped Serif; do
+    install -d "$pkgdir"/usr/share/fonts/OTF/ibm-plex/${variant,,}
+    install -Dm644 IBM-Plex-${variant}/fonts/complete/otf/*.otf "$pkgdir"/usr/share/fonts/OTF/ibm-plex/${variant,,}
+  done
+
+	install -Dm644 LICENSE.txt -t "$pkgdir"/usr/share/licenses/${pkgname}/
+}
+
+package_ttf-ibm-plex-git() {
+  cd ibm-plex
+
+  for variant in Mono Sans Sans-Arabic Sans-Condensed Sans-Devanagari Sans-Hebrew Sans-Thai Sans-Thai-Looped Sans-Variable Serif; do
+    install -d "$pkgdir"/usr/share/fonts/TTF/ibm-plex/${variant,,}
+    install -Dm644 IBM-Plex-${variant}/fonts/complete/ttf/*.ttf "$pkgdir"/usr/share/fonts/TTF/ibm-plex/${variant,,}
+  done
+
+	install -Dm644 LICENSE.txt -t "$pkgdir"/usr/share/licenses/${pkgname}/
+}
+
+package_woff-ibm-plex-git() {
+  cd ibm-plex
+
+  for variant in Mono Sans Sans-Arabic Sans-Condensed Sans-Devanagari Sans-Hebrew Sans-Thai Sans-Thai-Looped Sans-Variable Serif; do
+    install -d "$pkgdir"/usr/share/fonts/WOFF/ibm-plex/${variant,,}
+    install -Dm644 IBM-Plex-${variant}/fonts/complete/woff/*.woff "$pkgdir"/usr/share/fonts/WOFF/ibm-plex/${variant,,}
+  done
+
+	install -Dm644 LICENSE.txt -t "$pkgdir"/usr/share/licenses/${pkgname}/
+}
+
+package_woff2-ibm-plex-git() {
+  cd ibm-plex
+
+  for variant in Mono Sans Sans-Arabic Sans-Condensed Sans-Devanagari Sans-Hebrew Sans-Thai Sans-Thai-Looped Sans-Variable Serif; do
+    install -d "$pkgdir"/usr/share/fonts/WOFF2/ibm-plex/${variant,,}
+    install -Dm644 IBM-Plex-${variant}/fonts/complete/woff2/*.woff2 "$pkgdir"/usr/share/fonts/WOFF2/ibm-plex/${variant,,}
+  done
+
+	install -Dm644 LICENSE.txt -t "$pkgdir"/usr/share/licenses/${pkgname}/
+}

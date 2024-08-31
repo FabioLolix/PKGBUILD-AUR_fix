@@ -1,6 +1,6 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
-pkgbase=suse-font
+pkgbase=suse-fonts
 pkgname=(ttf-suse otf-suse woff2-suse)
 pkgver=1.000
 pkgrel=1

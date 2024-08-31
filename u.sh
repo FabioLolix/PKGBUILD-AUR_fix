@@ -1136,7 +1136,7 @@ VAR2=q
   VAR=qt5-webkit-movableink-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,*.patch} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=quickemu-git

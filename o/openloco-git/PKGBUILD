@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=openloco-git
-pkgver=24.08.r9.g05444a30c
+pkgver=24.09.r1.g2e73126a4
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
@@ -65,5 +65,6 @@ package() {
   ln -s /usr/bin/OpenLoco           "${pkgdir}/usr/bin/openloco"
   install -D "openloco/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
 
-  # TODO remove bundled sfl from package
+  #remove bundled sfl from package
+  rm -rf "${pkgdir}/usr/include/sfl"
 }

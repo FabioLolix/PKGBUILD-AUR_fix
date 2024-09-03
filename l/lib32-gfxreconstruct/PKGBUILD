@@ -27,7 +27,7 @@ build() {
   CFLAGS="$CFLAGS -m32" \
   CXXFLAGS="$CXXFLAGS -m32" \
   LDFLAGS="$LDFLAGS -m32" \
-  PKG_CONFIG_PATH='/usr/lib32/pkgconfig' \
+  PKG_CONFIG_PATH=/usr/lib32/pkgconfig \
   cmake -S gfxreconstruct -B build -Wno-dev \
     -G Ninja \
     -D CMAKE_BUILD_TYPE=None \

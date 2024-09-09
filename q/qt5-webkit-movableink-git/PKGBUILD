@@ -1,5 +1,6 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
+pkgbase=qt5-webkit-movableink-git
 pkgname=qt6-webkit-movableink-git
 pkgver=r284069.9a33154f9d7a
 pkgrel=1
@@ -27,13 +28,13 @@ provides=(qt6-webkit) #qt6-webkit-movableink
 conflicts=(qt6-webkit) #qt6-webkit-movableink
 options=(!lto)
 source=("movableink-webkit::git+https://github.com/movableink/webkit.git"
-        qtwebkit-ruby3.2.patch)
+         https://src.fedoraproject.org/rpms/qt5-qtwebkit/raw/rawhide/f/webkit-offlineasm-warnings-ruby27.patch)
 sha256sums=('SKIP'
-            '977221aca9471072d64a46e7541a0d3c540387841f47bb05b0af6c2fa25b034d')
+            '8768433ff3f641b506962ed22cc596eaf57bf21b6d3402e0e73ad8c2afeaa502')
 
 prepare() {
   cd movableink-webkit
-  patch -Np1 -i ../qtwebkit-ruby3.2.patch
+  patch -Np1 -i ../webkit-offlineasm-warnings-ruby27.patch
   echo "Done patch for Ruby 3.2"
 }
 
@@ -45,7 +46,7 @@ pkgver() {
 
 build() {
   cmake -B build -S movableink-webkit -Wno-dev \
-    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DPORT=Qt \
     -DENABLE_TOOLS=OFF

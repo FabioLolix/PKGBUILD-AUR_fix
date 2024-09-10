@@ -4,8 +4,8 @@
 
 _plugins_ver=3.16
 pkgname=nomacs
-pkgver=3.19.0
-pkgrel=2
+pkgver=3.19.1
+pkgrel=1
 epoch=1
 pkgdesc="A Qt image viewer"
 arch=(x86_64)
@@ -21,7 +21,7 @@ source=("git+https://github.com/nomacs/nomacs.git#tag=${pkgver}"
         #"nomacs-plugins-qt6_02.patch::https://github.com/nomacs/nomacs-plugins/pull/40/commits/a869962f051504dd2c1dedeb3bc3d266c17070c1.patch"
         #"nomacs-plugins-${_plugins_ver}.tar.gz::https://github.com/nomacs/nomacs-plugins/archive/${_plugins_ver}.tar.gz"
         )
-b2sums=('10bb3b77feac1f02a8b72cf4195173d7f15cca255fd7ecb8ae8a4ad50235f3ac5fbb3edbbbd44972cc5998fa60d8ffa5764ff5155c91b05c74d5776c1a405557')
+b2sums=('e2d840fd94fec6fd9f800a530d7514261646f12297330e656f5f511b0d2872d6877693e88e43bee8698c79b0ec29bedbc33971afde50827eafa7e5edea3bc7b9')
 
 export GIT_LFS_SKIP_SMUDGE=1
 

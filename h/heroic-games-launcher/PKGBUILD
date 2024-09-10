@@ -7,7 +7,7 @@ pkgdesc="Native GOG, Epic Games and Amazon games launcher for Linux"
 arch=(x86_64)
 url="https://heroicgameslauncher.com/"
 license=(GPL3)
-depends=(alsa-lib gtk3 nss )
+depends=(alsa-lib gtk3 nss which)
 makedepends=(git pnpm)
 options=(!strip)
 source=("git+https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher.git#tag=v${pkgver}")

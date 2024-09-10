@@ -2,13 +2,13 @@
 # Contributor: gaelic
 
 pkgname=shotwell-git
-pkgver=0.31.4.r0.g4888c8ed
+pkgver=0.32.1.r336.g2dd08596
 pkgrel=1
 pkgdesc="A digital photo organizer designed for the GNOME desktop environment"
 arch=(x86_64)
 url="https://wiki.gnome.org/Apps/Shotwell"
 license=(LGPL2.1)
-depends=(libgee libgexiv2 libraw libgdata libgphoto2)
+depends=(libgee libgexiv2 libraw libgphoto2 gtk4 libportal-gtk4 gcr-4)
 makedepends=(git vala meson ninja itstool)
 provides=(shotwell)
 conflicts=(shotwell)
@@ -16,17 +16,17 @@ source=("git+https://gitlab.gnome.org/GNOME/shotwell.git")
 sha256sums=('SKIP')
 
 pkgver() {
-  cd "${srcdir}/${pkgname%-git}"
+  cd "shotwell"
   git describe --long --tags | sed 's/^shotwell-//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-  cd "${srcdir}/${pkgname%-git}"
-  arch-meson -D unity_support=false build
+  cd "shotwell"
+  arch-meson build
   ninja -C build
 }
 
 package() {
-  cd "${srcdir}/${pkgname%-git}"
+  cd "shotwell"
   DESTDIR="${pkgdir}" meson install -C build
 }

@@ -34,8 +34,8 @@ sha256sums=('SKIP'
 
 prepare() {
   cd movableink-webkit
-  patch -Np1 -i ../webkit-offlineasm-warnings-ruby27.patch
-  echo "Done patch for Ruby 3.2"
+  #patch -Np1 -i ../webkit-offlineasm-warnings-ruby27.patch
+  #echo "Done patch for Ruby 3.2"
 }
 
 pkgver() {

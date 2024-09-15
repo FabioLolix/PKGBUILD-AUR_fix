@@ -16,6 +16,8 @@ conflicts=(zsync2)
 source=("git+https://github.com/AppImageCommunity/zsync2.git")
 b2sums=('SKIP')
 
+CFLAGS="$CFLAGS -Wno-incompatible-pointer-types"
+
 pkgver() {
   cd zsync2
   git describe --long --tags --exclude continuous | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'

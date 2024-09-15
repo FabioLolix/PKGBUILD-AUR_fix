@@ -14,3 +14,13 @@ VAR2=c
     rsync {PKGBUILD,.SRCINFO} "$BASE/$VAR2/$VAR"
 
 echo "Done C"
+
+
+
+VAR2=z
+  VAR=zsync2-git
+  cd "$DEST/$VAR2/$VAR"
+    git pull
+    rsync {PKGBUILD,.SRCINFO} "$BASE/$VAR2/$VAR"
+
+echo "Done Z"

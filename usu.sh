@@ -7,13 +7,13 @@ DEST=~/Dev/AUR
 
 
 
-VAR2=c
-  VAR=cinelerra-gg-git
+VAR2=m
+  VAR=morris
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
 
-echo "Done C"
+echo "Done M"
 
 
 

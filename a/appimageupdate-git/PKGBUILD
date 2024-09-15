@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=appimageupdate-git
-pkgver=2.0.0.alpha.1.20230526.r1.gd89e6bf
+pkgver=2.0.0.alpha.1.20230526.r4.gf716590
 pkgrel=1
 pkgdesc="Graphical front end to manage AppImage applications built using MauiKit"
 arch=(x86_64)

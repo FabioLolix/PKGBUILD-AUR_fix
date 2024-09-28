@@ -9,7 +9,7 @@ url="https://heroicgameslauncher.com/"
 license=(GPL-3.0-only)
 _electron=electron31
 depends=(alsa-lib gtk3 nss which $_electron)
-makedepends=(git pnpm)
+makedepends=(git pnpm npm python)
 source=("git+https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher.git#tag=v${pkgver}")
 sha256sums=('b752b2c11f7d20f068b40d8122a5d4b2b9dcdf3be134d84c9888fe71559045fe')
 

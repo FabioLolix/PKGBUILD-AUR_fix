@@ -4,14 +4,15 @@
 # Contributor: Michael Yang <ohmyarchlinux@protonmail.com>
 
 pkgname=spdlog-git
-pkgver=1.12.0.r8.g2312489b
+pkgver=1.14.1.r14.ge593f669
 pkgrel=1
 pkgdesc="Very fast, header only, C++ logging library"
-arch=(x86_64)
+arch=(x86_64 aarch64)
 url="https://github.com/gabime/spdlog"
 license=(MIT)
-depends=(glibc gcc-libs libfmt.so)
-makedepends=(git cmake)
+depends=(glibc gcc-libs fmt)
+depends+=(libfmt.so)
+makedepends=(git cmake catch2)
 provides=(spdlog libspdlog.so)
 conflicts=(spdlog)
 source=("git+https://github.com/gabime/spdlog.git#branch=v1.x")

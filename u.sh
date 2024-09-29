@@ -979,6 +979,12 @@ VAR2=p
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
+  VAR=pencil2d-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
   VAR=pktriggercord
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

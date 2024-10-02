@@ -3,8 +3,8 @@
 # Contributor: Otto VonStein <otto>
 
 pkgname=pencil2d-git
-pkgver=0.6.6.r506.g3d0a148
-pkgrel=2
+pkgver=0.6.6.r509.g6d6545e
+pkgrel=1
 pkgdesc="Animation/drawing software, that lets you create traditional hand-drawn animation using both bitmap and vector graphics"
 arch=(x86_64 i686)
 url="https://github.com/pencil2d/pencil"

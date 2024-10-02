@@ -2,7 +2,7 @@
 # Contributor: Caleb Fontenot foley2431 (at) gmail.com
 
 pkgname=pcsx-rearmed-git
-pkgver=r1638.67c020ee
+pkgver=r1644.1631b053
 pkgrel=1
 pkgdesc="Playstation 1 Emulator, optimized for ARM."
 arch=(x86_64 aarch64 armv7h)

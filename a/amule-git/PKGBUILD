@@ -4,7 +4,7 @@
 
 pkgname=amule-git
 pkgver=2.3.3.r46.be22aea36
-pkgrel=1
+pkgrel=2
 pkgdesc="Client for the eD2k and Kad networks"
 arch=(x86_64)
 url="https://amule.org/"

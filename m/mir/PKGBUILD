@@ -6,7 +6,7 @@
 
 pkgname=mir
 pkgver=2.18.2
-pkgrel=2
+pkgrel=3
 pkgdesc="Canonical's display server"
 url="https://github.com/canonical/mir"
 arch=(x86_64 i686)
@@ -41,10 +41,9 @@ build() {
   export CFLAGS+=" -Wno-error=array-bounds"
   export CXXFLAGS+=" -Wno-error=array-bounds"
 
-#-DMIR_USE_PRECOMPILED_HEADERS=OFF
-
   local _flags=(
-
+    -DMIR_USE_PRECOMPILED_HEADERS=OFF
+    -Dglm_DIR:PATH=/usr/lib/cmake/glm
   )
 
   cmake -B build -S "mir-${pkgver}" -Wno-dev \

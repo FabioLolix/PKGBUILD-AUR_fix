@@ -18,7 +18,7 @@ depends=(boost-libs libglvnd lttng-ust libepoxy libxml++2.6 libinput yaml-cpp
 
         # capnproto google-glog gflags liburcu nettle libevdev protobuf  python-gobject
 )
-makedepends=(glm doxygen graphviz cmake boost umockdev wlcs glmark2
+makedepends=(git glm doxygen graphviz cmake boost umockdev wlcs glmark2
 
              python-pillow python-dbus # required
              #gcovr lcov valgrind

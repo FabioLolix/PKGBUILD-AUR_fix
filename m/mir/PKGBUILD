@@ -6,14 +6,27 @@
 
 pkgname=mir
 pkgver=2.18.2
-pkgrel=1
+pkgrel=2
 pkgdesc="Canonical's display server"
 url="https://github.com/canonical/mir"
 arch=(x86_64 i686)
-license=(GPL LGPL)
-depends=(boost-libs capnproto google-glog gflags libglvnd  liburcu lttng-ust libepoxy libxml++2.6 nettle libinput yaml-cpp
-         libxkbcommon python-pillow freetype2 libevdev protobuf python-dbus python-gobject hicolor-icon-theme libxcursor)
-makedepends=(glm doxygen cmake boost gcovr gtest lcov valgrind python-dbusmock umockdev wlcs egl-wayland)
+license=(GPL-2.0-or-later OR GPL-3.0-or-later)
+depends=(boost-libs libglvnd lttng-ust libepoxy libxml++2.6 libinput yaml-cpp
+         libxkbcommon  freetype2  hicolor-icon-theme libxcursor
+
+        egl-wayland wayland
+
+        glib2 glibc gcc-libs util-linux-libs libxcb libxkbcommon-x11 libdrm mesa libx11 gtest glibmm
+
+        # capnproto google-glog gflags liburcu nettle libevdev protobuf  python-gobject
+)
+makedepends=(glm doxygen graphviz cmake boost umockdev wlcs glmark2
+
+             python-pillow python-dbus
+             #gcovr lcov valgrind
+             python-dbusmock
+             glib2-devel
+)
 optdepends=('qterminal: required for miral demos'
             'ttf-ubuntu-font-family: required for miral demos'
             'qt5-wayland: required for miral demos'

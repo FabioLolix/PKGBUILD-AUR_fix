@@ -13,15 +13,20 @@ arch=(x86_64 i686)
 license=(GPL LGPL)
 depends=(boost-libs capnproto google-glog gflags libglvnd  liburcu lttng-ust libepoxy libxml++2.6 nettle libinput yaml-cpp
          libxkbcommon python-pillow freetype2 libevdev protobuf python-dbus python-gobject hicolor-icon-theme libxcursor)
-makedepends=(glm doxygen cmake boost gcovr gtest lcov valgrind python-dbusmock umockdev wlcs)
+makedepends=(glm doxygen cmake boost gcovr gtest lcov valgrind python-dbusmock umockdev wlcs egl-wayland)
 optdepends=('qterminal: required for miral demos'
             'ttf-ubuntu-font-family: required for miral demos'
             'qt5-wayland: required for miral demos'
             'xcursor-dmz: opt requirement for miral demos')
+options=(!lto)
 source=("https://github.com/canonical/mir/releases/download/v${pkgver}/mir-${pkgver}.tar.xz")
 sha256sums=('e03d6c88eeabe177528e69719331529ed25f10266fe8a80d829071ab755b9ef7')
 
+# glm not found but is listed here
+
 build() {
+  export CFLAGS+=" -Wno-error=array-bounds"
+  export CXXFLAGS+=" -Wno-error=array-bounds"
 
 #-DMIR_USE_PRECOMPILED_HEADERS=OFF
 

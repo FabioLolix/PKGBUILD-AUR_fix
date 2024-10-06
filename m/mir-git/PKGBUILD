@@ -28,6 +28,9 @@ pkgver() {
 }
 
 build() {
+  export CFLAGS+=" -Wno-error=array-bounds"
+  export CXXFLAGS+=" -Wno-error=array-bounds"
+
 #-DCMAKE_INSTALL_LIBDIR="lib/
 
   local _flags=(

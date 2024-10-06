@@ -4,7 +4,7 @@
 
 pkgname=mir-git
 pkgver=2.18.2.r58.g8cccc26
-pkgrel=2
+pkgrel=3
 pkgdesc="Canonical's display server"
 url="https://github.com/canonical/mir"
 arch=(x86_64 i686 armv7h aarch64)
@@ -13,12 +13,13 @@ depends=(boost-libs libglvnd lttng-ust libepoxy libxml++2.6 libinput yaml-cpp
          libxkbcommon  freetype2  hicolor-icon-theme libxcursor
 
         egl-wayland wayland
+        libevdev umockdev
 
         glib2 glibc gcc-libs util-linux-libs libxcb libxkbcommon-x11 libdrm mesa libx11 gtest glibmm
 
-        # capnproto google-glog gflags liburcu nettle libevdev protobuf  python-gobject
+        # capnproto google-glog gflags liburcu nettle libevdev protobuf python-gobject
 )
-makedepends=(git glm doxygen graphviz cmake boost umockdev wlcs glmark2
+makedepends=(git glm doxygen graphviz cmake boost wlcs glmark2
 
              python-pillow python-dbus # required
              #gcovr lcov valgrind
@@ -45,7 +46,8 @@ build() {
   export CXXFLAGS+=" -Wno-error=array-bounds"
 
   local _flags=(
-
+    -DMIR_USE_PRECOMPILED_HEADERS=OFF
+    -Dglm_DIR:PATH=/usr/lib/cmake/glm
   )
 
   cmake -B build -S "mir" -Wno-dev \

@@ -2,8 +2,8 @@
 # Contributor: Pellegrino Prevete <pellegrinoprevete@gmail.com>
 
 pkgname=kronos-git
-pkgver=r7562.3316e0ed3
-pkgrel=2
+pkgver=2.6.2_official_release.r11.g3316e0e
+pkgrel=1
 pkgdesc="Sega Saturn emulator, fork of yabause"
 arch=(x86_64)
 url="https://github.com/FCare/Kronos"
@@ -17,7 +17,8 @@ sha256sums=('SKIP')
 
 pkgver() {
   cd Kronos
-  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  #printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+  git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {

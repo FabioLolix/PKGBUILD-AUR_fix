@@ -2,7 +2,7 @@
 # Contributor: Pellegrino Prevete <pellegrinoprevete@gmail.com>
 
 pkgname=kronos-git
-pkgver=r7500.b0819ab84
+pkgver=r7559.1844f3c6f
 pkgrel=1
 pkgdesc="Sega Saturn emulator, fork of yabause"
 arch=(x86_64)

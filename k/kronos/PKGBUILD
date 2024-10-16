@@ -3,7 +3,7 @@
 
 pkgname=kronos
 pkgver=2.6.1
-pkgrel=2
+pkgrel=3
 pkgdesc="Sega Saturn emulator, fork of yabause"
 arch=(x86_64 aarch64 i686 pentium4)
 url="https://github.com/FCare/Kronos"
@@ -15,8 +15,8 @@ b2sums=('4bfc208e1ccc7ae7d7bb50a7ec8f53bdf4cddfda818858065ae695bca3bc337b0746bab
 
 build() {
   export CC=/usr/bin/gcc-13 CXX=/usr/bin/g++-13
-  #export CFLAGS+=" -Wno-error=format-security"
-  #export CXXFLAGS+=" -Wno-error=format-security"
+  export CFLAGS+=" -Wno-error=format-security"
+  export CXXFLAGS+=" -Wno-error=format-security"
 
   cmake -B build -S "Kronos-${pkgver}_official_release/yabause" \
     -Wno-dev \

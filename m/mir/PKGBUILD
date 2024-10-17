@@ -10,7 +10,7 @@ pkgrel=3
 pkgdesc="Canonical's display server"
 url="https://github.com/canonical/mir"
 arch=(x86_64 i686)
-license=(GPL-2.0-or-later OR GPL-3.0-or-later)
+license=('GPL-2.0-or-later OR GPL-3.0-or-later')
 depends=(boost-libs libglvnd lttng-ust libepoxy libxml++2.6 libinput yaml-cpp
          libxkbcommon  freetype2  hicolor-icon-theme libxcursor
 

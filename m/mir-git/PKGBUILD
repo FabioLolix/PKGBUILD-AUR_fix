@@ -3,12 +3,12 @@
 # Contributor: kikadf <kikadf.01@gmail.com>
 
 pkgname=mir-git
-pkgver=2.18.2.r58.g8cccc26
-pkgrel=3
+pkgver=2.18.2.r139.g13f43b9
+pkgrel=1
 pkgdesc="Canonical's display server"
 url="https://github.com/canonical/mir"
 arch=(x86_64 i686 armv7h aarch64)
-license=(GPL-2.0-or-later OR GPL-3.0-or-later)
+license=('GPL-2.0-or-later OR GPL-3.0-or-later')
 depends=(boost-libs libglvnd lttng-ust libepoxy libxml++2.6 libinput yaml-cpp
          libxkbcommon  freetype2  hicolor-icon-theme libxcursor
 

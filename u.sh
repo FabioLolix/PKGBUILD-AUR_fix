@@ -196,6 +196,12 @@ VAR2=c
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
+  VAR=cartridges-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
   VAR=casclib
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -318,11 +324,11 @@ echo "Done D"
 
 
 VAR2=e
-  #VAR=efax-gtk
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-  #  echo "    synced $VAR"
+  VAR=efax-gtk
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
 
   VAR=ensmallen
   cd "$BASE/$VAR2/$VAR"
@@ -606,6 +612,12 @@ echo "Done I"
 
 
 VAR2=k
+  VAR=kcbench
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
   VAR=keycutter-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -625,6 +637,18 @@ VAR2=k
     echo "    synced $VAR"
 
   VAR=kitty-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=kronos
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=kronos-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"

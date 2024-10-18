@@ -2,7 +2,7 @@
 # Contributor: Salvador Pardiñas <darkfm@vera.com.uy>
 
 pkgname=higan-gtk-git
-pkgver=115.r239.gba4b918c0
+pkgver=115.r241.ga03b2e94c
 pkgrel=1
 pkgdesc="Multi-system emulator focused on accuracy, preservation, and configurability"
 arch=(x86_64)

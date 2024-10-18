@@ -2,7 +2,7 @@
 
 pkgbase=flac-git
 pkgname=(flac-git flac-doc-git)
-pkgver=1.4.3.r34.g66152791
+pkgver=1.4.3.r131.g155e206f
 pkgrel=1
 arch=(x86_64 aarch64)
 url="https://xiph.org/flac/"

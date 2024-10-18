@@ -2,8 +2,8 @@
 # Contributor: Linus Dierheimer <Linus@Dierheimer.de>
 
 pkgname=fastfetch-git
-pkgver=2.10.2.r14.g74c89cc0
-pkgrel=2
+pkgver=2.27.1.r26.gcd9cfa5d
+pkgrel=1
 pkgdesc="Like neofetch, but much faster because written in c"
 arch=(x86_64 i686 pentium4 armv7h aarch64 riscv64)
 url="https://github.com/fastfetch-cli/fastfetch"

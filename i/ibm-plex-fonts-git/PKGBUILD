@@ -3,7 +3,7 @@
 pkgbase=ibm-plex-fonts-git
 pkgname=(#otf-ibm-plex-git ttf-ibm-plex-git 
           woff2-ibm-plex-git) #eot-ibm-plex-git woff-ibm-plex-git
-pkgver=r335.3ddca8c9e
+pkgver=r337.d5735a062
 pkgrel=1
 pkgdesc="IBM Plex fonts"
 arch=(any)

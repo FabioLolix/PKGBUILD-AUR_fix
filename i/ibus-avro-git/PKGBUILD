@@ -3,7 +3,7 @@
 
 pkgname=ibus-avro-git
 epoch=1
-pkgver=1.2.r5.g4da8b05
+pkgver=1.2.r6.g8862f77
 pkgrel=1
 pkgdesc="Avro Phonetic Bangla typing for Linux"
 url="http://linux.omicronlab.com"

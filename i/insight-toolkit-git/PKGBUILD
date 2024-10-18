@@ -6,8 +6,8 @@
 # Contributor: joel schaerer <joel.schaerer@laposte.net>
 
 pkgname=insight-toolkit-git
-pkgver=5.4.0.r229.g37fca1004f
-pkgrel=2
+pkgver=5.4.0.r311.g15af3aed65
+pkgrel=1
 pkgdesc="Cross-platform system that provides developers with an extensive suite of software tools for image analysis"
 arch=(x86_64)
 url="https://itk.org/"

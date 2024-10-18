@@ -2,8 +2,8 @@
 # Contributor: Askhat Bakarov <sirocco{at}ngs{dot}ru>
 
 pkgname=android-file-transfer-git
-pkgver=4.3.r13.g2a48d30
-pkgrel=2
+pkgver=4.3.r15.gcf7036c
+pkgrel=1
 pkgdesc="An interactive MTP client implemented in C++ using Qt toolkit"
 arch=(x86_64 i686)
 url="https://github.com/whoozle/android-file-transfer-linux"

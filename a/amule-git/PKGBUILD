@@ -3,8 +3,8 @@
 # Contributor: lukpod
 
 pkgname=amule-git
-pkgver=2.3.3.r46.be22aea36
-pkgrel=2
+pkgver=2.3.3.r49.4db7f84b7
+pkgrel=1
 pkgdesc="Client for the eD2k and Kad networks"
 arch=(x86_64)
 url="https://amule.org/"

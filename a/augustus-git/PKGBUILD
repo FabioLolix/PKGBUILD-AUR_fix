@@ -4,8 +4,8 @@
 
 pkgname=augustus-git
 pkgdesc="An enhanced re-implementation of Caesar III (Original copy required)"
-pkgver=4.0.0.r398.g8a1a3f1
-pkgrel=2
+pkgver=4.0.0.r415.gb47ce83
+pkgrel=1
 arch=(x86_64 i686)
 url="https://github.com/Keriew/augustus"
 license=(AGPL-3.0-only)

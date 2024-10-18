@@ -2,7 +2,7 @@
 # Contributor: Roberto Hueso < roberto at robertohueso dot org >
 
 pkgname=ensmallen
-pkgver=2.21.1.r12.gb0879a1b
+pkgver=2.21.1.r96.gbd6a308a
 pkgrel=1
 pkgdesc="Flexible C++ header library for efficient mathematical optimization"
 arch=(any)

@@ -10,8 +10,8 @@ pkgdesc='Ruby/Pango is a Ruby binding of pango-1.x.'
 arch=(x86_64 i686 armv7h aarch64)
 url="https://github.com/ruby-gnome/ruby-gnome"
 license=(LGPL-2.1-only)
-depends=(ruby ruby-gobject-introspection pango glibc glib2)
-makedepends=(ruby-pkg-config ruby-native-package-installer ruby-glib2 ruby-cairo)
+depends=(ruby ruby-gobject-introspection=${pkgver} ruby-cairo-gobject=${pkgver} pango glibc glib2)
+makedepends=(ruby-pkg-config ruby-native-package-installer)
 source=("ruby-gnome-${pkgver}.tar.gz::https://github.com/ruby-gnome/ruby-gnome/archive/refs/tags/${pkgver}.tar.gz")
 sha256sums=('37a39e0175f00bedb3fca7791f12f9a0d759231c2d882a8770a7877a0e25cef5')
 

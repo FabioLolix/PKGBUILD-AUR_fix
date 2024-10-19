@@ -214,23 +214,11 @@ VAR2=c
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=castxml
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
   VAR=cdck-bin
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
-
-  #VAR=celeste-client-bin
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO,celeste-client.desktop,celeste-client.svg} "$DEST/$VAR2/$VAR"
-  #  echo "    synced $VAR"
 
   VAR=ciano-git
   cd "$BASE/$VAR2/$VAR"
@@ -1080,18 +1068,6 @@ VAR2=p
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=python-pygccxml
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
-  #VAR=python-pygccxml-git
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-  #  echo "    synced $VAR"
-
   VAR=pythonqt-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -1174,12 +1150,6 @@ VAR2=q
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
-
-  #VAR=qt5-webkit-movableink
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-  #  echo "    synced $VAR"
 
   VAR=qt5-webkit-movableink-git
   cd "$BASE/$VAR2/$VAR"
@@ -1521,18 +1491,6 @@ echo "Done U"
 
 
 VAR2=v
-  #VAR=vala0.26
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-  #  echo "    synced $VAR"
-
-  #VAR=vala0.54
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-  #  echo "    synced $VAR"
-
   VAR=vala-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -1629,17 +1587,6 @@ VAR2=w
     echo "    synced $VAR"
 
 echo "Done W"
-
-
-
-VAR2=x
-  #VAR=xboxdrv-git
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-  #  echo "    synced $VAR"
-
-echo "Done X"
 
 
 

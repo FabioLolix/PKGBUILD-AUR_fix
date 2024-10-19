@@ -1,7 +1,7 @@
 # Maintainer: Your Name <youremail@domain.com>
 
 pkgname=resonance-git
-pkgver=r14.901e76f
+pkgver=r83.9782609
 pkgrel=1
 pkgdesc="Music player"
 arch=(x86_64)

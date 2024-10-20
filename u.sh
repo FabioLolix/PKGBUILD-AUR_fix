@@ -15,7 +15,7 @@ VAR2=a
   VAR=activate-linux-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,*.desktop} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=akira-git

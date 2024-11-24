@@ -3,7 +3,7 @@
 # Contributor: Evan Bush (PencilShavings) <eb.pencilshavings@protonmail.com>
 
 pkgname=quickemu-git
-pkgver=4.9.6.r2.gaeb14a7
+pkgver=4.9.6.r51.gd0ae72a
 pkgrel=1
 pkgdesc="Quickly create and run optimised Windows, macOS and Linux desktop virtual machines"
 arch=(any)
@@ -34,5 +34,5 @@ package() {
   cd docs
   install -Dm644 quickget.1      -t ${pkgdir}/usr/share/man/man1
   install -Dm644 quickemu.1      -t ${pkgdir}/usr/share/man/man1
-  install -Dm644 quickemu_conf.1 -t ${pkgdir}/usr/share/man/man1
+  install -Dm644 quickemu_conf.5 -t ${pkgdir}/usr/share/man/man1
 }

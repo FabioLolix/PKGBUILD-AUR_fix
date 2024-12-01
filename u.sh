@@ -1441,13 +1441,13 @@ VAR2=t
   VAR=tahoma2d
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,*.patch} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=tahoma2d-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,*.patch} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=tea-qt

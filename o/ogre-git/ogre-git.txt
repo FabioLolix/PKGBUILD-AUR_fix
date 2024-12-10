@@ -1,0 +1,68 @@
+
+
+> cg: C for graphics shader language <http://developer.nvidia.com/object/cg_toolkit.html>
+
+nvidia-cg-toolkit, at least this don't require nvidia-utils
+
+> OpenEXR: Load High dynamic range images <http://www.openexr.com/>
+
+System version not recognixed
+
+> Softimage: Softimage SDK needed for building XSIExporter
+
+Proprietary commercial Autodesk stuff
+
+> Vulkan SDK: Vulkan RenderSystem, glslang Plugin. Alternatively use system packages <https://vulkan.lunarg.com/>
+
+Which package need?
+Not vulkan-extra-tools glslang
+
+
+> GLSL Optimizer: GLSL Optimizer <http://github.com/aras-p/glsl-optimizer/>
+> HLSL2GLSL: HLSL2GLSL <http://hlsl2glslfork.googlecode.com/>
+
+At least not in repo
+
+> JNI
+
+Says it want swig or java, found swig but with devtools it doesn't build (in dirty build is enabled as java is installed)
+
+
+  + Cg program manager [DEPRECATED]
+  + FreeImage codec (generic) [DEPRECATED]
+
+Consider disabling
+
+
+-- Found JNI: /usr/lib/jvm/default/include  found components: AWT JVM
+-- 
+-----------------------------------------------------------------------------
+-- The following external packages were located on your system.
+-- This installation will have the extra features provided by these packages, unless disabled.
++ freeimage
++ freetype
++ Wayland
++ X11
++ OpenGL
++ OpenGL ES 2.x
++ cg
++ Python
++ SWIG
++ pugixml
++ zlib
++ Assimp
++ Bullet
++ SDL2
++ Qt
++ Doxygen
++ Xaw
+-----------------------------------------------------------------------------
+-- The following OPTIONAL packages could NOT be located on your system.
+-- Consider installing them to enable more features from this software.
++ Vulkan SDK: Vulkan RenderSystem, glslang Plugin. Alternatively use system packages <https://vulkan.lunarg.com/>
++ OpenEXR: Load High dynamic range images <http://www.openexr.com/>
++ Softimage: Softimage SDK needed for building XSIExporter <>
++ GLSL Optimizer: GLSL Optimizer <http://github.com/aras-p/glsl-optimizer/>
++ HLSL2GLSL: HLSL2GLSL <http://hlsl2glslfork.googlecode.com/>
+-----------------------------------------------------------------------------
+

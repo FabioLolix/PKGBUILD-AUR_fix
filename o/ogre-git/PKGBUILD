@@ -5,17 +5,18 @@
 
 pkgname=ogre-git
 pkgver=14.3.2.r0.g05286bd
-pkgrel=1
+pkgrel=1.1
 pkgdesc="Scene-oriented, flexible 3D engine written in C++"
 arch=(x86_64 i686)
 url="https://www.ogre3d.org/"
 license=(MIT)
 depends=(freetype2 libxaw libxrandr sdl2 glu pugixml zlib bullet)
-makedepends=(git cmake doxygen graphviz ttf-dejavu mesa python ninja cppunit swig assimp freeimage vulkan-extra-tools glslang openexr)
+makedepends=(git cmake doxygen graphviz ttf-dejavu mesa python ninja cppunit swig assimp freeimage vulkan-extra-tools glslang openexr nvidia-cg-toolkit)
 optdepends=('cppunit: unit testing'
-            'intel-tbb: better threading support'
-            'poco: portability'
-            'boost: for developing using ogre')
+            #'intel-tbb: better threading support'
+            #'poco: portability'
+            #'boost: for developing using ogre'
+            )
 provides=(ogre ogre-docs)
 conflicts=(ogre ogre-docs)
 source=("git+https://github.com/OGRECave/ogre.git")

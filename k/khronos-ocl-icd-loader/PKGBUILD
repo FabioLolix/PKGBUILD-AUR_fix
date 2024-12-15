@@ -3,17 +3,17 @@
 # Contributor: Duong Pham <dthpham@gmail.com>
 # Contributor: Lazaros Koromilas <koromilaz@gmail.com>
 
-pkgname=khronos-ocl-icd
-pkgver=2023.12.14
+pkgname=khronos-ocl-icd-loader
+pkgver=2024.10.24
 pkgrel=1
 pkgdesc='Khronos Group OpenCL installable client driver (ICD) loader'
 arch=(x86_64)
 url='https://www.khronos.org/registry/OpenCL/'
-license=(Apache)
-depends=(glibc opencl-driver opencl-headers-git)
+license=(Apache-2.0)
+depends=(glibc opencl-driver opencl-headers)
 makedepends=(git cmake)
 provides=(ocl-icd opencl-icd-loader)
-conflicts=(ocl-icd)
+conflicts=(ocl-icd khronos-ocl-icd)
 source=("git+https://github.com/KhronosGroup/OpenCL-ICD-Loader.git#tag=v${pkgver}")
 sha256sums=('SKIP')
 

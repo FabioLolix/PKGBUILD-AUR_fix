@@ -1,0 +1,36 @@
+# Maintainer: Your Name <youremail@domain.com>
+
+pkgname=glaze-git
+pkgver=4.2.2.r0.g7a3e1b0
+pkgrel=1
+pkgdesc="thermitegod spacefm dependency"
+arch=(any)
+url="https://github.com/thermitegod/ztd"
+license=(MIT)
+makedepends=(git cmake)
+provides=(glaze)
+conflicts=(glaze)
+source=("git+https://github.com/stephenberry/glaze.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd glaze
+  git describe --long --tags --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+build() {
+  cmake -B build -S "glaze" -Wno-dev \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+  cmake --build build
+}
+
+check() {
+  ctest --test-dir build --output-on-failure
+}
+
+package() {
+  DESTDIR="${pkgdir}" cmake --install build
+  install -D glaze/LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}

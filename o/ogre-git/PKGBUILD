@@ -5,18 +5,16 @@
 
 pkgname=ogre-git
 pkgver=14.3.2.r0.g05286bd
-pkgrel=1.1
+pkgrel=2
 pkgdesc="Scene-oriented, flexible 3D engine written in C++"
 arch=(x86_64 i686)
 url="https://www.ogre3d.org/"
 license=(MIT)
-depends=(freetype2 libxaw libxrandr sdl2 glu pugixml zlib bullet)
-makedepends=(git cmake doxygen graphviz ttf-dejavu mesa python ninja cppunit swig assimp freeimage vulkan-extra-tools glslang openexr nvidia-cg-toolkit)
-optdepends=('cppunit: unit testing'
-            #'intel-tbb: better threading support'
-            #'poco: portability'
-            #'boost: for developing using ogre'
-            )
+depends=(freetype2 libxaw libxrandr sdl2 glu pugixml zlib bullet python assimp qt5-base
+         libxt gcc-libs libglvnd libx11
+         )
+makedepends=(git cmake doxygen graphviz ttf-dejavu mesa ninja cppunit swig)
+optdepends=('cppunit: unit testing')
 provides=(ogre ogre-docs)
 conflicts=(ogre ogre-docs)
 source=("git+https://github.com/OGRECave/ogre.git")
@@ -37,7 +35,8 @@ build() {
     -DOGRE_BUILD_TESTS=OFF
     -DOGRE_BUILD_DEPENDENCIES=OFF
     -DPYTHON_SITE_PACKAGES=$(python -c "import sysconfig; print(sysconfig.get_paths()[\"platlib\"]+'/Ogre/')")
-
+    -DOGRE_BUILD_PLUGIN_CG:BOOL=OFF
+    -DOGRE_BUILD_PLUGIN_FREEIMAGE:BOOL=OFF
   )
 
   cmake -B build -S "ogre" -Wno-dev -G Ninja \
@@ -49,12 +48,6 @@ build() {
 
   ninja -C build
   ninja -C build OgreDoc
-}
-
-check() {
-  #ctest --test-dir build --output-on-failure
-  # later
-true
 }
 
 package() {

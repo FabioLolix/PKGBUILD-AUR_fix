@@ -1,37 +1,38 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: nemstar
 
 pkgname=sunflower-git
-pkgver=0.4.62.r204.g7d304675
-pkgrel=1
+pkgver=0.4.62.r211.g52f1a0d
+pkgrel=2
 pkgdesc="Small and highly customizable twin-panel file manager for Linux with support for plugins"
 arch=(any)
 license=(GPL3)
 url="https://sunflower-fm.org"
-depends=(gtk3 vte3 python-gobject python-chardet python-cairo librsvg)
+depends=(gtk3 vte3 python python-gobject python-chardet python-cairo librsvg)
 makedepends=(git python-setuptools libnotify)
 optdepends=('libnotify'
             'python-mutagen: audio-metadata support'
             'gvfs: mount-management')
 provides=(sunflower)
 conflicts=(sunflower)
-source=("${pkgname%-git}::git+https://github.com/MeanEYE/Sunflower.git")
+source=("git+https://github.com/MeanEYE/Sunflower.git#branch=v0.5")
 sha256sums=('SKIP')
 
 pkgver() {
-	cd "${srcdir}/${pkgname%-git}"
-	git describe --long --tags --always | sed -r 's/([^-]*-g)/r\1/;s/-/./g'
+  cd "Sunflower"
+  git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-	cd "${srcdir}/${pkgname%-git}"
-    python setup.py build
+  cd "Sunflower"
+  python setup.py build
 }
 
 package() {
-	cd "${srcdir}/${pkgname%-git}"
-    python setup.py install --root="$pkgdir/" --optimize=1  --skip-build
-    install -Dm644 images/sunflower.png "${pkgdir}/usr/share/pixmaps/sunflower.png"
-    rm "${pkgdir}/usr/share/sunflower/images/sunflower.png"
-    rm -f "${pkgdir}"/usr/share/locale/*/LC_MESSAGES/*.po
-    rm -f "${pkgdir}"/usr/share/locale/*.pot
+  cd "Sunflower"
+  python setup.py install --root="$pkgdir/" --optimize=1  --skip-build
+  install -Dm644 images/sunflower.png "${pkgdir}/usr/share/pixmaps/sunflower.png"
+  rm "${pkgdir}/usr/share/sunflower/images/sunflower.png"
+  rm -f "${pkgdir}"/usr/share/locale/*/LC_MESSAGES/*.po
+  rm -f "${pkgdir}"/usr/share/locale/*.pot
 }

@@ -2,7 +2,7 @@
 # Contributor: Michael DeGuzis <mdeguzis@gmail.com>
 
 pkgname=play-emu-git
-pkgver=0.68.r7.g0cd0b38ae
+pkgver=0.68.r8.g7e723898a
 pkgrel=1
 pkgdesc="Play! is an experimental Playstation 2 emulator"
 arch=(x86_64)
@@ -11,7 +11,6 @@ license=(MIT)
 depends=(qt6-base openal glew)
 makedepends=(git cmake ninja nlohmann-json) #glslang
 source=("play-emu::git+https://github.com/jpd002/Play-.git"
-        0001-Add-missing-include-cstring-in-NamcoSys147-NANDReade.patch
         "git+https://github.com/jpd002/Play-Dependencies.git"
         "git+https://github.com/jpd002/Play--Framework.git"
         "git+https://github.com/jpd002/Play--CodeGen.git"
@@ -23,7 +22,6 @@ source=("play-emu::git+https://github.com/jpd002/Play-.git"
         "git+https://github.com/facebook/zstd.git"
         "git+https://github.com/Cyan4973/xxHash.git")
 sha256sums=('SKIP'
-            '01460ec361c1a6a4329b8bdcfc544a3439fa062e515b055b06124ea521523643'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -42,9 +40,6 @@ pkgver() {
 
 prepare () {
   cd "play-emu"
-
-  patch -Np1 -i ../0001-Add-missing-include-cstring-in-NamcoSys147-NANDReade.patch
-
   git submodule init
   git config 'submodule.deps/Dependencies.url' "${srcdir}/Play-Dependencies"
   git config 'submodule.deps/Framework.url' "${srcdir}/Play--Framework"

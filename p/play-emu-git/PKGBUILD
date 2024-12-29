@@ -2,15 +2,20 @@
 # Contributor: Michael DeGuzis <mdeguzis@gmail.com>
 
 pkgname=play-emu-git
-pkgver=0.68.r8.g7e723898a
+pkgver=0.68.r9.g4403687dc
 pkgrel=1
 pkgdesc="Play! is an experimental Playstation 2 emulator"
 arch=(x86_64)
 url="https://purei.org/"
 license=(MIT)
-depends=(qt6-base openal glew)
-makedepends=(git cmake ninja nlohmann-json) #glslang
-source=("play-emu::git+https://github.com/jpd002/Play-.git"
+depends=(qt6-base openal glew
+
+         # namcap implicit depends
+         hicolor-icon-theme sqlite libglvnd bzip2 curl openssl libevdev glibc icu zlib)
+makedepends=(git cmake ninja nlohmann-json)
+provides=(play-emu)
+conflicts=(play-emu)
+source=("play-emu::git+https://github.com/jpd002/Play-.git#branch=profiler_build_fix"
         "git+https://github.com/jpd002/Play-Dependencies.git"
         "git+https://github.com/jpd002/Play--Framework.git"
         "git+https://github.com/jpd002/Play--CodeGen.git"
@@ -49,8 +54,7 @@ prepare () {
   git config 'submodule.deps/AltKit.url' "${srcdir}/AltKit"
   git -c protocol.file.allow=always submodule update
 
-  cd "${srcdir}/play-emu"/deps/Dependencies
-
+  cd deps/Dependencies
   git submodule init
   git config 'submodule.SDWebImage.url' "${srcdir}/SDWebImage"
   git config 'submodule.ghc_filesystem.url' "${srcdir}/filesystem"
@@ -60,24 +64,19 @@ prepare () {
 }
 
 build() {
-  #cd "play-emu/build"
-  #cmake .. -Wno-dev -G"Ninja"
+  local _flags=(
+    -DWITH_SYSTEM_ZLIB=ON
+  )
 
   cmake -B build -S "play-emu" -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DWITH_SYSTEM_ZLIB:BOOL=ON
+    "${_flags[@]}"
 
   cmake --build build
-#--config Release
 }
 
 package() {
-  #cd "play-emu"
-  #install -Dm755 build/Source/ui_qt/Play    "${pkgdir}"/usr/bin/play-emu
-  #install -D icons/icon.svg                 "${pkgdir}"/usr/share/pixmaps/play.svg
-  #install -D installer_unix/org.purei.Play.desktop -t "${pkgdir}"/usr/share/applications/
-  #install -D License.txt                    "${pkgdir}/usr/share/licenses/${pkgname}"/License.txt
-
   DESTDIR="${pkgdir}" cmake --install build
+  install -D play-emu/License.txt -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

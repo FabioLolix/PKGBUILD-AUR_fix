@@ -12,11 +12,11 @@ pkgrel=1
 pkgdesc="The powerful music player for KDE"
 arch=(x86_64)
 url="https://apps.kde.org/amarok/"
-license=(GPL2 LGPL2.1 FDL)
+license=(GPL-2.0-or-later)
 depends=(threadweaver qt6-webengine phonon-qt6 qt6-declarative
          kcmutils knewstuff ktexteditor kdnssd kirigami2 kstatusnotifieritem ktextwidgets
          mariadb libmariadbclient fftw ffmpeg taglib libofa)
-makedepends=(git extra-cmake-modules kdoctools gdk-pixbuf2 knotifyconfig clang lld
+makedepends=(git extra-cmake-modules kdoctools gdk-pixbuf2 knotifyconfig
              libmtp loudmouth qt6-tools)
 optdepends=("libmtp: support for portable media devices"
             "loudmouth: backend needed by mp3tunes for syncing"
@@ -29,12 +29,6 @@ source=("https://invent.kde.org/multimedia/amarok/-/archive/v${pkgver}/amarok-v$
 sha256sums=('3fc2168ba770479bcb24a5a07ece8cc2bdde0132cf518456dc8036c739ca3fa8')
 
 build() {
-  export CC="/usr/bin/clang"
-  export CXX="/usr/bin/clang++"
-  export CPP="/usr/bin/clang-cpp"
-  export LD="/usr/bin/lld"
-  export LDFLAGS="-fuse-ld=lld"
-
   local _flags=(
     -DBUILD_WITH_QT6=TRUE
     -DWITH_GPODDER=OFF

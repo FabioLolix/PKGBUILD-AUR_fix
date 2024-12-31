@@ -8,10 +8,12 @@ pkgdesc="An audio metadata tag reader and writer (python library)"
 url="https://mutagen.readthedocs.io/en/latest/"
 license=(GPL-2.0-or-later)
 depends=(python)
-makedepends=(git python-build python-wheel python-installer python-setuptools)
+makedepends=(git python-build python-wheel python-installer python-setuptools
+python-eyed3 libogg libvorbis
+)
 checkdepends=(python-coverage python-pytest python-hypothesis liboggz vorbis-tools faad2
 
-             #python-eyed3
+             python-eyed3
              libogg libvorbis)
 provides=(python-mutagen)
 conflicts=(python-mutagen)

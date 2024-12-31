@@ -2,8 +2,8 @@
 # Contributor: Alfredo Ramos <alfredo dot ramos at yandex dot com>
 
 pkgname=pythonqt-git
-pkgver=3.5.6.r2.g39ef1f05
-pkgrel=1.1
+pkgver=3.5.7.r1.gafcbc9cc
+pkgrel=1
 pkgdesc="A dynamic Python binding for Qt applications"
 arch=(x86_64)
 url="https://github.com/MeVisLab/pythonqt"

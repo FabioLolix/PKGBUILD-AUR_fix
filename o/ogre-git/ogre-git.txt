@@ -66,3 +66,32 @@ Consider disabling
 + HLSL2GLSL: HLSL2GLSL <http://hlsl2glslfork.googlecode.com/>
 -----------------------------------------------------------------------------
 
+
+### openexr
+
+// Path to a library.
+OPENEXR_Half_LIBRARY:FILEPATH=OPENEXR_Half_LIBRARY-NOTFOUND
+
+// Path to a library.
+OPENEXR_Half_LIBRARY_DEBUG:FILEPATH=OPENEXR_Half_LIBRARY_DEBUG-NOTFOUND
+
+// Path to a file.
+OPENEXR_INCLUDE_DIR:PATH=/usr/include
+
+// Path to a library.
+OPENEXR_Iex_LIBRARY:FILEPATH=/usr/lib/libIex.so
+
+// Path to a library.
+OPENEXR_Iex_LIBRARY_DEBUG:FILEPATH=OPENEXR_Iex_LIBRARY_DEBUG-NOTFOUND
+
+// Path to a library.
+OPENEXR_IlmImf_LIBRARY:FILEPATH=OPENEXR_IlmImf_LIBRARY-NOTFOUND
+
+// Path to a library.
+OPENEXR_IlmImf_LIBRARY_DEBUG:FILEPATH=OPENEXR_IlmImf_LIBRARY_DEBUG-NOTFOUND
+
+// Path to a library.
+OPENEXR_IlmThread_LIBRARY:FILEPATH=/usr/lib/libIlmThread.so
+
+// Path to a library.
+OPENEXR_IlmThread_LIBRARY_DEBUG:FILEPATH=OPENEXR_IlmThread_LIBRARY_DEBUG-NOTFOUND

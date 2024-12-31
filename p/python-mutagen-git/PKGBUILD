@@ -9,8 +9,7 @@ url="https://mutagen.readthedocs.io/en/latest/"
 license=(GPL-2.0-or-later)
 depends=(python)
 makedepends=(git python-build python-wheel python-installer python-setuptools
-python-eyed3 libogg libvorbis
-)
+             python-eyed3 libogg libvorbis) # <- temporary test
 checkdepends=(python-coverage python-pytest python-hypothesis liboggz vorbis-tools faad2
 
              python-eyed3

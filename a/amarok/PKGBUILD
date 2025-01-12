@@ -11,7 +11,7 @@ pkgrel=1
 pkgdesc="The powerful music player for KDE"
 arch=(x86_64)
 url="https://apps.kde.org/amarok/"
-license=(FDL GPL2 LGPL2.1)
+license=(GPL-2.0-or-later)
 depends=(kcmutils5 kdnssd5 kirigami2 kirigami-addons5 ktexteditor5 liblastfm-qt5 libofa
          phonon-qt5 threadweaver5 taglib libmygpo-qt5 libmtp mariadb mariadb-libs gdk-pixbuf2 knotifyconfig5
 
@@ -19,7 +19,7 @@ depends=(kcmutils5 kdnssd5 kirigami2 kirigami-addons5 ktexteditor5 liblastfm-qt5
          glibc gcc-libs ffmpeg qt5-base qt5-svg qt5-declarative
          kwallet5 karchive5 kio5 kguiaddons5 kitemviews5 kpackage5 kglobalaccel5 kdbusaddons5 kcompletion5
          knotifications5 fftw kcodecs5  kxmlgui5 kcoreaddons5 ki18n5 ktextwidgets5 hicolor-icon-theme
-         kwindowsystem5 kconfigwidgets5 kwidgetsaddons5  kconfig5 kiconthemes5 kcrash5 solid5)
+         kwindowsystem5 kconfigwidgets5 kwidgetsaddons5 kconfig5 kiconthemes5 kcrash5 solid5)
 makedepends=(extra-cmake-modules git qt5-tools loudmouth qt5-webengine kdoctools5)
 optdepends=("libmtp: support for portable media devices"
             "loudmouth: backend needed by mp3tunes for syncing"

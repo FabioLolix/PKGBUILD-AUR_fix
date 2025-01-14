@@ -1,11 +1,11 @@
 
 pkgname=vegastrike-engine-git
-pkgver=0.9.0.alpha1.r147.gdfdd56dae
-pkgrel=1
+pkgver=0.9.0.beta2.r23.gbcc37c20a
+pkgrel=1.6
 pkgdesc="A spaceflight simulator in massive universe"
 arch=(x86_64)
 url="https://www.vega-strike.org/"
-license=(GPL2)
+license=(GPL-3.0-or-later)
 depends=(boost-libs python freeglut gtk3 libvorbis openal sdl2 glu
 
          # namcap implicit depends
@@ -13,7 +13,7 @@ depends=(boost-libs python freeglut gtk3 libvorbis openal sdl2 glu
 makedepends=(git cmake boost)
 provides=(vegastrike-engine)
 conflicts=(vegastrike-engine)
-source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source")
+source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source#branch=0.9.x")
 sha256sums=('SKIP')
 
 pkgver() {
@@ -25,15 +25,28 @@ build(){
   # buildtype None, enable ffmpeg, ogre will fail, not supported
   # https://github.com/vegastrike/Vega-Strike-Engine-Source/issues/777#issuecomment-1763235378
 
-  cmake -B build -S "Vega-Strike-Engine-Source" -Wno-dev \
+  local _flags=(
+    -DINSTALL_GTEST=ON  #fail to build using system's gtest
+    -DUSE_GTEST=ON
+	-DENABLE_PIE=ON
+  )
+
+  cmake -B build -S "Vega-Strike-Engine-Source/engine" -Wno-dev \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=/usr
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    "${_flags[@]}"
 
   cmake --build build
 }
 
+check() {
+  ctest --test-dir build --output-on-failure
+}
+
 package() {
   DESTDIR="$pkgdir" cmake --install build
+
+  # remove bundled gtest,gmock
   rm -rf ${pkgdir}/usr/include
   rm -rf ${pkgdir}/usr/lib
 }

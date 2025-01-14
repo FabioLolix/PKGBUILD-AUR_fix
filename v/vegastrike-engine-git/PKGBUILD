@@ -1,6 +1,6 @@
 
 pkgname=vegastrike-engine-git
-pkgver=0.9.0.alpha1.r79.g6340e2707
+pkgver=0.9.0.alpha1.r147.gdfdd56dae
 pkgrel=1
 pkgdesc="A spaceflight simulator in massive universe"
 arch=(x86_64)
@@ -25,7 +25,7 @@ build(){
   # buildtype None, enable ffmpeg, ogre will fail, not supported
   # https://github.com/vegastrike/Vega-Strike-Engine-Source/issues/777#issuecomment-1763235378
 
-  cmake -B build -S "Vega-Strike-Engine-Source/engine" -Wno-dev \
+  cmake -B build -S "Vega-Strike-Engine-Source" -Wno-dev \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr
 

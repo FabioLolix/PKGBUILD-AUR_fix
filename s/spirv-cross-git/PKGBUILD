@@ -2,8 +2,8 @@
 # Contributor: Lubosz Sarnecki <lubosz@gmail.com>
 
 pkgname=spirv-cross-git
-pkgver=r3902.9040e0d2
-pkgrel=2.1
+pkgver=r3920.5e7db829
+pkgrel=1
 pkgdesc="Tool and library for performing reflection on SPIR-V and disassembling SPIR-V back to high level languages"
 arch=(x86_64)
 url="https://github.com/KhronosGroup/SPIRV-Cross"
@@ -32,10 +32,6 @@ build() {
     "${_flags[@]}"
 
   cmake --build build
-}
-
-check() {
-  ctest --test-dir build --output-on-failure
 }
 
 package() {

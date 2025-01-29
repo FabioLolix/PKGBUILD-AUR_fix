@@ -6,23 +6,24 @@
 
 pkgname=gittyup
 pkgver=1.4.0
-pkgrel=1
+pkgrel=3
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
 arch=(x86_64)
 license=(MIT)
 depends=(qt5-base hunspell lua cmark pcre libssh2)
-makedepends=(git cmake ninja qt5-tools qt5-translations ) #libgit2 libgnome-keyring
+makedepends=(git cmake ninja qt5-tools qt5-translations gcc13) #libgit2 libgnome-keyring
 optdepends=('git-lfs: git-lfs support'
             'libgnome-keyring: for GNOME Keyring for auth credentials'
             'qt5-translations: translations')
 _commit=52bf8bebe2c2e38b435ce2bed269574b5cf47153
 source=("git+https://github.com/Murmele/Gittyup.git#commit=$_commit"
+        #"git+https://github.com/Murmele/Gittyup.git#tag=gittyup_v${pkgver}"
         "stinb-libgit2::git+https://github.com/stinb/libgit2.git"
         "git+https://github.com/kuba--/zip.git"
         "git+https://github.com/ScintillaOrg/lexilla.git"
         "git+https://github.com/orbitalquark/scintillua.git")
-sha256sums=('SKIP'
+sha256sums=('06e1d79a3a3062c2ab37ad3a0a8f67d74d0c19210a9defac2b5e9e68e70feb1f'
             'SKIP'
             'SKIP'
             'SKIP'
@@ -36,6 +37,9 @@ pkgver() {
 
 prepare() {
   cd "${srcdir}/Gittyup"
+
+  # https://github.com/Murmele/Gittyup/issues/766
+  git cherry-pick -n d36eba172a01d541945d59427b4f643aaed55da0
 
   git submodule init
   git config submodule.dep/libgit2/libgit2.url "${srcdir}/stinb-libgit2"
@@ -54,6 +58,7 @@ prepare() {
 
 build() {
   export CC=/usr/bin/gcc-13 CXX=/usr/bin/g++-13
+
   cd "${srcdir}/Gittyup/build"
   cmake -G Ninja .. -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
@@ -88,7 +93,7 @@ package() {
   install -Dm644 LICENSE.md "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 
   install -Dm644 rsrc/linux/com.github.Murmele.Gittyup.desktop -t "${pkgdir}/usr/share/applications/"
-  #install -Dm644 rsrc/linux/com.github.Murmele.Gittyup.appdata.xml.in -t "${pkgdir}/usr/share/metainfo/"
+  install -Dm644 rsrc/linux/com.github.Murmele.Gittyup.appdata.xml.in "${pkgdir}/usr/share/metainfo/com.github.Murmele.Gittyup.appdata.xml"
 
   install -Dm644 rsrc/Gittyup.iconset/gittyup_logo.svg "${pkgdir}/usr/share/icons/hicolor/scalable/apps/gittyup.svg"
   for s in 16x16 32x32 64x64 128x128 256x256 512x512; do

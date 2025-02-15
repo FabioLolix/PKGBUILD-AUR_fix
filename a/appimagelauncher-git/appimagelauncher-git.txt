@@ -1,0 +1,19 @@
+
+Even with -DBUILD_TESTING=ON there aren't tests to perform for cmake
+
+Fails to build with CMAKE_BUILD_TYPE=None
+
+Namcap false warning about qt6-declarative
+
+
+Fails to build with -DUSE_SYSTEM_LIBAPPIMAGE=ON
+
+
+-- CMAKE_INSTALL_LIBDIR: lib
+CMake Error at cmake/install.cmake:34 (install):
+  install TARGETS given target "libappimage" which does not exist.
+Call Stack (most recent call first):
+  CMakeLists.txt:62 (include)
+
+
+-- Checking for module 'glib-2.0>=2.40'

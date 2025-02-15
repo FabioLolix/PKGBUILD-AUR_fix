@@ -7,8 +7,8 @@
 # Contributor: Maël Kerbiriou <mael.kerbiriou-at-free-dot-fr>
 
 pkgname=amarok-qt6-git
-pkgver=3.2.1.r3.gb088d43
-pkgrel=2
+pkgver=3.2.2.r0.g0130338
+pkgrel=1
 pkgdesc="The powerful music player for KDE"
 arch=(x86_64)
 url="https://apps.kde.org/amarok/"

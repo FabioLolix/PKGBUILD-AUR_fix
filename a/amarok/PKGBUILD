@@ -6,13 +6,13 @@
 # Contributor: damir <damir@archlinux.org>
 
 pkgname=amarok
-pkgver=3.2.1
+pkgver=3.2.2
 pkgrel=1
 pkgdesc="The powerful music player for KDE"
 arch=(x86_64)
 url="https://apps.kde.org/amarok/"
 license=(GPL-2.0-or-later)
-depends=(kcmutils5 kdnssd5 kirigami2 kirigami-addons5 ktexteditor5 liblastfm-qt5 libofa
+depends=(kcmutils5 kdnssd5 kirigami2 ktexteditor5 liblastfm-qt5 libofa
          phonon-qt5 threadweaver5 taglib libmygpo-qt5 libmtp mariadb mariadb-libs gdk-pixbuf2 knotifyconfig5
 
          # namcap implicit depends
@@ -26,7 +26,7 @@ optdepends=("libmtp: support for portable media devices"
             #"taglib-extras: taglib plugins for Audible and RealMedia files"
             )
 source=("https://invent.kde.org/multimedia/amarok/-/archive/v${pkgver}/amarok-v${pkgver}.tar.gz")
-sha256sums=('20128ce6585bcc0ebadd04cee563d2d66c6f802774d61832cfae6fdae30def6d')
+sha256sums=('67fcf583e28aa6ca01ad2e589daab066e7bb7a8e846e521b28a3b8f19e738f33')
 
 build() {
   cmake -B build -S "amarok-v${pkgver}" -Wno-dev \

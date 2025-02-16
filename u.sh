@@ -1027,6 +1027,12 @@ VAR2=o
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
+  VAR=openloco-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
   VAR=openscenegraph-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -1219,7 +1225,7 @@ VAR2=q
   VAR=qt5-webkit
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,*.patch} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=qt5-webkit-git

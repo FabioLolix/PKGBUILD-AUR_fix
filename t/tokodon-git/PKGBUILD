@@ -2,12 +2,12 @@
 # Contributor: marcin mikołajczak <me@mkljczk.pl>
 
 pkgname=tokodon-git
-pkgver=24.02.2.r232.gd78745d
+pkgver=24.12.2.r430.g59dc6ab
 pkgrel=2
 pkgdesc="Native Mastodon client"
 arch=(x86_64)
 url="https://invent.kde.org/network/tokodon"
-license=(LGPL)
+license=(GPL-2.0-or-later LGPL-2.0-or-later)
 depends=(gcc-libs
          glibc
          kcolorscheme

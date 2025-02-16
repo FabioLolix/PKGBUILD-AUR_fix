@@ -12,7 +12,7 @@ Change-Id: Ib45c74e3caad148fbd778d0c07330127f7dab5ec
  1 file changed, 7 insertions(+)
 
 diff --git a/Source/WTF/wtf/Platform.h b/Source/WTF/wtf/Platform.h
-index a7b0f74bb7d1..af85a675266f 100644
+index a7b0f74bb7d17..af85a675266f8 100644
 --- a/Source/WTF/wtf/Platform.h
 +++ b/Source/WTF/wtf/Platform.h
 @@ -1138,6 +1138,13 @@

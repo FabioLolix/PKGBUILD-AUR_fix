@@ -3,7 +3,7 @@
 # Contributor: IgnorantGuru http://igurublog.wordpress.com/contact-ignorantguru/
 
 pkgname=spacefm-thermitegod-git
-pkgver=2.1.0.r1497.g0709f28a
+pkgver=2.1.0.r1515.gbbf508eb
 pkgrel=1
 pkgdesc="Multi-panel tabbed file manager"
 arch=(x86_64)
@@ -47,7 +47,7 @@ build() {
     -D with-system-cli11=true
     -D with-system-concurrencpp=true
     -D with-system-glaze=true
-    -D with-system-magic-enum=false
+    -D with-system-magic-enum=true
     -D with-system-spdlog=true
     -D with-system-toml11=true
     -D with-system-ztd=true

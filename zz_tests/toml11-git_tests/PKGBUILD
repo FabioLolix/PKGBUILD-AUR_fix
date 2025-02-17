@@ -1,13 +1,13 @@
 # Maintainer: Yuki Takagi <takagiy.4dev@gmail.com>
 
 pkgname=toml11-git
-pkgver=3.7.1.r85.087408a
+pkgver=4.4.0.r0.be08ba2
 pkgrel=1
 pkgdesc="A C++11 header-only toml parser/encoder depending only on C++ standard library"
 arch=(any)
 url="https://github.com/ToruNiina/toml11"
 license=(MIT)
-makedepends=(git cmake boost)
+makedepends=(git cmake boost doctest)
 provides=(toml11)
 conflicts=(toml11)
 source=("git+https://github.com/ToruNiina/toml11.git")
@@ -19,11 +19,15 @@ pkgver() {
 }
 
 build() {
-  cmake -B build -S "toml11" -Wno-dev \
+  local _flags=(
+    -DBUILD_TESTING:BOOL=ON
+    -DTOML11_BUILD_TESTS:BOOL=ON
+  )
+
+  cmake -B build -S toml11 -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_CXX_STANDARD=COMPILER \
-    -Dtoml11_BUILD_TEST=ON
+    "${_flags[@]}"
 
   cmake --build build
 }

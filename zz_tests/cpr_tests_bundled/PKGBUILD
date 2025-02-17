@@ -7,19 +7,18 @@ pkgdesc='C++ Requests: Curl for People, a spiritual port of Python Requests.'
 arch=(x86_64 i686)
 url="https://github.com/libcpr/cpr"
 license=(MIT)
-depends=(glibc gcc-libs curl openssl)
+depends=(glibc gcc-libs openssl)
 makedepends=(cmake)
-checkdepends=(gtest)
 provides=(cpr)
 conflicts=(cpr)
-source=("${pkgname}-${pkgver}.tar.gz::https://github.com/libcpr/cpr/archive/refs/tags/$pkgver.tar.gz")
+source=("cpr-${pkgver}.tar.gz::https://github.com/libcpr/cpr/archive/refs/tags/$pkgver.tar.gz")
 sha256sums=('e84b8ef348f41072609f53aab05bdaab24bf5916c62d99651dfbeaf282a8e0a2')
 
 build() {
   local _flags=(
     -DCPR_BUILD_TESTS=ON
-    -DCPR_USE_SYSTEM_GTEST=ON
-    -DCPR_USE_SYSTEM_CURL=ON
+    -DCPR_USE_SYSTEM_GTEST=OFF
+    -DCPR_USE_SYSTEM_CURL=OFF
   )
 
   cmake -B build -S "cpr-${pkgver}" -Wno-dev \

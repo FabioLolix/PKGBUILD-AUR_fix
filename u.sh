@@ -914,17 +914,18 @@ VAR2=n
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=nx-software-center
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
+  #VAR=nx-software-center
+  #cd "$BASE/$VAR2/$VAR"
+  #  makepkg --printsrcinfo > .SRCINFO
+  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+  #  echo "    synced $VAR"
 
-  VAR=nx-software-center-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
+  #VAR=nx-software-center-git
+  #cd "$BASE/$VAR2/$VAR"
+  #  makepkg --printsrcinfo > .SRCINFO
+  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+  #
+  echo "    synced $VAR"
 
   VAR=nymphcast-git
   cd "$BASE/$VAR2/$VAR"
@@ -1553,11 +1554,11 @@ VAR2=t
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=torrential-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
+  #VAR=torrential-git
+  #cd "$BASE/$VAR2/$VAR"
+  #  makepkg --printsrcinfo > .SRCINFO
+  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+  #  echo "    synced $VAR"
 
   VAR=twin-git
   cd "$BASE/$VAR2/$VAR"

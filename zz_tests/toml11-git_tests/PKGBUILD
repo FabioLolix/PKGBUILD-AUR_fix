@@ -7,15 +7,28 @@ pkgdesc="A C++11 header-only toml parser/encoder depending only on C++ standard 
 arch=(any)
 url="https://github.com/ToruNiina/toml11"
 license=(MIT)
-makedepends=(git cmake boost doctest)
+makedepends=(git cmake boost)
 provides=(toml11)
 conflicts=(toml11)
-source=("git+https://github.com/ToruNiina/toml11.git")
-sha256sums=('SKIP')
+source=("git+https://github.com/ToruNiina/toml11.git"
+        "git+https://github.com/doctest/doctest.git"
+        "nlohmann-json::git+https://github.com/nlohmann/json.git")
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP')
 
 pkgver() {
   cd toml11
   git describe --long --tags | sed 's/^v//;s/\([^-]*-\)g/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd toml11
+  git submodule init
+  git config submodule.tests/extlib/doctest.url "${srcdir}/doctest"
+  git config submodule.tests/extlib/json.url "${srcdir}/nlohmann-json"
+  git config submodule.docs/themes/hugo-book.update none
+  git -c protocol.file.allow=always submodule update
 }
 
 build() {

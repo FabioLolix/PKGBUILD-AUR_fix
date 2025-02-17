@@ -2,8 +2,8 @@
 # Contributor: Anatol Pomozov <anatol.pomozov@gmail.com>
 
 pkgname=mldonkey-git
-pkgver=3.2.1.r12.g4baae667
-pkgrel=3
+pkgver=3.2.1.r14.g0d446356
+pkgrel=1
 pkgdesc='A multi-network P2P client'
 arch=(x86_64)
 url="https://github.com/ygrek/mldonkey"

@@ -1,16 +1,15 @@
 # Maintainer: Tobias Backer Dirks <omgitsaheadcrab@gmail.com>
 # Contributor: Ivan "Penter" <ivaiva1999ivaiva@gmail.com>
 
-pkgname=cpr-git_tests
+pkgname=cpr-git_tests_bundled
 pkgver=1.11.1.r38.g9ae5818
 pkgrel=1
 pkgdesc="C++ Requests: Curl for People"
 arch=(x86_64 i686)
 url="https://github.com/libcpr/cpr"
 license=(MIT)
-depends=(glibc gcc-libs curl openssl)
-makedepends=(git cmake )
-checkdepends=(gtest)
+depends=(glibc gcc-libs openssl)
+makedepends=(git cmake)
 provides=(cpr)
 conflicts=(cpr)
 source=("git+${url}.git") ##branch=1.10.x
@@ -24,8 +23,8 @@ pkgver() {
 build() {
   local _flags=(
     -DCPR_BUILD_TESTS=ON
-    -DCPR_USE_SYSTEM_GTEST=ON
-    -DCPR_USE_SYSTEM_CURL=ON
+    -DCPR_USE_SYSTEM_GTEST=OFF
+    -DCPR_USE_SYSTEM_CURL=OFF
   )
 
   cmake -B build -S cpr -Wno-dev \

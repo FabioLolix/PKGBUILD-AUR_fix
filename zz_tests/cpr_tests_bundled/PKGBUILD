@@ -8,7 +8,7 @@ arch=(x86_64 i686)
 url="https://github.com/libcpr/cpr"
 license=(MIT)
 depends=(glibc gcc-libs openssl)
-makedepends=(cmake)
+makedepends=(cmake git)
 provides=(cpr)
 conflicts=(cpr)
 source=("cpr-${pkgver}.tar.gz::https://github.com/libcpr/cpr/archive/refs/tags/$pkgver.tar.gz")
@@ -37,3 +37,6 @@ package() {
   DESTDIR="${pkgdir}" cmake --install build
   install -D "cpr-${pkgver}/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }
+
+
+# error: could not find git for clone of zlib-populate

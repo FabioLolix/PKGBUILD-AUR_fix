@@ -1,49 +1,55 @@
-# Maintainer: spider-mario <spidermario@free.fr>
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: spider-mario <spidermario@free.fr>
 # Contributor: Jaroslav Lichtblau <svetlemodry@archlinux.org>
 # Contributor: Lukas Jirkovsky <l.jirkovsky@gmail.com>
 # Contributor: Dmitry N. Shilov <stormblast@land.ru>
 
 pkgname=luminancehdr-git
-pkgver=2.6.0.r298.gf5042b48
+pkgver=2.6.0.r304.g6107989
 pkgrel=1
-pkgdesc='Open source graphical user interface application that aims to provide a workflow for HDR imaging'
-arch=('x86_64')
-url='http://qtpfsgui.sourceforge.net/'
-license=('GPL')
-depends=('exiv2' 'fftw' 'gsl' 'lcms2' 'libraw' 'openexr' 'qt5-webengine' 'qt5-svg'
-         'ccfits' 'desktop-file-utils' 'hicolor-icon-theme' 'boost-libs')
-makedepends=('git' 'cmake' 'boost' 'eigen' 'gtest' 'qt5-tools' 'patch')
+pkgdesc="Open source graphical user interface application that aims to provide a workflow for HDR imaging"
+arch=(x86_64)
+url="https://github.com/LuminanceHDR/LuminanceHDR"
+license=(GPL-2.0-or-later)
+depends=(exiv2 fftw gsl lcms2 libraw openexr qt5-webengine qt5-svg
+         ccfits desktop-file-utils hicolor-icon-theme boost-libs)
+makedepends=(git cmake boost eigen qt5-tools)
 optdepends=('hugin: align image stack functionality')
-provides=('luminancehdr')
-conflicts=('luminancehdr')
-options=('!emptydirs')
-source=('git+https://github.com/LuminanceHDR/LuminanceHDR.git'
-        'cmake-build-type.patch')
+provides=(luminancehdr)
+conflicts=(luminancehdr)
+#options=('!emptydirs')
+source=("git+https://github.com/LuminanceHDR/LuminanceHDR.git"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/LuminanceHDR-clamp.patch"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/LuminanceHDR-fix-boost1.85.patch"
+        "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/LuminanceHDR-fix-boost-1.87.0-compilation.patch"
+        )
 b2sums=('SKIP'
-        '759f5b096f4b72cb9a11e24d5e31983ba26d0b84d67e85d25551f482b88e0366ac0996020b6ae5f2a3340c8be9e6f2ed5fb5b52d59754ff3d7e9829796910c82')
-
-pkgver() {
-  cd "${srcdir}"/LuminanceHDR
-  git describe --long | sed 's/^v\.//;s/\([^-]*-g\)/r\1/;s/-/./g'
-}
+        'faedf8959ba4df8bae3f5e7b71a7d4b4d0ca7692fbc226f2f06ba24fd4bec293486fce33730813d97fd55a4c3005c209c0b38b4ced47a8c8bedaffc308083fde'
+        'a252f4a11e77f0c5e35a096157a724e957de6511a35358d490691013439311ab524ac12e7c448c02269ca2f0586c1841138a84d1c10b7328a326adc9551b3d38'
+        'c2dfb62e32e74195f72781807aa1da88528fbae5e874bd6306ac03c420dcb55854ff19daa9146f3a9b5b065ba48c964f4bec9edbf5b51bd116cb81d983f816d9')
 
 prepare() {
-  cd "${srcdir}"/LuminanceHDR
-  git apply -3 ../cmake-build-type.patch
+  cd LuminanceHDR
+
+  # Remove clamp redefinition
+  patch -Np1 -i ../LuminanceHDR-clamp.patch
+  patch -Np1 -i ../LuminanceHDR-fix-boost1.85.patch
+  patch -Np1 -i ../LuminanceHDR-fix-boost-1.87.0-compilation.patch
+}
+
+pkgver() {
+  cd LuminanceHDR
+  git describe --long --tags --abbrev=7 | sed 's/^v.//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
-  mkdir -p build
-  cd build
+  cmake -B build -S "LuminanceHDR" -Wno-dev \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr
 
-  cmake \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_BUILD_TYPE=None \
-     "${srcdir}"/LuminanceHDR
-  make
+  cmake --build build
 }
 
 package() {
-  cd build
-  make DESTDIR="${pkgdir}" install
+  DESTDIR="${pkgdir}" cmake --install build
 }

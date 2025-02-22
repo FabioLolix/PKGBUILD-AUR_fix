@@ -778,6 +778,12 @@ VAR2=l
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
+  VAR=luminancehdr-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
 echo "Done L"
 
 
@@ -925,7 +931,7 @@ VAR2=n
   #  makepkg --printsrcinfo > .SRCINFO
   #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
   #
-  echo "    synced $VAR"
+  #echo "    synced $VAR"
 
   VAR=nymphcast-git
   cd "$BASE/$VAR2/$VAR"
@@ -1232,7 +1238,7 @@ VAR2=q
   VAR=qt5-webkit-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,*.patch} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=qt5-webkit-movableink-git

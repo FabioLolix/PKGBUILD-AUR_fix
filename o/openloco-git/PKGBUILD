@@ -1,16 +1,16 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=openloco-git
-pkgver=25.01.r2.gea4cb00e5
+pkgver=25.02.r1.gf3ec658e4
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
 url="https://github.com/OpenLoco/OpenLoco"
 license=(MIT)
 depends=(sdl2 libpng openal)
-depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal)
+depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal lib32-yaml-cpp lib32-fmt)
 makedepends=(cmake yaml-cpp git gtest fmt)
-makedepends_x86_64+=(lib32-gtest lib32-yaml-cpp lib32-fmt)
+makedepends_x86_64+=(lib32-gtest)
 optdepends_x86_64=(
     'lib32-libpipewire: audio output'
     'lib32-libpulse: audio output'

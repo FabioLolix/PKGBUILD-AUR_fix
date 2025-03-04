@@ -1,0 +1,26 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+
+pkgname=chuffed
+pkgver=0.13.2
+pkgrel=1
+pkgdesc="Lazy clause generation solver"
+arch=(x86_64)
+url="https://github.com/chuffed/chuffed"
+license=(MIT)
+depends=(glibc gcc-libs)
+makedepends=(git cmake)
+source=("git+https://github.com/chuffed/chuffed.git#tag=${pkgver}")
+sha256sums=('d68fbc9b66bcc0517c917d849e1960a6e0ee45e4557491ed3f597dc4dac01cb2')
+
+build() {
+  cmake -B build -S chuffed -Wno-dev \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr
+
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+  install -D chuffed/LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}

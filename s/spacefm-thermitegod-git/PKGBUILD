@@ -3,7 +3,7 @@
 # Contributor: IgnorantGuru http://igurublog.wordpress.com/contact-ignorantguru/
 
 pkgname=spacefm-thermitegod-git
-pkgver=2.1.0.r1515.gbbf508eb
+pkgver=2.1.0.r1531.g9ea6004f
 pkgrel=1
 pkgdesc="Multi-panel tabbed file manager"
 arch=(x86_64)
@@ -31,12 +31,31 @@ makedepends=(git meson cmake nlohmann-json libsigc++-3.0 toml11 concurrencpp cli
 #            'fuseiso: mount ISO files')
 conflicts=(spacefm spacefm-thermitegod)
 provides=(spacefm spacefm-thermitegod)
-source=("spacefm-thermitegod::git+https://github.com/thermitegod/spacefm.git")
-sha256sums=('SKIP')
+options=(!lto)
+source=("spacefm-thermitegod::git+https://github.com/thermitegod/spacefm.git"
+        "git+https://github.com/thermitegod/ztd.git"
+        "git+https://github.com/Neargye/magic_enum.git"
+)
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP')
 
 pkgver() {
   cd "spacefm-thermitegod"
   git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd "spacefm-thermitegod"
+  git submodule init
+  git config submodule.subprojects/toml11.update none
+  git config submodule.subprojects/ztd.url "${srcdir}/ztd"
+  git config submodule.subprojects/CLI11.update none
+  git config submodule.subprojects/magic_enum.url "${srcdir}/magic_enum"
+  git config submodule.subprojects/concurrencpp.update none
+  git config submodule.subprojects/spdlog.update none
+  git config submodule.subprojects/glaze.update none
+  git -c protocol.file.allow=always submodule update
 }
 
 build() {
@@ -47,10 +66,10 @@ build() {
     -D with-system-cli11=true
     -D with-system-concurrencpp=true
     -D with-system-glaze=true
-    -D with-system-magic-enum=true
+    -D with-system-magic-enum=false
     -D with-system-spdlog=true
     -D with-system-toml11=true
-    -D with-system-ztd=true
+    -D with-system-ztd=false
     --wrap-mode default
   )
 

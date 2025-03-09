@@ -1,7 +1,7 @@
 
 pkgname=vegastrike-engine-git
-pkgver=0.9.0.beta2.r23.gbcc37c20a
-pkgrel=1.6
+pkgver=0.9.0.beta3.r0.g23de3c4b3
+pkgrel=1
 pkgdesc="A spaceflight simulator in massive universe"
 arch=(x86_64)
 url="https://www.vega-strike.org/"

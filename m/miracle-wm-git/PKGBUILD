@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=miracle-wm-git
-pkgver=0.3.6.r16.g81066fc
+pkgver=0.4.1.r72.gc64475e
 pkgrel=1
 pkgdesc="Wayland tiling window manager built on Mir"
 arch=(x86_64)

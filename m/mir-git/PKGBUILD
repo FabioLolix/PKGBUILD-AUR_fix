@@ -3,7 +3,7 @@
 # Contributor: kikadf <kikadf.01@gmail.com>
 
 pkgname=mir-git
-pkgver=2.19.3.r157.gf4ed6e4
+pkgver=2.19.3.r246.gb982247
 pkgrel=1
 pkgdesc="Canonical's display server"
 url="https://github.com/canonical/mir"

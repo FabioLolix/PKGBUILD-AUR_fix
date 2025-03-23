@@ -1,0 +1,57 @@
+# Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributor: Dct Mei <dctxmei@gmail.com>
+
+pkgname=filebrowser-quantum-git
+pkgver=r2603.e39cf2dd
+pkgrel=1
+pkgdesc="Standalone web file manager"
+arch=(x86_64)
+url="https://github.com/gtsteffaniak/filebrowser"
+license=(Apache-2.0)
+depends=(glibc)
+makedepends=(git go nodejs npm)
+provides=(filebrowser)
+conflicts=(filebrowser)
+source=("filebrowser-quantum::git+https://github.com/gtsteffaniak/filebrowser.git"
+        "filebrowser@.service")
+sha512sums=('SKIP'
+            '0846815afbb3c5ccbb097a5361461ca0ada69e04246935afb123f4609d09cd61f9e3fe50e3b6698b3e4c1f335cbb0aa3d998cae13b422e2989aad62ed7ce4682')
+options=(emptydirs !lto)
+
+pkgver() {
+  cd "filebrowser-quantum"
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd "filebrowser-quantum/frontend"
+  npm install
+  echo "DONE NPM INSTALL"
+
+  #npm update --legacy-peer-deps
+  #npm update --force
+  #echo "DONE NPM UPDATE"
+
+  npm run build
+  echo "DONE NPM RUN BUILD"
+
+  cd "${srcdir}/filebrowser-quantum/backend"
+  go build \
+    -trimpath \
+    -buildmode=pie \
+    -mod=readonly \
+    -modcacherw \
+    -ldflags "-linkmode external -extldflags \"${LDFLAGS}\"" \
+    .
+  echo "DONE Go build"
+}
+
+package() {
+  install -Dm644 filebrowser@.service "${pkgdir}"/usr/lib/systemd/system/filebrowser@.service
+  install -Dm755 "${srcdir}"/filebrowser-quantum/backend/backend "${pkgdir}"/usr/bin/filebrowser-quantum
+#  install -d "${pkgdir}"/usr/share/filebrowser
+#  install -d "${pkgdir}"/etc/filebrowser/
+#  cd "${pkgdir}"/usr/share/filebrowser
+#  "${srcdir}"/filebrowser/filebrowser config init
+#  "${srcdir}"/filebrowser/filebrowser config export ${pkgdir}/etc/filebrowser/config.json
+}

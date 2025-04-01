@@ -18,7 +18,7 @@ depends=(chromaprint gst-plugins-base-libs libcdio libgpod liblastfm-qt5 libmtp 
          zlib glib2 sqlite libx11 gstreamer glibc gcc-libs abseil-cpp qt5-base fftw
 
          libprotobuf.so)
-makedepends=(git boost cmake3 qt5-tools sparsehash)
+makedepends=(git boost cmake qt5-tools sparsehash)
 optdepends=(
   'gst-plugins-base: "Base" plugin libraries'
   'gst-plugins-good: "Good" plugin libraries'
@@ -35,6 +35,10 @@ pkgver() {
   git describe --tags | sed 's/^v//;s/-/+/g'
 }
 
+prepare() {
+  sed -i 's/cmake_policy(SET CMP0053 OLD)/cmake_policy(SET CMP0026 NEW)/' Clementine/CMakeLists.txt
+}
+
 build() {
   export LDFLAGS="-Wl,--copy-dt-needed-entries"
 
@@ -48,6 +52,7 @@ build() {
   cmake -B build -S "Clementine" -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     "${_flags[@]}"
 
   cmake --build build

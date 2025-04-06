@@ -6,7 +6,7 @@
 # Contributor: joel schaerer <joel.schaerer@laposte.net>
 
 pkgname=insight-toolkit-git
-pkgver=6.0a02.r19.g91f4091666
+pkgver=6.0a03.r18.gf28ff8050a
 pkgrel=1
 pkgdesc="Cross-platform system that provides developers with an extensive suite of software tools for image analysis"
 arch=(x86_64)
@@ -16,7 +16,6 @@ depends=(glibc gcc-libs libjpeg-turbo libpng zlib libtiff gdcm expat hdf5)
 makedepends=(cmake git eigen gtest)
 provides=(insight-toolkit)
 conflicts=(insight-toolkit)
-#options=(!lto)
 source=("git+https://github.com/InsightSoftwareConsortium/ITK.git")
 sha512sums=('SKIP')
 

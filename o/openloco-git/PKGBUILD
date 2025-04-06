@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=openloco-git
-pkgver=25.02.r1.gf3ec658e4
+pkgver=25.03.r2.gbd539e2da
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
@@ -63,5 +63,19 @@ package() {
   install -D "openloco/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
 
   #remove bundled sfl from package
-  rm -rf "${pkgdir}/usr/include/sfl"
+  rm -rf "${pkgdir}/usr/share/include/sfl"
+
+  # Project installs a copy of its own deps as well
+  #for dep in Imath
+  #do
+  #  rm -r "$pkgdir"/usr/include/$dep/
+  #  rm -r "$pkgdir"/usr/lib/cmake/$dep/
+  #  rm    "$pkgdir"/usr/lib/lib$dep*.a
+  #done
+
+  # Raise an error in case there's every anything else added (either
+  # a new dep, or the project starts shipping libs)
+  #rmdir "$pkgdir"/usr/include/
+  #rmdir "$pkgdir"/usr/lib/cmake/
+  #rmdir "$pkgdir"/usr/lib/
 }

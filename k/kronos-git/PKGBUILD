@@ -2,7 +2,7 @@
 # Contributor: Pellegrino Prevete <pellegrinoprevete@gmail.com>
 
 pkgname=kronos-git
-pkgver=2.7.0_official_release.r0.g58352d6
+pkgver=2.7.0_official_release.r5.gd0384bc
 pkgrel=1
 pkgdesc="Sega Saturn emulator, fork of yabause"
 arch=(x86_64)
@@ -26,6 +26,7 @@ build() {
 
   local _flags=(
     -DYAB_USE_QT5=ON
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
   )
 
   cmake -B build -S "Kronos/yabause" -Wno-dev \

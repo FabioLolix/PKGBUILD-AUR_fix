@@ -7,7 +7,7 @@
 # Contributor: Maël Kerbiriou <mael.kerbiriou-at-free-dot-fr>
 
 pkgname=amarok-qt6-git
-pkgver=3.2.2.r0.g0130338
+pkgver=3.2.81.r3.g89d7d4a
 pkgrel=1
 pkgdesc="The powerful music player for KDE"
 arch=(x86_64)
@@ -40,7 +40,6 @@ pkgver() {
 
 build() {
   local _flags=(
-    -DBUILD_WITH_QT6=TRUE
     -DWITH_GPODDER=OFF
     -DWITH_IPOD=OFF
     -DWITH_LASTFM=OFF

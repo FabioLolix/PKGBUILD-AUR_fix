@@ -3,8 +3,8 @@
 # Contributor: lukpod
 
 pkgname=amule-git
-pkgver=2.3.3.r49.4db7f84b7
-pkgrel=1
+pkgver=2.3.3.r58.4a1b78a2a
+pkgrel=2
 pkgdesc="Client for the eD2k and Kad networks"
 arch=(x86_64)
 url="https://amule.org/"
@@ -30,6 +30,7 @@ pkgver() {
 build() {
   cmake -B build -S amule -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
     -DENABLE_UPNP=OFF \
     -DBUILD_ALC=ON \
     -DBUILD_ALCC=ON \

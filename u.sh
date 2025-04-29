@@ -974,19 +974,6 @@ VAR2=n
     rsync {PKGBUILD,.SRCINFO,.gitignore} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  #VAR=nx-software-center
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-  #  echo "    synced $VAR"
-
-  #VAR=nx-software-center-git
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-  #
-  #echo "    synced $VAR"
-
   VAR=nymphcast-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -1330,6 +1317,12 @@ VAR2=r
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
+  VAR=resvg-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
   VAR=ruby-atk
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -1413,24 +1406,6 @@ echo "Done R"
 
 
 VAR2=s
-  VAR=sayonara-player
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
-  VAR=sayonara-player-beta
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
-  VAR=sayonara-player-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
   VAR=setzer-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

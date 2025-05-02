@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=sfl-git
-pkgver=1.9.1.r0.gec5d0b2
+pkgver=1.9.2.r0.g53e09d1
 pkgrel=1
 pkgdesc="C++11 header-only library. Small and static vector. Small and static flat map/set. Compact vector. Segmented vector"
 arch=(any)

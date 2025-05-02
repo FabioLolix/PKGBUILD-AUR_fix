@@ -2,12 +2,12 @@
 # Contributor: schw0reismus <schw0reismus@protonmail.com>
 
 pkgname=foliate-git
-pkgver=3.1.1.r38.g5094665
+pkgver=3.2.1.r17.g90fc5de
 pkgrel=1
 pkgdesc="Simple and modern GTK eBook reader"
 arch=(any)
-url="https://johnfactotum.github.io/foliate/"
-license=(GPL3)
+url="https://github.com/johnfactotum/foliate"
+license=(GPL-3.0-or-later)
 depends=(gjs gtk4 libadwaita webkitgtk-6.0)
 makedepends=(meson ninja git)
 optdepends=('hyphen: Auto-hyphenation support'
@@ -15,6 +15,8 @@ optdepends=('hyphen: Auto-hyphenation support'
 			'dictd: Offline dictionary support'
 			'festival: Text-to-speech support'
 			'espeak-ng: Text-to-speech support'
+            'tinysparql: track file location'
+            'speech-dispatcher'
 		   )
 provides=(foliate)
 conflicts=(foliate)

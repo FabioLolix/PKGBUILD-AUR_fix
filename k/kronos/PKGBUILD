@@ -29,7 +29,7 @@ build() {
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5
   )
 
-  cmake -B build -S "Kronos-${pkgver}_official_release/yabause" \
+  cmake -B build -S "Kronos-${pkgver}_official_release/yabause" -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
     "${_flags[@]}"

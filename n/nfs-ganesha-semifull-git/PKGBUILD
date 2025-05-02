@@ -11,9 +11,9 @@ depends=(glibc nfsidmap libcap krb5 util-linux-libs e2fsprogs xfsprogs dbus libw
 makedepends=(cmake git lsb-release doxygen python-sphinx graphviz) #gssproxy libmspack
 
 # ceph-libs #AUR
-# lizardfs #AUR
-# KVSNS ?
-# Lustre ?
+# lizardfs #AUR https://github.com/lizardfs/lizardfs last touched 2023/03
+# KVSNS ? https://github.com/phdeniel/kvsns last touched 2021/10
+# Lustre ? https://github.com/nfs-ganesha/nfs-ganesha/wiki/XFSLUSTRE
 
 provides=(nfs-ganesha)
 conflicts=(nfs-ganesha)

@@ -3,13 +3,13 @@
 
 pkgname=noson-app-git
 pkgver=5.6.8.r4.g1230355
-pkgrel=2
+pkgrel=2.1
 pkgdesc="SONOS controller for Linux platforms"
 arch=(x86_64 aarch64 armv7h)
 url="https://github.com/janbar/noson-app"
 license=(GPL-3.0-only)
 depends=(qt5-base qt5-quickcontrols2 qt5-declarative)
-makedepends=(cmake git qt5-svg noson)
+makedepends=(cmake git qt5-svg noson flac libpulse)
 provides=(noson-app)
 conflicts=(noson-app)
 source=("git+https://github.com/janbar/noson-app.git")

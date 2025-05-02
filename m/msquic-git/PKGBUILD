@@ -3,8 +3,8 @@
 # Contributor: Florian Maunier <fmauneko@dissidence.ovh>
 
 pkgname=msquic-git
-pkgver=2.3.0.r609.g39b99c307
-pkgrel=2
+pkgver=2.3.0.r617.g3f0c9ee43
+pkgrel=1
 epoch=1
 pkgdesc="Microsoft implementation of the IETF QUIC protocol"
 arch=(x86_64 armv7h aarch64)

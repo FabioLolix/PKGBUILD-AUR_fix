@@ -54,13 +54,7 @@ VAR2=a
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=amarok-qt6
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
-  VAR=amarok-qt6-git
+  VAR=amarok-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
@@ -69,7 +63,7 @@ VAR2=a
   VAR=amule-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,*.patch} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=android-file-transfer-git
@@ -1067,6 +1061,12 @@ VAR2=o
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=opencascade-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO,*.sh} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=opendht-git

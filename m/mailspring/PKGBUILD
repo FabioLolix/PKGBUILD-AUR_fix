@@ -8,13 +8,13 @@
 
 pkgname=mailspring
 pkgver=1.15.1
-pkgrel=1
+pkgrel=2
 pkgdesc="A beautiful, fast and maintained fork of Nylas Mail by one of the original authors."
 arch=(x86_64)
 license=(GPL-3.0-only)
 url="https://github.com/Foundry376/Mailspring"
 depends=(alsa-lib gtk3 libsecret nss)
-makedepends=(git npm nodejs-lts-iron grunt-cli python)
+makedepends=(git npm nodejs-lts-iron grunt-cli python chrpath)
 source=("git+https://github.com/Foundry376/Mailspring.git#tag=${pkgver}"
         "https://raw.githubusercontent.com/FabioLolix/AUR-artifacts/master/mailspring_0001-linux-don-t-build-a-deb-or-rpm-please.patch"
         desktop.patch)
@@ -50,6 +50,8 @@ package() {
   for s in 16 32 64 128 256 512; do
     install -Dm0644 "icons/$s.png" "${pkgdir}/usr/share/icons/hicolor/$s/apps/mailspring.png"
   done
+
+  chrpath --delete "${pkgdir}/opt/mailspring/resources/app.asar.unpacked/mailsync.bin"
 
 #Insecure RPATH '/opt/openssl/lib' in file ('opt/mailspring/resources/app.asar.unpacked/mailsync.bin')
 }

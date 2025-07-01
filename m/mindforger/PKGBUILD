@@ -3,7 +3,7 @@
 
 pkgname=mindforger
 pkgver=2.0.0
-pkgrel=2
+pkgrel=3
 pkgdesc="Thinking notebook and Markdown IDE. Search, browse, view and edit your Markdown files. Get as much as possible from knowledge in your remarks"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://github.com/dvorka/mindforger"
@@ -29,7 +29,7 @@ prepare() {
 build() {
   mkdir -p "$srcdir/$pkgname"/deps/cmark-gfm/build
   cd "$srcdir/$pkgname"/deps/cmark-gfm/build
-  cmake -DCMARK_TESTS=OFF -DCMARK_SHARED=OFF -Wno-dev ..
+  cmake -DCMARK_TESTS=OFF -DCMARK_SHARED=OFF -Wno-dev -DCMAKE_POLICY_VERSION_MINIMUM=3.5 ..
   cmake --build .
 
   cd "$srcdir/$pkgname"

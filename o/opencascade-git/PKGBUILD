@@ -2,7 +2,7 @@
 # Maintainer: Grey Christoforo <first name at last name dot net>
 
 pkgname=opencascade-git
-pkgver=8.0.0.rc1.r0.g7aa85582ad
+pkgver=8.0.0.rc1.r33.g22d437b771
 pkgrel=1
 pkgdesc="An object-oriented C++ class library designed for rapid production of sophisticated domain-specific CAD/CAM/CAE applications."
 arch=(x86_64)

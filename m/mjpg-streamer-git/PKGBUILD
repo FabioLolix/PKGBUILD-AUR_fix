@@ -34,7 +34,7 @@ build() {
   cd "${pkgname/-git/}/mjpg-streamer-experimental/_build"
   cmake .. -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DPLUGIN_INPUT_OPENCV=ON \
+    -DPLUGIN_INPUT_OPENCV=OFF \
     -DENABLE_HTTP_MANAGEMENT=ON \
     -DWXP_COMPAT=ON \
 	-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \

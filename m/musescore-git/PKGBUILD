@@ -5,8 +5,8 @@
 # Contributor: Dr.Egg <rwhite@archlinux.us>
 
 pkgname=musescore-git
-pkgver=4.0_alpha_2.r10409.gfab8002
-pkgrel=1
+pkgver=4.0_alpha_2.r14760.gd1f5065
+pkgrel=2
 pkgdesc="Create, play and print beautiful sheet music"
 arch=(x86_64 i686)
 url="https://github.com/musescore/MuseScore"
@@ -58,6 +58,7 @@ build() {
     -DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_SKIP_RPATH=ON \
+	-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
     -DMUSESCORE_BUILD_CONFIGURATION=app \
     -DMUSESCORE_BUILD_MODE=release \
     -DMUSESCORE_REVISION=$(git rev-parse --short=7 HEAD) \

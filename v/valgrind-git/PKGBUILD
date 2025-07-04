@@ -3,7 +3,7 @@
 
 _name=valgrind
 pkgname=valgrind-git
-pkgver=3.22.0.r86.ge91953ef7
+pkgver=3.25.0.r78.gcd870f321
 pkgrel=1
 pkgdesc='A tool to help find memory-management problems in programs'
 arch=(x86_64)

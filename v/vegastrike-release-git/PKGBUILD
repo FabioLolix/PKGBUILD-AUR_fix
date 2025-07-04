@@ -1,6 +1,6 @@
 
 pkgname=vegastrike-release-git
-pkgver=0.9.0.r0.g6ecb8b5b
+pkgver=0.9.1.r0.ge1e31bc5
 pkgrel=1
 pkgdesc="Vega Strike - Upon the Coldest Sea. Space flight and trading simulator with realistic distances"
 arch=(any)

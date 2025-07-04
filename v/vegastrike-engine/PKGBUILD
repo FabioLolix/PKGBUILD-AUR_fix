@@ -2,8 +2,8 @@
 # Contributor: Evert Vorster <evorster@gmail.com>
 
 pkgname=vegastrike-engine
-pkgver=0.9.0
-pkgrel=1.2
+pkgver=0.9.1
+pkgrel=2
 pkgdesc="A spaceflight simulator in massive universe"
 arch=(x86_64)
 url="https://www.vega-strike.org/"
@@ -13,8 +13,15 @@ depends=(boost-libs python freeglut gtk3 libvorbis openal sdl glu
          # namcap implicit depends
          glibc gcc-libs glib2 zlib libpng libglvnd expat libjpeg-turbo)
 makedepends=(git cmake boost gtest)
-source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source#tag=v${pkgver}")
-sha256sums=('b8fbf41d95c32e8e74d1a7aa799a9aa5907b9d1be73b358546346838c9e583b4')
+source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source#tag=v${pkgver}"
+		vegastrike-engine-Add-missing-header.patch)
+sha256sums=('602cb322ba7ffa07885e00631892083592ecad8d9687d136734029187dd2dce5'
+            'beb8280fcf695de4d420ea271d3bfff0d9780127bc2c13b8b9cc5fd6deb4038d')
+
+prepare() {
+  cd Vega-Strike-Engine-Source
+  patch -Np1 -i ../vegastrike-engine-Add-missing-header.patch
+}
 
 build(){
   # buildtype None, enable ffmpeg, ogre will fail, not supported
@@ -40,6 +47,8 @@ check() {
 
 package() {
   DESTDIR="$pkgdir" cmake --install build
+
+  # remove bundled gtest,gmock
   rm -rf ${pkgdir}/usr/include
   rm -rf ${pkgdir}/usr/lib
 }

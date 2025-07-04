@@ -1,6 +1,6 @@
 
 pkgname=vegastrike-engine-git
-pkgver=0.9.0.r0.g23de3c4b3
+pkgver=0.9.0.alpha1.r606.gc5d4d2391
 pkgrel=1
 pkgdesc="A spaceflight simulator in massive universe"
 arch=(x86_64)
@@ -13,7 +13,7 @@ depends=(boost-libs python freeglut gtk3 libvorbis openal sdl2 glu
 makedepends=(git cmake boost)
 provides=(vegastrike-engine)
 conflicts=(vegastrike-engine)
-source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source#branch=0.9.x")
+source=("git+https://github.com/vegastrike/Vega-Strike-Engine-Source")
 sha256sums=('SKIP')
 
 pkgver() {
@@ -31,7 +31,7 @@ build(){
 	-DENABLE_PIE=ON
   )
 
-  cmake -B build -S "Vega-Strike-Engine-Source/engine" -Wno-dev \
+  cmake -B build -S "Vega-Strike-Engine-Source" -Wno-dev \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     "${_flags[@]}"

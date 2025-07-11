@@ -37,6 +37,7 @@ pkgver() {
 
 prepare() {
   sed -i 's/cmake_policy(SET CMP0053 OLD)/cmake_policy(SET CMP0026 NEW)/' Clementine/CMakeLists.txt
+  patch Clementine/src/CMakeLists.txt ../patch/rmflags.patch
 }
 
 build() {

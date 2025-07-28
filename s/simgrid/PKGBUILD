@@ -3,14 +3,14 @@
 
 pkgname=simgrid
 pkgver=4.0
-pkgrel=2
+pkgrel=1
 pkgdesc="Scientific instrument to study the behavior of large-scale distributed systems such as Grids, Clouds, HPC or P2P systems"
 arch=(x86_64)
 url="https://framagit.org/simgrid/simgrid"
 license=(LGPL-2.1-only)
-source=("https://framagit.org/simgrid/simgrid/-/archive/v${pkgver}/simgrid-v${pkgver}.tar.gz")
-depends=(graphviz python gcc-libs boost-libs perl glibc)
+depends=(sh graphviz python gcc-libs boost-libs perl glibc)
 makedepends=(cmake boost eigen doxygen pybind11 gcc-fortran nlohmann-json python-numpy)
+source=("https://framagit.org/simgrid/simgrid/-/archive/v${pkgver}/simgrid-v${pkgver}.tar.gz")
 sha256sums=('6a4958f7b3bfd347a1bddf0d739c0b394f63570a183921ff69ea3dfef04d7e04')
 
 build() {

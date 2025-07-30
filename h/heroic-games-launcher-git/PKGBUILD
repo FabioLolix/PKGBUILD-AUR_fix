@@ -9,7 +9,9 @@ url="https://heroicgameslauncher.com/"
 license=(GPL-3.0-only)
 _electron=electron36
 depends=(which $_electron zlib gcc-libs glibc)
-makedepends=(git pnpm npm python desktop-file-utils)
+makedepends=(git pnpm npm python desktop-file-utils
+			 nodejs-lts-jod
+			 )
 provides=(heroic-games-launcher)
 conflicts=(heroic-games-launcher)
 source=("git+https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher.git")

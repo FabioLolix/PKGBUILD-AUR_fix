@@ -938,6 +938,18 @@ echo "Done M"
 
 
 VAR2=n
+  VAR=netpeek
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=netpeek-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
   VAR=nfs-ganesha
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

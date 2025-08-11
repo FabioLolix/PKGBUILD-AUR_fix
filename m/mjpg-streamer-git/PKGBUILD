@@ -5,7 +5,7 @@
 pkgname=mjpg-streamer-git
 epoch=1
 pkgver=1.0.1.r1.g44a278f
-pkgrel=2
+pkgrel=3
 pkgdesc="Stream mjpeg frames from a webcam via http"
 arch=(x86_64 i686 armv7h aarch64)
 url="https://github.com/jacksonliam/mjpg-streamer"
@@ -14,34 +14,38 @@ depends=(protobuf-c zeromq sdl12-compat libgphoto2 v4l-utils)
 makedepends=(git cmake python-numpy)
 provides=(mjpg-streamer)
 conflicts=(mjpg-streamer)
-source=("git+https://github.com/LMBernardo/mjpg-streamer.git")
-sha256sums=('SKIP')
+source=("git+https://github.com/LMBernardo/mjpg-streamer.git"
+		"mjpg-streamer-export-symbols.patch::https://github.com/jacksonliam/mjpg-streamer/pull/401/commits/7b24e2a593a0029c6f555c9001be87a34eceecc6.patch")
+sha256sums=('SKIP'
+            '6addc138790d74dd151b6efc506148500cbccd9aa0333da04ef042993150ae86')
 
 export LDFLAGS="-Wl,-O1,--sort-common,--no-as-needed,-z,relro,-z,now"
 export CFLAGS="-fcommon"
 
 pkgver() {
-  cd "${pkgname/-git/}"
-  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  cd "mjpg-streamer"
+  git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
-  cd "${pkgname/-git/}/mjpg-streamer-experimental"
-  install -d _build
+  cd "mjpg-streamer"
+  patch -Np1 -i ../mjpg-streamer-export-symbols.patch
 }
 
 build() {
-  cd "${pkgname/-git/}/mjpg-streamer-experimental/_build"
-  cmake .. -Wno-dev \
+  local _flags=(
+    -DPLUGIN_INPUT_OPENCV=OFF
+    -DENABLE_HTTP_MANAGEMENT=OFF
+    -DWXP_COMPAT=ON
+	-DCMAKE_POLICY_VERSION_MINIMUM=3.5
+  )
+
+  cmake -B build -S "mjpg-streamer/mjpg-streamer-experimental" -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr \
-    -DPLUGIN_INPUT_OPENCV=OFF \
-    -DENABLE_HTTP_MANAGEMENT=ON \
-    -DWXP_COMPAT=ON \
-	-DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
-    -DCMAKE_BUILD_TYPE=release
+    -DCMAKE_BUILD_TYPE=release \
+    "${_flags[@]}"
 }
 
 package() {
-  cd "${pkgname/-git/}/mjpg-streamer-experimental"
-  make DESTDIR="${pkgdir}" install
+  DESTDIR="${pkgdir}" cmake --install build
 }

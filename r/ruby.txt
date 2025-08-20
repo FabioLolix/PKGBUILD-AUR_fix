@@ -1,0 +1,18 @@
+	ruby-native-package-installer
+	ruby-cairo
+
+    ruby-glib2
+    ruby-atk
+    ruby-cairo-gobject
+    ruby-gobject-introspection
+    ruby-gio2
+    ruby-gdk_pixbuf2
+    ruby-pango
+    ruby-gdk3
+    ruby-gtk3
+    rubyripper
+
+
+	ruby-gstreamer
+	ruby-gdk4
+	ruby-gtk4

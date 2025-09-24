@@ -32,7 +32,7 @@ depends=(qemu-desktop
          xorg-xrandr # xrandr
          zsync
          unzip)
-makedepends=(git)
+makedepends=(git pandoc)
 optdepends=('quickgui: graphical user interface')
 provides=(quickemu)
 conflicts=(quickemu)

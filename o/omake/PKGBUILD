@@ -25,7 +25,7 @@ build() {
 
 package() {
   cd "omake-omake-${pkgver}"
-  make INSTALL_ROOT="$pkgdir" install
-  mkdir -vp "$pkgdir"/usr/share/
-  mv -v "$pkgdir"/usr/man "$pkgdir"/usr/share/
+  make INSTALL_ROOT="${pkgdir}" install
+  mkdir -vp "${pkgdir}"/usr/share/
+  mv -v "${pkgdir}"/usr/man "${pkgdir}"/usr/share/
 }

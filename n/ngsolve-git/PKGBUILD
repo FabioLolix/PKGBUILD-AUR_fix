@@ -3,7 +3,7 @@
 # Contributor: Felix Schindler <aur at felixschindler dot net>
 
 pkgname=ngsolve-git
-pkgver=6.2.2405.r0.ge34d7dc
+pkgver=6.2.2506.r73.g12fb35d
 pkgrel=1
 pkgdesc="A general purpose Finite Element Library on top of Netgen."
 url=https://github.com/ngsolve/ngsolve

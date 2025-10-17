@@ -1,15 +1,15 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
-# Contributor: Mr.Smith1974
+# Contributors: Mr.Smith1974, LaPingvino
 
 pkgname=openloco
-pkgver=25.09
+pkgver=25.10
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
 url="https://github.com/OpenLoco/OpenLoco"
 license=(MIT)
 depends=(sdl2 libpng openal)
-depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal lib32-yaml-cpp lib32-fmt)
+depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal)
 makedepends=(cmake yaml-cpp gtest fmt git)
 makedepends_x86_64+=(lib32-gtest)
 optdepends=(
@@ -18,8 +18,8 @@ optdepends=(
 )
 options=(!lto)
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/OpenLoco/OpenLoco/archive/refs/tags/v${pkgver}.tar.gz"
-	    "openloco.desktop")
-sha256sums=('2a5fd79e3d9f963c24caea9ac7d515b73aa4b9aaabf82fb3d9d878fa6242b03b'
+        "openloco.desktop")
+sha256sums=('cc0efc1f30ca92c456879633d0e5de9e0dcfb5f41c5d2a178d234c278b70057f'
             '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae')
 
 build() {
@@ -32,7 +32,8 @@ build() {
 
   cmake -G "Unix Makefiles" -B build -S "OpenLoco-${pkgver}" -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
-    -DCMAKE_INSTALL_PREFIX=/usr/share \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DUSE_SYSTEM_FMT=ON \
     "${_flags[@]}"
 
   cmake --build build
@@ -45,6 +46,12 @@ check() {
 package() {
   install -Dm644 "openloco.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
   DESTDIR="${pkgdir}" cmake --install build
+
+  # Remove bundled fmt files to avoid conflicts with system fmt package
+  rm -rf "${pkgdir}/usr/include/fmt"
+  rm -rf "${pkgdir}/usr/lib/cmake/fmt"
+  rm -rf "${pkgdir}/usr/lib/pkgconfig/fmt.pc"
+
   install -D "OpenLoco-${pkgver}/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
 
   #remove bundled sfl from package

@@ -3,7 +3,7 @@
 # Contributor: speps <speps at aur dot archlinux dot org>
 
 pkgname=nomacs-qt6-git
-pkgver=3.21.0.r15.g1f44552
+pkgver=3.21.1.r963.g11de42f
 pkgrel=1
 pkgdesc="A Qt image viewer"
 arch=(x86_64)

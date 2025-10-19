@@ -1,0 +1,40 @@
+--- src/OpenLoco/src/Localisation/Languages.cpp
++++ src/OpenLoco/src/Localisation/Languages.cpp
+@@ -32,7 +32,7 @@
+                 continue;
+             }
+ 
+-            std::fstream stream(filePath);
++            std::ifstream stream(filePath);
+             if (!stream.is_open())
+             {
+                 continue;
+--- src/OpenLoco/src/Localisation/LanguageFiles.cpp
++++ src/OpenLoco/src/Localisation/LanguageFiles.cpp
+@@ -275,7 +275,7 @@
+ 
+             return true;
+         }
+-        catch (const std::exception& e)
++                catch (const std::exception& e)
+         {
+             Logging::error("{}", e.what());
+             Ui::showMessageBox("Exception", e.what());
+@@ -283,7 +283,7 @@
+         }
+     }
+ 
+-    void loadLanguageFile()
++        void loadLanguageFile()
+     {
+         // First, load en-GB for fallback strings.
+         fs::path languageDir = Environment::getPath(Environment::PathId::languageFiles);
+@@ -294,7 +294,7 @@
+         }
+ 
+         // Determine the language currently selected.
+-        auto& config = Config::get();
++                auto& config = Config::get();
+         if (config.language == "en-GB")
+         {
+             return;

@@ -1,0 +1,36 @@
+--- src/Diagnostics/src/LogTerminal.cpp
++++ src/Diagnostics/src/LogTerminal.cpp
+@@ -65,7 +65,8 @@
+         std::string timestamp;
+         if (getWriteTimestamps())
+         {
+-            timestamp = fmt::format("[{:%Y-%m-%d %H:%M:%S}] ", fmt::localtime(std::time(nullptr)));
++            std::time_t t = std::time(nullptr);
++            timestamp = fmt::format("[{:%Y-%m-%d %H:%M:%S}] ", *std::localtime(&t));
+         }
+ 
+         const int intendSize = getIntendSize();
+--- src/OpenLoco/src/Logging.cpp
++++ src/OpenLoco/src/Logging.cpp
+@@ -23,7 +23,8 @@
+ 
+     static std::string getLogFileName()
+     {
+-        return fmt::format("openloco_{:%Y-%m-%d_%H_%M_%S}.log", fmt::localtime(std::time(nullptr)));
++        std::time_t t = std::time(nullptr);
++        return fmt::format("openloco_{:%Y-%m-%d_%H_%M_%S}.log", *std::localtime(&t));
+     }
+ 
+     static void cleanupLogFiles(const fs::path& logsFolderPath)
+--- src/Diagnostics/src/LogFile.cpp
++++ src/Diagnostics/src/LogFile.cpp
+@@ -32,7 +32,8 @@
+         std::string timestamp;
+         if (getWriteTimestamps())
+         {
+-            timestamp = fmt::format("[{:%Y-%m-%d %H:%M:%S}] ", fmt::localtime(std::time(nullptr)));
++            std::time_t t = std::time(nullptr);
++            timestamp = fmt::format("[{:%Y-%m-%d %H:%M:%S}] ", *std::localtime(&t));
+         }
+ 
+         const int intendSize = getIntendSize();

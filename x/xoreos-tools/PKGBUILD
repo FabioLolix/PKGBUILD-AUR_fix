@@ -11,7 +11,7 @@ license=(GPL-3.0-or-later)
 depends=(zlib xz libxml2 boost-libs)
 makedepends=(git boost)
 source=("git+https://github.com/xoreos/xoreos-tools.git#tag=v${pkgver}")
-sha256sums=('SKIP')
+sha256sums=('eacf4678bdf789d91479203f98940be24d6412372456c48b9e33e1827c43128e')
 
 prepare() {
   cd xoreos-tools

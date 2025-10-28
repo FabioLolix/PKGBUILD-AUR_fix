@@ -10,7 +10,7 @@ url=https://github.com/ngsolve/ngsolve
 license=(LGPL-2.1-only)
 arch=(x86_64 i686)
 depends=(lapack blas python python-pillow python-numpy glibc gcc-libs gcc-libs sh) #netgen-git
-makedepends=(git cmake python-pillow python-numpy python-pybind11-stubgen )
+makedepends=(git cmake python-pillow python-numpy python-pybind11-stubgen opencascade glu)
 #options=(!buildflags)
 source=("git+https://github.com/NGSolve/ngsolve.git"
         "git+https://github.com/NGSolve/netgen.git"

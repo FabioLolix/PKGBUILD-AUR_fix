@@ -1,15 +1,15 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
-# Contributor: Mr.Smith1974
+# Contributor: Mr.Smith1974, LaPingvino
 
 pkgname=openloco
-pkgver=25.09
+pkgver=25.10
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
 url="https://github.com/OpenLoco/OpenLoco"
 license=(MIT)
 depends=(sdl2 libpng openal)
-depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal lib32-yaml-cpp lib32-fmt)
+depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal)
 makedepends=(cmake yaml-cpp gtest fmt git)
 makedepends_x86_64+=(lib32-gtest)
 optdepends=(
@@ -18,9 +18,15 @@ optdepends=(
 )
 options=(!lto)
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/OpenLoco/OpenLoco/archive/refs/tags/v${pkgver}.tar.gz"
-	    "openloco.desktop")
-sha256sums=('2a5fd79e3d9f963c24caea9ac7d515b73aa4b9aaabf82fb3d9d878fa6242b03b'
-            '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae')
+    "openloco.desktop"
+    "compatibility.patch"
+    "language-loading.patch") # Added compatibility.patch
+sha256sums=(
+            'cc0efc1f30ca92c456879633d0e5de9e0dcfb5f41c5d2a178d234c278b70057f'
+            '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae'
+            'f9b407637dad6039a9905b947427ffc0226a259f39cc2060f171aef400bdbf55'
+'87172344b5df11654de72f77fc428f7fc2a27bc6adc79e8d47f15b3baf30346a'
+)
 
 build() {
   local _flags=(
@@ -30,22 +36,50 @@ build() {
   export CXXFLAGS="$CXXFLAGS -m32 -Wno-error=null-dereference"
   #export CXXFLAGS="$CXXFLAGS -m32"
 
-  cmake -G "Unix Makefiles" -B build -S "OpenLoco-${pkgver}" -Wno-dev \
+  cd "${srcdir}/OpenLoco-${pkgver}"
+  patch -Np0 -i "${srcdir}/compatibility.patch"
+  patch -Np0 -i "${srcdir}/language-loading.patch"
+
+  cmake -G "Unix Makefiles" -B build -S . -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
-    -DCMAKE_INSTALL_PREFIX=/usr/share \
+    -DCMAKE_INSTALL_PREFIX=/usr/share/${pkgname} \
+    -DCMAKE_INSTALL_DATAROOTDIR=/usr/share/${pkgname} \
+    -DCMAKE_INSTALL_DATADIR=/usr/share/${pkgname}/data \
+    -DUSE_SYSTEM_FMT=ON \
     "${_flags[@]}"
 
   cmake --build build
 }
 
 check() {
+  cd "${srcdir}/OpenLoco-${pkgver}"
   ctest --test-dir build --output-on-failure
 }
 
 package() {
   install -Dm644 "openloco.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
+  install -Dm644 "${srcdir}/OpenLoco-${pkgver}/src/Resources/src/logo/icon_x16.png" "$pkgdir/usr/share/icons/hicolor/16x16/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco-${pkgver}/src/Resources/src/logo/icon_x32.png" "$pkgdir/usr/share/icons/hicolor/32x32/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco-${pkgver}/src/Resources/src/logo/icon_x64.png" "$pkgdir/usr/share/icons/hicolor/64x64/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco-${pkgver}/src/Resources/src/logo/icon_x128.png" "$pkgdir/usr/share/icons/hicolor/128x128/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco-${pkgver}/src/Resources/src/logo/icon_x256.png" "$pkgdir/usr/share/icons/hicolor/256x256/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco-${pkgver}/src/Resources/src/logo/icon_x512.png" "$pkgdir/usr/share/icons/hicolor/512x512/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco-${pkgver}/src/Resources/src/logo/icon_steam.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/openloco.svg"
+  cd "${srcdir}/OpenLoco-${pkgver}"
   DESTDIR="${pkgdir}" cmake --install build
-  install -D "OpenLoco-${pkgver}/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -D "LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
+
+  # Create symlink for executable
+  mkdir -p "${pkgdir}/usr/bin"
+  ln -s "/usr/share/${pkgname}/bin/OpenLoco" "${pkgdir}/usr/bin/OpenLoco"
+
+
+
+  # Remove bundled fmt files to avoid conflicts with system fmt package
+  rm -rf "${pkgdir}/usr/lib/libfmt.a"
+  rm -rf "${pkgdir}/usr/include/fmt"
+  rm -rf "${pkgdir}/usr/lib/cmake/fmt"
+  rm -rf "${pkgdir}/usr/lib/pkgconfig/fmt.pc"
 
   #remove bundled sfl from package
   rm -rf "${pkgdir}/usr/share/include/sfl"

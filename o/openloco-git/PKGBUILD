@@ -1,4 +1,5 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
+# Contributors: LaPingvino
 
 pkgname=openloco-git
 pkgver=25.09.r0.g5031e3782
@@ -8,7 +9,7 @@ arch=(x86_64 i686)
 url="https://github.com/OpenLoco/OpenLoco"
 license=(MIT)
 depends=(sdl2 libpng openal)
-depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal lib32-yaml-cpp lib32-fmt)
+depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal)
 makedepends=(cmake yaml-cpp git gtest fmt)
 makedepends_x86_64+=(lib32-gtest)
 optdepends_x86_64=(
@@ -22,11 +23,17 @@ optdepends_i686=(
 provides=(openloco)
 conflicts=(openloco)
 options=(!lto)
-source=("git+https://github.com/openloco/openloco.git"        )
-sha256sums=('SKIP')
+source=("git+https://github.com/OpenLoco/OpenLoco.git"
+        "openloco.desktop"
+        "compatibility.patch"
+        "language-loading.patch")
+sha256sums=('SKIP'
+            '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae'
+            'f9b407637dad6039a9905b947427ffc0226a259f39cc2060f171aef400bdbf55'
+            '87172344b5df11654de72f77fc428f7fc2a27bc6adc79e8d47f15b3baf30346a')
 
 pkgver() {
-  cd openloco
+  cd OpenLoco
   git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
@@ -45,37 +52,51 @@ build() {
 	)
 
   export CXXFLAGS="$CXXFLAGS -m32 -Wno-error=null-dereference"
-  cmake -G "Unix Makefiles" -B build -S "openloco" -Wno-dev \
+
+  cd "${srcdir}/OpenLoco"
+  patch -Np0 -i "${srcdir}/compatibility.patch"
+  patch -Np0 -i "${srcdir}/language-loading.patch"
+
+  cmake -G "Unix Makefiles" -B build -S . -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
-    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_PREFIX=/usr/share/${pkgname} \
+    -DCMAKE_INSTALL_DATAROOTDIR=/usr/share/${pkgname} \
+    -DCMAKE_INSTALL_DATADIR=/usr/share/${pkgname}/data \
+    -DUSE_SYSTEM_FMT=ON \
     "${_flags[@]}"
 
   cmake --build build
 }
 
 check() {
+  cd "${srcdir}/OpenLoco"
   ctest --test-dir build --output-on-failure
 }
 
 package() {
+  install -Dm644 "openloco.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
+  install -Dm644 "${srcdir}/OpenLoco/src/Resources/src/logo/icon_x16.png" "$pkgdir/usr/share/icons/hicolor/16x16/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco/src/Resources/src/logo/icon_x32.png" "$pkgdir/usr/share/icons/hicolor/32x32/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco/src/Resources/src/logo/icon_x64.png" "$pkgdir/usr/share/icons/hicolor/64x64/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco/src/Resources/src/logo/icon_x128.png" "$pkgdir/usr/share/icons/hicolor/128x128/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco/src/Resources/src/logo/icon_x256.png" "$pkgdir/usr/share/icons/hicolor/256x256/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco/src/Resources/src/logo/icon_x512.png" "$pkgdir/usr/share/icons/hicolor/512x512/apps/openloco.png"
+  install -Dm644 "${srcdir}/OpenLoco/src/Resources/src/logo/icon_steam.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/openloco.svg"
+
+  cd "${srcdir}/OpenLoco"
   DESTDIR="${pkgdir}" cmake --install build
-  ln -s /usr/bin/OpenLoco           "${pkgdir}/usr/bin/openloco"
-  install -D "openloco/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -D "${srcdir}/OpenLoco/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
+
+  # Create symlink for executable
+  mkdir -p "${pkgdir}/usr/bin"
+  ln -s "/usr/share/${pkgname}/bin/OpenLoco" "${pkgdir}/usr/bin/OpenLoco"
+
+  # Remove bundled fmt files to avoid conflicts with system fmt package
+  rm -rf "${pkgdir}/usr/lib/libfmt.a"
+  rm -rf "${pkgdir}/usr/include/fmt"
+  rm -rf "${pkgdir}/usr/lib/cmake/fmt"
+  rm -rf "${pkgdir}/usr/lib/pkgconfig/fmt.pc"
 
   #remove bundled sfl from package
   rm -rf "${pkgdir}/usr/share/include/sfl"
-
-  # Project installs a copy of its own deps as well
-  #for dep in Imath
-  #do
-  #  rm -r "$pkgdir"/usr/include/$dep/
-  #  rm -r "$pkgdir"/usr/lib/cmake/$dep/
-  #  rm    "$pkgdir"/usr/lib/lib$dep*.a
-  #done
-
-  # Raise an error in case there's every anything else added (either
-  # a new dep, or the project starts shipping libs)
-  #rmdir "$pkgdir"/usr/include/
-  #rmdir "$pkgdir"/usr/lib/cmake/
-  #rmdir "$pkgdir"/usr/lib/
 }

@@ -25,11 +25,9 @@ conflicts=(openloco)
 options=(!lto)
 source=("git+https://github.com/OpenLoco/OpenLoco.git"
         "openloco.desktop"
-        "compatibility.patch"
         "language-loading.patch")
 sha256sums=('SKIP'
             '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae'
-            'f9b407637dad6039a9905b947427ffc0226a259f39cc2060f171aef400bdbf55'
             '87172344b5df11654de72f77fc428f7fc2a27bc6adc79e8d47f15b3baf30346a')
 
 pkgver() {

@@ -2,7 +2,7 @@
 # Contributors: LaPingvino
 
 pkgname=openloco-git
-pkgver=25.09.r0.g5031e3782
+pkgver=25.11.r5.g22b8f5c27
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
@@ -25,11 +25,9 @@ conflicts=(openloco)
 options=(!lto)
 source=("git+https://github.com/OpenLoco/OpenLoco.git"
         "openloco.desktop"
-        "compatibility.patch"
         "language-loading.patch")
 sha256sums=('SKIP'
             '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae'
-            'f9b407637dad6039a9905b947427ffc0226a259f39cc2060f171aef400bdbf55'
             '87172344b5df11654de72f77fc428f7fc2a27bc6adc79e8d47f15b3baf30346a')
 
 pkgver() {
@@ -54,7 +52,6 @@ build() {
   export CXXFLAGS="$CXXFLAGS -m32 -Wno-error=null-dereference"
 
   cd "${srcdir}/OpenLoco"
-  patch -Np0 -i "${srcdir}/compatibility.patch"
   patch -Np0 -i "${srcdir}/language-loading.patch"
 
   cmake -G "Unix Makefiles" -B build -S . -Wno-dev \

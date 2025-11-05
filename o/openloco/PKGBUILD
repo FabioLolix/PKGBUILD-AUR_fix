@@ -2,7 +2,7 @@
 # Contributor: Mr.Smith1974, LaPingvino
 
 pkgname=openloco
-pkgver=25.10
+pkgver=25.11
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64 i686)
@@ -19,13 +19,11 @@ optdepends=(
 options=(!lto)
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/OpenLoco/OpenLoco/archive/refs/tags/v${pkgver}.tar.gz"
     "openloco.desktop"
-    "compatibility.patch"
-    "language-loading.patch") # Added compatibility.patch
+    "language-loading.patch")
 sha256sums=(
-            'cc0efc1f30ca92c456879633d0e5de9e0dcfb5f41c5d2a178d234c278b70057f'
+            'e0182576cb8680d7f4f2ad8ce59039e77e827555620ef92df211c2bf49e7f5d1'
             '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae'
-            'f9b407637dad6039a9905b947427ffc0226a259f39cc2060f171aef400bdbf55'
-'87172344b5df11654de72f77fc428f7fc2a27bc6adc79e8d47f15b3baf30346a'
+            '87172344b5df11654de72f77fc428f7fc2a27bc6adc79e8d47f15b3baf30346a'
 )
 
 build() {
@@ -37,7 +35,6 @@ build() {
   #export CXXFLAGS="$CXXFLAGS -m32"
 
   cd "${srcdir}/OpenLoco-${pkgver}"
-  patch -Np0 -i "${srcdir}/compatibility.patch"
   patch -Np0 -i "${srcdir}/language-loading.patch"
 
   cmake -G "Unix Makefiles" -B build -S . -Wno-dev \

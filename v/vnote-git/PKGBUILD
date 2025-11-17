@@ -2,7 +2,7 @@
 # Contributor: erk <v at erk dot io>
 
 pkgname=vnote-git
-pkgver=3.19.2.r0.g856d2597
+pkgver=3.20.0.r0.g1093b32d
 pkgrel=1
 pkgdesc="A Vim-inspired note-taking application, especially for Markdown."
 arch=(x86_64 i686 armv7h aarch64)
@@ -13,7 +13,7 @@ depends=(qt6-webengine qt6-svg qt6-webchannel qt6-5compat
          # namcap implicit depends
          qt6-base qt6-positioning libglvnd glibc hicolor-icon-theme libx11 libsm libice qt6-declarative gcc-libs libxext
 )
-makedepends=(git cmake qt6-tools clang lld)
+makedepends=(git cmake qt6-tools clang lld vulkan-headers)
 source=("git+https://github.com/vnotex/vnote.git"
         "vnotex-vtextedit::git+https://github.com/vnotex/vtextedit"
         "vnotex-QHotkey::git+https://github.com/vnotex/QHotkey.git"
@@ -49,9 +49,9 @@ prepare() {
 }
 
 build() {
-  export CC=/usr/bin/clang CXX=/usr/bin/clang++
-  export LD="/usr/bin/lld"
-  export LDFLAGS="-fuse-ld=lld"
+  #export CC=/usr/bin/clang CXX=/usr/bin/clang++
+  #export LD="/usr/bin/lld"
+  #export LDFLAGS="-fuse-ld=lld"
 
   cmake -B build -S "vnote" -Wno-dev \
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \

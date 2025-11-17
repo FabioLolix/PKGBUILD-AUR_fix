@@ -6,7 +6,7 @@
 # Contributor: Eric Bélanger <eric@archlinux.org>
 
 pkgname=tenacity-git
-pkgver=r14996.g5e269b9d8
+pkgver=r15750.g4c3549aea
 pkgrel=1
 epoch=1
 pkgdesc="An easy-to-use multi-track audio editor and recorder, forked from Audacity"
@@ -15,12 +15,13 @@ url="https://tenacityaudio.org"
 license=(GPL2 CCPL)
 groups=(pro-audio)
 depends=(gcc-libs glibc flac gtk3 wxwidgets-gtk3 wxwidgets-common libid3tag lilv lv2 portsmf suil libmad twolame
-         vamp-plugin-sdk libsoxr soundtouch portaudio jack portmidi libebml libmatroska libzip jsoncpp
+         vamp-plugin-sdk libsoxr soundtouch portaudio jack portmidi libebml libmatroska libzip jsoncpp wavpack
 
          # namcap implicit depends
          libogg expat hicolor-icon-theme glib2 libsndfile sqlite lame libvorbis
 )
 makedepends=(git cmake clang sdl2 libsoup libnotify gstreamer gst-plugins-bad-libs
+			 rapidjson
              ffmpeg nasm chrpath python)
 optdepends=('ffmpeg: additional import/export capabilities')
 provides=(tenacity)
@@ -33,8 +34,6 @@ sha256sums=('SKIP'
 pkgver() {
   cd tenacity
   printf "r%s.g%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-  #git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
-  #git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
@@ -57,8 +56,8 @@ prepare() {
 
 build() {
   cd tenacity/build
-  CC=clang CXX=clang++ cmake \
-    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+  CC=gcc CXX=g++ cmake \
+    -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DwxWidgets_CONFIG_EXECUTABLE=/usr/bin/wx-config \
     -Wno-dev \

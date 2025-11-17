@@ -1,21 +1,19 @@
 # Maintainer: Peter Mattern <pmattern at arcor dot de>
 
-_pkgname=nomacs
-pkgname=$_pkgname-git
-pkgver=3.19.0.r2.gf2c6c4d3
+pkgname=nomacs-git
+pkgver=3.21.1.r963.g11de42fa
 pkgrel=1
 pkgdesc='Free, open source image viewer, which supports multiple platforms. Qt6 Lolix pkgbuild'
 arch=('i686' 'x86_64')
 url='https://github.com/nomacs/nomacs'
 license=('GPL3')
-depends=(exiv2 gcc-libs glibc libraw libtiff opencv qt6-base qt6-svg)
-#depends+=(libopencv_imgproc.so)
-makedepends=('git' git-lfs 'cmake' 'qt6-tools' python)
+depends=(exiv2 gcc-libs glibc libraw libtiff opencv qt6-base qt6-svg quazip-qt6)
+makedepends=(cmake git git-lfs qt6-tools python)
 optdepends=('qt6-imageformats: support additional image formats'
-            'kimageformats: support QOI (Quite OK Image Format)')
-provides=("$_pkgname")
-conflicts=("$_pkgname")
-source=("git+https://github.com/$_pkgname/$_pkgname.git"
+            'kimageformats5: support QOI (Quite OK Image Format)')
+provides=(nomacs)
+conflicts=(nomacs)
+source=("git+https://github.com/nomacs/nomacs.git"
         #"git+https://github.com/nomacs/nomacs-plugins.git"
         )
 sha256sums=('SKIP')
@@ -23,12 +21,12 @@ sha256sums=('SKIP')
 export GIT_LFS_SKIP_SMUDGE=1
 
 pkgver() {
-  cd "$srcdir/$_pkgname"
+  cd nomacs
   git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
-  cd "$srcdir/$_pkgname"
+  cd nomacs
   # https://github.com/nomacs/nomacs/issues/951
   #patch -Np1 -i ../nomacs-fix-exiv2-0.28.patch.txt
   # copy plugin sources into place

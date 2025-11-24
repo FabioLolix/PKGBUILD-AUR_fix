@@ -6,7 +6,7 @@
 # Contributor: joel schaerer <joel.schaerer@laposte.net>
 
 pkgname=itk-lite-git
-pkgver=6.0a03.r508.g7ca2f0e73e
+pkgver=6.0b01.r232.gf48078d246
 pkgrel=1
 pkgdesc="Cross-platform system that provides developers with an extensive suite of software tools for image analysis"
 arch=(x86_64)

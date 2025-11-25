@@ -18,12 +18,6 @@ VAR2=a
     rsync {PKGBUILD,.SRCINFO,*.desktop} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=akira-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
   VAR=alizams
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -208,12 +202,6 @@ echo "Done B"
 
 
 VAR2=c
-  VAR=cartridges
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
   VAR=cartridges-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -348,11 +336,11 @@ VAR2=e
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=eigen3
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,eigen3.conf} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
+#  VAR=eigen3
+#  cd "$BASE/$VAR2/$VAR"
+#    makepkg --printsrcinfo > .SRCINFO
+#    rsync {PKGBUILD,.SRCINFO,eigen3.conf} "$DEST/$VAR2/$VAR"
+#    echo "    synced $VAR"
 
   VAR=embree-git
   cd "$BASE/$VAR2/$VAR"
@@ -447,12 +435,6 @@ VAR2=g
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=gerbera-mysql
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,gerbera.install,gerbera.sysusers,gerbera.tmpfiles} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
   VAR=gfxreconstruct
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -520,6 +502,12 @@ VAR2=g
     echo "    synced $VAR"
 
   VAR=gr-gsm-git
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
+  VAR=grok-jpeg2000-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
@@ -891,6 +879,12 @@ VAR2=m
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
+  VAR=miracle-wm
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
   VAR=miracle-wm-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -1064,12 +1058,6 @@ VAR2=o
     echo "    synced $VAR"
 
   VAR=ocaml4-ocamlbuild
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
-  VAR=odin-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
@@ -1632,12 +1620,6 @@ VAR2=t
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=thrive-bin
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO,thrive.sh} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
   VAR=tokodon-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -1649,12 +1631,6 @@ VAR2=t
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
-
-  #VAR=torrential-git
-  #cd "$BASE/$VAR2/$VAR"
-  #  makepkg --printsrcinfo > .SRCINFO
-  #  rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-  #  echo "    synced $VAR"
 
   VAR=twin-git
   cd "$BASE/$VAR2/$VAR"

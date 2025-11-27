@@ -2,24 +2,16 @@
 # Contributors: LaPingvino
 
 pkgname=openloco-git
-pkgver=25.11.r59.gb44d98aac
+pkgver=25.11.r74.g829d9ae7f
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
-arch=(x86_64 i686)
+arch=(x86_64)
 url="https://github.com/OpenLoco/OpenLoco"
 license=(MIT)
 depends=(sdl2 libpng openal)
-depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal)
+
 makedepends=(cmake yaml-cpp git gtest fmt)
-makedepends_x86_64+=(lib32-gtest)
-optdepends_x86_64=(
-    'lib32-libpipewire: audio output'
-    'lib32-libpulse: audio output'
-)
-optdepends_i686=(
-    'libpipewire: audio output'
-    'libpulse: audio output'
-)
+
 provides=(openloco)
 conflicts=(openloco)
 options=(!lto)
@@ -40,23 +32,24 @@ build() {
 
 
 	local _flags=(
-    -DFETCHCONTENT_QUIET:BOOL=OFF
-    #-DFETCHCONTENT_FULLY_DISCONNECTED:BOOL=ON
-    #-Dfmt_DIR:PATH=/usr/lib/cmake/fmt
-    #-Dsfl_DIR:PATH=/usr/include/sfl
-    #-Dyaml-cpp_DIR:PATH=/usr/lib/cmake/yaml-cpp
+    -DFETCHCONTENT_QUIET:BOOL=OFF \
+    -DCMAKE_SYSTEM_PROCESSOR=x86_64 \
+    -DOPENLOCO_BUILD_TESTS=OFF \
+    -DCMAKE_LIBRARY_ARCHITECTURE=x86_64 \
+    -DCMAKE_CXX_FLAGS="-Wno-error" \
 	)
 
-  export CXXFLAGS="$CXXFLAGS -m32 -Wno-error=null-dereference"
-
   cd "${srcdir}/OpenLoco"
+  rm -rf build
 
   cmake -G "Unix Makefiles" -B build -S . -Wno-dev \
     -DCMAKE_BUILD_TYPE=None \
-    -DCMAKE_INSTALL_PREFIX=/usr/share/${pkgname} \
-    -DCMAKE_INSTALL_DATAROOTDIR=/usr/share/${pkgname} \
-    -DCMAKE_INSTALL_DATADIR=/usr/share/${pkgname}/data \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_DATAROOTDIR=/usr/share \
+    -DCMAKE_INSTALL_DATADIR=/usr/share/data \
     -DUSE_SYSTEM_FMT=ON \
+    -DCMAKE_SIZEOF_VOID_P=8 \
+    -DCMAKE_INSTALL_LIBDIR=lib \
     "${_flags[@]}"
 
   cmake --build build
@@ -81,9 +74,7 @@ package() {
   DESTDIR="${pkgdir}" cmake --install build
   install -D "${srcdir}/OpenLoco/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
 
-  # Create symlink for executable
-  mkdir -p "${pkgdir}/usr/bin"
-  ln -s "/usr/share/${pkgname}/bin/OpenLoco" "${pkgdir}/usr/bin/OpenLoco"
+
 
   # Remove bundled fmt files to avoid conflicts with system fmt package
   rm -rf "${pkgdir}/usr/lib/libfmt.a"

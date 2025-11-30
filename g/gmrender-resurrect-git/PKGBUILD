@@ -3,7 +3,7 @@
 # Contributor: Drew DeVore <w.drew.devore at gmail dot com>
 
 pkgname=gmrender-resurrect-git
-pkgver=0.1.r5.g3a1234f
+pkgver=0.3.r0.gc26c5cd
 pkgrel=1
 epoch=1
 pkgdesc="Application to stream music from a UPnP server using gstreamer."

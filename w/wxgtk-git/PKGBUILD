@@ -57,7 +57,7 @@ prepare() {
 }
 
 build() {
-  cmake -B build-gtk3 -S wxWidgets -Wno-dev \
+  cmake -G "Unix Makefiles" -B build-gtk3 -S wxWidgets -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=None \
     -DwxBUILD_TOOLKIT=gtk3 \
@@ -76,7 +76,7 @@ build() {
 
   cmake --build build-gtk3
 
-  cmake -B build-qt5 -S wxWidgets -Wno-dev \
+  cmake -G "Unix Makefiles" -B build-qt5 -S wxWidgets -Wno-dev \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_BUILD_TYPE=None \
     -DwxBUILD_TOOLKIT=qt \

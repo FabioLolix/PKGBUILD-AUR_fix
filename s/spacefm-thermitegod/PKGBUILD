@@ -47,6 +47,7 @@ prepare() {
 
 build() {
   CFLAGS+=" -Wno-error=incompatible-pointer-types"
+  CFLAGS+=" -std=gnu17"
 
   cd "spacefm-thermitegod"
   arch-meson build

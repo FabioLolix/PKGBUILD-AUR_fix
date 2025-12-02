@@ -8,7 +8,7 @@ pkgdesc="A spaceflight simulator in massive universe"
 arch=(x86_64)
 url="https://www.vega-strike.org/"
 license=(GPL-3.0-or-later)
-depends=(boost-libs python freeglut gtk3 libvorbis openal sdl glu
+depends=(boost-libs python freeglut gtk3 libvorbis openal sdl2 glu
 
          # namcap implicit depends
          glibc gcc-libs glib2 zlib libpng libglvnd expat libjpeg-turbo)

@@ -8,7 +8,9 @@ arch=(x86_64)
 url="https://github.com/miracle-wm-org/miracle-wm"
 license=(GPL-3.0-only)
 depends=(mir libnotify)
-makedepends=(git cmake nlohmann-json glm boost)
+makedepends=(git cmake nlohmann-json glm boost
+            mold # prefer mold if available
+            )
 provides=(miracle-wm)
 conflicts=(miracle-wm)
 source=("git+https://github.com/miracle-wm-org/miracle-wm.git")

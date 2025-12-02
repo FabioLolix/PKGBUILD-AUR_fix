@@ -2,7 +2,7 @@
 # Contributor: Fabio 'Lolix' Loli <fabio.loli@disroot.org>
 
 pkgname=miracle-wm
-pkgver=0.8.0
+pkgver=0.8.2
 pkgrel=1
 pkgdesc="Wayland tiling window manager built on Mir"
 arch=(x86_64)
@@ -11,7 +11,7 @@ license=(GPL-3.0-only)
 depends=(mir libnotify)
 makedepends=(git cmake nlohmann-json glm boost)
 source=("git+https://github.com/miracle-wm-org/miracle-wm.git#tag=v${pkgver}")
-sha256sums=('83692a3c0e682ddcea69c4b5d03986affd39a6eeea5189bab298331520698f07')
+sha256sums=('c2e45ed6c6e74da5943f41caa845e32cbddab3d62a3e0e61b7ef2b9b41ff1c69')
 
 build() {
   cmake -B build -S "miracle-wm" -Wno-dev \

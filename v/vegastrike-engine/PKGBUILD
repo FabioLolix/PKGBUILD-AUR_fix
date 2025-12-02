@@ -3,7 +3,7 @@
 
 pkgname=vegastrike-engine
 pkgver=0.9.1
-pkgrel=2
+pkgrel=3
 pkgdesc="A spaceflight simulator in massive universe"
 arch=(x86_64)
 url="https://www.vega-strike.org/"

@@ -3,7 +3,7 @@
 # Contributor: Felix Schindler <aur at felixschindler dot net>
 
 pkgname=netgen-git
-pkgver=6.2.2506.r24.gaf18877
+pkgver=6.2.2506.r44.g3d26504
 pkgrel=1
 pkgdesc="An automatic 3d tetrahedral mesh generator."
 url=https://github.com/ngsolve/netgen

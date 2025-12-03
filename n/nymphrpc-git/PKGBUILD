@@ -2,7 +2,7 @@
 # Contributor: Kilian Guillaume "cafehaine" <kilian dot guillaume at gmail dot com>
 
 pkgname=nymphrpc-git
-pkgver=0.1.r11.gdb15955
+pkgver=0.1.1.r6.g719899d
 pkgrel=1
 pkgdesc="Versatile and fast remote procedure call library."
 arch=(x86_64 i686 armv7h aarch64)

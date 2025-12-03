@@ -1,8 +1,8 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=noson-git
-pkgver=2.12.9.r0.g741183c
-pkgrel=2
+pkgver=2.12.11.r2.g35b6934
+pkgrel=1
 pkgdesc="C++ library for accessing SONOS devices"
 arch=(x86_64 aarch64 armv7h)
 url="https://github.com/janbar/noson"

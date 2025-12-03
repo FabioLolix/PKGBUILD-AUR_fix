@@ -2,8 +2,8 @@
 # Contributor: Dennis Twardowsky <aur@devpty.de>
 
 pkgname=noson-app-git
-pkgver=5.6.8.r4.g1230355
-pkgrel=2.1
+pkgver=5.6.13+1.r3.ga4bccf3
+pkgrel=1
 pkgdesc="SONOS controller for Linux platforms"
 arch=(x86_64 aarch64 armv7h)
 url="https://github.com/janbar/noson-app"

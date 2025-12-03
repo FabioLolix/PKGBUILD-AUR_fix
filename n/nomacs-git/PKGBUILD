@@ -1,12 +1,12 @@
 # Maintainer: Peter Mattern <pmattern at arcor dot de>
 
 pkgname=nomacs-git
-pkgver=3.21.1.r963.g11de42fa
+pkgver=3.22.0.rc.1.r53.g52786878
 pkgrel=1
 pkgdesc='Free, open source image viewer, which supports multiple platforms. Qt6 Lolix pkgbuild'
 arch=('i686' 'x86_64')
 url='https://github.com/nomacs/nomacs'
-license=('GPL3')
+license=(GPL-3.0-only)
 depends=(exiv2 gcc-libs glibc libraw libtiff opencv qt6-base qt6-svg quazip-qt6)
 makedepends=(cmake git git-lfs qt6-tools python)
 optdepends=('qt6-imageformats: support additional image formats'

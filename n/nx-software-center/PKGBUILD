@@ -12,7 +12,7 @@ depends=(mauikit mauikit-filebrowsing libappimage appimageupdate hicolor-icon-th
          glibc gcc-libs qt5-base qt5-declarative ki18n5 kcoreaddons5)
 makedepends=(git cmake extra-cmake-modules)
 source=("git+https://github.com/Nitrux/nx-software-center.git#commit=de091d0fb50dae41992bd3766ce7a676208defc2")
-sha256sums=('SKIP')
+sha256sums=('4611e3eac804f4cf7e2ea0858a5fc5104cb71f47cd5dfd19877b81ffbbaea7b6')
 
 pkgver() {
   cd nx-software-center

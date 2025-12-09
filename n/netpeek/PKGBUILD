@@ -10,7 +10,7 @@ license=(GPL-3.0-or-later)
 depends=(python python-gobject python-nmap gtk4 libadwaita glib2)
 makedepends=(git meson ninja)
 source=("git+https://github.com/ZingyTomato/NetPeek.git#tag=v${pkgver}")
-sha256sums=('f58fd31009397ac04d9dd4087bfafdb81d2e724834a867cd5f9d4f98be3836dc')
+sha256sums=('db4f242baced2dc975e6371c03e9ed3975cd1024b4a06ed445859b44eab355be')
 
 build() {
   cd NetPeek

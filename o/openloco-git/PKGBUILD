@@ -2,7 +2,7 @@
 # Contributors: LaPingvino
 
 pkgname=openloco-git
-pkgver=25.11.r74.g829d9ae7f
+pkgver=25.11.r108.gad4f7c42a
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
 arch=(x86_64)
@@ -43,7 +43,7 @@ build() {
   rm -rf build
 
   cmake -G "Unix Makefiles" -B build -S . -Wno-dev \
-    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     -DCMAKE_INSTALL_DATAROOTDIR=/usr/share \
     -DCMAKE_INSTALL_DATADIR=/usr/share/data \

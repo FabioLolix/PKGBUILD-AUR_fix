@@ -2,7 +2,7 @@
 # Contributor: Dct Mei <dctxmei@gmail.com>
 
 pkgname=filebrowser-git
-pkgver=2.51.2.r2.g7fa3432f
+pkgver=2.52.0.r0.gc11c986b
 pkgrel=1
 pkgdesc="Standalone web file manager"
 arch=(x86_64)

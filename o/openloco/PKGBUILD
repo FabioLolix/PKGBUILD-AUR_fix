@@ -2,47 +2,41 @@
 # Contributor: Mr.Smith1974, LaPingvino
 
 pkgname=openloco
-pkgver=25.11
+pkgver=25.12
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
-arch=(x86_64 i686)
+arch=(x86_64)
 url="https://github.com/OpenLoco/OpenLoco"
 license=(MIT)
 depends=(sdl2 libpng openal)
-depends_x86_64+=(lib32-glibc lib32-gcc-libs lib32-sdl2 lib32-libpng lib32-openal)
 makedepends=(cmake yaml-cpp gtest fmt git)
-makedepends_x86_64+=(lib32-gtest)
-optdepends=(
-    'lib32-libpipewire: audio output'
-    'lib32-libpulse: audio output'
-)
 options=(!lto)
 source=("${pkgname}-${pkgver}.tar.gz::https://github.com/OpenLoco/OpenLoco/archive/refs/tags/v${pkgver}.tar.gz"
-    "openloco.desktop"
-    "language-loading.patch")
+    "openloco.desktop")
 sha256sums=(
-            'e0182576cb8680d7f4f2ad8ce59039e77e827555620ef92df211c2bf49e7f5d1'
-            '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae'
-            '87172344b5df11654de72f77fc428f7fc2a27bc6adc79e8d47f15b3baf30346a'
-)
+            '11e06a365c083940665cfeaa0c367686b9171733cd05bb7692222226b74a716e'
+            '57512f00144c1e0d2cc91c3adbf38460d5ec1223afc27bd16e1271760bce02ae')
 
 build() {
   local _flags=(
-    -DFETCHCONTENT_QUIET=OFF
+    -DFETCHCONTENT_QUIET:BOOL=OFF
+    -DCMAKE_SYSTEM_PROCESSOR=x86_64
+    -DOPENLOCO_BUILD_TESTS=OFF
+    -DCMAKE_LIBRARY_ARCHITECTURE=x86_64
+    -DCMAKE_CXX_FLAGS="-Wno-error"
   )
 
-  export CXXFLAGS="$CXXFLAGS -m32 -Wno-error=null-dereference"
-  #export CXXFLAGS="$CXXFLAGS -m32"
-
   cd "${srcdir}/OpenLoco-${pkgver}"
-  patch -Np0 -i "${srcdir}/language-loading.patch"
+  rm -rf build
 
   cmake -G "Unix Makefiles" -B build -S . -Wno-dev \
-    -DCMAKE_BUILD_TYPE=None \
-    -DCMAKE_INSTALL_PREFIX=/usr/share/${pkgname} \
-    -DCMAKE_INSTALL_DATAROOTDIR=/usr/share/${pkgname} \
-    -DCMAKE_INSTALL_DATADIR=/usr/share/${pkgname}/data \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DCMAKE_INSTALL_DATAROOTDIR=/usr/share \
+    -DCMAKE_INSTALL_DATADIR=/usr/share/data \
     -DUSE_SYSTEM_FMT=ON \
+    -DCMAKE_SIZEOF_VOID_P=8 \
+    -DCMAKE_INSTALL_LIBDIR=lib \
     "${_flags[@]}"
 
   cmake --build build
@@ -64,11 +58,7 @@ package() {
   install -Dm644 "${srcdir}/OpenLoco-${pkgver}/src/Resources/src/logo/icon_steam.svg" "$pkgdir/usr/share/icons/hicolor/scalable/apps/openloco.svg"
   cd "${srcdir}/OpenLoco-${pkgver}"
   DESTDIR="${pkgdir}" cmake --install build
-  install -D "LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
-
-  # Create symlink for executable
-  mkdir -p "${pkgdir}/usr/bin"
-  ln -s "/usr/share/${pkgname}/bin/OpenLoco" "${pkgdir}/usr/bin/OpenLoco"
+  install -D "${srcdir}/OpenLoco-${pkgver}/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
 
 
 

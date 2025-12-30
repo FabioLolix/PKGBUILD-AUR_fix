@@ -5,20 +5,21 @@
 # Contributor: kikadf <kikadf.01@gmail.com>
 
 pkgname=mir
-pkgver=2.23.0
-pkgrel=1
+pkgver=2.25.1
+pkgrel=2
 pkgdesc="Canonical's display server"
 url="https://github.com/canonical/mir"
 arch=(x86_64 i686)
 license=('GPL-2.0-or-later OR GPL-3.0-or-later')
 depends=(boost-libs libglvnd lttng-ust libepoxy libxml++2.6 libinput yaml-cpp
          libxkbcommon  freetype2  hicolor-icon-theme libxcursor
+         libxkbcommon freetype2  hicolor-icon-theme libxcursor
 		 libdisplay-info pixman
          egl-wayland wayland
 
          glib2 glibc gcc-libs util-linux-libs libxcb libxkbcommon-x11 libdrm mesa libx11 gtest glibmm sh
 
-         # capnproto google-glog gflags liburcu nettle libevdev protobuf  python-gobject
+         # capnproto google-glog gflags liburcu nettle libevdev protobuf python-gobject
          )
 makedepends=(glm doxygen graphviz cmake boost umockdev wlcs glmark2
 			 xorg-xwayland
@@ -33,17 +34,14 @@ optdepends=('qterminal: required for miral demos'
             'xcursor-dmz: opt requirement for miral demos')
 options=(!lto)
 source=("https://github.com/canonical/mir/releases/download/v${pkgver}/mir-${pkgver}.tar.xz")
-sha256sums=('01c088b037f19c69d40c33514be15dd124411ce385af55d3772cfed5fe18d3eb')
-
-# glm not found but is listed here
+sha256sums=('4f38c8ed86f017b1f51a1fe8d46bcff041766f4744acd2c1bc39896dff605be2')
 
 build() {
-  #export CFLAGS+=" -Wno-error=array-bounds"
-  #export CXXFLAGS+=" -Wno-error=array-bounds"
-
   local _flags=(
     -DMIR_USE_PRECOMPILED_HEADERS=OFF
-    -Dglm_DIR:PATH=/usr/lib/cmake/glm
+    -DMIR_FATAL_COMPILE_WARNINGS=OFF
+    -DMIR_ENABLE_WLCS_TESTS=OFF
+    -DMIR_USE_LD=ld
   )
 
   cmake -B build -S "mir-${pkgver}" -Wno-dev \

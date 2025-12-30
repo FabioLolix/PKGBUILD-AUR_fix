@@ -8,13 +8,35 @@ pkgdesc="Wayland tiling window manager built on Mir"
 arch=(x86_64)
 url="https://github.com/miracle-wm-org/miracle-wm"
 license=(GPL-3.0-only)
-depends=(mir libnotify)
-makedepends=(git cmake nlohmann-json glm boost)
-source=("git+https://github.com/miracle-wm-org/miracle-wm.git#tag=v${pkgver}")
-sha256sums=('c2e45ed6c6e74da5943f41caa845e32cbddab3d62a3e0e61b7ef2b9b41ff1c69')
+depends=(
+    mir
+    libnotify
+    )
+makedepends=(
+    git
+    cmake
+    nlohmann-json
+    glm
+    boost
+    mold # preferred linker
+    )
+source=("git+https://github.com/miracle-wm-org/miracle-wm.git#tag=v${pkgver}"
+        0001-bugfix-only-install-libmirrenderer-dev-if-it-is-avai.patch
+        0002-task-remove-version-checks-in-order-to-assume-latest.patch
+    )
+sha256sums=('c2e45ed6c6e74da5943f41caa845e32cbddab3d62a3e0e61b7ef2b9b41ff1c69'
+            'ffffac8ccbb663e595da9f38374acedb44f2e9c70d03537c3309e90d86f23c64'
+            '5c9ed7ac10ee8e3e352c326c2035ebaac0b57579a983d13715150c9a2c53bdcd')
+
+prepare() {
+  cd miracle-wm
+  patch -Np1 -i ../0001-bugfix-only-install-libmirrenderer-dev-if-it-is-avai.patch
+  patch -Np1 -i ../0002-task-remove-version-checks-in-order-to-assume-latest.patch
+}
 
 build() {
   cmake -B build -S "miracle-wm" -Wno-dev \
+    -DSYSTEMD_INTEGRATION=ON \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr
 

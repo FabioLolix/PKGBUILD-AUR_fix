@@ -3,7 +3,7 @@
 # Contributor: kikadf <kikadf.01@gmail.com>
 
 pkgname=mir-git
-pkgver=2.23.0.r204.g639580d
+pkgver=2.26.0.dev.r75.g1b1392d
 pkgrel=1
 pkgdesc="Canonical's display server"
 url="https://github.com/canonical/mir"
@@ -25,6 +25,7 @@ makedepends=(git glm doxygen graphviz cmake boost wlcs glmark2
              #gcovr lcov valgrind
              python-dbusmock
              glib2-devel
+             cargo
              )
 optdepends=('qterminal: required for miral demos'
             'ttf-ubuntu-font-family: required for miral demos'
@@ -42,9 +43,6 @@ pkgver() {
 }
 
 build() {
-  export CFLAGS+=" -Wno-error=array-bounds"
-  export CXXFLAGS+=" -Wno-error=array-bounds"
-
   local _flags=(
     -DMIR_USE_PRECOMPILED_HEADERS=OFF
     -Dglm_DIR:PATH=/usr/lib/cmake/glm
@@ -58,9 +56,9 @@ build() {
   cmake --build build
 }
 
-#check() {
-#  ctest --test-dir build --output-on-failure
-#}
+check() {
+  ctest --test-dir build --output-on-failure
+}
 
 package() {
   DESTDIR="${pkgdir}" cmake --install build

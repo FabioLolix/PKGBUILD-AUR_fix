@@ -3,7 +3,7 @@
 # Contributor: goodguy <lists.cinelerra-gg.org>
 
 pkgname=cinelerra-gg
-_pkgver=2025-04
+_pkgver=2025-12
 pkgver=${_pkgver//-/.}
 pkgrel=1
 pkgdesc="Professional video editing and compositing environment"
@@ -22,8 +22,8 @@ makedepends=(git cmake ctags libxml2 nasm perl-xml-libxml
              perl-xml-parser python xorg-mkfontdir
              xorg-mkfontscale yasm)
 conflicts=(cin)
-source=("cinelerra-gg::git://git.cinelerra-gg.org/goodguy/cinelerra.git#tag=${_pkgver}")
-sha256sums=('5531d74f7325c00e124fa94b5dd7489e381d0dd12d975eb2aad81fe1202ee2d7')
+source=("cinelerra-gg::git+https://git.cinelerra-gg.org/goodguy/cinelerra.git#tag=${_pkgver}")
+sha256sums=('02b6d70abd28116116174540bd4914810e6cd7423d322230c9cb637339d3f55f')
 
 prepare() {
   cd "${srcdir}/cinelerra-gg/cinelerra-5.1"

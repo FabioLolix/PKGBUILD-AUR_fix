@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=grok-jpeg2000-git
-pkgver=20.0.4.r1.g3350326
+pkgver=20.0.5.r0.g6367d1f
 pkgrel=1
 pkgdesc="A high performance open source JPEG 2000 codec"
 arch=(x86_64)
@@ -10,15 +10,25 @@ license=(AGPL-3.0-only)
 depends=(glibc gcc-libs libpng libtiff lcms2 libjpeg perl-image-exiftool
 		 'perl>=5.42' 'perl<5.43'
 		)
-makedepends=(git cmake cli11 doxygen python-sphinx patchelf)
+makedepends=(git cmake cli11 doxygen python-sphinx patchelf valgrind)
 provides=(grok-jpeg2000)
 conflicts=(grok-jpeg2000)
-source=("grok-jpeg2000::git+https://github.com/GrokImageCompression/grok.git")
-sha256sums=('SKIP')
+source=("grok-jpeg2000::git+https://github.com/GrokImageCompression/grok.git"
+        "git+https://github.com/google/highway.git")
+sha256sums=('SKIP'
+            'SKIP')
+
+prepare() {
+  cd grok-jpeg2000
+  git submodule init
+  git config submodule.src/include/CLI11.update none
+  git config submodule.src/lib/core/highway.url "${srcdir}/highway"
+  git -c protocol.file.allow=always submodule update
+}
 
 pkgver() {
   cd grok-jpeg2000
-  git describe --long --tags --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags --abbrev=7 --exclude=m* | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {

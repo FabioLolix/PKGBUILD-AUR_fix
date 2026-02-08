@@ -2,7 +2,7 @@
 # Contributor: Polis Minus <polisminus2247@tuta.io>
 
 pkgname=activate-linux-git
-pkgver=1.1.0.r91.g347a579
+pkgver=r376.347a579
 pkgrel=1
 pkgdesc="The 'Activate Windows' watermark ported to Linux with Xlib and cairo in C"
 arch=(x86_64)
@@ -19,7 +19,7 @@ sha256sums=('SKIP'
 
 pkgver() {
   cd "activate-linux"
-  git describe --long --tags --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
 }
 
 build() {
@@ -28,10 +28,9 @@ build() {
 }
 
 package() {
-  #install -D activate-linux.desktop "$pkgdir/usr/share/applications/activate-linux.desktop"
+  install -D activate-linux.desktop "$pkgdir/usr/share/applications/activate-linux.desktop"
   cd "activate-linux"
-  make DESTDIR="${pkgdir}" PREFIX=/usr install
-
-  #install -D activate-linux "$pkgdir/usr/bin/activate-linux"
-  #install -D activate-linux.1 -t "${pkgdir}"/usr/share/man/man1/
+  install -Dm644 LICENSE.md "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -D activate-linux "$pkgdir/usr/bin/activate-linux"
+  install -D activate-linux.1 -t "${pkgdir}"/usr/share/man/man1/
 }

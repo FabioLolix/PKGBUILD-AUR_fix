@@ -18,7 +18,7 @@ makedepends=(
     nlohmann-json
     glm
     boost
-    mold # preferred linker
+    #mold # preferred linker
     )
 source=("git+https://github.com/miracle-wm-org/miracle-wm.git#tag=v${pkgver}"
         0001-bugfix-only-install-libmirrenderer-dev-if-it-is-avai.patch

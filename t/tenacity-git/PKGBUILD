@@ -6,7 +6,7 @@
 # Contributor: Eric Bélanger <eric@archlinux.org>
 
 pkgname=tenacity-git
-pkgver=r15750.g4c3549aea
+pkgver=r15867.gecfc78cce
 pkgrel=1
 epoch=1
 pkgdesc="An easy-to-use multi-track audio editor and recorder, forked from Audacity"
@@ -75,5 +75,5 @@ package() {
      "${pkgdir}/usr/share/pixmaps/gnome-mime-application-x-tenacity-project.xpm"
 
   chrpath --delete "${pkgdir}"/usr/lib/tenacity/*.so
-  chrpath --delete "${pkgdir}"/usr/lib/tenacity/modules/*.so
+  chrpath --delete "${pkgdir}"/usr/lib/modules/*.so
 }

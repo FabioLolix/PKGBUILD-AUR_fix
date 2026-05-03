@@ -26,7 +26,14 @@ sha256sums=('93aca8d1c602331b17e7b2fefb82318f59c5faef9cacf60514b59cd6bb89be0e'
 
 prepare() {
   cd "${srcdir}/${pkgname}-${pkgver}/src"
-  echo "[[ ":\$TCLLIBPATH:" != *":/usr/lib/tcltk/linuxcnc:"* ]] && export TCLLIBPATH="/usr/lib/tcltk/linuxcnc:\$TCLLIBPATH"" > ${pkgname}.sh
+  cat <<EOF >${pkgname}.sh
+if [ -z "\$TCLLIBPATH" ]; then
+  export TCLLIBPATH=/usr/lib/tcltk/linuxcnc
+elif [[ \$TCLLIBPATH != *"/usr/lib/tcltk/linuxcnc"* ]]; then
+  export TCLLIBPATH=/usr/lib/tcltk/linuxcnc:\$TCLLIBPATH
+fi
+EOF
+
   find . -iname fixpaths.py -o -iname checkglade -o \
    -iname update_ini | xargs perl -p -i -e "s/python/python2/"
   patch -Np2 -i $srcdir/libtirpc.patch

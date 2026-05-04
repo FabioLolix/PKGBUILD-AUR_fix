@@ -25,5 +25,5 @@ check() {
 
 package() {
   DESTDIR="${pkgdir}" cmake --install build
-  install -D "${pkgname}-${pkgver}"/LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -D "args-${pkgver}"/LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }

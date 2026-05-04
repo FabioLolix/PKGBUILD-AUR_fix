@@ -3,8 +3,8 @@
 # Contributor: Thibaut Pérami (https://aur.archlinux.org/account/tperami)
 
 pkgname=magic_enum-git
-pkgver=0.9.7.r25.gec5734e
-pkgrel=2
+pkgver=0.9.8.r0.g1384769
+pkgrel=1
 pkgdesc="Header-only C++17 library, provides static reflection for enums, works with any enum type without any macro or boilerplate code."
 arch=(any)
 url="https://github.com/Neargye/magic_enum"

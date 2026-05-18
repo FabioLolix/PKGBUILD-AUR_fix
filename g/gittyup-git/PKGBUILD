@@ -5,7 +5,7 @@
 # Contributor: Whovian9369 <Whovian9369@gmail.com>
 
 pkgname=gittyup-git
-pkgver=2.0.0.r0.g54f61791
+pkgver=2.0.0.r41.ge7a94d68
 pkgrel=1
 pkgdesc="Graphical Git client (GitAhead fork)"
 url="https://github.com/Murmele/Gittyup"
@@ -14,7 +14,7 @@ license=(MIT)
 depends=(qt6-base hunspell lua cmark pcre libssh2
 
          # namcap implict depends
-         hicolor-icon-theme glibc gcc-libs zlib openssl libglvnd krb5
+         hicolor-icon-theme glibc libgcc libstdc++ zlib openssl libglvnd krb5
 )
 makedepends=(git cmake ninja qt6-tools qt6-translations) #libgit2 libgnome-keyring
 optdepends=('git-lfs: git-lfs support'

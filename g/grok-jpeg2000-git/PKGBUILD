@@ -1,21 +1,22 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=grok-jpeg2000-git
-pkgver=20.0.5.r0.g6367d1f
+pkgver=20.3.1.r0.g4f1f10c
 pkgrel=1
 pkgdesc="A high performance open source JPEG 2000 codec"
 arch=(x86_64)
 url="https://github.com/GrokImageCompression/grok"
 license=(AGPL-3.0-only)
-depends=(glibc gcc-libs libpng libtiff lcms2 libjpeg perl-image-exiftool
-		 'perl>=5.42' 'perl<5.43'
-		)
-makedepends=(git cmake cli11 doxygen python-sphinx patchelf valgrind)
+depends=(glibc gcc-libs libpng libtiff lcms2 libjpeg perl perl-image-exiftool)
+makedepends=(git cmake cli11 doxygen python-sphinx valgrind)
 provides=(grok-jpeg2000)
 conflicts=(grok-jpeg2000)
+#options=(!strip)
 source=("grok-jpeg2000::git+https://github.com/GrokImageCompression/grok.git"
-        "git+https://github.com/google/highway.git")
+        "git+https://github.com/google/highway.git"
+        "git+https://github.com/gabime/spdlog.git")
 sha256sums=('SKIP'
+            'SKIP'
             'SKIP')
 
 prepare() {
@@ -23,6 +24,7 @@ prepare() {
   git submodule init
   git config submodule.src/include/CLI11.update none
   git config submodule.src/lib/core/highway.url "${srcdir}/highway"
+  git config submodule.src/include/spdlog.url "${srcdir}/spdlog"
   git -c protocol.file.allow=always submodule update
 }
 
@@ -51,8 +53,11 @@ build() {
 }
 
 package() {
-  # patchelf --replace-needed liboriginal.so.1 libreplacement.so.1 my-program
-  patchelf --replace-needed libperl.so /usr/lib/perl5/5.42/core_perl/CORE/libperl.so build/bin/libgrokj2kcodec.so.20.0.4
-
   DESTDIR="${pkgdir}" cmake --install build
+
+  #remove bundled fmt from package
+  rm -rf "${pkgdir}/usr/include/fmt"
+  rm -rf "${pkgdir}/usr/lib/cmake/fmt"
+  rm     "$pkgdir"/usr/lib/pkgconfig/fmt.pc
+  rm     "$pkgdir"/usr/lib/libfmt.a
 }

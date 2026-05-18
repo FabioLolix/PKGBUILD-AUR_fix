@@ -2,12 +2,12 @@
 # Contributor: hacker1024 <joshleivenzon at outlook dot com>
 
 pkgname=mint-themes-git
-pkgver=2.1.6.r1.gb1dfbc54
-pkgrel=2
+pkgver=2.3.6.r0.gc2a0241e
+pkgrel=1
 pkgdesc="Linux Mint themes"
 arch=(any)
 url="https://github.com/linuxmint/mint-themes"
-license=(GPL3)
+license=(GPL-3.0-or-later)
 makedepends=(git python-libsass)
 conflicts=(mint-themes mint-x-theme mint-y-theme)
 provides=(mint-themes mint-x-theme mint-y-theme)

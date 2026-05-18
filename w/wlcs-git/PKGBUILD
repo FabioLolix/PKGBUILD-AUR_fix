@@ -3,7 +3,7 @@
 # Contributor: Pedro <https://aur.archlinux.org/account/PedroHLC>
 
 pkgname=wlcs-git
-pkgver=1.8.1.r26.ga661bd8
+pkgver=1.8.1.r173.g028e948
 pkgrel=1
 pkgdesc="Canonical's protocol-conformance-verifying test suite for Wayland compositor implementations."
 arch=(x86_64 i686 armv7h aarch64)

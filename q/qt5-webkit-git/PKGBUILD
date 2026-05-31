@@ -50,6 +50,10 @@ prepare() {
 # disabling XSLT to build https://github.com/qtwebkit/qtwebkit/issues/1097
 
 build() {
+  # Disable all warnings
+  export CFLAGS+=" -w"
+  export CXXFLAGS+=" -w"
+
   local _flags=(
     -DCMAKE_CXX_FLAGS="${CXXFLAGS} -DNDEBUG"
     -DPORT=Qt

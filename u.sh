@@ -1306,6 +1306,12 @@ VAR2=q
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
+  VAR=qt5-location
+  cd "$BASE/$VAR2/$VAR"
+    makepkg --printsrcinfo > .SRCINFO
+    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    echo "    synced $VAR"
+
   VAR=qt5-webkit
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO

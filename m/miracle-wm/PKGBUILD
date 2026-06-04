@@ -12,6 +12,7 @@ license=(GPL-3.0-only)
 depends=(
     mir
     libnotify
+    wasmedge
     )
 makedepends=(
     git

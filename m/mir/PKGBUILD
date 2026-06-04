@@ -7,7 +7,7 @@
 
 pkgname=mir
 pkgver=2.26.0
-pkgrel=1
+pkgrel=2
 pkgdesc="Canonical's display server"
 url="https://github.com/canonical/mir"
 arch=(x86_64 i686)

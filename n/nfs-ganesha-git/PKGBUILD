@@ -33,15 +33,16 @@ makedepends=(
     git
     graphviz
     lsb-release
-    prometheus-cpp
     python-sphinx
     )
 provides=(nfs-ganesha)
 conflicts=(nfs-ganesha)
 source=("git+https://github.com/nfs-ganesha/nfs-ganesha.git"
         "git+https://github.com/nfs-ganesha/ntirpc.git"
+        "git+https://github.com/biaks/prometheus-cpp-lite.git"
         )
 sha256sums=('SKIP'
+            'SKIP'
             'SKIP')
 backup=(etc/ganesha/ganesha.conf) #etc/sysconfig/ganesha
 
@@ -54,7 +55,11 @@ prepare() {
   cd nfs-ganesha
   git submodule init
   git config submodule.src/libntirpc.url "${srcdir}/ntirpc"
-  git -c protocol.file.allow=always  submodule update
+  git -c protocol.file.allow=always submodule update
+
+  cd src/libntirpc/src/monitoring
+  git config submodule.src/monitoring/prometheus-cpp-lite.url "${srcdir}/prometheus-cpp-lite"
+  git -c protocol.file.allow=always submodule update
 }
 
 build() {
@@ -63,7 +68,6 @@ build() {
   export CXXFLAGS+=" -w"
 
   local _flags=(
-    -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     -DUSE_MAN_PAGE=ON
     -DUSE_RADOS_RECOV=OFF
     -DRADOS_URLS=OFF

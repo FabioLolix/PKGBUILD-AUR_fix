@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=netpeek-git
-pkgver=0.2.6.r0.g8319a8e
+pkgver=0.2.7.r2.g2d39db3
 pkgrel=1
 pkgdesc="Mordern network scanner for GNOME"
 arch=(any)

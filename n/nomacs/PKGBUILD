@@ -11,11 +11,31 @@ pkgdesc="A Qt image viewer"
 arch=(x86_64)
 url="https://github.com/nomacs/nomacs"
 license=(GPL-3.0-only)
-depends=(exiv2 gcc-libs glibc libraw libtiff opencv qt6-base qt6-svg quazip-qt6)
-#depends+=(libopencv_imgproc.so)
-makedepends=(cmake git git-lfs qt6-tools python)
-optdepends=('qt6-imageformats: support additional image formats'
-            'kimageformats: support QOI (Quite OK Image Format)')
+depends=(
+    exiv2
+    glibc
+    hicolor-icon-theme
+    libgcc
+    libglvnd
+    libraw
+    libstdc++
+    libtiff
+    opencv      #libopencv_imgproc.so
+    qt6-base
+    qt6-svg
+    quazip-qt6
+    )
+makedepends=(
+    cmake
+    git
+    git-lfs
+    python
+    qt6-tools
+    )
+optdepends=(
+    'kimageformats: support QOI (Quite OK Image Format)'
+    'qt6-imageformats: support additional image formats'
+    )
 source=("git+https://github.com/nomacs/nomacs.git#tag=${pkgver}"
         #"nomacs-plugins-qt6_01.patch::https://github.com/nomacs/nomacs-plugins/pull/40/commits/1b87f615ce0e7125ec739bc3e40d8ff7f6783587.patch"
         #"nomacs-plugins-qt6_02.patch::https://github.com/nomacs/nomacs-plugins/pull/40/commits/a869962f051504dd2c1dedeb3bc3d266c17070c1.patch"

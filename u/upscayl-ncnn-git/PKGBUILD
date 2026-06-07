@@ -2,8 +2,8 @@
 # Contributor: HurricanePootis <hurricanepootis@protonmail.com>
 
 pkgname=upscayl-ncnn-git
-pkgver=20240601.103425.r2.g8f8babf
-pkgrel=4
+pkgver=20251207.174704.r1.g0beb390
+pkgrel=1
 pkgdesc="Fork of the NCNN implementation of Real-ESRGAN"
 arch=(x86_64)
 url="https://github.com/upscayl/upscayl-ncnn"

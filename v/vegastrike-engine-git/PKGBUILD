@@ -1,12 +1,12 @@
 
 pkgname=vegastrike-engine-git
-pkgver=0.10.0.alpha1.r353.ga05805c4b
+pkgver=0.10.0.alpha1.r790.ge7a876858
 pkgrel=1
 pkgdesc="A spaceflight simulator in massive universe"
 arch=(x86_64)
 url="https://www.vega-strike.org/"
 license=(GPL-3.0-or-later)
-depends=(boost-libs python freeglut gtk3 libvorbis openal sdl2 sdl2_image glu
+depends=(boost-libs python freeglut gtk3 libvorbis openal sdl3 sdl3_image glu
 
          # namcap implicit depends
          glibc gcc-libs glib2 zlib libglvnd libpng libjpeg-turbo expat)

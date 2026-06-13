@@ -3,13 +3,13 @@
 # Contributor: Wouter Wijsman <wwijsman@live.nl>
 
 pkgname=minigalaxy-git
-pkgver=1.2.6.r17.gb0f01ab
+pkgver=1.4.1.r72.g1127c95
 pkgrel=1
 pkgdesc="A simple GOG client for Linux"
 arch=(any)
 url="https://github.com/sharkwouter/minigalaxy"
 license=(GPL3 'CCPL:cc-by-sa-3.0')
-depends=(python python-requests python-gobject gtk3 webkit2gtk)
+depends=(python python-requests python-gobject gtk3 webkit2gtk-4.1)
 makedepends=(git python-build python-installer python-setuptools python-wheel)
 checkdepends=(python-coverage python-simplejson dosbox scummvm innoextract)
 optdepends=('dosbox: Use the system DOSBox installation'
@@ -32,8 +32,8 @@ build() {
 
 check() {
   cd "$srcdir/${pkgname%-git}"
-  #LANG=EN_us.UTF-8 python -m coverage run --source minigalaxy -m unittest discover -v tests
-  #LANG=EN_us.UTF-8 python -m coverage report -m
+  LANG=C.UTF-8 python -m coverage run --source minigalaxy -m unittest discover -v tests
+  LANG=C.UTF-8 python -m coverage report -m
 }
 
 package() {

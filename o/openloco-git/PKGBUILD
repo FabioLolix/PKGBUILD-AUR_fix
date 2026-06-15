@@ -1,18 +1,32 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=openloco-git
-pkgver=26.04.r1.g6f9cfc7ac
+pkgver=26.05.r7.g9511749ba
 pkgrel=1
 pkgdesc="An open source re-implementation of Chris Sawyer's Locomotion"
-arch=(x86_64 i686)
+arch=(x86_64)
 url="https://github.com/OpenLoco/OpenLoco"
 license=(MIT)
-depends=(glibc libgcc libstdc++ sdl3 libpng openal yaml-cpp fmt hicolor-icon-theme onetbb)
-makedepends=(cmake yaml-cpp git gtest ) #fmt
+depends=(
+    glibc
+    hicolor-icon-theme
+    libgcc
+    libpng
+    libstdc++
+    onetbb
+    openal
+    sdl3
+    yaml-cpp
+    )
+makedepends=(
+    cmake
+    git
+    gtest
+    )
 optdepends=(
     'libpipewire: audio output'
     'libpulse: audio output'
-)
+    )
 provides=(openloco)
 conflicts=(openloco)
 options=(!lto)
@@ -50,7 +64,7 @@ check() {
 
 package() {
   DESTDIR="${pkgdir}" cmake --install build
-  ln -s /usr/bin/OpenLoco           "${pkgdir}/usr/bin/openloco"
+  ln -s /usr/bin/OpenLoco          "${pkgdir}/usr/bin/openloco"
   install -D "openloco/LICENSE" -t "${pkgdir}/usr/share/licenses/${pkgname}"
 
   #remove bundled sfl from package

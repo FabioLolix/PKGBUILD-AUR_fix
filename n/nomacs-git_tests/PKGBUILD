@@ -1,0 +1,78 @@
+# Maintainer: Peter Mattern <pmattern at arcor dot de>
+
+pkgname=nomacs-git
+pkgver=3.23.1.r14.gcd76467e
+pkgrel=1
+pkgdesc='Free, open source image viewer, which supports multiple platforms. Qt6 Lolix pkgbuild'
+arch=(x86_64)
+url="https://github.com/nomacs/nomacs"
+license=(GPL-3.0-only)
+depends=(
+    exiv2
+    glibc
+    hicolor-icon-theme
+    libgcc
+    libglvnd
+    libraw
+    libtiff
+    opencv      #libopencv_imgproc.so
+    qt6-base
+    qt6-svg
+    quazip-qt6
+    )
+makedepends=(
+    cmake
+    git
+    gtest
+    python
+    qt6-tools
+    vulkan-headers
+    )
+optdepends=(
+    'kimageformats: support QOI (Quite OK Image Format)'
+    'qt6-imageformats: support additional image formats'
+    )
+provides=(nomacs)
+conflicts=(nomacs)
+source=("git+https://github.com/nomacs/nomacs.git"
+        "nomacs-opencv5.patch::https://github.com/nomacs/nomacs/pull/1622.patch"
+        )
+sha256sums=('SKIP'
+            'f509419f3ae78223ac83da4e582e3eb44620dd39bbbcee65028fdf29a992da92')
+
+pkgver() {
+  cd nomacs
+  git describe --long --tags | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+  cd nomacs
+  patch -Np1 -i ../nomacs-opencv5.patch
+}
+
+build() {
+  # Disable warning Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+  export LANG=C.UTF-8
+  export LC_ALL=C.UTF-8
+
+  local _flags=(
+    -DQT_VERSION_MAJOR=6
+    -DENABLE_QUAZIP=ON
+    -DENABLE_TRANSLATIONS=ON
+  )
+
+  cmake -B build -S "nomacs/ImageLounge" -Wno-author \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    "${_flags[@]}"
+
+  cmake --build build
+}
+
+check() {
+  ctest --test-dir build --output-on-failure
+}
+
+package() {
+  DESTDIR="${pkgdir}" cmake --install build
+}

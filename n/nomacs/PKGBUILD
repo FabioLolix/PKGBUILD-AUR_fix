@@ -3,7 +3,7 @@
 # Contributor: speps <speps at aur dot archlinux dot org>
 
 pkgname=nomacs
-pkgver=3.22.1
+pkgver=3.23.1
 pkgrel=1
 epoch=1
 pkgdesc="A Qt image viewer"
@@ -15,10 +15,10 @@ depends=(
     glibc
     hicolor-icon-theme
     libgcc
-    #libglvnd
-    #libraw
-    #libtiff
-    #opencv      #libopencv_imgproc.so
+    libglvnd
+    libraw
+    libtiff
+    opencv      #libopencv_imgproc.so
     qt6-base
     qt6-svg
     quazip-qt6
@@ -26,6 +26,7 @@ depends=(
 makedepends=(
     cmake
     git
+    #gtest # for tests
     python
     qt6-tools
     vulkan-headers
@@ -37,13 +38,13 @@ optdepends=(
 source=("git+https://github.com/nomacs/nomacs.git#tag=${pkgver}"
         "nomacs-opencv5.patch::https://github.com/nomacs/nomacs/pull/1622.patch"
         )
-b2sums=('52eedf00a119aaa08ef6d79a506b6490cd858bbe336f4491db67fb5f4a701b3ef03d1f5a60f1ce8ae1974973203efc2125aa9ee649947e2535a20604a05f2cd2'
+b2sums=('1d6660001b029362282bac021950c6893d4ae8b7606518d5cb80385345a09cea3c5dbfa039f1432537760bd5cf06f541517de728c93772e3bdd9b9f763bd0345'
         '0232c14becbdf31f321e67cedeae0e13edf051606bf68ecdde4aac96c2ec20258bd3ce0d5f6b765f609a35ae15a00e282a208d82d9e0e5a707c65960a6714ef3')
 
 prepare() {
   cd nomacs
-  #patch -Np1 -i ../nomacs-opencv5.patch
-  # Patch doesn't apply cleanly
+  patch -Np1 -i ../nomacs-opencv5.patch
+  # Patch doesn't apply cleanly to stable version 3.22.1
   # https://github.com/nomacs/nomacs/issues/1619
   # https://github.com/nomacs/nomacs/pull/1622
 }
@@ -59,10 +60,10 @@ build() {
     -DENABLE_AVIF=ON    # not in next version
     -DENABLE_QUAZIP=ON  # not in next version
     -DENABLE_TRANSLATIONS=ON
-    -DENABLE_OPENCV=OFF
-    -DENABLE_RAW=OFF
-    -DENABLE_TIFF=OFF
-    -DENABLE_PLUGINS=OFF
+    #-DENABLE_OPENCV=OFF
+    #-DENABLE_RAW=OFF
+    #-DENABLE_TIFF=OFF
+    #-DENABLE_PLUGINS=OFF
   )
 
   cmake -B build -S "nomacs/ImageLounge" -Wno-author \
@@ -73,11 +74,10 @@ build() {
   cmake --build build
 }
 
-check() {
+#check() {
   #ctest --test-dir build --output-on-failure
   # tests not built despite nomacs "tests ................................................. YES" ?
-  true
-}
+#}
 
 package() {
   DESTDIR="${pkgdir}" cmake --install build

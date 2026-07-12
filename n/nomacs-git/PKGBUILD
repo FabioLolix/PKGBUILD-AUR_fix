@@ -1,24 +1,43 @@
 # Maintainer: Peter Mattern <pmattern at arcor dot de>
 
 pkgname=nomacs-git
-pkgver=3.22.0.rc.1.r53.g52786878
+pkgver=3.23.1.r14.gcd76467e
 pkgrel=1
 pkgdesc='Free, open source image viewer, which supports multiple platforms. Qt6 Lolix pkgbuild'
-arch=('i686' 'x86_64')
-url='https://github.com/nomacs/nomacs'
+arch=(x86_64)
+url="https://github.com/nomacs/nomacs"
 license=(GPL-3.0-only)
-depends=(exiv2 gcc-libs glibc libraw libtiff opencv qt6-base qt6-svg quazip-qt6)
-makedepends=(cmake git git-lfs qt6-tools python)
-optdepends=('qt6-imageformats: support additional image formats'
-            'kimageformats5: support QOI (Quite OK Image Format)')
+depends=(
+    exiv2
+    glibc
+    hicolor-icon-theme
+    libgcc
+    libglvnd
+    libraw
+    libtiff
+    opencv      #libopencv_imgproc.so
+    qt6-base
+    qt6-svg
+    quazip-qt6
+    )
+makedepends=(
+    cmake
+    git
+    python
+    qt6-tools
+    vulkan-headers
+    )
+optdepends=(
+    'kimageformats: support QOI (Quite OK Image Format)'
+    'qt6-imageformats: support additional image formats'
+    )
 provides=(nomacs)
 conflicts=(nomacs)
 source=("git+https://github.com/nomacs/nomacs.git"
-        #"git+https://github.com/nomacs/nomacs-plugins.git"
+        "nomacs-opencv5.patch::https://github.com/nomacs/nomacs/pull/1622.patch"
         )
-sha256sums=('SKIP')
-
-export GIT_LFS_SKIP_SMUDGE=1
+sha256sums=('SKIP'
+            'f509419f3ae78223ac83da4e582e3eb44620dd39bbbcee65028fdf29a992da92')
 
 pkgver() {
   cd nomacs
@@ -27,26 +46,28 @@ pkgver() {
 
 prepare() {
   cd nomacs
-  # https://github.com/nomacs/nomacs/issues/951
-  #patch -Np1 -i ../nomacs-fix-exiv2-0.28.patch.txt
-  # copy plugin sources into place
-  #cp -av "${srcdir}/nomacs-plugins/"* "ImageLounge/plugins"
+  patch -Np1 -i ../nomacs-opencv5.patch
 }
 
 build() {
-  cd nomacs
-  cmake -B build -S ImageLounge -Wno-dev \
-    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DQT_VERSION_MAJOR=6 \
-    -DUSE_SYSTEM_QUAZIP=ON \
-    -DENABLE_AVIF=ON \
+  # Disable warning Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+  export LANG=C.UTF-8
+  export LC_ALL=C.UTF-8
+
+  local _flags=(
+    -DQT_VERSION_MAJOR=6
+    -DENABLE_QUAZIP=ON
     -DENABLE_TRANSLATIONS=ON
+  )
+
+  cmake -B build -S "nomacs/ImageLounge" -Wno-author \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    "${_flags[@]}"
 
   cmake --build build
 }
 
 package() {
-  cd nomacs
-  DESTDIR="$pkgdir" cmake --install build
+  DESTDIR="${pkgdir}" cmake --install build
 }

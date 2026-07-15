@@ -56,8 +56,6 @@ build() {
   local _flags=(
     -DQT_VERSION_MAJOR=6
     -DUSE_SYSTEM_QUAZIP=ON
-    -DENABLE_AVIF=ON    # not in next version
-    -DENABLE_QUAZIP=ON  # not in next version
     -DENABLE_TRANSLATIONS=ON
   )
 

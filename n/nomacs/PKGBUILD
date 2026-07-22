@@ -35,18 +35,8 @@ optdepends=(
     'kimageformats: support QOI (Quite OK Image Format)'
     'qt6-imageformats: support additional image formats'
     )
-source=("git+https://github.com/nomacs/nomacs.git#tag=${pkgver}"
-        #"nomacs-opencv5.patch::https://github.com/nomacs/nomacs/pull/1622.patch"
-        )
+source=("git+https://github.com/nomacs/nomacs.git#tag=${pkgver}")
 b2sums=('ccfd20c66feea7411ad78623f0966d74d94f0012a96186e36616fbea3ff45505bf35459eed50d64be5e40b038acfae6c634a545133c62d4a92e12d33bc53e552')
-
-prepare() {
-  cd nomacs
-  #patch -Np1 -i ../nomacs-opencv5.patch
-  # Patch doesn't apply cleanly to stable version 3.22.1
-  # https://github.com/nomacs/nomacs/issues/1619
-  # https://github.com/nomacs/nomacs/pull/1622
-}
 
 build() {
   # Disable warning Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.

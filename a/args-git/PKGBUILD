@@ -1,7 +1,7 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=args-git
-pkgver=6.4.16.r0.g745abe3
+pkgver=6.5.0.r4.g18c8125
 pkgrel=1
 pkgdesc="Simple header-only C++ argument parser library"
 arch=(any)

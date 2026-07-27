@@ -2,13 +2,13 @@
 # Contributor: quininer
 
 pkgname=ruffle-git
-pkgver=r13229.0eccd9b74
+pkgver=r14018.e433e01f8
 pkgrel=1
 epoch=1
 pkgdesc="A Flash Player emulator written in Rust"
 arch=(x86_64 aarch64)
-url="https://ruffle.rs/"
-license=(Apache MIT)
+url="https://github.com/ruffle-rs/ruffle"
+license=(Apache-2.0 MIT)
 depends=(alsa-lib gtk3
 
          # namcap implicit depends

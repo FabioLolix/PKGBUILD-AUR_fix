@@ -2,14 +2,48 @@
 # Contributor: gaelic
 
 pkgname=shotwell-git
-pkgver=0.32.1.r336.g2dd08596
+pkgver=0.32.1.r610.g140a6938
 pkgrel=1
 pkgdesc="A digital photo organizer designed for the GNOME desktop environment"
 arch=(x86_64)
-url="https://wiki.gnome.org/Apps/Shotwell"
-license=(LGPL2.1)
-depends=(libgee libgexiv2 libraw libgphoto2 gtk4 libportal-gtk4 gcr-4)
-makedepends=(git vala meson ninja itstool)
+url="https://gitlab.gnome.org/GNOME/shotwell"
+license=(LGPL-2.1-or-later)
+depends=(
+    cairo
+    dconf
+    gcr-4
+    gdk-pixbuf2
+    gexiv2
+    glib2
+    glibc
+    graphene
+    gstreamer
+    gtk4
+    hicolor-icon-theme
+    json-glib
+    libexif
+    libgee
+    libgphoto2
+    libgudev
+    libportal
+    libportal-gtk4
+    libraw
+    libsecret
+    libsoup3
+    libwebp
+    libxml2
+    pango
+    python
+    sh
+    sqlite
+    )
+makedepends=(
+    git
+    itstool
+    meson
+    ninja
+    vala
+    )
 provides=(shotwell)
 conflicts=(shotwell)
 source=("git+https://gitlab.gnome.org/GNOME/shotwell.git")
@@ -17,10 +51,14 @@ sha256sums=('SKIP')
 
 pkgver() {
   cd "shotwell"
-  git describe --long --tags | sed 's/^shotwell-//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags --exclude 33* | sed 's/^shotwell-//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {
+  # Disable all warnings
+  export CFLAGS+=" -w"
+  export CXXFLAGS+=" -w"
+
   cd "shotwell"
   arch-meson build
   ninja -C build

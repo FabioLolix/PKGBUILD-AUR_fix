@@ -80,7 +80,7 @@ build() {
     -DENABLE_LAPACK=yes
     -DBUILD_WITH_EPOXY=ON
     -DBUILD_HSI=ON
-    #-DUSE_GDKBACKEND_X11=ON
+    -DUSE_GDKBACKEND_X11=ON
     -DwxWidgets_CONFIG_EXECUTABLE=/usr/bin/wx-config
   )
 

@@ -1,0 +1,12 @@
+diff --git a/src/hugin_script_interface/hpi_classes.cpp b/src/hugin_script_interface/hpi_classes.cpp
+--- a/src/hugin_script_interface/hpi_classes.cpp
++++ b/src/hugin_script_interface/hpi_classes.cpp
+@@ -112,7 +112,7 @@
+         if ( pValue != NULL )
+         {
+             // the function should have returned an integer
+-            result = PyInt_AsLong ( pValue ) ;
++            result = PyLong_AsLong ( pValue ) ;
+             Py_DECREF(pValue);
+         }
+     }

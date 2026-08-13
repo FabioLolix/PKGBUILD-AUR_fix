@@ -6,14 +6,14 @@
 # Contributor: joel schaerer <joel.schaerer@laposte.net>
 
 pkgname=itk-lite-git
-pkgver=6.0b01.r232.gf48078d246
+pkgver=6.0b02.r6228.g2f6c5acced
 pkgrel=1
 pkgdesc="Cross-platform system that provides developers with an extensive suite of software tools for image analysis"
 arch=(x86_64)
 url="https://itk.org/"
 license=(Apache-2.0)
 depends=(glibc gcc-libs libjpeg-turbo libpng zlib libtiff gdcm expat hdf5)
-makedepends=(cmake git eigen3 gtest)
+makedepends=(cmake git eigen gtest)
 provides=(itk insight-toolkit insight-toolkit-git)
 conflicts=(itk insight-toolkit)
 source=("git+https://github.com/InsightSoftwareConsortium/ITK.git")
@@ -36,18 +36,19 @@ build() {
     -DITK_USE_SYSTEM_TIFF:BOOL=ON
     -DITK_USE_SYSTEM_GDCM:BOOL=ON
     -DITK_LEGACY_SILENT:BOOL=ON
-    -DCMAKE_CXX_FLAGS:STRING="-std=c++98"
     -DITK_USE_SYSTEM_LIBRARIES:BOOL=ON
     -DITK_USE_SYSTEM_EXPAT:BOOL=ON
     -DITK_USE_SYSTEM_FFTW:BOOL=ON
     -DITK_USE_SYSTEM_HDF5:BOOL=ON
+    -DITK_USE_SYSTEM_EIGEN=OFF
     -DITK_USE_SYSTEM_GOOGLETEST=OFF
+    -DITK_USE_SYSTEM_POCKETFFT:BOOL=OFF # unversioned
     -DModule_ITKIOMINC:BOOL=ON
     -DModule_ITKIOTransformMINC:BOOL=ON
     -DModule_SimpleITKFilters:BOOL=ON
   )
 
-  cmake -B build -S "ITK" -Wno-dev \
+  cmake -B build -S "ITK" -Wno-author \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr \
     "${_flags[@]}"

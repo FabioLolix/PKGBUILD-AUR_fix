@@ -7,7 +7,7 @@
 
 pkgname=itk-lite-git
 pkgver=6.0b02.r6232.gd56ecc0402
-pkgrel=1
+pkgrel=2
 pkgdesc="Cross-platform system that provides developers with an extensive suite of software tools for image analysis"
 arch=(x86_64)
 url="https://itk.org/"
@@ -22,11 +22,12 @@ depends=(
     libpng
     libstdc++
     libtiff
+    openjpeg2
     zlib
     )
 makedepends=(
     cmake
-    eigen
+    #eigen
     git
     gtest
     )
@@ -56,7 +57,7 @@ build() {
     -DITK_USE_SYSTEM_EXPAT:BOOL=ON
     -DITK_USE_SYSTEM_FFTW:BOOL=ON
     -DITK_USE_SYSTEM_HDF5:BOOL=ON
-    -DITK_USE_SYSTEM_EIGEN=ON
+    -DITK_USE_SYSTEM_EIGEN=OFF
     -DITK_USE_SYSTEM_GOOGLETEST=OFF
     -DITK_USE_SYSTEM_POCKETFFT:BOOL=OFF # unversioned
     -DModule_ITKIOMINC:BOOL=ON

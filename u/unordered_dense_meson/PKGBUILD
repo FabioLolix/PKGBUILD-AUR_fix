@@ -1,19 +1,27 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
-pkgname=unordered_dense
-pkgver=4.9.1
+pkgname=unordered_dense_tests
+pkgver=4.9.2
 pkgrel=1
 pkgdesc="A fast & densely stored hashmap and hashset based on robin-hood backward shift deletion"
 arch=(any)
 url="https://github.com/martinus/unordered_dense"
 license=(MIT)
 makedepends=(
-    doctest # test
+    boost   # for tests
+    doctest # for tests
+    fmt     # for tests
     git
     meson
+    ninja
     )
 source=("git+https://github.com/martinus/unordered_dense.git#tag=v${pkgver}")
-sha256sums=('cc16619c151f669caeb057354a27481024630480bc00a0a552285042e89e804b')
+sha256sums=('3955d39d5c28fc30f67adf48a72fe14bec218c6691ee0580e51752f2ae7a6a94')
+
+prepare() {
+  cd unordered_dense/test/app
+  sed -i 's|#include <doctest.h>|#include <doctest/doctest.h>|g' doctest.h
+}
 
 build() {
   arch-meson unordered_dense build
@@ -27,6 +35,5 @@ check() {
 package() {
   meson install -C build --destdir "${pkgdir}"
 
-  cd unordered_dense
   install -Dm644 unordered_dense/LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}/"
 }

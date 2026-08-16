@@ -1,14 +1,34 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=grok-jpeg2000-git
-pkgver=20.3.6.r8.g437cf24
-pkgrel=2
+pkgver=20.3.6.r9.gd231604
+pkgrel=1
 pkgdesc="A high performance open source JPEG 2000 codec"
 arch=(x86_64)
 url="https://github.com/GrokImageCompression/grok"
 license=(AGPL-3.0-only)
-depends=(glibc gcc-libs libpng libtiff lcms2 libjpeg-turbo perl perl-image-exiftool fmt)
-makedepends=(git cmake cli11 doxygen python-sphinx valgrind)
+depends=(
+    glibc
+    #gcc-libs
+    libpng
+    libtiff
+    lcms2
+    libjpeg-turbo
+    perl
+    perl-image-exiftool
+    fmt
+    libgcc
+    libstdc++
+    )
+makedepends=(
+    git
+    cmake
+    cli11
+    doxygen
+    python-sphinx
+    valgrind
+    swig
+    )
 provides=(grok-jpeg2000)
 conflicts=(grok-jpeg2000)
 source=("grok-jpeg2000::git+https://github.com/GrokImageCompression/grok.git"
@@ -48,7 +68,7 @@ build() {
     -DSPDLOG_FMT_EXTERNAL=ON
   )
 
-  cmake -B build -S "grok-jpeg2000" -Wno-dev \
+  cmake -B build -S "grok-jpeg2000" -Wno-author \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
     "${_flags[@]}"

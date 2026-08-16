@@ -5,46 +5,66 @@
 # Contributor: Dr.Egg <rwhite@archlinux.us>
 
 pkgname=musescore-git
-pkgver=4.0_alpha_2.r14760.gd1f5065
-pkgrel=2
+pkgver=4.0_alpha_2.r21658.g75b8a13
+pkgrel=1
 pkgdesc="Create, play and print beautiful sheet music"
 arch=(x86_64 i686)
 url="https://github.com/musescore/MuseScore"
 license=(GPL-3.0-only)
 groups=(pro-audio)
 depends=(
-  gcc-libs
-  glibc
-  hicolor-icon-theme
-  libasound.so
-  libfreetype.so
-  libsndfile.so
-  qt6-5compat
-  qt6-base
-  qt6-declarative
-  #qt6-graphicaleffects
-  qt6-networkauth
-  #qt6-quickcontrols
-  #qt6-quickcontrols2
-  qt6-scxml
-  qt6-svg
-  zlib
-)
+    glibc
+    hicolor-icon-theme
+    alsa-lib libasound.so
+    freetype2 libfreetype.so
+    libsndfile libsndfile.so
+    qt6-5compat
+    qt6-base
+    qt6-declarative
+    #qt6-graphicaleffects
+    qt6-networkauth
+    #qt6-quickcontrols
+    #qt6-quickcontrols2
+    qt6-scxml
+    qt6-svg
+    zlib
+    flac
+    lame
+    harfbuzz
+    #lame
+    libfdk-aac
+    libgcc
+    libstdc++
+    opus
+    )
 makedepends=(
-  cmake
-  doxygen
-  git
-  lame
-  ninja
-  python
-  qt6-tools
-)
+    cmake
+    doxygen
+    git
+    lame
+    ninja
+    python
+    qt6-tools
+    xxd
+    )
 optdepends=('lame: MP3 export')
 options=(!lto)
 conflicts=(musescore)
 provides=(musescore)
-source=("git+https://github.com/musescore/MuseScore.git")
-md5sums=('SKIP')
+source=("git+https://github.com/musescore/MuseScore.git"
+        "git+https://github.com/musescore/muse_framework.git"
+        "git+https://github.com/musescore/muse_deps.git")
+sha256sums=('SKIP'
+            'SKIP'
+            'SKIP')
+
+prepare() {
+  cd MuseScore
+  git submodule init
+  git config submodule.muse.url "${srcdir}/muse_framework"
+  git config submodule.muse_deps.url "${srcdir}/muse_deps"
+  git -c protocol.file.allow=always submodule update
+}
 
 pkgver() {
   cd MuseScore
@@ -52,22 +72,30 @@ pkgver() {
 }
 
 build() {
-  cmake -S MuseScore -B build -G Ninja \
-    -DCMAKE_BUILD_TYPE=None \
-    -DCMAKE_C_FLAGS_RELEASE="$CFLAGS" \
-    -DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS" \
-    -DCMAKE_INSTALL_PREFIX=/usr \
-    -DCMAKE_SKIP_RPATH=ON \
-	-DCMAKE_POSITION_INDEPENDENT_CODE=ON \
-    -DMUSESCORE_BUILD_CONFIGURATION=app \
-    -DMUSESCORE_BUILD_MODE=release \
-    -DMUSESCORE_REVISION=$(git rev-parse --short=7 HEAD) \
+  # Disable all warnings
+  export CFLAGS+=" -w"
+  export CXXFLAGS+=" -w"
+
+  local _flags=(
+    -DCMAKE_C_FLAGS_RELEASE="$CFLAGS"
+    -DCMAKE_CXX_FLAGS_RELEASE="$CXXFLAGS"
+    -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+    -DCMAKE_SKIP_RPATH=ON
     -DMUE_BUILD_CRASHPAD_CLIENT=OFF \
-    -DMUE_BUILD_UNIT_TESTS=OFF \
-    -DMUE_COMPILE_USE_SYSTEM_FREETYPE=ON \
-    -DMUE_ENABLE_FILE_ASSOCIATION=ON \
-    -DMUE_INSTALL_SOUNDFONT=ON \
-    -Wno-dev
+    -DMUE_BUILD_UNIT_TESTS=OFF
+    -DMUE_COMPILE_USE_SYSTEM_FREETYPE=ON
+    -DMUE_ENABLE_FILE_ASSOCIATION=ON
+    -DMUE_INSTALL_SOUNDFONT=ON
+    -DMUSESCORE_BUILD_CONFIGURATION=app
+    -DMUSESCORE_BUILD_MODE=release
+    -DMUSESCORE_REVISION=$(git rev-parse --short=7 HEAD)
+  )
+
+  cmake -B build -S "MuseScore" -Wno-author \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    "${_flags[@]}"
+
   cmake --build build
 }
 
@@ -75,4 +103,3 @@ package() {
   DESTDIR="${pkgdir}" cmake --install build
   rm -rf "${pkgdir}"/usr/{bin/crashpad_handler,include,lib}
 }
-

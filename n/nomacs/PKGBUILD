@@ -27,7 +27,8 @@ depends=(
 makedepends=(
     cmake
     git
-    #gtest # for tests
+    gtest # for tests
+    ninja
     python
     qt6-tools
     vulkan-headers
@@ -48,6 +49,7 @@ build() {
     -DQT_VERSION_MAJOR=6
     -DENABLE_QUAZIP=ON
     -DENABLE_TRANSLATIONS=ON
+    -GNinja
   )
 
   cmake -B build -S "nomacs/ImageLounge" -Wno-author \
@@ -58,10 +60,9 @@ build() {
   cmake --build build
 }
 
-#check() {
-  #ctest --test-dir build --output-on-failure
-  # tests not built despite nomacs "tests ................................................. YES" ?
-#}
+check() {
+  ninja -C build check
+}
 
 package() {
   DESTDIR="${pkgdir}" cmake --install build

@@ -1,7 +1,7 @@
 # Maintainer: Peter Mattern <pmattern at arcor dot de>
 
 pkgname=nomacs-git
-pkgver=3.23.1.r15.gd5ae2741
+pkgver=3.23.3.r25.g0dbd4f12
 pkgrel=1
 pkgdesc='Free, open source image viewer, which supports multiple platforms. Qt6 Lolix pkgbuild'
 arch=(x86_64)
@@ -13,6 +13,7 @@ depends=(
     hicolor-icon-theme
     libgcc
     libglvnd
+    libstdc++
     libraw
     libtiff
     opencv      #libopencv_imgproc.so
@@ -23,6 +24,8 @@ depends=(
 makedepends=(
     cmake
     git
+    gtest # for tests
+    ninja
     python
     qt6-tools
     vulkan-headers
@@ -50,6 +53,7 @@ build() {
     -DQT_VERSION_MAJOR=6
     -DENABLE_QUAZIP=ON
     -DENABLE_TRANSLATIONS=ON
+    -GNinja
   )
 
   cmake -B build -S "nomacs/ImageLounge" -Wno-author \
@@ -58,6 +62,10 @@ build() {
     "${_flags[@]}"
 
   cmake --build build
+}
+
+check() {
+  ninja -C build check
 }
 
 package() {

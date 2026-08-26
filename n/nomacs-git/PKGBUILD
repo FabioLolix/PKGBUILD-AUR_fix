@@ -1,7 +1,7 @@
 # Maintainer: Peter Mattern <pmattern at arcor dot de>
 
 pkgname=nomacs-git
-pkgver=3.23.3.r32.g7633e737
+pkgver=3.22.2.r4.g2135bbc0
 pkgrel=1
 pkgdesc='Free, open source image viewer, which supports multiple platforms. Qt6 Lolix pkgbuild'
 arch=(x86_64)
@@ -36,7 +36,7 @@ optdepends=(
     )
 provides=(nomacs)
 conflicts=(nomacs)
-source=("git+https://github.com/nomacs/nomacs.git")
+source=("git+https://github.com/nomacs/nomacs.git#branch=3.22.x")
 sha256sums=('SKIP')
 
 pkgver() {

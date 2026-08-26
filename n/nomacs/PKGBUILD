@@ -3,9 +3,9 @@
 # Contributor: speps <speps at aur dot archlinux dot org>
 
 pkgname=nomacs
-pkgver=3.23.3
+pkgver=3.22.2
 pkgrel=1
-epoch=1
+epoch=2
 pkgdesc="A Qt image viewer"
 arch=(x86_64)
 url="https://github.com/nomacs/nomacs"
@@ -37,8 +37,16 @@ optdepends=(
     'kimageformats: support QOI (Quite OK Image Format)'
     'qt6-imageformats: support additional image formats'
     )
-source=("git+https://github.com/nomacs/nomacs.git#tag=${pkgver}")
-b2sums=('ef320f1a517a093f66155d5cb860f9828477e7e3dd2ac6abb70fca186e0d0204b4cf742831d5b443d39578b1ebb26906c6590872040690e8654584a67f56bf96')
+source=("git+https://github.com/nomacs/nomacs.git#tag=${pkgver}"
+        "nomacs-opencv5.patch::https://github.com/nomacs/nomacs/pull/1622.patch"
+)
+b2sums=('d175d7b2d69ecf9c3a08ef59d00cea21b42374820fb1c8ea323dc4426d96c879cd5b1184a13303db51b180950f71e8794202bf881972085697018cd3fbedd3d9'
+        '0232c14becbdf31f321e67cedeae0e13edf051606bf68ecdde4aac96c2ec20258bd3ce0d5f6b765f609a35ae15a00e282a208d82d9e0e5a707c65960a6714ef3')
+
+prepare() {
+  cd nomacs
+  patch -Np1 -i ../nomacs-opencv5.patch
+}
 
 build() {
   # Disable warning Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.

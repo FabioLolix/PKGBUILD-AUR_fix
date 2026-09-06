@@ -2,7 +2,7 @@
 # Contributor: Lukas Jirkovsky <l.jirkovsky@gmail.com>
 
 pkgname=hugin-hg
-pkgver=r9001+.c2f39c6d2664+
+pkgver=r9024.a3a195f9a8e6
 pkgrel=1
 pkgdesc="Panorama photo stitcher"
 arch=(x86_64)
@@ -35,8 +35,7 @@ depends=(
     libx11
     #libxi
     #libxmu
-    openexr
-    openexr
+    openexr # -- Could not find OPTIONAL package OPENEXR
     python
     sqlite
     vigra
@@ -46,6 +45,7 @@ depends=(
 makedepends=(
     #boost
     cmake
+    #flann # fails to build with this
     mercurial
     mesa
     swig
@@ -67,7 +67,7 @@ sha256sums=('SKIP'
 
 prepare() {
   cd "hugin"
-  hg import --no-commit ../pylong.patch
+  #hg import --no-commit ../pylong.patch
 }
 
 pkgver() {

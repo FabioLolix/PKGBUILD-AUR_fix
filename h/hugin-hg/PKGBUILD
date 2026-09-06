@@ -45,7 +45,6 @@ depends=(
 makedepends=(
     #boost
     cmake
-    #flann # fails to build with this
     mercurial
     mesa
     swig
@@ -59,11 +58,8 @@ optdepends=(
     )
 provides=(hugin)
 conflicts=(hugin)
-source=("hg+http://hg.code.sf.net/p/hugin/hugin"
-        pylong.patch
-        )
-sha256sums=('SKIP'
-            '7ffe9285d764bd97c4386695f8566a5c1b5a233d1cd9e2cdae800522b9bee3ea')
+source=("hg+http://hg.code.sf.net/p/hugin/hugin")
+sha256sums=('SKIP')
 
 prepare() {
   cd "hugin"

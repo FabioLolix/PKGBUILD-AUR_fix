@@ -10,7 +10,7 @@
 # Based on community/clementine PKGBUILD
 
 pkgname=clementine-git
-pkgver=1.4.1.r79.g841f3251d.0.g841f3251d
+pkgver=1.4.1.r106.ga4b3599ec.0.ga4b3599ec
 pkgrel=1
 pkgdesc='A modern music player and library organizer'
 arch=(x86_64)
@@ -99,7 +99,7 @@ build() {
     -DUSE_SYSTEM_TAGLIB=ON
   )
 
-  cmake -B build -S Clementine -Wno-dev \
+  cmake -B build -S Clementine -Wno-author \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
     "${_flags[@]}"

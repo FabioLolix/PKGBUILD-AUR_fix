@@ -2,7 +2,7 @@
 # Contributor: Lukas Jirkovsky <l.jirkovsky@gmail.com>
 
 pkgname=hugin-hg
-pkgver=r9024.a3a195f9a8e6
+pkgver=r9032.227b68cb5190
 pkgrel=1
 pkgdesc="Panorama photo stitcher"
 arch=(x86_64)

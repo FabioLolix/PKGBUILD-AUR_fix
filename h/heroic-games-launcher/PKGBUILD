@@ -1,8 +1,8 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
+pkgname=heroic-games-launcher
 pkgver=2.22.3
 pkgrel=2
-pkgname=heroic-games-launcher
 pkgdesc="Native GOG, Epic Games and Amazon games launcher for Linux"
 arch=(x86_64)
 url="https://heroicgameslauncher.com/"
@@ -11,6 +11,7 @@ _electron=electron43
 depends=(
     $_electron
     glibc
+    hicolor-icon-theme
     libgcc
     python
     sh

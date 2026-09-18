@@ -539,13 +539,13 @@ VAR2=h
   VAR=heroic-games-launcher
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,heroic.sh} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=heroic-games-launcher-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
+    rsync {PKGBUILD,.SRCINFO,heroic.sh} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
   VAR=higan-git

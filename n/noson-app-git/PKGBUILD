@@ -2,7 +2,7 @@
 # Contributor: Dennis Twardowsky <aur@devpty.de>
 
 pkgname=noson-app-git
-pkgver=5.7.1.r0.g261f21d
+pkgver=5.7.6.r0.g905afc6
 pkgrel=1
 pkgdesc="SONOS controller for Linux platforms"
 arch=(x86_64 aarch64 armv7h)
@@ -27,6 +27,7 @@ makedepends=(
     git
     libpulse
     vulkan-headers
+    vulkan-icd-loader
     )
 provides=(noson-app)
 conflicts=(noson-app)
@@ -42,7 +43,7 @@ build() {
   local _flags=(
   )
 
-  cmake -B build -S "noson-app" -Wno-dev \
+  cmake -B build -S "noson-app" -Wno-author \
     -DCMAKE_BUILD_TYPE=None \
     -DCMAKE_INSTALL_PREFIX=/usr \
     "${_flags[@]}"

@@ -1,21 +1,43 @@
 # Maintainer: Fabio 'Lolix' Loli <lolix@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=q2rtx-git
-pkgver=1.8.1.r1.gf2526e9a
+pkgver=1.4.0.r2238.g6bd3caa
 _pkgver=1.8.0
 pkgrel=1
 pkgdesc="NVIDIA’s implementation of RTX ray-tracing in Quake II "
 arch=(x86_64)
 url="https://github.com/NVIDIA/Q2RTX"
-license=(GPL2 custom)
-depends=(gcc-libs libssh2 vulkan-icd-loader sndio)
-makedepends=(git cmake openal libglvnd python pipewire alsa-lib libpulse jack portaudio sdl2)
+license=(GPL-2.0-only AND LicenseRef-custom)
+depends=(
+    glibc
+    libgcc
+    libidn2
+    libpsl
+    libssh2
+    libstdc++
+    openssl
+    sh
+    vulkan-icd-loader
+    )
+makedepends=(
+    alsa-lib
+    cmake
+    git
+    jack
+    libglvnd
+    libpulse
+    openal
+    pipewire
+    portaudio
+    python
+    #sdl2
+    )
 optdepends=(q2rtx-data)
 provides=(q2rtx)
 conflicts=(q2rtx quake2rtx)
 replaces=(quake2rtx)
 #options=(!lto)
-source=("git+https://github.com/NVIDIA/Q2RTX.git"
+source=("Q2RTX-res2k::git+https://github.com/res2k/Q2RTX.git"
         "git+https://github.com/madler/zlib.git"
         "git+https://github.com/curl/curl.git"
         "git+https://github.com/libsdl-org/SDL.git"
@@ -39,12 +61,12 @@ sha256sums=('SKIP'
             '7467a33056d8c98f9abef6bfdb02a6a2904a311ec669c59a68241cf588f93222')
 
 pkgver() {
-  cd Q2RTX
-  git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  cd Q2RTX-res2k
+  git describe --long --tags --abbrev=7 | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 prepare() {
-  cd Q2RTX
+  cd Q2RTX-res2k
   git submodule init
   git config submodule.extern/zlib.url "${srcdir}/zlib"
   git config submodule.extern/curl.url "${srcdir}/curl"
@@ -55,23 +77,26 @@ prepare() {
   git config submodule.extern/glslang.url "${srcdir}/glslang"
   git config submodule.extern/openal-soft.url "${srcdir}/openal-soft"
   git -c protocol.file.allow=always submodule update
-
-  [[ -d build ]] || mkdir build
 }
 
 build() {
-  cd Q2RTX/build
-  cmake .. -Wno-dev \
-    -DCMAKE_BUILD_TYPE=RelWithDebInfo \
+  local _flags=(
     -DCONFIG_BUILD_GLSLANG=ON
+    -DCMAKE_BUILD_WITH_INSTALL_RPATH=ON
+  )
 
-  make
+  cmake -B build -S "Q2RTX-res2k" -Wno-author \
+    -DCMAKE_BUILD_TYPE=None \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    "${_flags[@]}"
+
+  cmake --build build
 }
 
 package() {
   install -Dm755 q2rtx.sh "${pkgdir}/usr/bin/q2rtx"
 
-  cd Q2RTX
+  cd Q2RTX-res2k
   install -d "${pkgdir}/usr/share/q2rtx/bin"
   cp q2rtx{,ded} "${pkgdir}/usr/share/q2rtx/bin/"
   cp -r baseq2 "${pkgdir}/usr/share/q2rtx/bin/"

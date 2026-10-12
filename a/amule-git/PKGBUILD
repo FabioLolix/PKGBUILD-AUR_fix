@@ -3,8 +3,8 @@
 # Contributor: lukpod
 
 pkgname=amule-git
-pkgver=3.1.0.r239.a775d2b42
-pkgrel=1
+pkgver=3.1.0.r243.5c5cdd9f8
+pkgrel=2
 pkgdesc="Client for the eD2k and Kad networks"
 arch=(x86_64)
 url="https://github.com/amule-org/amule"
@@ -61,6 +61,7 @@ build() {
   local _flags=(
     -DBUILD_ALCC=ON
     -DBUILD_ALC=ON
+    -DBUILD_AMULEAPI=ON
     -DBUILD_AMULECMD=ON
     -DBUILD_CAS=ON
     -DBUILD_DAEMON=ON
@@ -72,6 +73,7 @@ build() {
     -DENABLE_IP2COUNTRY=ON
     -DENABLE_NLS=ON
     -DENABLE_UPNP=ON
+    -DBUILD_EVERYTHING=ON
   )
 
   cmake -B build -S amule -Wno-author \

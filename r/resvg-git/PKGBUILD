@@ -1,10 +1,10 @@
 # Maintainer: Fabio 'Lolix' Loli <fabio.loli@disroot.org> -> https://github.com/FabioLolix
 
 pkgname=resvg-git
-pkgver=0.48.1.r4.g021d44b7
+pkgver=0.48.1.r23.g5192641d
 pkgrel=1
-pkgdesc='SVG rendering library and CLI'
-arch=(i686 x86_64)
+pkgdesc="SVG rendering library and CLI"
+arch=(x86_64)
 url="https://github.com/linebender/resvg"
 license=(MPL-2.0)
 depends=(
@@ -12,20 +12,20 @@ depends=(
     libgcc
     libstdc++
     )
-optdepends=(
-    'qt5-base: For the Qt backend and for viewsvg'
-	'cairo: For the cairo backend'
-    )
 makedepends=(
+    cairo
     cargo
     cargo-c
-    qt5-base
-    qt5-tools
-    cairo
-    pango
-    git
     cmake
     extra-cmake-modules
+    git
+    pango
+    qt5-base
+    qt5-tools
+    )
+optdepends=(
+	'cairo: For the cairo backend'
+    'qt5-base: For the Qt backend and for viewsvg'
     )
 conflicts=(resvg)
 provides=(resvg)
@@ -73,8 +73,6 @@ package() {
 
   cargo cinstall --frozen --release -p resvg-capi --destdir="${pkgdir}" --prefix=/usr
 
-
-  install -Dm644 -t "$pkgdir/usr/include/resvg" crates/c-api/*.h
   install -d "$pkgdir/usr/share/doc/resvg"
   cp -r target/doc/* "$pkgdir/usr/share/doc/resvg"
 }

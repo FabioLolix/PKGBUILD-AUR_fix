@@ -7,26 +7,74 @@
 # Contributor: Maël Kerbiriou <mael.kerbiriou-at-free-dot-fr>
 
 pkgname=amarok-git
-pkgver=3.3.2.r52.g072a2ac
+pkgver=3.3.3.r41.g087b788
 pkgrel=1
 pkgdesc="The powerful music player for KDE"
 arch=(x86_64)
 url="https://apps.kde.org/amarok/"
 license=(GPL-2.0-or-later)
-depends=(threadweaver qt6-webengine qt6-declarative
-         kcmutils ktexteditor kdnssd kirigami2 kstatusnotifieritem ktextwidgets
-         mariadb libmariadbclient fftw ffmpeg taglib qt6-tools gstreamer gst-plugins-base-libs
-
-         # namcap implicit depends
-         kiconthemes ki18n qt6-svg gcc-libs kcompletion kitemviews kwidgetsaddons solid karchive kcrash
-         kdbusaddons kconfigwidgets kpackage kcodecs knotifications hicolor-icon-theme kxmlgui qt6-base kconfig
-         kcoreaddons kglobalaccel kirigami kwindowsystem kguiaddons glibc kio kcolorscheme)
-makedepends=(git extra-cmake-modules kdoctools gdk-pixbuf2 knotifyconfig vulkan-headers
-             libmtp loudmouth)
-optdepends=("libmtp: support for portable media devices"
-            "loudmouth: backend needed by mp3tunes for syncing"
-            "liblastfm-qt6: Last.fm service"
-            )
+depends=(
+    ffmpeg
+    fftw
+    glib2
+    glibc
+    gst-plugins-base-libs
+    gstreamer
+    hicolor-icon-theme
+    karchive
+    kcmutils
+    kcodecs
+    kcolorscheme
+    kcompletion
+    kconfig
+    kconfigwidgets
+    kcoreaddons
+    kcrash
+    kdbusaddons
+    kdnssd
+    kglobalaccel
+    kguiaddons
+    ki18n
+    kiconthemes
+    kio
+    kirigami
+    #kirigami2
+    kitemviews
+    knotifications
+    kpackage
+    kstatusnotifieritem
+    ktexteditor
+    ktextwidgets
+    kwidgetsaddons
+    kwindowsystem
+    kxmlgui
+    libmariadbclient
+    libstdc++
+    mariadb
+    qt6-base
+    qt6-declarative
+    qt6-svg
+    qt6-tools
+    qt6-webengine
+    solid
+    taglib
+    threadweaver
+    )
+makedepends=(
+    extra-cmake-modules
+    gdk-pixbuf2
+    git
+    kdoctools
+    knotifyconfig
+    libmtp
+    loudmouth
+    vulkan-headers
+    )
+optdepends=(
+    "liblastfm-qt6: Last.fm service"
+    "libmtp: support for portable media devices"
+    "loudmouth: backend needed by mp3tunes for syncing"
+    )
 conflicts=(amarok)
 provides=(amarok)
 source=("git+https://invent.kde.org/multimedia/amarok.git")

@@ -53,7 +53,7 @@ depends=(
     wxwidgets-gtk3
     )
 makedepends=(
-    chrpath
+    #chrpath
     cmake
     ffmpeg
     git
@@ -100,7 +100,7 @@ build() {
   export CC=/usr/bin/gcc CXX=/usr/bin/g++
 
   local _flags=(
-    #-DCMAKE_BUILD_WITH_INSTALL_RPATH=ON
+    -DCMAKE_SKIP_RPATH=ON
     -DwxWidgets_CONFIG_EXECUTABLE=/usr/bin/wx-config
   )
 
@@ -121,6 +121,6 @@ package() {
   #mv "${pkgdir}/usr/share/pixmaps/gnome-mime-application-x-audacity-project.xpm" \
   #   "${pkgdir}/usr/share/pixmaps/gnome-mime-application-x-tenacity-project.xpm"
 
-  chrpath --delete "${pkgdir}"/usr/lib/tenacity/*.so
-  chrpath --delete "${pkgdir}"/usr/lib/modules/*.so
+  #chrpath --delete "${pkgdir}"/usr/lib/tenacity/*.so
+  #chrpath --delete "${pkgdir}"/usr/lib/modules/*.so
 }

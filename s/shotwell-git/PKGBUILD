@@ -2,7 +2,7 @@
 # Contributor: gaelic
 
 pkgname=shotwell-git
-pkgver=0.32.1.r610.g140a6938
+pkgver=33.0.r47.gfe46f4f
 pkgrel=1
 pkgdesc="A digital photo organizer designed for the GNOME desktop environment"
 arch=(x86_64)
@@ -13,15 +13,16 @@ depends=(
     dconf
     gcr-4
     gdk-pixbuf2
-    gexiv2
+    gexiv2     #namcap false positive on this not needed
     glib2
     glibc
+    glycin
     graphene
     gstreamer
     gtk4
     hicolor-icon-theme
     json-glib
-    libexif
+    #libexif
     libgee
     libgphoto2
     libgudev
@@ -30,7 +31,7 @@ depends=(
     libraw
     libsecret
     libsoup3
-    libwebp
+    #libwebp
     libxml2
     pango
     python
@@ -51,7 +52,7 @@ sha256sums=('SKIP')
 
 pkgver() {
   cd "shotwell"
-  git describe --long --tags --exclude 33* | sed 's/^shotwell-//;s/\([^-]*-g\)/r\1/;s/-/./g'
+  git describe --long --tags --abbrev=7 | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
 }
 
 build() {

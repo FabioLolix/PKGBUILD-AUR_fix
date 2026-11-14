@@ -3,7 +3,7 @@
 # Contributor: lukpod
 
 pkgname=amule-git
-pkgver=3.2.0.r2.2d2f985bd
+pkgver=3.2.0.r326.3d6462c2b
 pkgrel=1
 pkgdesc="Client for the eD2k and Kad networks"
 arch=(x86_64)
@@ -21,7 +21,7 @@ depends=(
     libayatana-appindicator
     libgcc
     libmaxminddb # IP2COUNTRY
-    libpng
+    #libpng
     libstdc++
     libupnp
     readline
@@ -74,6 +74,7 @@ build() {
     #-DENABLE_IP2COUNTRY=ON
     #-DENABLE_NLS=ON
     #-DENABLE_UPNP=ON
+    -DCMAKE_INSTALL_LIBEXECDIR=/usr/lib
   )
 
   cmake -B build -S amule -Wno-author \

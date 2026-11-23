@@ -5,7 +5,7 @@
 # Contributor: Dmitry N. Shilov <stormblast@land.ru>
 
 pkgname=luminancehdr-git
-pkgver=2.6.0.r318.g0860ba8
+pkgver=2.6.0.r335.gc767afb
 pkgrel=1
 pkgdesc="Open source graphical user interface application that aims to provide a workflow for HDR imaging"
 arch=(x86_64)
@@ -46,7 +46,7 @@ optdepends=('hugin: align image stack functionality')
 provides=(luminancehdr)
 conflicts=(luminancehdr)
 #options=('!emptydirs')
-source=("git+https://github.com/LuminanceHDR/LuminanceHDR.git#branch=convert-to-qt6")
+source=("git+https://github.com/LuminanceHDR/LuminanceHDR.git#branch=release/3.0.0")
 b2sums=('SKIP')
 
 pkgver() {
@@ -63,7 +63,7 @@ build() {
   export CFLAGS+=" -w"
   export CXXFLAGS+=" -w"
 
-  cmake -B build -S "LuminanceHDR" -Wno-dev \
+  cmake -B build -S "LuminanceHDR" -Wno-author \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=/usr
 

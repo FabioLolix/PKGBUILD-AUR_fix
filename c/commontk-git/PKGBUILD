@@ -3,7 +3,7 @@
 
 pkgname=commontk-git
 pkgrel=1
-pkgver=2023.07.13.r158.gd7ce6d91
+pkgver=2026.08.06.r0.g0dfffe11
 pkgdesc="set of common support code for medical imaging, surgical navigation, and related purposes"
 arch=(x86_64)
 url="https://github.com/commontk/CTK"
@@ -38,9 +38,9 @@ build() {
   cmake --build build
 }
 
-#check() {
-#  xvfb-run -s '-screen 0 1920x1080x24 -nolisten local' ctest --test-dir build --output-on-failure
-#}
+check() {
+  xvfb-run -s '-screen 0 1920x1080x24 -nolisten local' ctest --test-dir build --output-on-failure
+}
 
 package() {
   DESTDIR="${pkgdir}" cmake --install build

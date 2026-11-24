@@ -577,13 +577,7 @@ VAR2=i
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
     echo "    synced $VAR"
 
-  VAR=iconoscope
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
-  VAR=iconoscope-git
+  VAR=icewm-git
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
@@ -682,24 +676,6 @@ echo "Done K"
 
 
 VAR2=l
-  VAR=lib32-fmt
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
-  VAR=lib32-gfxreconstruct
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
-  VAR=lib32-gtest
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
   VAR=libcdk
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
@@ -808,12 +784,6 @@ VAR2=m
     echo "    synced $VAR"
 
   VAR=minigalaxy-git
-  cd "$BASE/$VAR2/$VAR"
-    makepkg --printsrcinfo > .SRCINFO
-    rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
-    echo "    synced $VAR"
-
-  VAR=ministream
   cd "$BASE/$VAR2/$VAR"
     makepkg --printsrcinfo > .SRCINFO
     rsync {PKGBUILD,.SRCINFO} "$DEST/$VAR2/$VAR"
